@@ -3,12 +3,16 @@ import { ArrowLeft, ArrowUpLeft, BookOpen, Globe2, Landmark, ChevronLeft, Chevro
 import { Category, WPPost, displayDate, postCategory, postImage, readingMinutes } from "@/lib/wordpress";
 import { localPath, plainText } from "@/lib/content";
 
-export function PostPhoto({ post, priority = false }: { post: WPPost; priority?: boolean }) {
-  const src = postImage(post);
+export function PostPhoto({ post, priority = false, size = "card" }: { post: WPPost; priority?: boolean; size?: "hero" | "card" | "thumb" }) {
+  const imgWidth = size === "hero" ? 1080 : size === "thumb" ? 384 : 640;
+  const imgQuality = size === "hero" ? 80 : 75;
+  const src = postImage(post, imgWidth, imgQuality);
   const media = post._embedded?.["wp:featuredmedia"]?.[0];
   const width = media?.media_details?.width;
   const height = media?.media_details?.height;
   const isPortrait = width && height ? width / height < 1.15 : false;
+  // Tiny blurred backdrop for portrait images
+  const backdropSrc = isPortrait ? postImage(post, 128, 40) : undefined;
 
   return (
     <Link
@@ -20,10 +24,10 @@ export function PostPhoto({ post, priority = false }: { post: WPPost; priority?:
     >
       {src ? (
         <>
-          {isPortrait && (
+          {isPortrait && backdropSrc && (
             <div
               className="post-photo-backdrop"
-              style={{ backgroundImage: `url(${src})` }}
+              style={{ backgroundImage: `url(${backdropSrc})` }}
               aria-hidden="true"
             />
           )}
@@ -34,6 +38,7 @@ export function PostPhoto({ post, priority = false }: { post: WPPost; priority?:
             loading={priority ? "eager" : "lazy"}
             fetchPriority={priority ? "high" : "auto"}
             decoding="async"
+            sizes={size === "hero" ? "(max-width: 768px) 100vw, 720px" : size === "thumb" ? "280px" : "(max-width: 768px) 100vw, 420px"}
           />
         </>
       ) : (
@@ -75,11 +80,11 @@ export function RegionRail({ categories, total }: { categories: Category[]; tota
 }
 
 export function LatestRail({ posts, books }: { posts: WPPost[]; books: WPPost[] }) {
-  return <aside className="latest-rail"><SectionTitle>يېڭى نەزەر</SectionTitle><div className="rail-label"><Globe2 size={15} /> دۇنيا ۋە سىياسەت</div>{posts.slice(0, 2).map(post => <article className="side-story" key={post.id}><PostPhoto post={post} /><PostMeta post={post} /><h3><Link href={localPath(post.link)} prefetch={true}>{plainText(post.title.rendered)}</Link></h3><ReadLink href={localPath(post.link)} children="ئوقۇڭ" /></article>)}<div className="rail-label book-label"><BookOpen size={16} /> كىتاپ تەكچىسى</div>{books.slice(0, 1).map(post => <article className="side-story book-story" key={post.id}><PostPhoto post={post} /><h3><Link href={localPath(post.link)} prefetch={true}>{plainText(post.title.rendered)}</Link></h3><ReadLink href={localPath(post.link)} children="تەپسىلاتى" /></article>)}<a className="source-link" href="https://orhunpolicycenter.com/" lang="en" dir="ltr">Orhun in English<ArrowUpLeft size={15} /></a></aside>;
+  return <aside className="latest-rail"><SectionTitle>يېڭى نەزەر</SectionTitle><div className="rail-label"><Globe2 size={15} /> دۇنيا ۋە سىياسەت</div>{posts.slice(0, 2).map(post => <article className="side-story" key={post.id}><PostPhoto post={post} size="thumb" /><PostMeta post={post} /><h3><Link href={localPath(post.link)} prefetch={true}>{plainText(post.title.rendered)}</Link></h3><ReadLink href={localPath(post.link)} children="ئوقۇڭ" /></article>)}<div className="rail-label book-label"><BookOpen size={16} /> كىتاپ تەكچىسى</div>{books.slice(0, 1).map(post => <article className="side-story book-story" key={post.id}><PostPhoto post={post} size="thumb" /><h3><Link href={localPath(post.link)} prefetch={true}>{plainText(post.title.rendered)}</Link></h3><ReadLink href={localPath(post.link)} children="تەپسىلاتى" /></article>)}<a className="source-link" href="https://orhunpolicycenter.com/" lang="en" dir="ltr">Orhun in English<ArrowUpLeft size={15} /></a></aside>;
 }
 
 export function Hero({ post, secondary }: { post: WPPost; secondary?: WPPost }) {
-  return <section className="hero-section"><SectionTitle href="/uy?q=" label="بارلىق يازمىلار">ئۆتۈكەن نەزىرى</SectionTitle><div className="hero-grid"><article className="hero-story"><div className="hero-copy"><PostMeta post={post} /><h1><Link href={localPath(post.link)} prefetch={true}>{plainText(post.title.rendered)}</Link></h1><p>{plainText(post.excerpt.rendered)}</p><div className="hero-author"><span>{post._embedded?.author?.[0]?.name}</span><span>{readingMinutes(post)} مىنۇت ئوقۇش</span></div><ReadLink href={localPath(post.link)} /></div><PostPhoto post={post} priority /></article>{secondary && <article className="hero-secondary"><PostPhoto post={secondary} /><PostMeta post={secondary} /><h3><Link href={localPath(secondary.link)} prefetch={true}>{plainText(secondary.title.rendered)}</Link></h3><p>{plainText(secondary.excerpt.rendered)}</p><ReadLink href={localPath(secondary.link)} /></article>}</div></section>;
+  return <section className="hero-section"><SectionTitle href="/uy?q=" label="بارلىق يازمىلار">ئۆتۈكەن نەزىرى</SectionTitle><div className="hero-grid"><article className="hero-story"><div className="hero-copy"><PostMeta post={post} /><h1><Link href={localPath(post.link)} prefetch={true}>{plainText(post.title.rendered)}</Link></h1><p>{plainText(post.excerpt.rendered)}</p><div className="hero-author"><span>{post._embedded?.author?.[0]?.name}</span><span>{readingMinutes(post)} مىنۇت ئوقۇش</span></div><ReadLink href={localPath(post.link)} /></div><PostPhoto post={post} priority size="hero" /></article>{secondary && <article className="hero-secondary"><PostPhoto post={secondary} /><PostMeta post={secondary} /><h3><Link href={localPath(secondary.link)} prefetch={true}>{plainText(secondary.title.rendered)}</Link></h3><p>{plainText(secondary.excerpt.rendered)}</p><ReadLink href={localPath(secondary.link)} /></article>}</div></section>;
 }
 
 export function Pagination({

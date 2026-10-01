@@ -31,18 +31,15 @@ function getCategoryNavIcon(categoryId: number, slug: string) {
   return <Bookmark size={15} className="nav-icon" aria-hidden="true" />;
 }
 
+import { LanguageSwitcher } from "@/components/language-switcher";
+
 export function Header({ categories, active }: { categories: Category[]; active?: number | string }) {
   const analysis = categories.find(c => c.id === 3);
   const otherCats = [22, 14, 21].map(id => categories.find(c => c.id === id)).filter((c): c is Category => !!c);
   return <>
     <div className="utility-bar"><div className="site-width utility-inner">
       <span>تەتقىقات · ئانالىز · يېڭى نەزەر</span>
-      <div className="language-links">
-        <Languages size={13} className="lang-icon" aria-hidden="true" />
-        <span aria-current="true">ئۇيغۇرچە</span>
-        <a href="https://orhunpolicycenter.com/ug/" lang="ug-Latn" dir="ltr">Uyghurche</a>
-        <a href="https://orhunpolicycenter.com/" lang="en" dir="ltr">English <ArrowUpLeft size={11} /></a>
-      </div>
+      <LanguageSwitcher currentLocale="uy" />
     </div></div>
     <header className="site-width masthead">
       <Link href="/uy" className="brand" aria-label="باشبەت">

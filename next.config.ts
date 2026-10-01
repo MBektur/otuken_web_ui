@@ -7,6 +7,8 @@ const config: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,
+    deviceSizes: [640, 828, 1080, 1200, 1920],
+    imageSizes: [128, 256, 384],
     remotePatterns: [
       {
         protocol: "https",
@@ -25,7 +27,7 @@ const config: NextConfig = {
   async headers() {
     return [
       {
-        source: "/api/img",
+        source: "/_next/image",
         headers: [
           {
             key: "Cache-Control",

@@ -77,7 +77,7 @@ export function ArticleSidebar({
             </div>
             <div className="sidebar-post-list">
               {recentPosts.slice(0, 4).map(post => {
-                const img = postImage(post);
+                const img = postImage(post, 256, 70);
                 return (
                   <article key={post.id} className="sidebar-post-item">
                     {img && (
@@ -87,7 +87,7 @@ export function ArticleSidebar({
                         tabIndex={-1}
                         aria-hidden="true"
                       >
-                        <img src={img} alt="" loading="lazy" decoding="async" />
+                        <img src={img} alt="" loading="lazy" decoding="async" sizes="120px" />
                       </Link>
                     )}
                     <div className="sidebar-post-info">

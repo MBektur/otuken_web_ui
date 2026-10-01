@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import Link from "next/link";
 import { Play, Youtube, ArrowLeft, Clock3, Volume2 } from "lucide-react";
-import { WPPost, postCategory, displayDate, readingMinutes } from "@/lib/wordpress";
+import { WPPost, postCategory, displayDate, readingMinutes, toCachedImageUrl } from "@/lib/wordpress";
 import { localPath, plainText } from "@/lib/content";
 
 export function PodcastView({ podcasts }: { podcasts: WPPost[] }) {
@@ -108,11 +108,12 @@ export function PodcastView({ podcasts }: { podcasts: WPPost[] }) {
         <div className="podcast-grid">
           {podcasts.map(post => {
             const isPlaying = post.id === current.id;
-            const thumb =
+            const rawThumb =
               post.previewImage ||
               (post.youtubeId
                 ? `https://img.youtube.com/vi/${post.youtubeId}/hqdefault.jpg`
                 : undefined);
+            const thumb = toCachedImageUrl(rawThumb, 384, 75);
 
             return (
               <article
@@ -132,7 +133,7 @@ export function PodcastView({ podcasts }: { podcasts: WPPost[] }) {
                   }}
                 >
                   {thumb ? (
-                    <img src={thumb} alt="" loading="lazy" decoding="async" />
+                    <img src={thumb} alt="" loading="lazy" decoding="async" sizes="320px" />
                   ) : (
                     <div className="photo-empty">ئۆتۈكەن سىن</div>
                   )}

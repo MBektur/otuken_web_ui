@@ -9,19 +9,23 @@ export function plainText(html: string): string {
   return he.decode(sanitizeHtml(html, { allowedTags: [], allowedAttributes: {} })).replace(/\s+/g, " ").trim();
 }
 
-export function localPath(link: string): string {
+export function localPath(link: string, prefix: string = "/uy"): string {
   if (link.startsWith("#")) return link;
   try {
     const url = new URL(he.decode(link), WORDPRESS_URL + "/");
     if (url.origin === SOURCE_ORIGIN && (url.pathname === SOURCE_PATH || url.pathname.startsWith(SOURCE_PATH + "/"))) {
       const suffix = url.pathname.slice(SOURCE_PATH.length);
       if (/^\/(?:wp-content|wp-includes|wp-json|wp-admin)(?:\/|$)/.test(suffix) || suffix === "/wp-login.php") return url.href;
-      return url.pathname + url.search + url.hash;
+      return prefix + suffix + url.search + url.hash;
     }
     return url.href;
   } catch {
-    return "/uy";
+    return prefix;
   }
+}
+
+export function localPathUg(link: string): string {
+  return localPath(link, "/ug");
 }
 
 export function robustDecode(str: string): string {

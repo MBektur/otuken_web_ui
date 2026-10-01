@@ -16,7 +16,8 @@
     "next": "^16.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sanitize-html": "^2.17.0"
+    "sanitize-html": "^2.17.0",
+    "ulc-converter": "^1.1.0"
   },
   "devDependencies": {
     "@types/he": "^1.2.3",

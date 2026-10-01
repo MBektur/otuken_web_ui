@@ -163,20 +163,28 @@ export async function getPages(): Promise<WPPage[]> {
   catch (e) { pagesCache = null; throw e; }
 }
 
-export function toCachedImageUrl(url?: string): string | undefined {
+/**
+ * Convert a remote image URL to an optimized, cached URL via Next.js Image Optimization.
+ * Automatically converts to WebP/AVIF, resizes, and caches on Vercel Edge CDN (1 year).
+ * @param url - Source image URL
+ * @param w - Target width in pixels (default 640)
+ * @param q - Quality 1-100 (default 75)
+ */
+export function toCachedImageUrl(url?: string, w: number = 640, q: number = 75): string | undefined {
   if (!url) return undefined;
-  if (url.startsWith("/api/img")) return url;
+  // Already an optimized URL
+  if (url.startsWith("/_next/image")) return url;
   if (
     url.includes("orhunpolicycenter.com") ||
     url.includes("youtube.com") ||
     url.includes("ytimg.com")
   ) {
-    return `/api/img?url=${encodeURIComponent(url)}`;
+    return `/_next/image?url=${encodeURIComponent(url)}&w=${w}&q=${q}`;
   }
   return url;
 }
 
-export function postImage(post: WPPost): string | undefined {
+export function postImage(post: WPPost, w?: number, q?: number): string | undefined {
   let img = post.previewImage;
   if (!img) {
     const media = post._embedded?.["wp:featuredmedia"]?.[0];
@@ -186,7 +194,7 @@ export function postImage(post: WPPost): string | undefined {
       media?.source_url ||
       (renderedContent ? contentImage(renderedContent) : undefined);
   }
-  return toCachedImageUrl(img);
+  return toCachedImageUrl(img, w, q);
 }
 
 export function postCategory(post: WPPost): string {

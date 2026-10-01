@@ -154,21 +154,25 @@ export default async function ContentPage({ params, searchParams }: Props) {
 
   const isPost = data.kind === "post";
   let leadImage: string | undefined = undefined;
+  let leadImageOriginal: string | undefined = undefined;
   let leadImageAlt = "";
   let leadImageCaption: string | undefined = undefined;
   let showLeadImage = false;
 
   if (isPost) {
     const media = data.post._embedded?.["wp:featuredmedia"]?.[0];
-    const postImg = postImage(data.post);
+    const postImg = postImage(data.post, 1080, 80);
+    const rawImg = media?.media_details?.sizes?.large?.source_url || media?.source_url || "";
     const isYoutube = data.post.youtubeId || (postImg && (postImg.includes("youtube.com") || postImg.includes("ytimg.com")));
 
     if (postImg && !isYoutube) {
       leadImage = postImg;
+      leadImageOriginal = rawImg || undefined;
       leadImageAlt = media?.alt_text || plainText(data.post.title.rendered);
       leadImageCaption = media?.caption?.rendered ? plainText(media.caption.rendered) : undefined;
 
-      const filename = leadImage.split("/").pop()?.split("?")[0];
+      // Use raw URL (not optimized) for content deduplication check
+      const filename = rawImg.split("/").pop()?.split("?")[0];
       const inContent = filename ? item.content.rendered.includes(filename) : false;
       if (!inContent) {
         showLeadImage = true;
@@ -217,7 +221,7 @@ export default async function ContentPage({ params, searchParams }: Props) {
                 {showLeadImage && leadImage && (
                   <figure className="article-lead-dropcap">
                     <a
-                      href={leadImage}
+                      href={leadImageOriginal || leadImage}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="lead-dropcap-link"
@@ -230,6 +234,7 @@ export default async function ContentPage({ params, searchParams }: Props) {
                           className="lead-dropcap-img"
                           loading="eager"
                           decoding="async"
+                          sizes="(max-width: 768px) 100vw, 720px"
                         />
                         <span className="lead-dropcap-zoom-badge" aria-hidden="true">
                           <Maximize2 size={13} />

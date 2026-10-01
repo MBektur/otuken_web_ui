@@ -9,9 +9,18 @@ export const metadata: Metadata = {
   description: "سىياسىي ئانالىز، خەلقئارا مۇناسىۋەتلەر، تەتقىقات ۋە كىتاپ تونۇشتۇرۇش.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+import { headers } from "next/headers";
+import { DirectionManager } from "@/components/direction-manager";
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const headerList = await headers();
+  const pathname = headerList.get("x-pathname") || "";
+  const isUg = pathname.startsWith("/ug");
+  const dir = isUg ? "ltr" : "rtl";
+  const lang = isUg ? "ug-Cyrl" : "ug";
+
   return (
-    <html lang="ug" dir="rtl" data-scroll-behavior="smooth">
+    <html lang={lang} dir={dir} data-scroll-behavior="smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -24,9 +33,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body>
+      <body className={isUg ? "ug-cyrl" : ""}>
+        <Suspense fallback={null}>
+          <DirectionManager />
+        </Suspense>
         <a className="skip-link" href="#main">
-          مەزمۇنغا ئۆتۈش
+          {isUg ? "Мәзмунға өтүш" : "مەزمۇنغا ئۆتۈش"}
         </a>
         <Suspense fallback={null}>
           <NavigationProgress />

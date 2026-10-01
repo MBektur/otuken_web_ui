@@ -205,7 +205,7 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
           onDragStart={e => e.preventDefault()}
         >
           {posts.map((post, idx) => {
-            const img = postImage(post);
+            const img = postImage(post, 384);
             return (
               <article
                 className={`carousel-card ${idx === activeIndex ? "is-active" : ""}`}
@@ -219,7 +219,7 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
                   draggable={false}
                 >
                   {img ? (
-                    <img src={img} alt="" loading="lazy" decoding="async" draggable={false} />
+                    <img src={img} alt="" loading="lazy" decoding="async" draggable={false} sizes="320px" />
                   ) : (
                     <div className="carousel-no-photo">ئۆتۈكەن</div>
                   )}
