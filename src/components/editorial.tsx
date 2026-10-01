@@ -5,10 +5,47 @@ import { localPath, plainText } from "@/lib/content";
 
 export function PostPhoto({ post, priority = false }: { post: WPPost; priority?: boolean }) {
   const src = postImage(post);
-  return <Link href={localPath(post.link)} prefetch={true} className={`post-photo ${!src ? "photo-empty" : ""}`} tabIndex={-1} aria-hidden="true">
-    {src ? <img src={src} alt="" loading={priority ? "eager" : "lazy"} fetchPriority={priority ? "high" : "auto"} decoding="async" /> : <Globe2 size={44} strokeWidth={1} />}
-    {post.youtubeId && <span className="photo-play-badge"><Play size={15} fill="currentColor" /></span>}
-  </Link>;
+  const media = post._embedded?.["wp:featuredmedia"]?.[0];
+  const width = media?.media_details?.width;
+  const height = media?.media_details?.height;
+  const isPortrait = width && height ? width / height < 1.15 : false;
+
+  return (
+    <Link
+      href={localPath(post.link)}
+      prefetch={true}
+      className={`post-photo ${!src ? "photo-empty" : ""} ${isPortrait ? "photo-portrait" : ""}`}
+      tabIndex={-1}
+      aria-hidden="true"
+    >
+      {src ? (
+        <>
+          {isPortrait && (
+            <div
+              className="post-photo-backdrop"
+              style={{ backgroundImage: `url(${src})` }}
+              aria-hidden="true"
+            />
+          )}
+          <img
+            src={src}
+            alt=""
+            className="post-photo-img"
+            loading={priority ? "eager" : "lazy"}
+            fetchPriority={priority ? "high" : "auto"}
+            decoding="async"
+          />
+        </>
+      ) : (
+        <Globe2 size={44} strokeWidth={1} />
+      )}
+      {post.youtubeId && (
+        <span className="photo-play-badge">
+          <Play size={15} fill="currentColor" />
+        </span>
+      )}
+    </Link>
+  );
 }
 
 export function PostMeta({ post }: { post: WPPost }) {

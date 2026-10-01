@@ -598,24 +598,55 @@ svg {
 }
 
 .post-photo {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
-    background: var(--wash);
+    background: #eae5dc;
     position: relative;
-    aspect-ratio: 1.7
+    aspect-ratio: 16 / 10;
+    border-radius: 4px;
 }
 
-.post-photo img {
+.post-photo img,
+.post-photo-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform .4s ease;
-    filter: saturate(.8)
+    object-position: center;
+    transition: transform .4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    z-index: 1;
 }
 
-.post-photo:hover img {
-    transform: scale(1.025);
-    filter: saturate(1)
+.post-photo:hover img,
+.post-photo:hover .post-photo-img {
+    transform: scale(1.03);
+}
+
+.post-photo.photo-portrait {
+    background: #dfd8cb;
+}
+
+.post-photo.photo-portrait img,
+.post-photo.photo-portrait .post-photo-img {
+    width: auto;
+    max-width: 90%;
+    height: 94%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.22));
+}
+
+.post-photo-backdrop {
+    position: absolute;
+    inset: -20px;
+    background-size: cover;
+    background-position: center;
+    filter: blur(24px) brightness(0.9);
+    opacity: 0.45;
+    transform: scale(1.2);
+    z-index: 0;
+    pointer-events: none;
 }
 
 .photo-play-badge {
@@ -642,8 +673,9 @@ svg {
 }
 
 .hero-story>.post-photo {
-    aspect-ratio: auto;
-    min-height: 365px
+    aspect-ratio: 16 / 10;
+    min-height: 280px;
+    max-height: 480px;
 }
 
 .hero-secondary {
@@ -840,7 +872,16 @@ svg {
 }
 
 .book-story .post-photo {
-    aspect-ratio: 1.65
+    aspect-ratio: 16 / 10;
+    background: #dfd8cb;
+}
+
+.book-story .post-photo img {
+    object-fit: contain;
+    width: auto;
+    max-width: 88%;
+    height: 94%;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.22));
 }
 
 .source-link {

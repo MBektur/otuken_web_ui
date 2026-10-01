@@ -9,7 +9,7 @@ export type WPPost = WPPage & {
   youtubeId?: string;
   _embedded?: {
     author?: { name: string; slug: string }[];
-    "wp:featuredmedia"?: { source_url: string; alt_text: string; caption?: { rendered: string }; media_details?: { sizes?: Record<string, { source_url: string }> } }[];
+    "wp:featuredmedia"?: { source_url: string; alt_text: string; caption?: { rendered: string }; media_details?: { width?: number; height?: number; sizes?: Record<string, { source_url: string }> } }[];
     "wp:term"?: Category[][];
   };
 };
@@ -160,11 +160,31 @@ export async function getPages(): Promise<WPPage[]> {
   catch (e) { pagesCache = null; throw e; }
 }
 
+export function toCachedImageUrl(url?: string): string | undefined {
+  if (!url) return undefined;
+  if (url.includes("orhunpolicycenter.com/uy/wp-content/uploads/")) {
+    return url.replace("https://orhunpolicycenter.com/uy/wp-content/uploads/", "/uploads/");
+  }
+  if (url.includes("orhunpolicycenter.com/wp-content/uploads/")) {
+    return url.replace("https://orhunpolicycenter.com/wp-content/uploads/", "/uploads/");
+  }
+  if (url.includes("img.youtube.com/vi/")) {
+    return url.replace("https://img.youtube.com/vi/", "/ytimg/");
+  }
+  return url;
+}
+
 export function postImage(post: WPPost): string | undefined {
-  if (post.previewImage) return post.previewImage;
-  const media = post._embedded?.["wp:featuredmedia"]?.[0];
-  const renderedContent = post.content?.rendered || post.excerpt?.rendered || "";
-  return media?.media_details?.sizes?.large?.source_url || media?.source_url || (renderedContent ? contentImage(renderedContent) : undefined);
+  let img = post.previewImage;
+  if (!img) {
+    const media = post._embedded?.["wp:featuredmedia"]?.[0];
+    const renderedContent = post.content?.rendered || post.excerpt?.rendered || "";
+    img =
+      media?.media_details?.sizes?.large?.source_url ||
+      media?.source_url ||
+      (renderedContent ? contentImage(renderedContent) : undefined);
+  }
+  return toCachedImageUrl(img);
 }
 
 export function postCategory(post: WPPost): string {
