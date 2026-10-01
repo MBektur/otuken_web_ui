@@ -54,3 +54,11 @@ test("YouTube IDs are extracted correctly from embeds and urls for podcasts", ()
     undefined
   );
 });
+
+test("cache-sync validates secret key correctly", () => {
+  const { isValidSecret } = require("../src/lib/cache-sync");
+  assert.equal(isValidSecret("otuken2026"), true);
+  assert.equal(isValidSecret("wrong_secret"), false);
+  assert.equal(isValidSecret(null), false);
+  assert.equal(isValidSecret(""), false);
+});

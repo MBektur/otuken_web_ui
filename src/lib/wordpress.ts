@@ -37,6 +37,9 @@ type PostList = { data: WPPost[]; total: number; totalPages: number };
 // Some published articles contain large HTML exports. Cache the small card data,
 // not multi-megabyte collections of full articles. This cache is per server process.
 const postLists = new Map<string, { expires: number; result: Promise<PostList> }>();
+export function clearMemoryCache() {
+  postLists.clear();
+}
 export async function getPosts(options: { page?: number; perPage?: number; category?: number; search?: string; exclude?: number[] } = {}): Promise<PostList> {
   const params: Record<string, string | number> = { _embed: "author,wp:term,wp:featuredmedia", _fields: "id,date,modified,slug,link,title,content,excerpt,categories,_links,_embedded", per_page: options.perPage || 12, page: options.page || 1, orderby: "date", order: "desc" };
   if (options.category) params.categories = options.category;
