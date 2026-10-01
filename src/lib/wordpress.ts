@@ -9,7 +9,7 @@ export type WPPost = WPPage & {
   youtubeId?: string;
   _embedded?: {
     author?: { name: string; slug: string }[];
-    "wp:featuredmedia"?: { source_url: string; alt_text: string; media_details?: { sizes?: Record<string, { source_url: string }> } }[];
+    "wp:featuredmedia"?: { source_url: string; alt_text: string; caption?: { rendered: string }; media_details?: { sizes?: Record<string, { source_url: string }> } }[];
     "wp:term"?: Category[][];
   };
 };

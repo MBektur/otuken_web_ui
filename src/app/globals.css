@@ -1000,6 +1000,101 @@ svg {
     margin: 24px 0
 }
 
+/* Editorial Lead Dropcap / Corner Image */
+.article-body .article-lead-dropcap {
+    float: left;
+    width: 380px;
+    max-width: 48%;
+    margin: 6px 28px 20px 0;
+    background: #ffffff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.article-body .article-lead-dropcap:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.lead-dropcap-link {
+    display: block;
+    text-decoration: none;
+    cursor: zoom-in;
+}
+
+.lead-dropcap-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #f4efe6;
+}
+
+.article-body .article-lead-dropcap img.lead-dropcap-img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    display: block;
+    margin: 0;
+    transition: transform 0.35s ease;
+}
+
+.article-body .article-lead-dropcap:hover img.lead-dropcap-img {
+    transform: scale(1.03);
+}
+
+.lead-dropcap-zoom-badge {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(20, 20, 20, 0.65);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.article-body .article-lead-dropcap:hover .lead-dropcap-zoom-badge {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.lead-dropcap-caption {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--muted);
+    padding: 8px 12px;
+    background: #fdfbf7;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+}
+
+.article-body::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media (max-width: 768px) {
+    .article-body .article-lead-dropcap {
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 0 24px 0;
+    }
+}
+
 .article-body img {
     width: auto;
     max-width: 100%;
