@@ -120,7 +120,7 @@ export function CacheManager() {
       const elapsed = Math.round(performance.now() - start);
 
       if (res.ok && data.ok) {
-        addLog(`✅ مۇۋەپپەقىيەتلىك تامام block (${elapsed}ms): ${data.message || "كەش يېڭىلاندى"}`, "success");
+        addLog(`✅ مۇۋەپپەقىيەتلىك تامام block (${elapsed}ms): ${data.message || "تېز خاتىرە يېڭىلاندى"}`, "success");
         if (data.samplePaths?.length) {
           addLog(`⚡ قىزىتىلغان تاللانما بەتلەر: ${data.samplePaths.slice(0, 5).join(", ")}...`, "info");
         }
@@ -204,7 +204,7 @@ export function CacheManager() {
             <ShieldCheck size={28} />
           </div>
           <div>
-            <h1>كەش ئەسلىمىسى ۋە يېڭىلاش مەركىزى</h1>
+            <h1>تېز خاتىرە ئەسلىمىسى ۋە يېڭىلاش مەركىزى</h1>
             <p>Vercel Edge ISR، ئارقا پىلان تەكشۈرۈش ۋە دەرھال ئۆچۈرۈپ قايتا يېڭىلاش سىستېمىسى</p>
           </div>
         </div>
@@ -292,7 +292,7 @@ export function CacheManager() {
       <section className="cache-actions-section">
         <div className="section-title-wrap">
           <h2>تېز سۈرئەتلىك يېڭىلاش مەشغۇلاتلىرى</h2>
-          <p>تۆۋەندىكى كۇنۇپكىلار بىلەن Vercel نىڭ Edge كەشنى دەرھال بوشىتىپ يېڭىلىيالايسىز.</p>
+          <p>تۆۋەندىكى كۇنۇپكىلار بىلەن Vercel نىڭ Edge تېز خاتىرەنى دەرھال بوشىتىپ يېڭىلىيالايسىز.</p>
         </div>
 
         <div className="actions-grid">
@@ -306,7 +306,7 @@ export function CacheManager() {
               <Flame size={22} className={loadingAction === "warmup" ? "spin" : ""} />
             </div>
             <div className="btn-text">
-              <strong>🔥 پۈتۈن تور بەتنى قىزىتىش ۋە تولۇق كىشلەش (Global Pre-Warm)</strong>
+              <strong>🔥 پۈتۈن تور بەتنى قىزىتىش ۋە تولۇق تېز خاتىرە يېڭىلاش (Global Pre-Warm)</strong>
               <span>بارلىق يازمىلارنى ئارقا پىلاندا يۈكلەپ، كېيىنكى زىيارەتچىلەرگە 0ms لىق تېزلىك بىلەن چىقىرىپ بېرىدۇ</span>
             </div>
           </button>
@@ -352,7 +352,7 @@ export function CacheManager() {
             </div>
             <div className="btn-text">
               <strong>ئۆزگىرىشلەرنى ماسلاشتۇرۇش (Auto-Sync)</strong>
-              <span>تەھرىرلەنگەن ئەڭ يېڭى يازمىلارنى تەكشۈرۈپ ئاپتوماتىك قايتا كەش قىلىدۇ</span>
+              <span>تەھرىرلەنگەن ئەڭ يېڭى يازمىلارنى تەكشۈرۈپ ئاپتوماتىك قايتا تېز خاتىرە قىلىدۇ</span>
             </div>
           </button>
 
@@ -366,7 +366,7 @@ export function CacheManager() {
               <RefreshCw size={22} className={loadingAction === "all" ? "spin" : ""} />
             </div>
             <div className="btn-text">
-              <strong>بارلىق كەش ئەسلىمىنى تازىلاش</strong>
+              <strong>بارلىق تېز خاتىرە ئەسلىمىنى تازىلاش</strong>
               <span>پۈتۈن تور بېكەت قۇرۇلمىسى ۋە بارلىق بەتلەرنى قايتا سالىدۇ (Purge All)</span>
             </div>
           </button>

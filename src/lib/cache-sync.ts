@@ -85,7 +85,7 @@ export async function revalidateSpecificUrl(inputUrlOrSlug: string) {
     ok: true,
     action: "single",
     path,
-    message: `«${path}» بېتىنىڭ كەش ئەسلىمىسى يېڭىلاندى`,
+    message: `«${path}» بېتىنىڭ تېز خاتىرە ئەسلىمىسى يېڭىلاندى`,
     timestamp: new Date().toISOString(),
   };
 }
@@ -184,7 +184,7 @@ export async function preWarmSite(limit = 50, baseUrl?: string) {
     totalPosts,
     warmedCount,
     totalTargeted: paths.length,
-    message: `${warmedCount} بەت مۇۋەپپەقىيەتلىك ئىسسىتىلىپ، كەش ئەسلىمىگە تولۇق ساقلاندى (${warmedCount} sayfa başarıyla ısıtılıp önbelleklendi)`,
+    message: `${warmedCount} بەت مۇۋەپپەقىيەتلىك ئىسسىتىلىپ، تېز خاتىرە ئەسلىمىگە تولۇق ساقلاندى (${warmedCount} sayfa başarıyla ısıtılıp önbelleklendi)`,
     samplePaths: warmedPaths.slice(0, 10),
     timestamp: new Date().toISOString(),
   };
