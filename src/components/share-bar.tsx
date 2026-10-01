@@ -13,10 +13,14 @@ interface ShareBarProps {
 export function ShareBar({ title, url: initialUrl, className = "", variant = "top" }: ShareBarProps) {
   const [copied, setCopied] = useState(false);
   const [shareUrl, setShareUrl] = useState(initialUrl || "");
+  const [hasNativeShare, setHasNativeShare] = useState(false);
 
   useEffect(() => {
     if (!shareUrl && typeof window !== "undefined") {
       setShareUrl(window.location.href);
+    }
+    if (typeof navigator !== "undefined" && typeof navigator.share === "function") {
+      setHasNativeShare(true);
     }
   }, [shareUrl]);
 
@@ -49,8 +53,6 @@ export function ShareBar({ title, url: initialUrl, className = "", variant = "to
       }
     }
   };
-
-  const hasNativeShare = typeof navigator !== "undefined" && typeof navigator.share === "function";
 
   return (
     <div className={`article-share-bar variant-${variant} ${className}`} aria-label="ھەمبەھىرلەش تاللانمىلىرى">
