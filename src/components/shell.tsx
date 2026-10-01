@@ -4,7 +4,8 @@ import { Category } from "@/lib/wordpress";
 import { localPath } from "@/lib/content";
 
 export function Header({ categories, active }: { categories: Category[]; active?: number | string }) {
-  const nav = [3, 22, 14, 21].map(id => categories.find(c => c.id === id)).filter((c): c is Category => !!c);
+  const analysis = categories.find(c => c.id === 3);
+  const otherCats = [22, 14, 21].map(id => categories.find(c => c.id === id)).filter((c): c is Category => !!c);
   return <>
     <div className="utility-bar"><div className="site-width utility-inner">
       <span>تەتقىقات · ئانالىز · يېڭى نەزەر</span>
@@ -19,7 +20,13 @@ export function Header({ categories, active }: { categories: Category[]; active?
       <div className="masthead-edition" dir="ltr"><span>THE ORHUN REVIEW</span><span className="edition-line"/><span>ANALYSIS & INSIGHT</span></div>
     </header>
     <div className="navigation-wrap"><div className="site-width navigation-inner">
-      <nav aria-label="باش تىزىملىك"><Link href="/uy" className={!active ? "active" : ""}>باشبەت</Link>{nav.map(c => <Link key={c.id} href={localPath(c.link)} className={active === c.id ? "active" : ""}>{c.name}</Link>)}<Link href="/uy/podcasts" className={active === "podcasts" ? "active" : ""}>پودكاستلار</Link><Link href="/uy#regions">رايونلار</Link></nav>
+      <nav aria-label="باش تىزىملىك">
+        <Link href="/uy" className={!active ? "active" : ""}>باشبەت</Link>
+        {analysis && <Link href={localPath(analysis.link)} className={active === analysis.id ? "active" : ""}>{analysis.name}</Link>}
+        <Link href="/uy/podcasts" className={`nav-podcast-item ${active === "podcasts" ? "active" : ""}`}>پودكاستلار</Link>
+        {otherCats.map(c => <Link key={c.id} href={localPath(c.link)} className={active === c.id ? "active" : ""}>{c.name}</Link>)}
+        <Link href="/uy#regions">رايونلار</Link>
+      </nav>
       <SearchForm compact/>
     </div></div>
   </>;

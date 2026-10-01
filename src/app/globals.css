@@ -271,6 +271,10 @@ svg {
     line-height: 54px
 }
 
+.navigation-inner nav a.nav-podcast-item {
+    font-weight: 700;
+}
+
 .navigation-inner nav a.active {
     color: var(--wine)
 }
@@ -2238,9 +2242,11 @@ svg {
 
     .navigation-inner nav {
         width: 100%;
-        justify-content: space-between;
-        gap: 15px;
-        overflow-x: auto
+        justify-content: flex-start;
+        gap: 18px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
     }
 
     .search-form.compact {
