@@ -24,18 +24,45 @@ export function localPath(link: string): string {
   }
 }
 
-export function normalizedPath(path: string): string {
-  try {
-    let curr = path;
-    for (let i = 0; i < 3; i++) {
+export function robustDecode(str: string): string {
+  if (!str) return "";
+  let curr = str;
+  for (let iter = 0; iter < 3; iter++) {
+    try {
       const decoded = decodeURIComponent(curr);
       if (decoded === curr) break;
       curr = decoded;
+    } catch {
+      try {
+        const bytes: number[] = [];
+        for (let i = 0; i < curr.length; i++) {
+          if (curr[i] === "%" && i + 2 < curr.length && /^[0-9a-fA-F]{2}$/.test(curr.slice(i + 1, i + 3))) {
+            bytes.push(parseInt(curr.slice(i + 1, i + 3), 16));
+            i += 2;
+          } else {
+            const code = curr.charCodeAt(i);
+            if (code < 128) {
+              bytes.push(code);
+            } else {
+              const encoded = Buffer.from(curr[i], "utf8");
+              for (let b = 0; b < encoded.length; b++) bytes.push(encoded[b]);
+            }
+          }
+        }
+        const decoder = new TextDecoder("utf-8", { fatal: false });
+        const decoded = decoder.decode(new Uint8Array(bytes)).replace(/\uFFFD/g, "");
+        if (decoded === curr) break;
+        curr = decoded;
+      } catch {
+        break;
+      }
     }
-    return curr.replace(/\/$/, "");
-  } catch {
-    return path.replace(/\/$/, "");
   }
+  return curr;
+}
+
+export function normalizedPath(path: string): string {
+  return robustDecode(path).toLowerCase().replace(/\/$/, "");
 }
 
 export function contentImage(html: string): string | undefined {

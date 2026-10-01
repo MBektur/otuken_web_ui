@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ArrowLeft, Clock3, Maximize2 } from "lucide-react";
 import { Category, getCategories, getPages, getPostBySlug, getPosts, postImage, readingMinutes, displayDate, postCategory, WordPressError, WPPost } from "@/lib/wordpress";
-import { localPath, normalizedPath, plainText, safeContent } from "@/lib/content";
+import { localPath, normalizedPath, plainText, robustDecode, safeContent } from "@/lib/content";
 import { safeDecode, getLocalSnapshot } from "@/lib/cache-store";
 import { Header, Footer } from "@/components/shell";
 import { PostCard, RegionRail, PostMeta, Pagination, SectionTitle } from "@/components/editorial";
@@ -138,7 +138,19 @@ export default async function ContentPage({ params, searchParams }: Props) {
     return <><Header categories={data.categories} active={data.category.id} /><main className="site-width category-layout" id="main"><RegionRail categories={data.categories} /><div className="category-main"><div className="listing-header"><Link className="eyebrow" href="/uy">باشبەت / رايون ۋە تېمىلار</Link><h1>{data.category.name}</h1><p><b dir="ltr">{result.total}</b> يازما</p></div><div className="posts-grid">{result.data.map(post => <PostCard post={post} key={post.id} />)}</div>{!result.data.length && <div className="empty-state"><h2>ھازىرچە يازما يوق</h2><Link href="/uy">باشبەتكە قايتىش ←</Link></div>}<Pagination page={page} totalPages={result.totalPages} base={localPath(data.category.link)} /></div></main><Footer /></>;
   }
   const item = data.kind === "post" ? data.post : data.page;
-  if (normalizedPath(`/uy/${path.join("/")}`) !== normalizedPath(localPath(item.link))) redirect(localPath(item.link));
+  const currentPath = normalizedPath(`/uy/${path.join("/")}`);
+  const targetPath = normalizedPath(localPath(item.link));
+
+  if (currentPath !== targetPath) {
+    const isSamePost = data.kind === "post" && (
+      currentPath.includes(robustDecode(data.post.slug).toLowerCase()) ||
+      targetPath.includes(robustDecode(path[path.length - 1]).toLowerCase()) ||
+      (data.post.date && currentPath.includes(data.post.date.slice(0, 10).replace(/-/g, "/")))
+    );
+    if (!isSamePost) {
+      redirect(localPath(item.link));
+    }
+  }
 
   const isPost = data.kind === "post";
   let leadImage: string | undefined = undefined;

@@ -122,7 +122,10 @@ export async function getPostBySlug(slug: string): Promise<WPPost | undefined> {
   if (postBySlugMap.size >= 100) postBySlugMap.delete(postBySlugMap.keys().next().value!);
   postBySlugMap.set(slug, { expires: Date.now() + (600 * 1000), result });
   try { return await result; }
-  catch (error) { if (postBySlugMap.get(slug)?.result === result) postBySlugMap.delete(slug); throw error; }
+  catch {
+    if (postBySlugMap.get(slug)?.result === result) postBySlugMap.delete(slug);
+    return undefined;
+  }
 }
 
 export async function getPodcastPosts(): Promise<WPPost[]> {

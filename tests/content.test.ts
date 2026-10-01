@@ -45,6 +45,13 @@ test("Uyghur post slug resolution matches decoded, raw, and encoded variations",
   assert.equal(post1.id, 81);
   assert.equal(post2?.id, 81);
   assert.equal(post3?.id, 81);
+
+  // Test post 317 with truncated malformed %d8 at end:
+  const malformedSlug = "%d8%ae%db%95%d9%84%d9%82%d8%a6%d8%a7%d8%b1%d8%a7-%d9%85%db%87%d9%86%d8%a7%d8%b3%d9%89%db%8b%db%95%d8";
+  const post317 = getLocalPostBySlug(malformedSlug);
+  assert.ok(post317);
+  assert.equal(post317.id, 317);
+  assert.equal(normalizedPath(`/uy/2025/01/02/${malformedSlug}`), "/uy/2025/01/02/خەلقئارا-مۇناسىۋە");
 });
 
 test("plugin widgets are omitted and only recognized video hosts are embedded", () => {
