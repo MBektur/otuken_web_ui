@@ -36,7 +36,7 @@ export function Header({ categories, active }: { categories: Category[]; active?
   const otherCats = [22, 14, 21].map(id => categories.find(c => c.id === id)).filter((c): c is Category => !!c);
   return <>
     <div className="utility-bar" dir="rtl"><div className="site-width utility-inner" dir="rtl">
-      <span>Тәтқиқات · Анализ · Йеңи Нәزәр</span>
+      <span>йеңи нәзәр</span>
       <LanguageSwitcher currentLocale="ug" />
     </div></div>
     <header className="site-width masthead">
