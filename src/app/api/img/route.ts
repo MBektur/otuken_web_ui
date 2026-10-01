@@ -20,6 +20,9 @@ export async function GET(req: NextRequest) {
       return new NextResponse("Host not allowed", { status: 403 });
     }
     targetUrl = parsed.toString();
+    if (targetUrl.startsWith("http://")) {
+      targetUrl = targetUrl.replace("http://", "https://");
+    }
   } catch {
     return new NextResponse("Invalid URL", { status: 400 });
   }

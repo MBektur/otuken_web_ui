@@ -93,7 +93,17 @@ export function safeContent(html: string): string {
     exclusiveFilter: frame => frame.attribs.id === "daexthefu-container",
     transformTags: {
       a: (_tagName, attrs) => ({ tagName: "a", attribs: { ...attrs, href: attrs.href ? localPath(attrs.href) : "", rel: "noopener noreferrer" } }),
-      img: (_tagName, attrs) => ({ tagName: "img", attribs: { ...attrs, loading: "lazy" } }),
+      img: (_tagName, attrs) => {
+        let src = attrs.src || "";
+        if (
+          src.includes("orhunpolicycenter.com") ||
+          src.includes("youtube.com") ||
+          src.includes("ytimg.com")
+        ) {
+          src = `/api/img?url=${encodeURIComponent(src)}`;
+        }
+        return { tagName: "img", attribs: { ...attrs, src, loading: "lazy" } };
+      },
     },
   });
 }

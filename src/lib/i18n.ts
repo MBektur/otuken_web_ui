@@ -26,10 +26,15 @@ export function transliterateHtml(html: string, locale?: "uy" | "ug"): string {
     // We split by HTML tags
     const parts = html.split(/(<[^>]+>)/g);
     return parts.map(part => {
+      if (!part) return "";
       if (part.startsWith("<")) {
          // It's a tag, transliterate alt and title attributes
          let tag = part.replace(/\b(alt|title)=["']([^"']*)["']/gi, (match, attr, value) => {
-           return `${attr}="${ulcConvert(value, "uc")}"`;
+           try {
+             return value ? `${attr}="${ulcConvert(value, "uc")}"` : match;
+           } catch {
+             return match;
+           }
          });
          // Replace internal links to stay within /ug
          tag = tag.replace(/href=["'](?:https:\/\/orhunpolicycenter\.com\/uy|\/uy)(\/[^"']*)?["']/gi, (m, rest) => {
@@ -38,7 +43,11 @@ export function transliterateHtml(html: string, locale?: "uy" | "ug"): string {
          return tag;
       }
       // It's text content
-      return ulcConvert(part, "uc");
+      try {
+        return ulcConvert(part, "uc");
+      } catch {
+        return part;
+      }
     }).join("");
   } catch {
     return html;

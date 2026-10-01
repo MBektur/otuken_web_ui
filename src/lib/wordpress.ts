@@ -164,37 +164,76 @@ export async function getPages(): Promise<WPPage[]> {
 }
 
 /**
- * Convert a remote image URL to an optimized, cached URL via Next.js Image Optimization.
- * Automatically converts to WebP/AVIF, resizes, and caches on Vercel Edge CDN (1 year).
- * @param url - Source image URL
- * @param w - Target width in pixels (default 640)
- * @param q - Quality 1-100 (default 75)
+ * Convert a remote image URL to an edge-cached proxy URL via /api/img.
+ * Images are cached with public, max-age=31536000, immutable for 1 year.
  */
 export function toCachedImageUrl(url?: string, w: number = 640, q: number = 75): string | undefined {
   if (!url) return undefined;
-  // Already an optimized URL
-  if (url.startsWith("/_next/image")) return url;
+  // If already an API img proxy URL or local path, return as is
+  if (url.startsWith("/api/img") || (url.startsWith("/") && !url.startsWith("/_next/image"))) {
+    return url;
+  }
+  // If it was previous /_next/image format, extract original url
+  if (url.startsWith("/_next/image")) {
+    try {
+      const parsed = new URL(url, "http://localhost:3000");
+      const realUrl = parsed.searchParams.get("url");
+      if (realUrl) url = realUrl;
+    } catch {
+      // keep url as is
+    }
+  }
   if (
     url.includes("orhunpolicycenter.com") ||
     url.includes("youtube.com") ||
     url.includes("ytimg.com")
   ) {
-    return `/_next/image?url=${encodeURIComponent(url)}&w=${w}&q=${q}`;
+    return `/api/img?url=${encodeURIComponent(url)}`;
   }
   return url;
 }
 
 export function postImage(post: WPPost, w?: number, q?: number): string | undefined {
-  let img = post.previewImage;
-  if (!img) {
-    const media = post._embedded?.["wp:featuredmedia"]?.[0];
-    const renderedContent = post.content?.rendered || post.excerpt?.rendered || "";
-    img =
-      media?.media_details?.sizes?.large?.source_url ||
-      media?.source_url ||
-      (renderedContent ? contentImage(renderedContent) : undefined);
+  const media = post._embedded?.["wp:featuredmedia"]?.[0];
+  const sizes = media?.media_details?.sizes;
+  const targetW = w || 640;
+
+  let chosenUrl: string | undefined;
+
+  // 1. Pick the best matching pre-generated WordPress size to save bandwidth and load super fast
+  if (sizes) {
+    if (targetW <= 200) {
+      chosenUrl = sizes.thumbnail?.source_url || sizes.medium?.source_url;
+    } else if (targetW <= 400) {
+      chosenUrl = sizes.medium?.source_url || sizes["morenews-medium"]?.source_url || sizes.thumbnail?.source_url;
+    } else if (targetW <= 640) {
+      chosenUrl = sizes["morenews-medium"]?.source_url || sizes.medium_large?.source_url || sizes.medium?.source_url;
+    } else if (targetW <= 900) {
+      chosenUrl = sizes["morenews-large"]?.source_url || sizes.medium_large?.source_url || sizes.large?.source_url;
+    } else {
+      chosenUrl = sizes.large?.source_url || sizes["morenews-featured"]?.source_url || sizes.full?.source_url;
+    }
   }
-  return toCachedImageUrl(img, w, q);
+
+  // 2. If no media sizes matched, check media source_url
+  if (!chosenUrl && media?.source_url) {
+    chosenUrl = media.source_url;
+  }
+
+  // 3. Fall back to previewImage
+  if (!chosenUrl && post.previewImage) {
+    chosenUrl = post.previewImage;
+  }
+
+  // 4. Fall back to content image
+  if (!chosenUrl) {
+    const renderedContent = post.content?.rendered || post.excerpt?.rendered || "";
+    if (renderedContent) {
+      chosenUrl = contentImage(renderedContent);
+    }
+  }
+
+  return toCachedImageUrl(chosenUrl, w, q);
 }
 
 export function postCategory(post: WPPost): string {

@@ -161,20 +161,31 @@ export default async function ContentPage({ params, searchParams }: Props) {
 
   if (isPost) {
     const media = data.post._embedded?.["wp:featuredmedia"]?.[0];
+    const hasFeaturedMedia = Boolean(media?.source_url);
     const postImg = postImage(data.post, 1080, 80);
     const rawImg = media?.media_details?.sizes?.large?.source_url || media?.source_url || "";
     const isYoutube = data.post.youtubeId || (postImg && (postImg.includes("youtube.com") || postImg.includes("ytimg.com")));
 
-    if (postImg && !isYoutube) {
+    // Only show lead/dropcap image if the post has an actual featured thumbnail
+    // AND that image (or an image) is not already at the top of the content
+    if (hasFeaturedMedia && postImg && !isYoutube) {
       leadImage = postImg;
       leadImageOriginal = rawImg || undefined;
       leadImageAlt = media?.alt_text || plainText(data.post.title.rendered);
       leadImageCaption = media?.caption?.rendered ? plainText(media.caption.rendered) : undefined;
 
-      // Use raw URL (not optimized) for content deduplication check
-      const filename = rawImg.split("/").pop()?.split("?")[0];
-      const inContent = filename ? item.content.rendered.includes(filename) : false;
-      if (!inContent) {
+      const originalFile = (media?.source_url || "").split("/").pop()?.split("?")[0] || "";
+      const lastDot = originalFile.lastIndexOf(".");
+      const baseName = lastDot > 0 ? originalFile.slice(0, lastDot) : originalFile;
+
+      const inContent = originalFile
+        ? item.content.rendered.includes(originalFile) || (baseName.length > 3 && item.content.rendered.includes(baseName))
+        : false;
+
+      const firstImgMatch = item.content.rendered.match(/<img\b[^>]*>/i);
+      const hasImgAtTop = firstImgMatch ? item.content.rendered.indexOf(firstImgMatch[0]) < 400 : false;
+
+      if (!inContent && !hasImgAtTop) {
         showLeadImage = true;
       }
     }
