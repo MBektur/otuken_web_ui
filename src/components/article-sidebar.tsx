@@ -132,7 +132,7 @@ export function ArticleSidebar({
 
         {/* About Motto */}
         <div className="sidebar-card sidebar-about-card">
-          <span className="sidebar-about-title">ئورخۇن تەتقىقات مەركىزى</span>
+          <span className="sidebar-about-title">ئۆتۈكەن تەتقىقات مەركىزى</span>
           <p>«دۇنياغا نەزەر، كەلگۈسىگە تەپەككۇر.» سىياسىي ئانالىز ۋە مۇستەقىل كۆز قاراش.</p>
           <Link href="/uy/ھەققىمىزدە/" className="read-link">
             تەپسىلاتى ←

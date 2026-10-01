@@ -134,7 +134,7 @@ export function PodcastView({ podcasts }: { podcasts: WPPost[] }) {
                   {thumb ? (
                     <img src={thumb} alt="" loading="lazy" decoding="async" />
                   ) : (
-                    <div className="photo-empty">ئورخۇن سىن</div>
+                    <div className="photo-empty">ئۆتۈكەن سىن</div>
                   )}
                   <div className="podcast-play-overlay">
                     <span className="podcast-play-icon">

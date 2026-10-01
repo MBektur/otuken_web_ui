@@ -104,7 +104,7 @@ export default async function ContentPage({ params, searchParams }: Props) {
           {isPost ? (
             <Link href="/uy#regions">{postCategory(data.post)}</Link>
           ) : (
-            <span>ئورخۇن</span>
+            <span>ئۆتۈكەن</span>
           )}
           <span>/</span>
           <span className="breadcrumb-current">{plainText(item.title.rendered)}</span>
@@ -118,7 +118,7 @@ export default async function ContentPage({ params, searchParams }: Props) {
                 <h1>{plainText(item.title.rendered)}</h1>
                 {isPost && (
                   <div className="article-byline">
-                    <span>{data.post._embedded?.author?.[0]?.name || "ئورخۇن تەھرىرىيىتى"}</span>
+                    <span>{data.post._embedded?.author?.[0]?.name || "ئۆتۈكەن تەھرىرىيىتى"}</span>
                     <time dateTime={data.post.date} dir="ltr">
                       {displayDate(data.post.date)}
                     </time>
@@ -165,7 +165,7 @@ export default async function ContentPage({ params, searchParams }: Props) {
               </div>
 
               <div className="article-end">
-                <span>ئورخۇن سىياسەت تەتقىقات مەركىزى</span>
+                <span>ئۆتۈكەن سىياسەت تەتقىقات مەركىزى</span>
                 <a href={item.link} target="_blank" rel="noopener noreferrer">
                   ئەسلى نەشرى <ArrowLeft size={15} />
                 </a>

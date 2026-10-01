@@ -9,7 +9,7 @@ export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "پودكاستلار — سىن ۋە ئاۋازلىق ئانالىزلار",
-  description: "ئورخۇن سىياسەت تەتقىقات مەركىزىنىڭ سىن، پودكاست ۋە سۆھبەت پروگراممىلىرى.",
+  description: "ئۆتۈكەن سىياسەت تەتقىقات مەركىزىنىڭ سىن، پودكاست ۋە سۆھبەت پروگراممىلىرى.",
   alternates: { canonical: "/uy/podcasts" },
 };
 
@@ -31,7 +31,7 @@ export default async function PodcastsPage() {
 
         <div className="podcast-header">
           <div className="podcast-header-text">
-            <span className="eyebrow">ئورخۇن مېدىيا</span>
+            <span className="eyebrow">ئۆتۈكەن مېدىيا</span>
             <h1>سىن ۋە ئاۋازلىق پودكاستلار</h1>
             <p>
               خەلقئارا مۇناسىۋەتلەر، دۇنيا ۋەزىيىتى ۋە چوڭ دۆلەتلەر رىقابىتى ھەققىدىكى

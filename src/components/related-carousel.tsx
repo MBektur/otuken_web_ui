@@ -221,7 +221,7 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
                   {img ? (
                     <img src={img} alt="" loading="lazy" decoding="async" draggable={false} />
                   ) : (
-                    <div className="carousel-no-photo">ئورخۇن</div>
+                    <div className="carousel-no-photo">ئۆتۈكەن</div>
                   )}
                 </Link>
                 <div className="carousel-card-body">
