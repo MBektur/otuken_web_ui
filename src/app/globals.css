@@ -139,12 +139,14 @@ svg {
 }
 
 .utility-bar {
+    direction: rtl !important;
     border-bottom: 1px solid var(--rule);
     font-size: 12px;
     letter-spacing: .1px
 }
 
 .utility-inner {
+    direction: rtl !important;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -153,6 +155,7 @@ svg {
 }
 
 .language-links {
+    direction: rtl !important;
     display: flex;
     align-items: center;
     gap: 16px;
@@ -1193,8 +1196,8 @@ html[dir="ltr"] .scroll-controls {
 }
 
 .article-header h1 {
-    font-size: 43px;
-    line-height: 1.6;
+    font-size: 33px;
+    line-height: 1.45;
     color: var(--wine);
     margin-top: 15px;
     text-wrap: balance
@@ -1937,6 +1940,38 @@ html[dir="ltr"] .scroll-controls {
     margin-bottom: 0;
     border-bottom: 0;
     padding-bottom: 0;
+}
+
+.related-carousel-header .section-heading h2,
+.related-carousel-section .section-heading h2 {
+    font-size: 21px;
+    line-height: 1.35;
+}
+
+@media (max-width: 768px) {
+    .related-carousel-header .section-heading h2,
+    .related-carousel-section .section-heading h2,
+    main > section > div:first-child > div:first-child > h2 {
+        font-size: 16px !important;
+        line-height: 1.3;
+    }
+
+    .related-carousel-header {
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .related-carousel-header .section-heading h2,
+    .related-carousel-section .section-heading h2,
+    main > section > div:first-child > div:first-child > h2 {
+        font-size: 14.5px !important;
+    }
+
+    .related-count {
+        font-size: 11px;
+    }
 }
 
 .related-count {
@@ -3130,8 +3165,8 @@ html[dir="ltr"] .scroll-controls {
     }
 
     .article-header h1 {
-        font-size: 30px;
-        line-height: 1.75
+        font-size: 24px;
+        line-height: 1.55
     }
 
     .article-byline {

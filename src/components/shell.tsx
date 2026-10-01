@@ -37,7 +37,7 @@ export function Header({ categories, active }: { categories: Category[]; active?
   const analysis = categories.find(c => c.id === 3);
   const otherCats = [22, 14, 21].map(id => categories.find(c => c.id === id)).filter((c): c is Category => !!c);
   return <>
-    <div className="utility-bar"><div className="site-width utility-inner">
+    <div className="utility-bar" dir="rtl"><div className="site-width utility-inner" dir="rtl">
       <span>تەتقىقات · ئانالىز · يېڭى نەزەر</span>
       <LanguageSwitcher currentLocale="uy" />
     </div></div>

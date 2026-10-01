@@ -48,9 +48,9 @@ export function LanguageSwitcher({ currentLocale = "uy" }: { currentLocale?: "uy
   }, [isUg]);
 
   return (
-    <div className="language-links" id="language-switcher">
+    <div className="language-links" id="language-switcher" dir="rtl">
       <Languages size={13} className="lang-icon" aria-hidden="true" />
-      <div className="script-switcher" role="group" aria-label="يېزىق تاللاش / Тил таллаш">
+      <div className="script-switcher" role="group" aria-label="يېزىق تاللاش / Тил таллаش" dir="rtl">
         <Link
           href={uyPath}
           prefetch={true}
@@ -82,7 +82,7 @@ export function LanguageSwitcher({ currentLocale = "uy" }: { currentLocale?: "uy
         rel="noopener noreferrer"
         className="lang-external-en"
       >
-        English {isUg ? <ArrowUpRight size={11} /> : <ArrowUpLeft size={11} />}
+        English <ArrowUpLeft size={11} />
       </a>
     </div>
   );
