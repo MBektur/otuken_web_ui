@@ -1,9 +1,9 @@
-import { cache } from "react";
+import { cache, Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ArrowLeft, Clock3, Maximize2 } from "lucide-react";
-import { getCategories, getPages, getPostBySlug, getPosts, postImage, readingMinutes, displayDate, postCategory, WordPressError, WPPost } from "@/lib/wordpress";
+import { Category, getCategories, getPages, getPostBySlug, getPosts, postImage, readingMinutes, displayDate, postCategory, WordPressError, WPPost } from "@/lib/wordpress";
 import { localPath, normalizedPath, plainText, safeContent } from "@/lib/content";
 import { Header, Footer } from "@/components/shell";
 import { PostCard, RegionRail, PostMeta, Pagination, SectionTitle } from "@/components/editorial";
@@ -76,6 +76,41 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   return { title, description: plainText(data.kind === "post" ? data.post.excerpt.rendered : item.content.rendered).slice(0, 170), alternates: { canonical: localPath(item.link) }, openGraph: { title, type: data.kind === "post" ? "article" : "website", images: data.kind === "post" && postImage(data.post) ? [postImage(data.post)!] : undefined } };
 }
 
+async function ArticleSidebarStream({
+  currentPost,
+  categories,
+}: {
+  currentPost: WPPost;
+  categories: Category[];
+}) {
+  const recentResult = await getPosts({ perPage: 12, page: 1 }).catch(() => ({ data: [] }));
+  const recentPosts = recentResult.data.filter(p => p.id !== currentPost.id).slice(0, 4);
+  return (
+    <ArticleSidebar
+      currentPost={currentPost}
+      recentPosts={recentPosts}
+      categories={categories}
+    />
+  );
+}
+
+async function RelatedCarouselStream({ currentPost }: { currentPost: WPPost }) {
+  const catId = currentPost.categories?.[0];
+  const [relResult, recentResult] = await Promise.all([
+    catId ? getPosts({ category: catId, perPage: 10, page: 1 }).catch(() => ({ data: [] })) : Promise.resolve({ data: [] }),
+    getPosts({ perPage: 10, page: 1 }).catch(() => ({ data: [] })),
+  ]);
+  let related = relResult.data.filter(p => p.id !== currentPost.id);
+  if (related.length < 4) {
+    const extra = recentResult.data.filter(p => p.id !== currentPost.id && !related.some(r => r.id === p.id));
+    related = [...related, ...extra].slice(0, 8);
+  } else {
+    related = related.slice(0, 8);
+  }
+  if (!related.length) return null;
+  return <RelatedCarousel posts={related} />;
+}
+
 export default async function ContentPage({ params, searchParams }: Props) {
   const { path } = await params;
   const data = await resolve(path.join("/"));
@@ -90,25 +125,12 @@ export default async function ContentPage({ params, searchParams }: Props) {
   if (normalizedPath(`/uy/${path.join("/")}`) !== normalizedPath(localPath(item.link))) redirect(localPath(item.link));
 
   const isPost = data.kind === "post";
-  let related: WPPost[] = [];
-  let recentPosts: WPPost[] = [];
   let leadImage: string | undefined = undefined;
   let leadImageAlt = "";
   let leadImageCaption: string | undefined = undefined;
   let showLeadImage = false;
 
   if (isPost) {
-    const [relResult, recentResult] = await Promise.all([
-      getPosts({ category: data.post.categories[0], exclude: [item.id], perPage: 8 }).catch(() => ({ data: [] })),
-      getPosts({ exclude: [item.id], perPage: 8 }).catch(() => ({ data: [] })),
-    ]);
-    related = relResult.data;
-    if (related.length < 4) {
-      const extra = recentResult.data.filter(p => !related.some(r => r.id === p.id));
-      related = [...related, ...extra].slice(0, 8);
-    }
-    recentPosts = recentResult.data;
-
     const media = data.post._embedded?.["wp:featuredmedia"]?.[0];
     const postImg = postImage(data.post);
     const isYoutube = data.post.youtubeId || (postImg && (postImg.includes("youtube.com") || postImg.includes("ytimg.com")));
@@ -209,15 +231,28 @@ export default async function ContentPage({ params, searchParams }: Props) {
           </div>
 
           {isPost && (
-            <ArticleSidebar
-              currentPost={data.post}
-              recentPosts={recentPosts}
-              categories={data.categories}
-            />
+            <Suspense
+              fallback={
+                <ArticleSidebar
+                  currentPost={data.post}
+                  recentPosts={[]}
+                  categories={data.categories}
+                />
+              }
+            >
+              <ArticleSidebarStream
+                currentPost={data.post}
+                categories={data.categories}
+              />
+            </Suspense>
           )}
         </div>
 
-        {isPost && related.length > 0 && <RelatedCarousel posts={related} />}
+        {isPost && (
+          <Suspense fallback={null}>
+            <RelatedCarouselStream currentPost={data.post} />
+          </Suspense>
+        )}
 
         <ScrollControls />
       </main>

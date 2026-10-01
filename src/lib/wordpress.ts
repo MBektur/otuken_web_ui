@@ -34,14 +34,37 @@ async function request<T>(resource: string, params: Record<string, string | numb
 }
 
 type PostList = { data: WPPost[]; total: number; totalPages: number };
-// Some published articles contain large HTML exports. Cache the small card data,
-// not multi-megabyte collections of full articles. This cache is per server process.
 const postLists = new Map<string, { expires: number; result: Promise<PostList> }>();
+const postBySlugMap = new Map<string, { expires: number; result: Promise<WPPost | undefined> }>();
+let categoriesCache: { expires: number; result: Promise<Category[]> } | null = null;
+let pagesCache: { expires: number; result: Promise<WPPage[]> } | null = null;
+
 export function clearMemoryCache() {
   postLists.clear();
+  postBySlugMap.clear();
+  categoriesCache = null;
+  pagesCache = null;
 }
-export async function getPosts(options: { page?: number; perPage?: number; category?: number; search?: string; exclude?: number[] } = {}): Promise<PostList> {
-  const params: Record<string, string | number> = { _embed: "author,wp:term,wp:featuredmedia", _fields: "id,date,modified,slug,link,title,content,excerpt,categories,_links,_embedded", per_page: options.perPage || 12, page: options.page || 1, orderby: "date", order: "desc" };
+
+export async function getPosts(options: {
+  page?: number;
+  perPage?: number;
+  category?: number;
+  search?: string;
+  exclude?: number[];
+  withContent?: boolean;
+} = {}): Promise<PostList> {
+  const fields = options.withContent
+    ? "id,date,modified,slug,link,title,content,excerpt,categories,_links,_embedded"
+    : "id,date,modified,slug,link,title,excerpt,categories,_links,_embedded";
+  const params: Record<string, string | number> = {
+    _embed: "author,wp:term,wp:featuredmedia",
+    _fields: fields,
+    per_page: options.perPage || 12,
+    page: options.page || 1,
+    orderby: "date",
+    order: "desc",
+  };
   if (options.category) params.categories = options.category;
   if (options.search) params.search = options.search;
   if (options.exclude?.length) params.exclude = options.exclude.join(",");
@@ -52,7 +75,7 @@ export async function getPosts(options: { page?: number; perPage?: number; categ
   const result = request<WPPost[]>("posts", params, revalidate).then(list => ({
     ...list,
     data: list.data.map(post => {
-      const ytId = extractYoutubeId(post.content?.rendered || "");
+      const ytId = post.content?.rendered ? extractYoutubeId(post.content.rendered) : undefined;
       return {
         ...post,
         previewImage: postImage(post) || (ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : undefined),
@@ -69,25 +92,48 @@ export async function getPosts(options: { page?: number; perPage?: number; categ
 }
 
 export async function getPostBySlug(slug: string) {
-  const post = (await request<WPPost[]>("posts", { slug, _embed: "1" }, 600)).data[0];
-  if (post && post.content?.rendered) {
-    post.youtubeId = extractYoutubeId(post.content.rendered);
-  }
-  return post;
+  const cached = postBySlugMap.get(slug);
+  if (cached && cached.expires > Date.now()) return cached.result;
+
+  const result = request<WPPost[]>("posts", { slug, _embed: "1" }, 600).then(r => {
+    const post = r.data[0];
+    if (post && post.content?.rendered) {
+      post.youtubeId = extractYoutubeId(post.content.rendered);
+    }
+    return post;
+  });
+
+  if (postBySlugMap.size >= 100) postBySlugMap.delete(postBySlugMap.keys().next().value!);
+  postBySlugMap.set(slug, { expires: Date.now() + (600 * 1000), result });
+  try { return await result; }
+  catch (error) { if (postBySlugMap.get(slug)?.result === result) postBySlugMap.delete(slug); throw error; }
 }
 
 export async function getPodcastPosts(): Promise<WPPost[]> {
   const [page1, page2, page3] = await Promise.all([
-    getPosts({ perPage: 30, page: 1 }),
-    getPosts({ perPage: 30, page: 2 }),
-    getPosts({ perPage: 30, page: 3 }),
+    getPosts({ perPage: 15, page: 1, withContent: true }),
+    getPosts({ perPage: 15, page: 2, withContent: true }),
+    getPosts({ perPage: 15, page: 3, withContent: true }),
   ]);
   const all = [...page1.data, ...page2.data, ...page3.data];
   return all.filter(p => !!p.youtubeId);
 }
 
-export async function getCategories() { return (await request<Category[]>("categories", { per_page: 100, hide_empty: "false" }, 3600)).data; }
-export async function getPages() { return (await request<WPPage[]>("pages", { per_page: 100 }, 3600)).data; }
+export async function getCategories(): Promise<Category[]> {
+  if (categoriesCache && categoriesCache.expires > Date.now()) return categoriesCache.result;
+  const result = request<Category[]>("categories", { per_page: 100, hide_empty: "false" }, 3600).then(r => r.data);
+  categoriesCache = { expires: Date.now() + (3600 * 1000), result };
+  try { return await result; }
+  catch (e) { categoriesCache = null; throw e; }
+}
+
+export async function getPages(): Promise<WPPage[]> {
+  if (pagesCache && pagesCache.expires > Date.now()) return pagesCache.result;
+  const result = request<WPPage[]>("pages", { per_page: 100 }, 3600).then(r => r.data);
+  pagesCache = { expires: Date.now() + (3600 * 1000), result };
+  try { return await result; }
+  catch (e) { pagesCache = null; throw e; }
+}
 
 export function postImage(post: WPPost): string | undefined {
   if (post.previewImage) return post.previewImage;

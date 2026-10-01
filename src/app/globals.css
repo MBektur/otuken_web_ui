@@ -3418,6 +3418,33 @@ svg {
     to { transform: rotate(360deg); }
 }
 
+/* Loading Skeletons & Navigation Progress Bar */
+.global-nav-progress-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(270deg, #851e37, #d32f2f, #f4b41a);
+    box-shadow: 0 0 12px rgba(211, 47, 47, 0.8);
+    z-index: 999999;
+    pointer-events: none;
+    transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+    will-change: width, opacity;
+}
+
+.skeleton-bar {
+    background: #eae5dc;
+    background: linear-gradient(90deg, #ede8df 0%, #f7f3ec 50%, #ede8df 100%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes skeleton-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
 @media(prefers-reduced-motion:reduce) {
     html {
         scroll-behavior: auto
