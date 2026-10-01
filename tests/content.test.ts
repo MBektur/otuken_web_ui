@@ -34,3 +34,23 @@ test("plugin widgets are omitted and only recognized video hosts are embedded", 
   assert.ok(result.includes("https://www.youtube.com/embed/abc"));
   assert.ok(!result.includes("evil.example"));
 });
+
+test("YouTube IDs are extracted correctly from embeds and urls for podcasts", () => {
+  const { extractYoutubeId } = require("../src/lib/content");
+  assert.equal(
+    extractYoutubeId('<iframe width="560" height="315" src="https://www.youtube.com/embed/NlgZanVJZw8" title="YouTube video"></iframe>'),
+    "NlgZanVJZw8"
+  );
+  assert.equal(
+    extractYoutubeId('<p>Watch here: https://youtu.be/HPOa4HnsznI?si=abc</p>'),
+    "HPOa4HnsznI"
+  );
+  assert.equal(
+    extractYoutubeId('<a href="https://www.youtube.com/watch?v=hJLuyjDlpCo">Video</a>'),
+    "hJLuyjDlpCo"
+  );
+  assert.equal(
+    extractYoutubeId('<p>No video here just text and photos</p>'),
+    undefined
+  );
+});

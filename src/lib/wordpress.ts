@@ -1,4 +1,4 @@
-import { contentImage, plainText, WORDPRESS_URL } from "./content";
+import { contentImage, plainText, extractYoutubeId, WORDPRESS_URL } from "./content";
 
 export type Category = { id: number; name: string; slug: string; count: number; parent: number; link: string };
 export type WPPage = { id: number; slug: string; link: string; title: { rendered: string }; content: { rendered: string } };
@@ -6,6 +6,7 @@ export type WPPost = WPPage & {
   date: string; modified: string; categories: number[]; excerpt: { rendered: string };
   previewImage?: string;
   readMinutes?: number;
+  youtubeId?: string;
   _embedded?: {
     author?: { name: string; slug: string }[];
     "wp:featuredmedia"?: { source_url: string; alt_text: string; media_details?: { sizes?: Record<string, { source_url: string }> } }[];
@@ -45,9 +46,19 @@ export async function getPosts(options: { page?: number; perPage?: number; categ
   const cached = postLists.get(key);
   if (cached && cached.expires > Date.now()) return cached.result;
   const revalidate = options.search ? 120 : 300;
-  const result = request<WPPost[]>("posts", params, revalidate).then(list => ({ ...list, data: list.data.map(post => ({
-    ...post, previewImage: postImage(post), readMinutes: readingMinutes(post), content: { rendered: "" },
-  })) }));
+  const result = request<WPPost[]>("posts", params, revalidate).then(list => ({
+    ...list,
+    data: list.data.map(post => {
+      const ytId = extractYoutubeId(post.content?.rendered || "");
+      return {
+        ...post,
+        previewImage: postImage(post) || (ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : undefined),
+        readMinutes: readingMinutes(post),
+        youtubeId: ytId,
+        content: { rendered: "" },
+      };
+    }),
+  }));
   if (postLists.size >= 100) postLists.delete(postLists.keys().next().value!);
   postLists.set(key, { expires: Date.now() + (revalidate * 1000), result });
   try { return await result; }
@@ -55,7 +66,21 @@ export async function getPosts(options: { page?: number; perPage?: number; categ
 }
 
 export async function getPostBySlug(slug: string) {
-  return (await request<WPPost[]>("posts", { slug, _embed: "1" }, 600)).data[0];
+  const post = (await request<WPPost[]>("posts", { slug, _embed: "1" }, 600)).data[0];
+  if (post && post.content?.rendered) {
+    post.youtubeId = extractYoutubeId(post.content.rendered);
+  }
+  return post;
+}
+
+export async function getPodcastPosts(): Promise<WPPost[]> {
+  const [page1, page2, page3] = await Promise.all([
+    getPosts({ perPage: 30, page: 1 }),
+    getPosts({ perPage: 30, page: 2 }),
+    getPosts({ perPage: 30, page: 3 }),
+  ]);
+  const all = [...page1.data, ...page2.data, ...page3.data];
+  return all.filter(p => !!p.youtubeId);
 }
 
 export async function getCategories() { return (await request<Category[]>("categories", { per_page: 100, hide_empty: "false" }, 3600)).data; }

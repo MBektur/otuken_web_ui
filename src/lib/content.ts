@@ -57,3 +57,9 @@ export function safeContent(html: string): string {
     },
   });
 }
+
+export function extractYoutubeId(html: string): string | undefined {
+  if (!html) return undefined;
+  const match = html.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);
+  return match ? match[1] : undefined;
+}

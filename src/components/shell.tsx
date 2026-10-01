@@ -3,7 +3,7 @@ import { ArrowUpLeft, Search } from "lucide-react";
 import { Category } from "@/lib/wordpress";
 import { localPath } from "@/lib/content";
 
-export function Header({ categories, active }: { categories: Category[]; active?: number }) {
+export function Header({ categories, active }: { categories: Category[]; active?: number | string }) {
   const nav = [3, 22, 14, 21].map(id => categories.find(c => c.id === id)).filter((c): c is Category => !!c);
   return <>
     <div className="utility-bar"><div className="site-width utility-inner">
@@ -19,7 +19,7 @@ export function Header({ categories, active }: { categories: Category[]; active?
       <div className="masthead-edition" dir="ltr"><span>THE ORHUN REVIEW</span><span className="edition-line"/><span>ANALYSIS & INSIGHT</span></div>
     </header>
     <div className="navigation-wrap"><div className="site-width navigation-inner">
-      <nav aria-label="باش تىزىملىك"><Link href="/uy" className={!active ? "active" : ""}>باشبەت</Link>{nav.map(c => <Link key={c.id} href={localPath(c.link)} className={active === c.id ? "active" : ""}>{c.name}</Link>)}<Link href="/uy#regions">رايونلار</Link></nav>
+      <nav aria-label="باش تىزىملىك"><Link href="/uy" className={!active ? "active" : ""}>باشبەت</Link>{nav.map(c => <Link key={c.id} href={localPath(c.link)} className={active === c.id ? "active" : ""}>{c.name}</Link>)}<Link href="/uy/podcasts" className={active === "podcasts" ? "active" : ""}>پودكاستلار</Link><Link href="/uy#regions">رايونلار</Link></nav>
       <SearchForm compact/>
     </div></div>
   </>;
@@ -32,5 +32,5 @@ export function SearchForm({ compact = false, value }: { compact?: boolean; valu
 }
 
 export function Footer() {
-  return <footer className="footer"><div className="site-width footer-inner"><Link href="/uy" className="footer-brand">ئورخۇن <span dir="ltr">POLICY CENTER</span></Link><nav aria-label="ئاستى تىزىملىك"><Link href="/uy/ھەققىمىزدە/">ھەققىمىزدە</Link><Link href="/uy/biz-bilen-alaqilid/">ئالاقىلىشىڭ</Link><Link href="/uy/teklip-pikir/">تەكلىپ-پىكىر</Link></nav><small>© {new Date().getFullYear()} ئورخۇن سىياسەت تەتقىقات مەركىزى</small></div></footer>;
+  return <footer className="footer"><div className="site-width footer-inner"><Link href="/uy" className="footer-brand">ئورخۇن <span dir="ltr">POLICY CENTER</span></Link><nav aria-label="ئاستى تىزىملىك"><Link href="/uy/podcasts">پودكاستلار</Link><Link href="/uy/ھەققىمىزدە/">ھەققىمىزدە</Link><Link href="/uy/biz-bilen-alaqilid/">ئالاقىلىشىڭ</Link><Link href="/uy/teklip-pikir/">تەكلىپ-پىكىر</Link></nav><small>© {new Date().getFullYear()} ئورخۇن سىياسەت تەتقىقات مەركىزى</small></div></footer>;
 }
