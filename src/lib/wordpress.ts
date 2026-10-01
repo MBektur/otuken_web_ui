@@ -17,10 +17,13 @@ export class WordPressError extends Error {
   constructor(public status: number) { super(`WordPress returned ${status}`); }
 }
 
-async function request<T>(resource: string, params: Record<string, string | number> = {}, cacheResponse = true): Promise<{ data: T; total: number; totalPages: number }> {
+async function request<T>(resource: string, params: Record<string, string | number> = {}, revalidateSeconds: number = 300): Promise<{ data: T; total: number; totalPages: number }> {
   const url = new URL(`${WORDPRESS_URL}/wp-json/wp/v2/${resource}`);
   for (const [key, value] of Object.entries(params)) url.searchParams.set(key, String(value));
-  const response = await fetch(url, { ...(cacheResponse ? { next: { revalidate: 120 } } : { cache: "no-store" as const }), signal: AbortSignal.timeout(20000) });
+  const response = await fetch(url, {
+    next: { revalidate: revalidateSeconds, tags: [resource] },
+    signal: AbortSignal.timeout(15000),
+  });
   if (!response.ok) throw new WordPressError(response.status);
   return {
     data: await response.json() as T,
@@ -41,21 +44,22 @@ export async function getPosts(options: { page?: number; perPage?: number; categ
   const key = JSON.stringify(params);
   const cached = postLists.get(key);
   if (cached && cached.expires > Date.now()) return cached.result;
-  const result = request<WPPost[]>("posts", params, false).then(list => ({ ...list, data: list.data.map(post => ({
+  const revalidate = options.search ? 120 : 300;
+  const result = request<WPPost[]>("posts", params, revalidate).then(list => ({ ...list, data: list.data.map(post => ({
     ...post, previewImage: postImage(post), readMinutes: readingMinutes(post), content: { rendered: "" },
   })) }));
   if (postLists.size >= 100) postLists.delete(postLists.keys().next().value!);
-  postLists.set(key, { expires: Date.now() + 120000, result });
+  postLists.set(key, { expires: Date.now() + (revalidate * 1000), result });
   try { return await result; }
   catch (error) { if (postLists.get(key)?.result === result) postLists.delete(key); throw error; }
 }
 
 export async function getPostBySlug(slug: string) {
-  return (await request<WPPost[]>("posts", { slug, _embed: "1" })).data[0];
+  return (await request<WPPost[]>("posts", { slug, _embed: "1" }, 600)).data[0];
 }
 
-export async function getCategories() { return (await request<Category[]>("categories", { per_page: 100, hide_empty: "false" })).data; }
-export async function getPages() { return (await request<WPPage[]>("pages", { per_page: 100 })).data; }
+export async function getCategories() { return (await request<Category[]>("categories", { per_page: 100, hide_empty: "false" }, 3600)).data; }
+export async function getPages() { return (await request<WPPage[]>("pages", { per_page: 100 }, 3600)).data; }
 
 export function postImage(post: WPPost): string | undefined {
   if (post.previewImage) return post.previewImage;

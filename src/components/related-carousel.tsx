@@ -105,7 +105,7 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
                   aria-hidden="true"
                 >
                   {img ? (
-                    <img src={img} alt="" loading="lazy" />
+                    <img src={img} alt="" loading="lazy" decoding="async" />
                   ) : (
                     <div className="carousel-no-photo">ئورخۇن</div>
                   )}

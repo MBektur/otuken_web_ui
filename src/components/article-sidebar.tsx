@@ -87,7 +87,7 @@ export function ArticleSidebar({
                         tabIndex={-1}
                         aria-hidden="true"
                       >
-                        <img src={img} alt="" loading="lazy" />
+                        <img src={img} alt="" loading="lazy" decoding="async" />
                       </Link>
                     )}
                     <div className="sidebar-post-info">

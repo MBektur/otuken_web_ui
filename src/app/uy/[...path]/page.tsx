@@ -1,3 +1,4 @@
+import { cache } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
@@ -10,8 +11,12 @@ import { ScrollControls } from "@/components/scroll-controls";
 import { RelatedCarousel } from "@/components/related-carousel";
 import { ArticleSidebar } from "@/components/article-sidebar";
 
+export const revalidate = 300;
+
 type Props = { params: Promise<{ path: string[] }>; searchParams: Promise<{ page?: string }> };
-async function resolve(path: string[]) {
+
+const resolve = cache(async (pathKey: string) => {
+  const path = pathKey ? pathKey.split("/") : [];
   const pathname = normalizedPath(`/uy/${path.join("/")}`);
   const categories = await getCategories();
   const category = categories.find(c => normalizedPath(localPath(c.link)) === pathname);
@@ -22,13 +27,13 @@ async function resolve(path: string[]) {
     const page = pages.find(p => normalizedPath(localPath(p.link)) === pathname);
     if (page) return { kind: "page" as const, categories, page };
   }
-  const post = await getPostBySlug(path[path.length-1]);
+  const post = await getPostBySlug(path[path.length - 1]);
   if (post) return { kind: "post" as const, categories, post };
-}
+});
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { path } = await params;
-  const data = await resolve(path);
+  const data = await resolve(path.join("/"));
   if (!data) return { title: "بەت تېپىلمىدى" };
   if (data.kind === "category") {
     const { page } = await searchParams;
@@ -41,7 +46,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 
 export default async function ContentPage({ params, searchParams }: Props) {
   const { path } = await params;
-  const data = await resolve(path);
+  const data = await resolve(path.join("/"));
   if (!data) notFound();
   if (data.kind === "category") {
     const query = await searchParams;

@@ -5,6 +5,8 @@ import { localPath, plainText } from "@/lib/content";
 import { Header, Footer, SearchForm } from "@/components/shell";
 import { Hero, LatestRail, RegionRail, PostCard, SectionTitle, Pagination, PostPhoto } from "@/components/editorial";
 
+export const revalidate = 300;
+
 type Props = { searchParams: Promise<{ q?: string; page?: string }> };
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const { q, page } = await searchParams;

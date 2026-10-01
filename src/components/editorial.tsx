@@ -6,7 +6,7 @@ import { localPath, plainText } from "@/lib/content";
 export function PostPhoto({ post, priority = false }: { post: WPPost; priority?: boolean }) {
   const src = postImage(post);
   return <Link href={localPath(post.link)} className={`post-photo ${!src ? "photo-empty" : ""}`} tabIndex={-1} aria-hidden="true">
-    {src ? <img src={src} alt="" loading={priority ? "eager" : "lazy"} fetchPriority={priority ? "high" : "auto"}/> : <Globe2 size={44} strokeWidth={1}/>}
+    {src ? <img src={src} alt="" loading={priority ? "eager" : "lazy"} fetchPriority={priority ? "high" : "auto"} decoding="async"/> : <Globe2 size={44} strokeWidth={1}/>}
   </Link>;
 }
 
