@@ -18,7 +18,7 @@ export async function generateStaticParams() {
   try {
     const [categories, posts, pages] = await Promise.all([
       getCategories().catch(() => []),
-      getPosts({ perPage: 30 }).catch(() => ({ data: [] })),
+      getPosts({ perPage: 100 }).catch(() => ({ data: [] })),
       getPages().catch(() => []),
     ]);
 

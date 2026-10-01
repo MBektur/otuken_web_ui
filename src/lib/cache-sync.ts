@@ -1,6 +1,7 @@
 import { revalidatePath } from "next/cache";
 import { WORDPRESS_URL, localPath, plainText } from "./content";
 import { clearMemoryCache } from "./wordpress";
+import { getLocalSnapshot, updateLocalSnapshot } from "./cache-store";
 
 export const DEFAULT_SECRET = process.env.REVALIDATE_SECRET || "otuken2026";
 
@@ -101,6 +102,34 @@ export async function autoSyncModifiedPosts() {
       revalidatePath(post.link);
       revalidatedPaths.push(post.link);
     }
+  }
+
+  // Fetch newest posts to update in-memory snapshot
+  try {
+    const freshRes = await fetch(`${WORDPRESS_URL}/wp-json/wp/v2/posts?per_page=10&_embed=1`, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(10000),
+    });
+    if (freshRes.ok) {
+      const freshPosts: any[] = await freshRes.json();
+      const current = getLocalSnapshot();
+      const mergedPosts = [...current.posts];
+      for (const fp of freshPosts) {
+        const idx = mergedPosts.findIndex(p => p.id === fp.id);
+        if (idx >= 0) {
+          mergedPosts[idx] = { ...mergedPosts[idx], ...fp };
+        } else {
+          mergedPosts.unshift(fp);
+        }
+      }
+      updateLocalSnapshot({
+        posts: mergedPosts,
+        latestModified: status.latestModified,
+        totalPosts: mergedPosts.length,
+      });
+    }
+  } catch {
+    // Non-blocking fallback
   }
 
   // Revalidate home and podcast pages to reflect any new additions or edits

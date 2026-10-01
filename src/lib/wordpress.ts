@@ -46,6 +46,14 @@ export function clearMemoryCache() {
   pagesCache = null;
 }
 
+import {
+  getLocalCategories,
+  getLocalPages,
+  getLocalPostBySlug,
+  getLocalPosts,
+  getLocalPodcasts,
+} from "./cache-store";
+
 export async function getPosts(options: {
   page?: number;
   perPage?: number;
@@ -54,6 +62,11 @@ export async function getPosts(options: {
   exclude?: number[];
   withContent?: boolean;
 } = {}): Promise<PostList> {
+  const local = getLocalPosts(options);
+  if (local && (local.data.length > 0 || !options.search)) {
+    return local;
+  }
+
   const fields = options.withContent
     ? "id,date,modified,slug,link,title,content,excerpt,categories,_links,_embedded"
     : "id,date,modified,slug,link,title,excerpt,categories,_links,_embedded";
@@ -91,7 +104,10 @@ export async function getPosts(options: {
   catch (error) { if (postLists.get(key)?.result === result) postLists.delete(key); throw error; }
 }
 
-export async function getPostBySlug(slug: string) {
+export async function getPostBySlug(slug: string): Promise<WPPost | undefined> {
+  const local = getLocalPostBySlug(slug);
+  if (local) return local;
+
   const cached = postBySlugMap.get(slug);
   if (cached && cached.expires > Date.now()) return cached.result;
 
@@ -110,6 +126,9 @@ export async function getPostBySlug(slug: string) {
 }
 
 export async function getPodcastPosts(): Promise<WPPost[]> {
+  const local = getLocalPodcasts();
+  if (local && local.length > 0) return local;
+
   const [page1, page2, page3] = await Promise.all([
     getPosts({ perPage: 15, page: 1, withContent: true }),
     getPosts({ perPage: 15, page: 2, withContent: true }),
@@ -120,6 +139,9 @@ export async function getPodcastPosts(): Promise<WPPost[]> {
 }
 
 export async function getCategories(): Promise<Category[]> {
+  const local = getLocalCategories();
+  if (local && local.length > 0) return local;
+
   if (categoriesCache && categoriesCache.expires > Date.now()) return categoriesCache.result;
   const result = request<Category[]>("categories", { per_page: 100, hide_empty: "false" }, 3600).then(r => r.data);
   categoriesCache = { expires: Date.now() + (3600 * 1000), result };
@@ -128,6 +150,9 @@ export async function getCategories(): Promise<Category[]> {
 }
 
 export async function getPages(): Promise<WPPage[]> {
+  const local = getLocalPages();
+  if (local && local.length > 0) return local;
+
   if (pagesCache && pagesCache.expires > Date.now()) return pagesCache.result;
   const result = request<WPPage[]>("pages", { per_page: 100 }, 3600).then(r => r.data);
   pagesCache = { expires: Date.now() + (3600 * 1000), result };
