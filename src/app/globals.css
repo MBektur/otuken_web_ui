@@ -1450,8 +1450,8 @@ svg {
 
 /* Related Carousel */
 .related-carousel-section {
-    max-width: 1140px;
-    margin: 55px auto 0;
+    width: 100%;
+    margin: 55px 0 0;
     padding-top: 30px;
     border-top: 1px solid var(--rule);
 }
@@ -1521,7 +1521,7 @@ svg {
 
 .carousel-track {
     display: flex;
-    gap: 22px;
+    gap: 18px;
     overflow-x: auto;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
@@ -1535,8 +1535,8 @@ svg {
 }
 
 .carousel-card {
-    flex: 0 0 calc(33.333% - 15px);
-    min-width: 260px;
+    flex: 0 0 calc((100% - 54px) / 4);
+    min-width: 220px;
     scroll-snap-align: start;
     display: flex;
     flex-direction: column;
@@ -2622,6 +2622,13 @@ svg {
     }
 }
 
+@media(max-width:1250px) {
+    .carousel-card {
+        flex: 0 0 calc((100% - 36px) / 3);
+        min-width: 220px;
+    }
+}
+
 @media(max-width:1100px) {
     .article-grid {
         grid-template-columns: 1fr;
@@ -2634,8 +2641,8 @@ svg {
     }
 
     .carousel-card {
-        flex: 0 0 calc(50% - 11px);
-        min-width: 240px;
+        flex: 0 0 calc(50% - 9px);
+        min-width: 220px;
     }
 }
 

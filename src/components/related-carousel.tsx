@@ -23,7 +23,7 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
     setCanNext(absScroll < maxScroll - 10);
 
     // Calculate approximate active card
-    const cardWidth = el.firstElementChild ? (el.firstElementChild as HTMLElement).offsetWidth + 20 : 300;
+    const cardWidth = el.firstElementChild ? (el.firstElementChild as HTMLElement).offsetWidth + 18 : 260;
     const idx = Math.min(posts.length - 1, Math.max(0, Math.round(absScroll / cardWidth)));
     setActiveIndex(idx);
   }
@@ -44,7 +44,7 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
     const el = trackRef.current;
     if (!el) return;
     const card = el.firstElementChild as HTMLElement | null;
-    const step = card ? card.offsetWidth + 22 : 320;
+    const step = card ? (card.offsetWidth + 18) * 2 : 400;
     // In RTL, "next" scrolls in the negative direction, "prev" in the positive direction
     const delta = direction === "next" ? -step : step;
     el.scrollBy({ left: delta, behavior: "smooth" });

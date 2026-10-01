@@ -64,7 +64,7 @@ export default async function ContentPage({ params, searchParams }: Props) {
   if (isPost) {
     const [relResult, recentResult] = await Promise.all([
       getPosts({ category: data.post.categories[0], exclude: [item.id], perPage: 8 }).catch(() => ({ data: [] })),
-      getPosts({ exclude: [item.id], perPage: 6 }).catch(() => ({ data: [] })),
+      getPosts({ exclude: [item.id], perPage: 8 }).catch(() => ({ data: [] })),
     ]);
     related = relResult.data;
     if (related.length < 4) {
