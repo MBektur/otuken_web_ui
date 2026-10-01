@@ -46,3 +46,11 @@ npm run build
 ## Üretime geçişte kalan işler
 
 WordPress yönetim paneline ihtiyaç duymadan açık içerikler ve arayüz geliştirildi. Canlıya geçiş için domain/yönlendirme yapılandırması, taslak önizleme yetkilendirmesi, anlık güncelleme webhook'u, dil sürümlerinin entegrasyonu ve mevcut yorum/form eklentilerinin bağlantısı ayrıca yapılmalıdır. Mevcut canlı WordPress sitesi değiştirilmedi.
+
+## Son doğrulama
+
+- Üretim derlemesi ve TypeScript kontrolü geçti.
+- HTML güvenliği, görsel çıkarımı, Uygurca URL/karakterler, PDF bağlantıları ve gömülü video/eklenti temizliği için 4 test geçti.
+- Tarayıcıda arama (ترامپ: 52 sonuç), ana sayfa, makale ve 404 ekranı doğrulandı.
+- Kategori, sayfa ve ikinci sonuç sayfası gerçek API ile kontrol edildi.
+- Mobil görünümde yatay sayfa taşması yok; navigasyon kendi içinde kaydırılır.
