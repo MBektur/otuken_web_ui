@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ArrowLeft, Clock3 } from "lucide-react";
-import { getCategories, getPages, getPostBySlug, getPosts, postImage, readingMinutes, displayDate, WordPressError } from "@/lib/wordpress";
+import { getCategories, getPages, getPostBySlug, getPosts, postImage, readingMinutes, displayDate, postCategory, WordPressError, WPPost } from "@/lib/wordpress";
 import { localPath, normalizedPath, plainText, safeContent } from "@/lib/content";
 import { Header, Footer } from "@/components/shell";
 import { PostCard, RegionRail, PostMeta, Pagination, SectionTitle } from "@/components/editorial";
+import { ScrollControls } from "@/components/scroll-controls";
+import { RelatedCarousel } from "@/components/related-carousel";
+import { ArticleSidebar } from "@/components/article-sidebar";
 
 type Props = { params: Promise<{ path: string[] }>; searchParams: Promise<{ page?: string }> };
 async function resolve(path: string[]) {
@@ -48,6 +51,88 @@ export default async function ContentPage({ params, searchParams }: Props) {
   }
   const item = data.kind === "post" ? data.post : data.page;
   if (normalizedPath(`/uy/${path.join("/")}`) !== normalizedPath(localPath(item.link))) redirect(localPath(item.link));
-  const related = data.kind === "post" ? (await getPosts({ category: data.post.categories[0], exclude: [item.id], perPage: 3 })).data : [];
-  return <><Header categories={data.categories}/><main id="main" className="site-width article-layout"><div className="article-breadcrumb"><Link href="/uy">باشبەت</Link><span>/</span><span>{data.kind === "post" ? "يازما" : "ئورخۇن"}</span></div><article className="article"><header className="article-header">{data.kind === "post" && <PostMeta post={data.post}/>}<h1>{plainText(item.title.rendered)}</h1>{data.kind === "post" && <div className="article-byline"><span>{data.post._embedded?.author?.[0]?.name}</span><time dateTime={data.post.date} dir="ltr">{displayDate(data.post.date)}</time><span><Clock3 size={14}/>{readingMinutes(data.post)} مىنۇت ئوقۇش</span></div>}</header><div className="article-body" dangerouslySetInnerHTML={{ __html: safeContent(item.content.rendered) }}/><div className="article-end"><span>ئورخۇن سىياسەت تەتقىقات مەركىزى</span><a href={item.link}>ئەسلى نەشرى <ArrowLeft size={15}/></a></div></article>{related.length > 0 && <section className="related-section"><SectionTitle>مۇناسىۋەتلىك يازمىلار</SectionTitle><div className="posts-grid">{related.map(post => <PostCard key={post.id} post={post}/>)}</div></section>}</main><Footer/></>;
+
+  const isPost = data.kind === "post";
+  let related: WPPost[] = [];
+  let recentPosts: WPPost[] = [];
+
+  if (isPost) {
+    const [relResult, recentResult] = await Promise.all([
+      getPosts({ category: data.post.categories[0], exclude: [item.id], perPage: 8 }).catch(() => ({ data: [] })),
+      getPosts({ exclude: [item.id], perPage: 6 }).catch(() => ({ data: [] })),
+    ]);
+    related = relResult.data;
+    if (related.length < 4) {
+      const extra = recentResult.data.filter(p => !related.some(r => r.id === p.id));
+      related = [...related, ...extra].slice(0, 8);
+    }
+    recentPosts = recentResult.data;
+  }
+
+  return (
+    <>
+      <Header categories={data.categories} />
+      <main id="main" className="site-width article-layout">
+        <div className="article-breadcrumb">
+          <Link href="/uy">باشبەت</Link>
+          <span>/</span>
+          {isPost ? (
+            <Link href="/uy#regions">{postCategory(data.post)}</Link>
+          ) : (
+            <span>ئورخۇن</span>
+          )}
+          <span>/</span>
+          <span className="breadcrumb-current">{plainText(item.title.rendered)}</span>
+        </div>
+
+        <div className={isPost ? "article-grid" : "article-single-grid"}>
+          <div className="article-main-col">
+            <article className="article">
+              <header className="article-header">
+                {isPost && <PostMeta post={data.post} />}
+                <h1>{plainText(item.title.rendered)}</h1>
+                {isPost && (
+                  <div className="article-byline">
+                    <span>{data.post._embedded?.author?.[0]?.name || "ئورخۇن تەھرىرىيىتى"}</span>
+                    <time dateTime={data.post.date} dir="ltr">
+                      {displayDate(data.post.date)}
+                    </time>
+                    <span>
+                      <Clock3 size={14} />
+                      {readingMinutes(data.post)} مىنۇت ئوقۇش
+                    </span>
+                  </div>
+                )}
+              </header>
+
+              <div
+                className="article-body"
+                dangerouslySetInnerHTML={{ __html: safeContent(item.content.rendered) }}
+              />
+
+              <div className="article-end">
+                <span>ئورخۇن سىياسەت تەتقىقات مەركىزى</span>
+                <a href={item.link} target="_blank" rel="noopener noreferrer">
+                  ئەسلى نەشرى <ArrowLeft size={15} />
+                </a>
+              </div>
+            </article>
+          </div>
+
+          {isPost && (
+            <ArticleSidebar
+              currentPost={data.post}
+              recentPosts={recentPosts}
+              categories={data.categories}
+            />
+          )}
+        </div>
+
+        {isPost && related.length > 0 && <RelatedCarousel posts={related} />}
+
+        <ScrollControls />
+      </main>
+      <Footer />
+    </>
+  );
 }
