@@ -10,6 +10,8 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(posts.length > 1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -44,6 +46,14 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
     setCanPrev(!atStart);
     setCanNext(!atEnd);
 
+    // Calculate pages based on visible cards per page
+    const firstCard = cards[0];
+    const gap = 18;
+    const cardStride = firstCard.offsetWidth + gap;
+    const visibleCount = Math.max(1, Math.round((el.clientWidth + gap) / cardStride));
+    const pages = Math.max(1, Math.ceil(cards.length / visibleCount));
+    setTotalPages(pages);
+
     // Find card closest to start (right edge)
     let closestIdx = 0;
     let minDiff = Infinity;
@@ -56,6 +66,18 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
       }
     }
     setActiveIndex(closestIdx);
+
+    if (pages <= 1 || atStart) {
+      setCurrentPage(1);
+    } else if (atEnd) {
+      setCurrentPage(pages);
+    } else {
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      const currentScroll = Math.abs(el.scrollLeft);
+      const progress = maxScroll > 0 ? Math.min(1, Math.max(0, currentScroll / maxScroll)) : 0;
+      const pageIndex = 1 + Math.round(progress * (pages - 1));
+      setCurrentPage(Math.min(pages, Math.max(1, pageIndex)));
+    }
   }
 
   useEffect(() => {
@@ -89,7 +111,8 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
           lastXRef.current = e.clientX;
           lastTimeRef.current = now;
         }
-        trackRef.current.scrollLeft = startScrollLeftRef.current + dx;
+        // Direct manipulation: moving mouse by dx moves cards in exact synchronization
+        trackRef.current.scrollLeft = startScrollLeftRef.current - dx;
       }
     }
 
@@ -100,7 +123,7 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
       if (hasMovedRef.current && trackRef.current) {
         const v = velocityRef.current;
         if (Math.abs(v) > 0.2) {
-          trackRef.current.scrollBy({ left: v * 280, behavior: "smooth" });
+          trackRef.current.scrollBy({ left: -v * 280, behavior: "smooth" });
         }
         setTimeout(() => {
           setIsDragging(false);
@@ -163,22 +186,15 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
     const cards = Array.from(el.children) as HTMLElement[];
     if (cards.length === 0) return;
 
-    const stepCards = el.clientWidth > 768 ? 2 : 1;
-    let targetIdx = direction === "next"
-      ? Math.min(cards.length - 1, activeIndex + stepCards)
-      : Math.max(0, activeIndex - stepCards);
+    const firstCard = cards[0];
+    const gap = 18;
+    const cardStride = firstCard.offsetWidth + gap;
+    const visibleCount = Math.max(1, Math.round((el.clientWidth + gap) / cardStride));
 
-    if (targetIdx === activeIndex) {
-      targetIdx = direction === "next" ? Math.min(cards.length - 1, activeIndex + 1) : Math.max(0, activeIndex - 1);
-    }
-
-    if (cards[targetIdx] && typeof cards[targetIdx].scrollIntoView === "function") {
-      cards[targetIdx].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
-    } else {
-      const card = cards[0];
-      const step = card ? (card.offsetWidth + 18) * stepCards : 320;
-      el.scrollBy({ left: direction === "next" ? -step : step, behavior: "smooth" });
-    }
+    // Scroll by one full page of visible cards
+    const step = visibleCount * cardStride;
+    const delta = direction === "next" ? -step : step;
+    el.scrollBy({ left: delta, behavior: "smooth" });
   }
 
   if (!posts || posts.length === 0) return null;
@@ -199,21 +215,21 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
             className="carousel-arrow"
             onClick={() => scroll("prev")}
             disabled={!canPrev}
-            aria-label="ئالدىنقى يازمىلار"
-            title="ئالدىنقى"
+            aria-label="ئالدىنقى بەت"
+            title="ئالدىنقى بەت"
           >
             <ChevronRight size={15} strokeWidth={2} />
           </button>
-          <span className="carousel-page-indicator" dir="ltr">
-            {activeIndex + 1} / {posts.length}
+          <span className="carousel-page-indicator" dir="ltr" aria-label={`بەت ${currentPage} / ${totalPages}`}>
+            {currentPage} / {totalPages}
           </span>
           <button
             type="button"
             className="carousel-arrow"
             onClick={() => scroll("next")}
             disabled={!canNext}
-            aria-label="كېيىنكى يازمىلار"
-            title="كېيىنكى"
+            aria-label="كېيىنكى بەت"
+            title="كېيىنكى بەت"
           >
             <ChevronLeft size={15} strokeWidth={2} />
           </button>
