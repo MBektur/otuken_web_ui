@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowUpLeft, BookOpen, Globe2, Landmark, ChevronLeft, Play } from "lucide-react";
+import { ArrowLeft, ArrowUpLeft, BookOpen, Globe2, Landmark, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { Category, WPPost, displayDate, postCategory, postImage, readingMinutes } from "@/lib/wordpress";
 import { localPath, plainText } from "@/lib/content";
 
@@ -82,8 +82,118 @@ export function Hero({ post, secondary }: { post: WPPost; secondary?: WPPost }) 
   return <section className="hero-section"><SectionTitle href="/uy?q=" label="بارلىق يازمىلار">ئۆتۈكەن نەزىرى</SectionTitle><div className="hero-grid"><article className="hero-story"><div className="hero-copy"><PostMeta post={post} /><h1><Link href={localPath(post.link)} prefetch={true}>{plainText(post.title.rendered)}</Link></h1><p>{plainText(post.excerpt.rendered)}</p><div className="hero-author"><span>{post._embedded?.author?.[0]?.name}</span><span>{readingMinutes(post)} مىنۇت ئوقۇش</span></div><ReadLink href={localPath(post.link)} /></div><PostPhoto post={post} priority /></article>{secondary && <article className="hero-secondary"><PostPhoto post={secondary} /><PostMeta post={secondary} /><h3><Link href={localPath(secondary.link)} prefetch={true}>{plainText(secondary.title.rendered)}</Link></h3><p>{plainText(secondary.excerpt.rendered)}</p><ReadLink href={localPath(secondary.link)} /></article>}</div></section>;
 }
 
-export function Pagination({ page, totalPages, base, query }: { page: number; totalPages: number; base: string; query?: string }) {
+export function Pagination({
+  page,
+  totalPages,
+  base,
+  query,
+}: {
+  page: number;
+  totalPages: number;
+  base: string;
+  query?: string;
+}) {
   if (totalPages <= 1) return null;
-  function href(n: number) { const params = new URLSearchParams(); if (query !== undefined) params.set("q", query); params.set("page", String(n)); return `${base}?${params}`; }
-  return <nav className="pagination" aria-label="بەتلەر">{page > 1 && <Link href={href(page - 1)} prefetch={true}>ئالدىنقى بەت</Link>}<span><b dir="ltr">{page}</b> / <b dir="ltr">{totalPages}</b></span>{page < totalPages && <Link href={href(page + 1)} prefetch={true}>كېيىنكى بەت<ArrowLeft size={15} /></Link>}</nav>;
+
+  function href(n: number) {
+    const params = new URLSearchParams();
+    if (query !== undefined) params.set("q", query);
+    params.set("page", String(n));
+    return `${base}?${params}`;
+  }
+
+  const getPageNumbers = () => {
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+    if (page <= 4) {
+      return [1, 2, 3, 4, 5, "...", totalPages];
+    }
+    if (page >= totalPages - 3) {
+      return [1, "...", totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+    }
+    return [1, "...", page - 1, page, page + 1, "...", totalPages];
+  };
+
+  const pages = getPageNumbers();
+
+  return (
+    <nav className="pagination" aria-label="بەتلەر">
+      {/* Previous button (in RTL, points right towards lower numbers) */}
+      {page > 1 ? (
+        <Link
+          href={href(page - 1)}
+          prefetch={true}
+          className="page-nav-btn"
+          aria-label="ئالدىنقى بەت"
+          title="ئالدىنقى بەت"
+        >
+          <ChevronRight size={18} aria-hidden="true" />
+        </Link>
+      ) : (
+        <span className="page-nav-btn disabled" aria-hidden="true" title="ئالدىنقى بەت يوق">
+          <ChevronRight size={18} />
+        </span>
+      )}
+
+      {/* Numbered page circular buttons */}
+      <div className="page-numbers">
+        {pages.map((p, idx) => {
+          if (p === "...") {
+            return (
+              <span key={`ellipsis-${idx}`} className="page-ellipsis" aria-hidden="true">
+                •••
+              </span>
+            );
+          }
+          const num = Number(p);
+          const isCurrent = num === page;
+          return isCurrent ? (
+            <span
+              key={num}
+              className="page-btn active"
+              aria-current="page"
+              aria-label={`${num}-بەت`}
+            >
+              <b dir="ltr">{num}</b>
+            </span>
+          ) : (
+            <Link
+              key={num}
+              href={href(num)}
+              prefetch={true}
+              className="page-btn"
+              aria-label={`${num}-بەت`}
+            >
+              <b dir="ltr">{num}</b>
+            </Link>
+          );
+        })}
+      </div>
+
+      {/* Mobile compact badge */}
+      <div className="page-badge-mobile">
+        <span className="page-counter-pill">
+          <b dir="ltr">{page}</b> / <b dir="ltr">{totalPages}</b>
+        </span>
+      </div>
+
+      {/* Next button (in RTL, points left towards higher numbers) */}
+      {page < totalPages ? (
+        <Link
+          href={href(page + 1)}
+          prefetch={true}
+          className="page-nav-btn"
+          aria-label="كېيىنكى بەت"
+          title="كېيىنكى بەت"
+        >
+          <ChevronLeft size={18} aria-hidden="true" />
+        </Link>
+      ) : (
+        <span className="page-nav-btn disabled" aria-hidden="true" title="كېيىنكى بەت يوق">
+          <ChevronLeft size={18} />
+        </span>
+      )}
+    </nav>
+  );
 }

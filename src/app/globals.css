@@ -918,26 +918,117 @@ svg {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 25px;
+    gap: 8px;
     border-top: 1px solid var(--rule);
-    margin-top: 30px;
-    padding-top: 22px;
-    font-size: 13px;
-    color: var(--wine)
+    margin-top: 36px;
+    padding-top: 26px;
+    user-select: none;
 }
 
-.pagination a {
+.page-numbers {
     display: flex;
     align-items: center;
-    gap: 9px
+    gap: 7px;
 }
 
-.pagination span {
-    color: var(--muted)
+.page-btn,
+.page-nav-btn {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid var(--rule);
+    color: var(--ink);
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    cursor: pointer;
 }
 
-.pagination b {
-    font-weight: normal
+.page-btn b {
+    font-weight: 600;
+    font-family: inherit;
+}
+
+.page-btn:hover {
+    border-color: var(--wine);
+    color: var(--wine);
+    background: var(--paper);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(104, 21, 42, 0.12);
+}
+
+.page-btn.active {
+    background: var(--wine);
+    color: #fff !important;
+    border-color: var(--wine);
+    box-shadow: 0 3px 10px rgba(104, 21, 42, 0.28);
+    cursor: default;
+    transform: none;
+}
+
+.page-btn.active b {
+    color: #fff !important;
+}
+
+.page-nav-btn {
+    color: var(--wine);
+    background: #fff;
+}
+
+.page-nav-btn:hover:not(.disabled) {
+    background: var(--wine);
+    color: #fff !important;
+    border-color: var(--wine);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(104, 21, 42, 0.25);
+}
+
+.page-nav-btn.disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: transparent;
+    border-color: var(--rule);
+    color: var(--muted);
+    box-shadow: none;
+}
+
+.page-ellipsis {
+    width: 28px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.page-badge-mobile {
+    display: none;
+}
+
+.page-counter-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 9999px;
+    background: #fff;
+    border: 1px solid var(--rule);
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 600;
 }
 
 .listing-header {
@@ -3051,8 +3142,23 @@ svg {
     }
 
     .pagination {
-        gap: 17px;
-        font-size: 12px
+        gap: 8px;
+    }
+
+    .page-numbers {
+        display: none;
+    }
+
+    .page-badge-mobile {
+        display: inline-flex;
+    }
+
+    .page-btn,
+    .page-nav-btn {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
     }
 }
 
