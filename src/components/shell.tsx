@@ -1,7 +1,35 @@
 import Link from "next/link";
-import { ArrowUpLeft, Search } from "lucide-react";
+import {
+  ArrowUpLeft,
+  Search,
+  Home,
+  TrendingUp,
+  Headphones,
+  Globe,
+  BookOpen,
+  Cpu,
+  Compass,
+  Bookmark,
+  Languages,
+} from "lucide-react";
 import { Category } from "@/lib/wordpress";
 import { localPath } from "@/lib/content";
+
+function getCategoryNavIcon(categoryId: number, slug: string) {
+  if (categoryId === 3 || slug.includes("analiz")) {
+    return <TrendingUp size={15} className="nav-icon" aria-hidden="true" />;
+  }
+  if (categoryId === 22 || slug.includes("dunyada") || slug.includes("dunya")) {
+    return <Globe size={15} className="nav-icon" aria-hidden="true" />;
+  }
+  if (categoryId === 14 || slug.includes("kitap") || slug.includes("kitob")) {
+    return <BookOpen size={15} className="nav-icon" aria-hidden="true" />;
+  }
+  if (categoryId === 21 || slug.includes("iqtisad") || slug.includes("texnika")) {
+    return <Cpu size={15} className="nav-icon" aria-hidden="true" />;
+  }
+  return <Bookmark size={15} className="nav-icon" aria-hidden="true" />;
+}
 
 export function Header({ categories, active }: { categories: Category[]; active?: number | string }) {
   const analysis = categories.find(c => c.id === 3);
@@ -9,7 +37,12 @@ export function Header({ categories, active }: { categories: Category[]; active?
   return <>
     <div className="utility-bar"><div className="site-width utility-inner">
       <span>تەتقىقات · ئانالىز · يېڭى نەزەر</span>
-      <div className="language-links"><span aria-current="true">ئۇيغۇرچە</span><a href="https://orhunpolicycenter.com/ug/" lang="ug-Latn" dir="ltr">Uyghurche</a><a href="https://orhunpolicycenter.com/" lang="en" dir="ltr">English <ArrowUpLeft size={11} /></a></div>
+      <div className="language-links">
+        <Languages size={13} className="lang-icon" aria-hidden="true" />
+        <span aria-current="true">ئۇيغۇرچە</span>
+        <a href="https://orhunpolicycenter.com/ug/" lang="ug-Latn" dir="ltr">Uyghurche</a>
+        <a href="https://orhunpolicycenter.com/" lang="en" dir="ltr">English <ArrowUpLeft size={11} /></a>
+      </div>
     </div></div>
     <header className="site-width masthead">
       <Link href="/uy" className="brand" aria-label="باشبەت">
@@ -21,11 +54,30 @@ export function Header({ categories, active }: { categories: Category[]; active?
     </header>
     <div className="navigation-wrap"><div className="site-width navigation-inner">
       <nav aria-label="باش تىزىملىك">
-        <Link href="/uy" className={!active ? "active" : ""}>باشبەت</Link>
-        {analysis && <Link href={localPath(analysis.link)} className={active === analysis.id ? "active" : ""}>{analysis.name}</Link>}
-        <Link href="/uy/podcasts" className={`nav-podcast-item ${active === "podcasts" ? "active" : ""}`}>پودكاستلار</Link>
-        {otherCats.map(c => <Link key={c.id} href={localPath(c.link)} className={active === c.id ? "active" : ""}>{c.name}</Link>)}
-        <Link href="/uy#regions">رايونلار</Link>
+        <Link href="/uy" className={!active ? "active" : ""}>
+          <Home size={15} className="nav-icon" aria-hidden="true" />
+          <span>باشبەت</span>
+        </Link>
+        {analysis && (
+          <Link href={localPath(analysis.link)} className={active === analysis.id ? "active" : ""}>
+            <TrendingUp size={15} className="nav-icon" aria-hidden="true" />
+            <span>{analysis.name}</span>
+          </Link>
+        )}
+        <Link href="/uy/podcasts" className={`nav-podcast-item ${active === "podcasts" ? "active" : ""}`}>
+          <Headphones size={15} className="nav-icon" aria-hidden="true" />
+          <span>پودكاستلار</span>
+        </Link>
+        {otherCats.map(c => (
+          <Link key={c.id} href={localPath(c.link)} className={active === c.id ? "active" : ""}>
+            {getCategoryNavIcon(c.id, c.slug)}
+            <span>{c.name}</span>
+          </Link>
+        ))}
+        <Link href="/uy#regions">
+          <Compass size={15} className="nav-icon" aria-hidden="true" />
+          <span>رايونلار</span>
+        </Link>
       </nav>
       <SearchForm compact />
     </div></div>

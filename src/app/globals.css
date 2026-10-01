@@ -267,12 +267,44 @@ svg {
 
 .navigation-inner nav a {
     position: relative;
-    font-size: 16px;
-    line-height: 54px
+    font-size: 15px;
+    line-height: 54px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s ease;
+}
+
+.navigation-inner nav a .nav-icon {
+    flex-shrink: 0;
+    color: #857a6c;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.navigation-inner nav a:hover .nav-icon {
+    color: var(--wine);
+    transform: translateY(-1px);
+}
+
+.navigation-inner nav a.active .nav-icon {
+    color: var(--wine);
 }
 
 .navigation-inner nav a.nav-podcast-item {
     font-weight: 700;
+    color: #8e24aa;
+}
+
+.navigation-inner nav a.nav-podcast-item .nav-icon {
+    color: #8e24aa;
+}
+
+.navigation-inner nav a.nav-podcast-item:hover {
+    color: #5c1670;
+}
+
+.navigation-inner nav a.nav-podcast-item:hover .nav-icon {
+    color: #5c1670;
 }
 
 .navigation-inner nav a.active {
