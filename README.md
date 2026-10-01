@@ -23,7 +23,7 @@ Yerel adres: http://localhost:3000/uy
 - Kapak görseli yoksa içerikteki ilk görsel kullanılır.
 - Uygurca font mevcut siteden alınmıştır; yayın öncesinde lisansı doğrulanmalıdır.
 - İngilizce ve Latin Uygurca bağlantıları mevcut sitedeki sürümlere gider. Yeni arayüz şu an `/uy` sürümüdür.
-- API verisi sunucuda alınır ve 120 saniye önbelleğe alınır. Ağ hatalarında hata ekranı gösterilir.
+- API verisi sunucuda alınır ve 120 saniye önbelleğe alınır. Büyük yazı koleksiyonları için yalnızca kart verisi sunucu sürecinde, en fazla 100 sorguluk bellekte tutulur; ayrı sunucu süreçlerinin önbellekleri bağımsızdır. Ağ hatalarında hata ekranı gösterilir.
 
 ## API incelemesi (1 Ekim 2026)
 

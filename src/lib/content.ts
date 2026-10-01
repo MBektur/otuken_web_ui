@@ -14,6 +14,8 @@ export function localPath(link: string): string {
   try {
     const url = new URL(he.decode(link), WORDPRESS_URL + "/");
     if (url.origin === SOURCE_ORIGIN && (url.pathname === SOURCE_PATH || url.pathname.startsWith(SOURCE_PATH + "/"))) {
+      const suffix = url.pathname.slice(SOURCE_PATH.length);
+      if (/^\/(?:wp-content|wp-includes|wp-json|wp-admin)(?:\/|$)/.test(suffix) || suffix === "/wp-login.php") return url.href;
       return url.pathname + url.search + url.hash;
     }
     return url.href;
@@ -38,14 +40,17 @@ export function contentImage(html: string): string | undefined {
 
 export function safeContent(html: string): string {
   return sanitizeHtml(html, {
-    allowedTags: [...sanitizeHtml.defaults.allowedTags, "img", "figure", "figcaption", "sup", "sub"],
+    allowedTags: [...sanitizeHtml.defaults.allowedTags, "img", "figure", "figcaption", "sup", "sub", "iframe"],
     allowedAttributes: {
       a: ["href", "title", "rel"],
       img: ["src", "alt", "width", "height", "loading"],
+      iframe: ["src", "title", "allowfullscreen", "loading"],
       "*": ["id", "dir", "lang"],
       td: ["colspan", "rowspan"], th: ["colspan", "rowspan", "scope"],
     },
     allowedSchemes: ["https", "http", "mailto", "tel"],
+    allowedIframeHostnames: ["www.youtube.com", "www.youtube-nocookie.com", "player.vimeo.com"],
+    exclusiveFilter: frame => frame.attribs.id === "daexthefu-container",
     transformTags: {
       a: (_tagName, attrs) => ({ tagName: "a", attribs: { ...attrs, href: attrs.href ? localPath(attrs.href) : "", rel: "noopener noreferrer" } }),
       img: (_tagName, attrs) => ({ tagName: "img", attribs: { ...attrs, loading: "lazy" } }),

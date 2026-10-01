@@ -23,7 +23,6 @@ export default async function Home({ searchParams }: Props) {
     getPosts({ category: 14, perPage: 1 }),
   ]);
   const posts = result.data;
-  const analysis = categories.find(c => c.id === 3);
   return <><Header categories={categories}/><main id="main" className="site-width editorial-layout">
     <RegionRail categories={categories} total={result.total}/>
     <div className="main-column">

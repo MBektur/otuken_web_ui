@@ -23,4 +23,14 @@ test("Uyghur permalinks and entities survive normalization", () => {
   assert.equal(localPath("https://orhunpolicycenter.com/ug/"), "https://orhunpolicycenter.com/ug/");
   assert.equal(localPath("https://example.com/source"), "https://example.com/source");
   assert.equal(localPath("#footnote-1"), "#footnote-1");
+  assert.equal(localPath("https://orhunpolicycenter.com/uy/wp-content/uploads/report.pdf"), "https://orhunpolicycenter.com/uy/wp-content/uploads/report.pdf");
+});
+
+test("plugin widgets are omitted and only recognized video hosts are embedded", () => {
+  const result = safeContent('<p>Article</p><div id="daexthefu-container"><div><h3>Plugin button</h3></div></div><p>End</p><iframe src="https://www.youtube.com/embed/abc"></iframe><iframe src="https://evil.example/embed"></iframe>');
+  assert.ok(result.includes("Article"));
+  assert.ok(result.includes("End"));
+  assert.ok(!result.includes("Plugin button"));
+  assert.ok(result.includes("https://www.youtube.com/embed/abc"));
+  assert.ok(!result.includes("evil.example"));
 });
