@@ -10,8 +10,40 @@ import { PostCard, RegionRail, PostMeta, Pagination, SectionTitle } from "@/comp
 import { ScrollControls } from "@/components/scroll-controls";
 import { RelatedCarousel } from "@/components/related-carousel";
 import { ArticleSidebar } from "@/components/article-sidebar";
+import { ShareBar } from "@/components/share-bar";
 
 export const revalidate = 300;
+
+export async function generateStaticParams() {
+  try {
+    const [categories, posts, pages] = await Promise.all([
+      getCategories().catch(() => []),
+      getPosts({ perPage: 30 }).catch(() => ({ data: [] })),
+      getPages().catch(() => []),
+    ]);
+
+    const paramsList: { path: string[] }[] = [];
+
+    for (const c of categories) {
+      const p = localPath(c.link).replace(/^\/uy\/?/, "").split("/").filter(Boolean);
+      if (p.length) paramsList.push({ path: p });
+    }
+
+    for (const page of pages) {
+      const p = localPath(page.link).replace(/^\/uy\/?/, "").split("/").filter(Boolean);
+      if (p.length) paramsList.push({ path: p });
+    }
+
+    for (const post of posts.data) {
+      const p = localPath(post.link).replace(/^\/uy\/?/, "").split("/").filter(Boolean);
+      if (p.length) paramsList.push({ path: p });
+    }
+
+    return paramsList;
+  } catch {
+    return [];
+  }
+}
 
 type Props = { params: Promise<{ path: string[] }>; searchParams: Promise<{ page?: string }> };
 
@@ -128,6 +160,7 @@ export default async function ContentPage({ params, searchParams }: Props) {
                     </span>
                   </div>
                 )}
+                <ShareBar title={plainText(item.title.rendered)} variant="top" />
               </header>
 
               <div className="article-body">
@@ -163,6 +196,8 @@ export default async function ContentPage({ params, searchParams }: Props) {
                   dangerouslySetInnerHTML={{ __html: safeContent(item.content.rendered) }}
                 />
               </div>
+
+              <ShareBar title={plainText(item.title.rendered)} variant="bottom" />
 
               <div className="article-end">
                 <span>ئۆتۈكەن سىياسەت تەتقىقات مەركىزى</span>

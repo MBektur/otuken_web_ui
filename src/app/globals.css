@@ -1014,6 +1014,134 @@ svg {
     font-family: Georgia, serif
 }
 
+/* Article Share Bar (Top & Bottom) */
+.article-share-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.article-share-bar.variant-top {
+    margin-top: 16px;
+    padding-top: 4px;
+    justify-content: flex-start;
+}
+
+.article-share-bar.variant-bottom {
+    margin-top: 40px;
+    padding: 16px 20px;
+    background: #fbf9f5;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    justify-content: space-between;
+}
+
+.article-share-bar .share-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.share-buttons-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 10px;
+    border-radius: 6px;
+    background: #ffffff;
+    border: 1px solid var(--rule);
+    color: #4b453e;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+    outline: none;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.share-btn:focus-visible {
+    outline: 2px solid var(--wine);
+    outline-offset: 1px;
+}
+
+.share-btn.share-x:hover {
+    background: #000000;
+    color: #ffffff;
+    border-color: #000000;
+}
+
+.share-btn.share-telegram:hover {
+    background: #229ED9;
+    color: #ffffff;
+    border-color: #229ED9;
+}
+
+.share-btn.share-whatsapp:hover {
+    background: #25D366;
+    color: #ffffff;
+    border-color: #25D366;
+}
+
+.share-btn.share-facebook:hover {
+    background: #1877F2;
+    color: #ffffff;
+    border-color: #1877F2;
+}
+
+.share-btn.share-copy:hover {
+    background: #f5f2eb;
+    color: var(--ink);
+    border-color: #cfc5b4;
+}
+
+.share-btn.share-copy.copied {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border-color: #a5d6a7;
+}
+
+.share-btn.share-native:hover {
+    background: var(--wine);
+    color: #ffffff;
+    border-color: var(--wine);
+}
+
+.copy-tooltip {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.copy-icon-success {
+    color: #2e7d32;
+}
+
+@media (max-width: 640px) {
+    .article-share-bar.variant-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
+
 .article-body {
     font-size: 21px;
     line-height: 2.05;
@@ -3058,6 +3186,18 @@ svg {
     flex-shrink: 0;
 }
 
+.action-card-btn.warmup-btn {
+    grid-column: 1 / -1;
+    background: #fffdf8;
+    border-color: #ffd8a8;
+}
+
+.action-card-btn.warmup-btn:hover:not(:disabled) {
+    background: #fff8eb;
+    border-color: #f7b731;
+}
+
+.btn-icon.warmup { background: #fff3e0; color: #e65100; }
 .btn-icon.home { background: #e8f5e9; color: #2e7d32; }
 .btn-icon.podcast { background: #fce4ec; color: #c2185b; }
 .btn-icon.sync { background: #fff8e1; color: #f57f17; }

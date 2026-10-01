@@ -117,3 +117,75 @@ export async function autoSyncModifiedPosts() {
     timestamp: new Date().toISOString(),
   };
 }
+
+export async function preWarmSite(limit = 50, baseUrl?: string) {
+  clearMemoryCache();
+  const fetchLimit = Math.min(Math.max(limit, 10), 100);
+  const url = `${WORDPRESS_URL}/wp-json/wp/v2/posts?per_page=${fetchLimit}&orderby=modified&order=desc&_fields=id,date,modified,slug,link,title`;
+
+  const res = await fetch(url, {
+    cache: "no-store",
+    signal: AbortSignal.timeout(15000),
+  });
+
+  if (!res.ok) {
+    throw new Error(`WordPress API returned status ${res.status}`);
+  }
+
+  const posts: any[] = await res.json();
+  const totalPosts = Number(res.headers.get("X-WP-Total") || posts.length);
+
+  // Target paths for pre-caching
+  const paths: string[] = ["/uy", "/uy/podcasts"];
+  for (const p of posts) {
+    if (p.link) {
+      const lp = localPath(p.link);
+      if (!paths.includes(lp)) paths.push(lp);
+    }
+  }
+
+  // 1. Revalidate Next.js cache for all paths
+  for (const p of paths) {
+    revalidatePath(p);
+  }
+
+  // 2. Determine base origin for warm-up requests
+  const origin = (baseUrl || process.env.NEXT_PUBLIC_SITE_URL || "https://otuken-policy-center.vercel.app").replace(/\/$/, "");
+
+  let warmedCount = 0;
+  const warmedPaths: string[] = [];
+
+  // Batch warm-up requests (5 concurrent at a time)
+  const batchSize = 5;
+  for (let i = 0; i < paths.length; i += batchSize) {
+    const batch = paths.slice(i, i + batchSize);
+    await Promise.allSettled(
+      batch.map(async p => {
+        try {
+          const warmUrl = `${origin}${p}`;
+          const r = await fetch(warmUrl, {
+            headers: { "x-warmup": "1", "User-Agent": "OtukenWarmer/1.0" },
+            signal: AbortSignal.timeout(10000),
+          });
+          if (r.ok) {
+            warmedCount++;
+            warmedPaths.push(p);
+          }
+        } catch {
+          // Ignore individual timeouts
+        }
+      })
+    );
+  }
+
+  return {
+    ok: true,
+    action: "warmup",
+    totalPosts,
+    warmedCount,
+    totalTargeted: paths.length,
+    message: `${warmedCount} بەت مۇۋەپپەقىيەتلىك ئىسسىتىلىپ، كەش ئەسلىمىگە تولۇق ساقلاندى (${warmedCount} sayfa başarıyla ısıtılıp önbelleklendi)`,
+    samplePaths: warmedPaths.slice(0, 10),
+    timestamp: new Date().toISOString(),
+  };
+}

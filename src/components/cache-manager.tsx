@@ -17,6 +17,7 @@ import {
   ArrowLeft,
   Volume2,
   Terminal,
+  Flame,
 } from "lucide-react";
 
 interface SyncStatus {
@@ -101,15 +102,16 @@ export function CacheManager() {
     }
   }
 
-  async function handleAction(action: "all" | "sync" | "home" | "podcasts") {
+  async function handleAction(action: "all" | "sync" | "home" | "podcasts" | "warmup") {
     setLoadingAction(action);
     const start = performance.now();
-    addLog(`⏳ ${action.toUpperCase()} يېڭىلاش مەشغۇلاتى يوللاندى...`, "info");
+    addLog(`⏳ ${action.toUpperCase()} يېڭىلاش / قىزىتىش مەشغۇلاتى يوللاندى...`, "info");
 
     try {
       let endpoint = `/api/revalidate?secret=${encodeURIComponent(secret)}`;
       if (action === "all") endpoint += "&action=all";
       else if (action === "sync") endpoint += "&action=sync";
+      else if (action === "warmup") endpoint += "&action=warmup&limit=60";
       else if (action === "home") endpoint += "&action=single&path=/uy";
       else if (action === "podcasts") endpoint += "&action=single&path=/uy/podcasts";
 
@@ -119,7 +121,10 @@ export function CacheManager() {
 
       if (res.ok && data.ok) {
         addLog(`✅ مۇۋەپپەقىيەتلىك تامام block (${elapsed}ms): ${data.message || "كەش يېڭىلاندى"}`, "success");
-        if (action === "sync" || action === "all") {
+        if (data.samplePaths?.length) {
+          addLog(`⚡ قىزىتىلغان تاللانما بەتلەر: ${data.samplePaths.slice(0, 5).join(", ")}...`, "info");
+        }
+        if (action === "sync" || action === "all" || action === "warmup") {
           refreshStatus();
         }
       } else {
@@ -291,6 +296,21 @@ export function CacheManager() {
         </div>
 
         <div className="actions-grid">
+          <button
+            type="button"
+            className="action-card-btn warmup-btn highlight"
+            onClick={() => handleAction("warmup")}
+            disabled={!isAuthenticated || !!loadingAction}
+          >
+            <div className="btn-icon warmup">
+              <Flame size={22} className={loadingAction === "warmup" ? "spin" : ""} />
+            </div>
+            <div className="btn-text">
+              <strong>🔥 پۈتۈن تور بەتنى قىزىتىش ۋە تولۇق كىشلەش (Global Pre-Warm)</strong>
+              <span>بارلىق يازمىلارنى ئارقا پىلاندا يۈكلەپ، كېيىنكى زىيارەتچىلەرگە 0ms لىق تېزلىك بىلەن چىقىرىپ بېرىدۇ</span>
+            </div>
+          </button>
+
           <button
             type="button"
             className="action-card-btn"
