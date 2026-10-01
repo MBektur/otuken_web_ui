@@ -162,14 +162,13 @@ export async function getPages(): Promise<WPPage[]> {
 
 export function toCachedImageUrl(url?: string): string | undefined {
   if (!url) return undefined;
-  if (url.includes("orhunpolicycenter.com/uy/wp-content/uploads/")) {
-    return url.replace("https://orhunpolicycenter.com/uy/wp-content/uploads/", "/uploads/");
-  }
-  if (url.includes("orhunpolicycenter.com/wp-content/uploads/")) {
-    return url.replace("https://orhunpolicycenter.com/wp-content/uploads/", "/uploads/");
-  }
-  if (url.includes("img.youtube.com/vi/")) {
-    return url.replace("https://img.youtube.com/vi/", "/ytimg/");
+  if (url.startsWith("/api/img")) return url;
+  if (
+    url.includes("orhunpolicycenter.com") ||
+    url.includes("youtube.com") ||
+    url.includes("ytimg.com")
+  ) {
+    return `/api/img?url=${encodeURIComponent(url)}`;
   }
   return url;
 }

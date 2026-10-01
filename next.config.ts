@@ -22,31 +22,10 @@ const config: NextConfig = {
       },
     ],
   },
-  async rewrites() {
-    return [
-      {
-        source: "/uploads/:path*",
-        destination: "https://orhunpolicycenter.com/uy/wp-content/uploads/:path*",
-      },
-      {
-        source: "/ytimg/:path*",
-        destination: "https://img.youtube.com/vi/:path*",
-      },
-    ];
-  },
   async headers() {
     return [
       {
-        source: "/uploads/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, s-maxage=31536000, immutable",
-          },
-        ],
-      },
-      {
-        source: "/ytimg/:path*",
+        source: "/api/img",
         headers: [
           {
             key: "Cache-Control",
