@@ -138,7 +138,8 @@ export async function getPages(): Promise<WPPage[]> {
 export function postImage(post: WPPost): string | undefined {
   if (post.previewImage) return post.previewImage;
   const media = post._embedded?.["wp:featuredmedia"]?.[0];
-  return media?.media_details?.sizes?.large?.source_url || media?.source_url || contentImage(post.content.rendered);
+  const renderedContent = post.content?.rendered || post.excerpt?.rendered || "";
+  return media?.media_details?.sizes?.large?.source_url || media?.source_url || (renderedContent ? contentImage(renderedContent) : undefined);
 }
 
 export function postCategory(post: WPPost): string {
@@ -149,7 +150,11 @@ export function postCategory(post: WPPost): string {
 
 export function readingMinutes(post: WPPost): number {
   if (post.readMinutes) return post.readMinutes;
-  return Math.max(1, Math.ceil(plainText(post.content.rendered).split(/\s+/).length / 180));
+  const text = plainText(post.content?.rendered || post.excerpt?.rendered || "");
+  if (!post.content?.rendered && post.excerpt?.rendered) {
+    return Math.max(3, Math.min(8, Math.ceil(text.split(/\s+/).filter(Boolean).length / 15)));
+  }
+  return Math.max(1, Math.ceil(text.split(/\s+/).filter(Boolean).length / 180));
 }
 
 export function displayDate(date: string): string {
