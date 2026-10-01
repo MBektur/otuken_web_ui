@@ -11,6 +11,21 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(posts.length > 1);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+
+  // Mouse drag references
+  const isDownRef = useRef(false);
+  const startXRef = useRef(0);
+  const startScrollLeftRef = useRef(0);
+  const hasMovedRef = useRef(false);
+  const lastXRef = useRef(0);
+  const lastTimeRef = useRef(0);
+  const velocityRef = useRef(0);
+
+  // Touch tracking references
+  const touchStartXRef = useRef(0);
+  const touchStartYRef = useRef(0);
+  const touchMovedRef = useRef(false);
 
   function checkScroll() {
     const el = trackRef.current;
@@ -39,6 +54,96 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
       window.removeEventListener("resize", checkScroll);
     };
   }, [posts.length]);
+
+  // Global mousemove and mouseup listeners to ensure smooth drag-and-drop
+  useEffect(() => {
+    function handleWindowMouseMove(e: MouseEvent) {
+      if (!isDownRef.current || !trackRef.current) return;
+      const dx = e.clientX - startXRef.current;
+
+      if (!hasMovedRef.current && Math.abs(dx) > 4) {
+        hasMovedRef.current = true;
+        setIsDragging(true);
+      }
+
+      if (hasMovedRef.current) {
+        const now = performance.now();
+        const dt = now - lastTimeRef.current;
+        if (dt > 10) {
+          velocityRef.current = (e.clientX - lastXRef.current) / dt;
+          lastXRef.current = e.clientX;
+          lastTimeRef.current = now;
+        }
+        // In modern browser RTL, scrollLeft decreases (becomes negative) when dragging left (dx < 0)
+        trackRef.current.scrollLeft = startScrollLeftRef.current + dx;
+      }
+    }
+
+    function handleWindowMouseUp() {
+      if (!isDownRef.current) return;
+      isDownRef.current = false;
+
+      if (hasMovedRef.current && trackRef.current) {
+        // Apply smooth momentum if user flicked with mouse
+        const v = velocityRef.current;
+        if (Math.abs(v) > 0.2) {
+          trackRef.current.scrollBy({ left: v * 280, behavior: "smooth" });
+        }
+        // Brief timeout so click capture blocks card link navigation
+        setTimeout(() => {
+          setIsDragging(false);
+          hasMovedRef.current = false;
+        }, 80);
+      } else {
+        setIsDragging(false);
+        hasMovedRef.current = false;
+      }
+    }
+
+    window.addEventListener("mousemove", handleWindowMouseMove);
+    window.addEventListener("mouseup", handleWindowMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", handleWindowMouseMove);
+      window.removeEventListener("mouseup", handleWindowMouseUp);
+    };
+  }, []);
+
+  function handleMouseDown(e: React.MouseEvent) {
+    if (e.button !== 0 || !trackRef.current) return;
+    isDownRef.current = true;
+    hasMovedRef.current = false;
+    startXRef.current = e.clientX;
+    lastXRef.current = e.clientX;
+    lastTimeRef.current = performance.now();
+    velocityRef.current = 0;
+    startScrollLeftRef.current = trackRef.current.scrollLeft;
+  }
+
+  function handleTouchStart(e: React.TouchEvent) {
+    if (e.touches.length === 1) {
+      touchStartXRef.current = e.touches[0].clientX;
+      touchStartYRef.current = e.touches[0].clientY;
+      touchMovedRef.current = false;
+    }
+  }
+
+  function handleTouchMove(e: React.TouchEvent) {
+    if (e.touches.length === 1 && !touchMovedRef.current) {
+      const dx = Math.abs(e.touches[0].clientX - touchStartXRef.current);
+      const dy = Math.abs(e.touches[0].clientY - touchStartYRef.current);
+      if (dx > 8 && dx > dy) {
+        touchMovedRef.current = true;
+      }
+    }
+  }
+
+  function handleClickCapture(e: React.MouseEvent) {
+    if (hasMovedRef.current || touchMovedRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+      touchMovedRef.current = false;
+    }
+  }
 
   function scroll(direction: "prev" | "next") {
     const el = trackRef.current;
@@ -90,7 +195,15 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
       </div>
 
       <div className="carousel-viewport">
-        <div className="carousel-track" ref={trackRef}>
+        <div
+          className={`carousel-track ${isDragging ? "is-dragging" : ""}`}
+          ref={trackRef}
+          onMouseDown={handleMouseDown}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onClickCapture={handleClickCapture}
+          onDragStart={e => e.preventDefault()}
+        >
           {posts.map((post, idx) => {
             const img = postImage(post);
             return (
@@ -103,9 +216,10 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
                   className={`carousel-photo ${!img ? "photo-empty" : ""}`}
                   tabIndex={-1}
                   aria-hidden="true"
+                  draggable={false}
                 >
                   {img ? (
-                    <img src={img} alt="" loading="lazy" decoding="async" />
+                    <img src={img} alt="" loading="lazy" decoding="async" draggable={false} />
                   ) : (
                     <div className="carousel-no-photo">ئورخۇن</div>
                   )}
@@ -119,14 +233,14 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
                     </time>
                   </div>
                   <h3>
-                    <Link href={localPath(post.link)}>
+                    <Link href={localPath(post.link)} draggable={false}>
                       {plainText(post.title.rendered)}
                     </Link>
                   </h3>
                   <p className="carousel-excerpt">
                     {plainText(post.excerpt.rendered)}
                   </p>
-                  <Link href={localPath(post.link)} className="read-link">
+                  <Link href={localPath(post.link)} className="read-link" draggable={false}>
                     ئوقۇڭ <ArrowLeft size={14} />
                   </Link>
                 </div>

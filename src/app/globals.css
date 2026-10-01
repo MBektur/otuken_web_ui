@@ -1532,6 +1532,28 @@ svg {
     scrollbar-width: none;
     -ms-overflow-style: none;
     padding-block: 4px 14px;
+    cursor: grab;
+    cursor: -webkit-grab;
+    touch-action: pan-y pinch-zoom;
+    -webkit-overflow-scrolling: touch;
+}
+
+.carousel-track.is-dragging {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+    user-select: none;
+    -webkit-user-select: none;
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+}
+
+.carousel-track.is-dragging * {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.carousel-track.is-dragging a {
+    pointer-events: none;
 }
 
 .carousel-track::-webkit-scrollbar {
