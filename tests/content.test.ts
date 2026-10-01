@@ -18,12 +18,33 @@ test("images are found inside posts when featured_media is missing", () => {
 
 test("Uyghur permalinks and entities survive normalization", () => {
   assert.equal(normalizedPath("/uy/%DA%BE%DB%95%D9%82/"), "/uy/ھەق");
+  assert.equal(normalizedPath("/uy/2025/06/18/%d8%a6%d9%89%d8%b3%d8%b1%d8%a7%d8%a6%d9%89%d9%84%d9%89%d9%8a%db%95-%d8%a6%d9%89%d8%b1%d8%a7%d9%86-d"), "/uy/2025/06/18/ئىسرائىلىيە-ئىران-d");
+  assert.equal(normalizedPath("/uy/2025/06/18/ئىسرائىلىيە-ئىران-d/"), "/uy/2025/06/18/ئىسرائىلىيە-ئىران-d");
   assert.equal(plainText("<p>خىتاي &#8211; رۇسىيە</p>"), "خىتاي – رۇسىيە");
   assert.equal(localPath("https://orhunpolicycenter.com/uy/category/test/"), "/uy/category/test/");
   assert.equal(localPath("https://orhunpolicycenter.com/ug/"), "https://orhunpolicycenter.com/ug/");
   assert.equal(localPath("https://example.com/source"), "https://example.com/source");
   assert.equal(localPath("#footnote-1"), "#footnote-1");
   assert.equal(localPath("https://orhunpolicycenter.com/uy/wp-content/uploads/report.pdf"), "https://orhunpolicycenter.com/uy/wp-content/uploads/report.pdf");
+});
+
+test("Uyghur post slug resolution matches decoded, raw, and encoded variations", () => {
+  const { getLocalPostBySlug, safeDecode } = require("../src/lib/cache-store");
+  const rawEncoded = "%d8%a6%d9%89%d8%b3%d8%b1%d8%a7%d8%a6%d9%89%d9%84%d9%89%d9%8a%db%95-%d8%a6%d9%89%d8%b1%d8%a7%d9%86-d";
+  const decoded = "ئىسرائىلىيە-ئىران-d";
+  const upperEncoded = encodeURIComponent(decoded);
+
+  assert.equal(safeDecode(rawEncoded), decoded);
+  assert.equal(safeDecode(upperEncoded), decoded);
+
+  const post1 = getLocalPostBySlug(rawEncoded);
+  const post2 = getLocalPostBySlug(decoded);
+  const post3 = getLocalPostBySlug(upperEncoded);
+
+  assert.ok(post1);
+  assert.equal(post1.id, 81);
+  assert.equal(post2?.id, 81);
+  assert.equal(post3?.id, 81);
 });
 
 test("plugin widgets are omitted and only recognized video hosts are embedded", () => {

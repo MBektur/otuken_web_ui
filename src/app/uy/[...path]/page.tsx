@@ -5,6 +5,7 @@ import { notFound, redirect } from "next/navigation";
 import { ArrowLeft, Clock3, Maximize2 } from "lucide-react";
 import { Category, getCategories, getPages, getPostBySlug, getPosts, postImage, readingMinutes, displayDate, postCategory, WordPressError, WPPost } from "@/lib/wordpress";
 import { localPath, normalizedPath, plainText, safeContent } from "@/lib/content";
+import { safeDecode, getLocalSnapshot } from "@/lib/cache-store";
 import { Header, Footer } from "@/components/shell";
 import { PostCard, RegionRail, PostMeta, Pagination, SectionTitle } from "@/components/editorial";
 import { ScrollControls } from "@/components/scroll-controls";
@@ -48,7 +49,8 @@ export async function generateStaticParams() {
 type Props = { params: Promise<{ path: string[] }>; searchParams: Promise<{ page?: string }> };
 
 const resolve = cache(async (pathKey: string) => {
-  const path = pathKey ? pathKey.split("/") : [];
+  const path = pathKey ? pathKey.split("/").filter(Boolean) : [];
+  if (!path.length) return undefined;
   const pathname = normalizedPath(`/uy/${path.join("/")}`);
   const categories = await getCategories();
   const category = categories.find(c => normalizedPath(localPath(c.link)) === pathname);
@@ -59,7 +61,21 @@ const resolve = cache(async (pathKey: string) => {
     const page = pages.find(p => normalizedPath(localPath(p.link)) === pathname);
     if (page) return { kind: "page" as const, categories, page };
   }
-  const post = await getPostBySlug(path[path.length - 1]);
+  const lastSegment = path[path.length - 1];
+  let post = await getPostBySlug(lastSegment);
+
+  // Fallback: If not found and path has date segments e.g. [2025, 06, 18, slug]
+  if (!post && path.length >= 4) {
+    const datePrefix = `${path[0]}-${path[1]}-${path[2]}`;
+    const allPosts = getLocalSnapshot().posts;
+    const targetDecoded = safeDecode(lastSegment).toLowerCase();
+    post = allPosts.find(p => {
+      if (!p.date?.startsWith(datePrefix)) return false;
+      const s = safeDecode(p.slug).toLowerCase();
+      return s.includes(targetDecoded) || targetDecoded.includes(s);
+    });
+  }
+
   if (post) return { kind: "post" as const, categories, post };
 });
 

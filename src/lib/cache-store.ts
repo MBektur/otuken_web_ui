@@ -40,12 +40,18 @@ export function getLocalPages(): WPPage[] {
   return currentCache.pages;
 }
 
-function safeDecode(str: string): string {
-  try {
-    return decodeURIComponent(str);
-  } catch {
-    return str;
+export function safeDecode(str: string): string {
+  let curr = str;
+  for (let i = 0; i < 3; i++) {
+    try {
+      const decoded = decodeURIComponent(curr);
+      if (decoded === curr) break;
+      curr = decoded;
+    } catch {
+      break;
+    }
   }
+  return curr;
 }
 
 export function getLocalPostBySlug(slug: string): WPPost | undefined {

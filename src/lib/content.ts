@@ -25,8 +25,17 @@ export function localPath(link: string): string {
 }
 
 export function normalizedPath(path: string): string {
-  try { return decodeURIComponent(path).replace(/\/$/, ""); }
-  catch { return path.replace(/\/$/, ""); }
+  try {
+    let curr = path;
+    for (let i = 0; i < 3; i++) {
+      const decoded = decodeURIComponent(curr);
+      if (decoded === curr) break;
+      curr = decoded;
+    }
+    return curr.replace(/\/$/, "");
+  } catch {
+    return path.replace(/\/$/, "");
+  }
 }
 
 export function contentImage(html: string): string | undefined {
