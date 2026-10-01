@@ -1969,6 +1969,15 @@ html[dir="ltr"] .scroll-controls {
         font-size: 14.5px !important;
     }
 
+    .carousel-arrow {
+        width: 27px;
+        height: 27px;
+    }
+
+    .carousel-page-indicator {
+        font-size: 10px;
+    }
+
     .related-count {
         font-size: 11px;
     }
@@ -1982,12 +1991,12 @@ html[dir="ltr"] .scroll-controls {
 .carousel-controls {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
 }
 
 .carousel-arrow {
-    width: 38px;
-    height: 38px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     border: 1px solid var(--rule);
     background: #fff;
@@ -1997,6 +2006,7 @@ html[dir="ltr"] .scroll-controls {
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
+    flex-shrink: 0;
 }
 
 .carousel-arrow:hover:not(:disabled) {
@@ -2007,14 +2017,15 @@ html[dir="ltr"] .scroll-controls {
 }
 
 .carousel-arrow:disabled {
-    opacity: 0.35;
+    opacity: 0.28;
     cursor: not-allowed;
 }
 
 .carousel-page-indicator {
-    font: 11px Georgia, serif;
+    font: 10.5px Georgia, serif;
     color: var(--muted);
-    padding-inline: 4px;
+    padding-inline: 3px;
+    user-select: none;
 }
 
 .carousel-viewport {
@@ -2026,14 +2037,15 @@ html[dir="ltr"] .scroll-controls {
     display: flex;
     gap: 18px;
     overflow-x: auto;
-    scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
+    scroll-padding-inline: 16px;
+    overscroll-behavior-x: contain;
     scrollbar-width: none;
     -ms-overflow-style: none;
     padding-block: 4px 14px;
     cursor: grab;
     cursor: -webkit-grab;
-    touch-action: pan-y pinch-zoom;
+    touch-action: pan-x pan-y;
     -webkit-overflow-scrolling: touch;
 }
 

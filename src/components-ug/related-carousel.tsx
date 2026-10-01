@@ -30,15 +30,32 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
   function checkScroll() {
     const el = trackRef.current;
     if (!el) return;
-    const { scrollLeft, scrollWidth, clientWidth } = el;
-    const maxScroll = scrollWidth - clientWidth;
-    setCanPrev(scrollLeft > 10);
-    setCanNext(scrollLeft < maxScroll - 10);
+    const cards = Array.from(el.children) as HTMLElement[];
+    if (cards.length === 0) return;
 
-    // Calculate approximate active card
-    const cardWidth = el.firstElementChild ? (el.firstElementChild as HTMLElement).offsetWidth + 18 : 260;
-    const idx = Math.min(posts.length - 1, Math.max(0, Math.round(scrollLeft / cardWidth)));
-    setActiveIndex(idx);
+    const trackRect = el.getBoundingClientRect();
+    const firstRect = cards[0].getBoundingClientRect();
+    const lastRect = cards[cards.length - 1].getBoundingClientRect();
+
+    // In LTR, start is on the left, end is on the right
+    const atStart = firstRect.left >= trackRect.left - 12;
+    const atEnd = lastRect.right <= trackRect.right + 12;
+
+    setCanPrev(!atStart);
+    setCanNext(!atEnd);
+
+    // Find card closest to start (left edge)
+    let closestIdx = 0;
+    let minDiff = Infinity;
+    for (let i = 0; i < cards.length; i++) {
+      const rect = cards[i].getBoundingClientRect();
+      const diff = Math.abs(rect.left - trackRect.left);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIdx = i;
+      }
+    }
+    setActiveIndex(closestIdx);
   }
 
   useEffect(() => {
@@ -146,11 +163,25 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
   function scroll(direction: "prev" | "next") {
     const el = trackRef.current;
     if (!el) return;
-    const card = el.firstElementChild as HTMLElement | null;
-    const step = card ? (card.offsetWidth + 18) * 2 : 400;
-    // In LTR, "next" scrolls in the positive direction, "prev" in the negative direction
-    const delta = direction === "next" ? step : -step;
-    el.scrollBy({ left: delta, behavior: "smooth" });
+    const cards = Array.from(el.children) as HTMLElement[];
+    if (cards.length === 0) return;
+
+    const stepCards = el.clientWidth > 768 ? 2 : 1;
+    let targetIdx = direction === "next"
+      ? Math.min(cards.length - 1, activeIndex + stepCards)
+      : Math.max(0, activeIndex - stepCards);
+
+    if (targetIdx === activeIndex) {
+      targetIdx = direction === "next" ? Math.min(cards.length - 1, activeIndex + 1) : Math.max(0, activeIndex - 1);
+    }
+
+    if (cards[targetIdx] && typeof cards[targetIdx].scrollIntoView === "function") {
+      cards[targetIdx].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+    } else {
+      const card = cards[0];
+      const step = card ? (card.offsetWidth + 18) * stepCards : 320;
+      el.scrollBy({ left: direction === "next" ? step : -step, behavior: "smooth" });
+    }
   }
 
   if (!posts || posts.length === 0) return null;
@@ -171,10 +202,10 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
             className="carousel-arrow"
             onClick={() => scroll("prev")}
             disabled={!canPrev}
-            aria-label="Алдинқи Йазмилар"
+            aria-label="Алдинқи Йазмиلار"
             title="Алдинқи"
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={15} strokeWidth={2} />
           </button>
           <span className="carousel-page-indicator" dir="ltr">
             {activeIndex + 1} / {posts.length}
@@ -187,7 +218,7 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
             aria-label="Кейинки Йазмилар"
             title="Кейинки"
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={15} strokeWidth={2} />
           </button>
         </div>
       </div>

@@ -30,17 +30,32 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
   function checkScroll() {
     const el = trackRef.current;
     if (!el) return;
-    const { scrollLeft, scrollWidth, clientWidth } = el;
-    // In RTL, scrollLeft is typically <= 0 or between 0 and (scrollWidth - clientWidth)
-    const maxScroll = scrollWidth - clientWidth;
-    const absScroll = Math.abs(scrollLeft);
-    setCanPrev(absScroll > 10);
-    setCanNext(absScroll < maxScroll - 10);
+    const cards = Array.from(el.children) as HTMLElement[];
+    if (cards.length === 0) return;
 
-    // Calculate approximate active card
-    const cardWidth = el.firstElementChild ? (el.firstElementChild as HTMLElement).offsetWidth + 18 : 260;
-    const idx = Math.min(posts.length - 1, Math.max(0, Math.round(absScroll / cardWidth)));
-    setActiveIndex(idx);
+    const trackRect = el.getBoundingClientRect();
+    const firstRect = cards[0].getBoundingClientRect();
+    const lastRect = cards[cards.length - 1].getBoundingClientRect();
+
+    // In RTL, the start is at the right edge, the end is at the left edge
+    const atStart = firstRect.right >= trackRect.right - 12;
+    const atEnd = lastRect.left >= trackRect.left - 12;
+
+    setCanPrev(!atStart);
+    setCanNext(!atEnd);
+
+    // Find card closest to start (right edge)
+    let closestIdx = 0;
+    let minDiff = Infinity;
+    for (let i = 0; i < cards.length; i++) {
+      const rect = cards[i].getBoundingClientRect();
+      const diff = Math.abs(rect.right - trackRect.right);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIdx = i;
+      }
+    }
+    setActiveIndex(closestIdx);
   }
 
   useEffect(() => {
@@ -74,7 +89,6 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
           lastXRef.current = e.clientX;
           lastTimeRef.current = now;
         }
-        // In modern browser RTL, scrollLeft decreases (becomes negative) when dragging left (dx < 0)
         trackRef.current.scrollLeft = startScrollLeftRef.current + dx;
       }
     }
@@ -84,12 +98,10 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
       isDownRef.current = false;
 
       if (hasMovedRef.current && trackRef.current) {
-        // Apply smooth momentum if user flicked with mouse
         const v = velocityRef.current;
         if (Math.abs(v) > 0.2) {
           trackRef.current.scrollBy({ left: v * 280, behavior: "smooth" });
         }
-        // Brief timeout so click capture blocks card link navigation
         setTimeout(() => {
           setIsDragging(false);
           hasMovedRef.current = false;
@@ -131,7 +143,7 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
     if (e.touches.length === 1 && !touchMovedRef.current) {
       const dx = Math.abs(e.touches[0].clientX - touchStartXRef.current);
       const dy = Math.abs(e.touches[0].clientY - touchStartYRef.current);
-      if (dx > 8 && dx > dy) {
+      if (dx > 12 && dx > dy) {
         touchMovedRef.current = true;
       }
     }
@@ -148,11 +160,25 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
   function scroll(direction: "prev" | "next") {
     const el = trackRef.current;
     if (!el) return;
-    const card = el.firstElementChild as HTMLElement | null;
-    const step = card ? (card.offsetWidth + 18) * 2 : 400;
-    // In RTL, "next" scrolls in the negative direction, "prev" in the positive direction
-    const delta = direction === "next" ? -step : step;
-    el.scrollBy({ left: delta, behavior: "smooth" });
+    const cards = Array.from(el.children) as HTMLElement[];
+    if (cards.length === 0) return;
+
+    const stepCards = el.clientWidth > 768 ? 2 : 1;
+    let targetIdx = direction === "next"
+      ? Math.min(cards.length - 1, activeIndex + stepCards)
+      : Math.max(0, activeIndex - stepCards);
+
+    if (targetIdx === activeIndex) {
+      targetIdx = direction === "next" ? Math.min(cards.length - 1, activeIndex + 1) : Math.max(0, activeIndex - 1);
+    }
+
+    if (cards[targetIdx] && typeof cards[targetIdx].scrollIntoView === "function") {
+      cards[targetIdx].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+    } else {
+      const card = cards[0];
+      const step = card ? (card.offsetWidth + 18) * stepCards : 320;
+      el.scrollBy({ left: direction === "next" ? -step : step, behavior: "smooth" });
+    }
   }
 
   if (!posts || posts.length === 0) return null;
@@ -176,7 +202,7 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
             aria-label="ئالدىنقى يازمىلار"
             title="ئالدىنقى"
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={15} strokeWidth={2} />
           </button>
           <span className="carousel-page-indicator" dir="ltr">
             {activeIndex + 1} / {posts.length}
@@ -189,7 +215,7 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
             aria-label="كېيىنكى يازمىلار"
             title="كېيىنكى"
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={15} strokeWidth={2} />
           </button>
         </div>
       </div>
