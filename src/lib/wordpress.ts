@@ -87,9 +87,7 @@ export async function getPosts(options: {
 
   // 3. For page 1 (homepage, category, recent rail) or when local has no items:
   // Fetch from WordPress API with Next.js ISR tag-based cache (60s TTL)
-  const fields = options.withContent
-    ? "id,date,modified,slug,link,title,content,excerpt,categories,_links,_embedded"
-    : "id,date,modified,slug,link,title,excerpt,categories,_links,_embedded";
+  const fields = "id,date,modified,slug,link,title,content,excerpt,categories,_links,_embedded";
   const params: Record<string, string | number> = {
     _embed: "author,wp:term,wp:featuredmedia",
     _fields: fields,
@@ -113,12 +111,17 @@ export async function getPosts(options: {
     .then(list => {
       const mappedData = list.data.map(post => {
         const ytId = post.content?.rendered ? extractYoutubeId(post.content.rendered) : undefined;
+        const foundContentImg = post.content?.rendered ? contentImage(post.content.rendered) : undefined;
+        const mediaImg = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+        const localMatch = getLocalSnapshot().posts.find(p => p.id === post.id);
+        const resolvedImage = mediaImg || foundContentImg || localMatch?.previewImage || (ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : undefined);
+
         return {
           ...post,
-          previewImage: postImage(post) || (ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : undefined),
+          previewImage: resolvedImage,
           readMinutes: readingMinutes(post),
           youtubeId: ytId,
-          content: { rendered: "" },
+          content: options.withContent ? post.content : { rendered: "" },
         };
       });
 
@@ -130,7 +133,12 @@ export async function getPosts(options: {
         for (const p of mappedData) {
           const idx = merged.findIndex(existing => existing.id === p.id);
           if (idx >= 0) {
-            merged[idx] = { ...merged[idx], ...p };
+            merged[idx] = {
+              ...merged[idx],
+              ...p,
+              previewImage: p.previewImage || merged[idx].previewImage,
+              content: p.content?.rendered ? p.content : (merged[idx].content || { rendered: "" }),
+            };
           } else {
             merged.unshift(p);
             hasNew = true;
@@ -312,6 +320,14 @@ export function postImage(post: WPPost, w?: number, q?: number): string | undefi
     const renderedContent = post.content?.rendered || post.excerpt?.rendered || "";
     if (renderedContent) {
       chosenUrl = contentImage(renderedContent);
+    }
+  }
+
+  // 5. Fall back to snapshot copy if this post object had its content/previewImage stripped
+  if (!chosenUrl && post.id) {
+    const local = getLocalSnapshot().posts.find(p => p.id === post.id);
+    if (local && local !== post) {
+      chosenUrl = local.previewImage || (local.content?.rendered ? contentImage(local.content.rendered) : undefined) || local._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
     }
   }
 
