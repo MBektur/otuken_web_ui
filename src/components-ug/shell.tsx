@@ -41,8 +41,19 @@ export function Header({ categories, active }: { categories: Category[]; active?
     </div></div>
     <header className="site-width masthead">
       <Link href="/ug" className="brand" aria-label="Башбәт">
-        <svg className="brand-mark" viewBox="0 0 50 66" fill="none" aria-hidden="true"><path d="M4 62V4h42v58H4Z M10 62V10h30v52 M16 62V30c0-8 9-14 9-14s9 6 9 14v32 M22 62V32c0-4 3-7 3-7s3 3 3 7v30" stroke="currentColor" strokeWidth="1.8" /><path d="M4 4l6 6M46 4l-6 6M4 62l6-6M46 62l-6-6" stroke="currentColor" /></svg>
-        <div><span className="brand-title">Өтүкән</span><span className="brand-subtitle">Сийасәт Тәтқиқат Мәркизи</span><span className="brand-english" dir="ltr">ORHUN POLICY CENTER</span></div>
+        <img
+          src="/logo.Header-UY.png"
+          alt="Өтүкән Сийасәт Тәтқиқат Мәркизи"
+          className="brand-logo-img"
+          width={730}
+          height={141}
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+          onError={(e) => {
+            e.currentTarget.src = "https://orhunpolicycenter.com/uy/wp-content/uploads/2025/08/logo.Header-UY.png";
+          }}
+        />
       </Link>
       <div className="masthead-motto"><span>Дунйаға Нәзәр,</span><span>Кәлгүсигә Тәпәккур.</span><small dir="ltr">INDEPENDENT THOUGHT. GLOBAL PERSPECTIVE.</small></div>
       <div className="masthead-edition" dir="ltr"><span>THE ORHUN REVIEW</span><span className="edition-line" /><span>ANALYSIS & INSIGHT</span></div>
