@@ -183,26 +183,43 @@ export async function getPosts(options: {
 }
 
 export async function getPostBySlug(slug: string): Promise<WPPost | undefined> {
-  const local = getLocalPostBySlug(slug);
-  if (local) return local;
-
   const cached = postBySlugMap.get(slug);
   if (cached && cached.expires > Date.now()) return cached.result;
 
-  const result = request<WPPost[]>("posts", { slug, _embed: "1" }, 600).then(r => {
-    const post = r.data[0];
-    if (post && post.content?.rendered) {
-      post.youtubeId = extractYoutubeId(post.content.rendered);
-    }
-    return post;
-  });
+  const result: Promise<WPPost | undefined> = request<WPPost[]>("posts", { slug, _embed: "1" }, 60)
+    .then(r => {
+      const post = r.data[0];
+      if (post) {
+        if (post.content?.rendered) {
+          post.youtubeId = extractYoutubeId(post.content.rendered);
+        }
+        // Update in-memory snapshot with fresh post
+        try {
+          const current = getLocalSnapshot();
+          const merged = [...current.posts];
+          const idx = merged.findIndex(p => p.id === post.id);
+          if (idx >= 0) {
+            merged[idx] = { ...merged[idx], ...post };
+            updateLocalSnapshot({ posts: merged });
+          }
+        } catch {}
+        return post;
+      }
+      return getLocalPostBySlug(slug);
+    })
+    .catch(() => {
+      return getLocalPostBySlug(slug);
+    });
 
   if (postBySlugMap.size >= 100) postBySlugMap.delete(postBySlugMap.keys().next().value!);
-  postBySlugMap.set(slug, { expires: Date.now() + (600 * 1000), result });
-  try { return await result; }
-  catch {
+  postBySlugMap.set(slug, { expires: Date.now() + 60000, result });
+  try {
+    const post = await result;
+    if (post) return post;
+    return getLocalPostBySlug(slug);
+  } catch {
     if (postBySlugMap.get(slug)?.result === result) postBySlugMap.delete(slug);
-    return undefined;
+    return getLocalPostBySlug(slug);
   }
 }
 
