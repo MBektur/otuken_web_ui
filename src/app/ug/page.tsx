@@ -14,7 +14,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   const query = decoded !== undefined && decoded !== "" ? decoded : undefined;
   const browsing = q !== undefined || !!page;
   return {
-    title: query ? `Издәш: ${query}` : (page ? "Барлиқ Йазмиلار" : "Башбәт"),
+    title: query ? `Издәш: ${query}` : (page ? "Барлиқ Йазмилар" : "Башбәт"),
     alternates: browsing ? undefined : { canonical: "/ug" },
     robots: browsing ? { index: false, follow: true } : undefined,
   };

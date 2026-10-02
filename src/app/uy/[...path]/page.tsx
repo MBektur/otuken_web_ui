@@ -183,6 +183,18 @@ export default async function ContentPage({ params, searchParams }: Props) {
     }
   }
 
+  const currentCategoryName = isPost ? postCategory(data.post) : "";
+  const matchedCategory = isPost
+    ? data.categories.find(c => {
+        if (data.post.categories?.length) {
+          const validCatId = data.post.categories.find((id: number) => id === 3) || data.post.categories.find((id: number) => id !== 1 && id !== 15) || data.post.categories[0];
+          return c.id === validCatId;
+        }
+        return c.name === currentCategoryName;
+      })
+    : undefined;
+  const categoryHref = matchedCategory ? localPath(matchedCategory.link) : "/uy#regions";
+
   return (
     <>
       <Header categories={data.categories} />
@@ -191,7 +203,7 @@ export default async function ContentPage({ params, searchParams }: Props) {
           <Link href="/uy">باشبەت</Link>
           <span>/</span>
           {isPost ? (
-            <Link href="/uy#regions">{postCategory(data.post)}</Link>
+            <Link href={categoryHref}>{currentCategoryName}</Link>
           ) : (
             <span>ئۆتۈكەن</span>
           )}
