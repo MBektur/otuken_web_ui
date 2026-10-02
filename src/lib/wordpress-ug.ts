@@ -1,4 +1,4 @@
-import { getPosts, getCategories, getPostBySlug, getPages } from "./wordpress";
+import { getPosts, getCategories, getPostBySlug, getPages, type WPPost } from "./wordpress";
 import { transliterateHtml, t } from "./i18n";
 
 function transCategory(cat: any) {
@@ -50,7 +50,7 @@ export type { WPPost, WPPage, Category } from "./wordpress";
 
 export { toCachedImageUrl } from "./wordpress";
 
-import { getPodcastPosts } from "./wordpress";
+import { getPodcastPosts, getSmartRelatedPosts } from "./wordpress";
 import { localPath as origLocalPath } from "./content";
 
 export function localPath(link: string): string {
@@ -59,5 +59,10 @@ export function localPath(link: string): string {
 
 export async function getPodcastPostsUg() {
   const posts = await getPodcastPosts();
+  return posts.map(transPost);
+}
+
+export function getSmartRelatedPostsUg(currentPost: WPPost, limit = 8): WPPost[] {
+  const posts = getSmartRelatedPosts(currentPost, limit);
   return posts.map(transPost);
 }

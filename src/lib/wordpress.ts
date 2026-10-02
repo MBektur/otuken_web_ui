@@ -3,7 +3,7 @@ import { contentImage, plainText, extractYoutubeId, WORDPRESS_URL } from "./cont
 export type Category = { id: number; name: string; slug: string; count: number; parent: number; link: string };
 export type WPPage = { id: number; slug: string; link: string; title: { rendered: string }; content: { rendered: string } };
 export type WPPost = WPPage & {
-  date: string; modified: string; categories: number[]; excerpt: { rendered: string };
+  date: string; modified: string; categories: number[]; tags?: number[]; excerpt: { rendered: string };
   previewImage?: string;
   readMinutes?: number;
   youtubeId?: string;
@@ -52,6 +52,7 @@ import {
   getLocalPostBySlug,
   getLocalPosts,
   getLocalPodcasts,
+  getLocalSnapshot,
 } from "./cache-store";
 
 export async function getPosts(options: {
@@ -254,4 +255,83 @@ export function readingMinutes(post: WPPost): number {
 export function displayDate(date: string): string {
   const [year, month, day] = date.slice(0, 10).split("-");
   return `${year}.${month}.${day}`;
+}
+
+function cleanSeriesTitle(title: string): string {
+  return (title || "")
+    .replace(/[（\(][ivxlcdmIVXLCDM0-9\s]+[）\)]/g, "")
+    .replace(/\b\d+[-ـ]?قىسىم\b/g, "")
+    .replace(/[-–—:«»"'\.,!\?]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function cleanSeriesSlug(slug: string): string {
+  return (slug || "").replace(/_[ivxlcdm]+$/i, "").replace(/_\d+$/, "").trim();
+}
+
+const STOP_WORDS = new Set([
+  "بىلەن", "ئۈچۈن", "ھەققىدە", "بولغان", "قانداق", "نېمە", "ۋە", "بىر", "ياكى",
+  "دەۋرى", "يىلى", "خەۋەر", "يېڭى", "دەستۇرى"
+]);
+
+export function getSmartRelatedPosts(currentPost: WPPost, limit = 8): WPPost[] {
+  const allPosts = getLocalSnapshot().posts;
+  if (!allPosts?.length) return [];
+
+  const currentCleanTitle = cleanSeriesTitle(currentPost.title?.rendered || "").toLowerCase();
+  const currentCleanSlug = cleanSeriesSlug(currentPost.slug || "").toLowerCase();
+  const currentTags = new Set(currentPost.tags || []);
+  const currentCats = new Set((currentPost.categories || []).filter(c => c !== 1));
+
+  const titleWords = currentCleanTitle.split(/\s+/).filter(w => w.length >= 4 && !STOP_WORDS.has(w));
+
+  const scored = allPosts
+    .filter(p => p.id !== currentPost.id)
+    .map(p => {
+      let score = 0;
+      const pCleanTitle = cleanSeriesTitle(p.title?.rendered || "").toLowerCase();
+      const pCleanSlug = cleanSeriesSlug(p.slug || "").toLowerCase();
+
+      // 1. Direct series / continuation match
+      if (
+        (currentCleanSlug.length > 5 && currentCleanSlug === pCleanSlug) ||
+        (currentCleanTitle.length > 5 && currentCleanTitle === pCleanTitle)
+      ) {
+        score += 100;
+      }
+
+      // 2. Shared tags
+      if (p.tags?.length && currentTags.size > 0) {
+        for (const t of p.tags) {
+          if (currentTags.has(t)) score += 30;
+        }
+      }
+
+      // 3. Meaningful title keyword matches
+      for (const w of titleWords) {
+        if (pCleanTitle.includes(w)) score += 10;
+      }
+
+      // 4. Shared categories
+      if (p.categories?.length && currentCats.size > 0) {
+        for (const c of p.categories) {
+          if (currentCats.has(c)) score += 5;
+        }
+      }
+
+      return { post: p, score };
+    });
+
+  scored.sort((a, b) => {
+    const isSeriesA = a.score >= 100;
+    const isSeriesB = b.score >= 100;
+    if (isSeriesA && isSeriesB) {
+      return new Date(a.post.date).getTime() - new Date(b.post.date).getTime();
+    }
+    if (b.score !== a.score) return b.score - a.score;
+    return new Date(b.post.date).getTime() - new Date(a.post.date).getTime();
+  });
+
+  return scored.slice(0, limit).map(s => s.post);
 }

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ArrowLeft, Clock3, Maximize2 } from "lucide-react";
-import { Category, getCategories, getPages, getPostBySlug, getPosts, postImage, readingMinutes, displayDate, postCategory, WordPressError, WPPost } from "@/lib/wordpress";
+import { Category, getCategories, getPages, getPostBySlug, getPosts, getSmartRelatedPosts, postImage, readingMinutes, displayDate, postCategory, WordPressError, WPPost } from "@/lib/wordpress";
 import { localPath, normalizedPath, plainText, robustDecode, safeContent } from "@/lib/content";
 import { safeDecode, getLocalSnapshot } from "@/lib/cache-store";
 import { Header, Footer } from "@/components/shell";
@@ -121,18 +121,7 @@ async function ArticleSidebarStream({
 }
 
 async function RelatedCarouselStream({ currentPost }: { currentPost: WPPost }) {
-  const catId = currentPost.categories?.[0];
-  const [relResult, recentResult] = await Promise.all([
-    catId ? getPosts({ category: catId, perPage: 10, page: 1 }).catch(() => ({ data: [] })) : Promise.resolve({ data: [] }),
-    getPosts({ perPage: 10, page: 1 }).catch(() => ({ data: [] })),
-  ]);
-  let related = relResult.data.filter(p => p.id !== currentPost.id);
-  if (related.length < 4) {
-    const extra = recentResult.data.filter(p => p.id !== currentPost.id && !related.some(r => r.id === p.id));
-    related = [...related, ...extra].slice(0, 8);
-  } else {
-    related = related.slice(0, 8);
-  }
+  const related = getSmartRelatedPosts(currentPost, 8);
   if (!related.length) return null;
   return <RelatedCarousel posts={related} />;
 }
