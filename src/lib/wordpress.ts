@@ -238,6 +238,14 @@ export function postImage(post: WPPost, w?: number, q?: number): string | undefi
 }
 
 export function postCategory(post: WPPost): string {
+  const allCats = getLocalCategories();
+  if (post.categories?.length) {
+    const validCatId = post.categories.find(id => id === 3) || post.categories.find(id => id !== 1 && id !== 15) || post.categories[0];
+    if (validCatId && validCatId !== 1) {
+      const found = allCats.find(c => c.id === validCatId);
+      if (found) return plainText(found.name);
+    }
+  }
   const categories = post._embedded?.["wp:term"]?.[0] || [];
   const category = categories.find(c => c.id === 3) || categories.find(c => c.id !== 1 && c.id !== 15) || categories[0];
   return category && category.id !== 1 ? plainText(category.name) : "يازما";
