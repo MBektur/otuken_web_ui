@@ -50,9 +50,6 @@ export function Header({ categories, active }: { categories: Category[]; active?
           loading="eager"
           decoding="async"
           fetchPriority="high"
-          onError={(e) => {
-            e.currentTarget.src = "https://orhunpolicycenter.com/uy/wp-content/uploads/2025/08/logo.Header-UY.png";
-          }}
         />
       </Link>
       <div className="masthead-motto"><span>Дунйаға Нәзәр,</span><span>Кәлгүсигә Тәпәккур.</span><small dir="ltr">INDEPENDENT THOUGHT. GLOBAL PERSPECTIVE.</small></div>
