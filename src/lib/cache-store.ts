@@ -10,6 +10,14 @@ export type CacheSnapshot = {
   posts: WPPost[];
 };
 
+export function sortPostsByDateDesc(posts: WPPost[]): WPPost[] {
+  return [...posts].sort((a, b) => {
+    const timeA = a.date ? new Date(a.date).getTime() : 0;
+    const timeB = b.date ? new Date(b.date).getTime() : 0;
+    return timeB - timeA;
+  });
+}
+
 // In-memory mutable store initialized from the bundled snapshot
 let currentCache: CacheSnapshot = {
   syncedAt: initialData.syncedAt || new Date().toISOString(),
@@ -17,7 +25,7 @@ let currentCache: CacheSnapshot = {
   totalPosts: initialData.totalPosts || (initialData.posts?.length ?? 0),
   categories: (initialData.categories || []) as unknown as Category[],
   pages: (initialData.pages || []) as unknown as WPPage[],
-  posts: (initialData.posts || []) as unknown as WPPost[],
+  posts: sortPostsByDateDesc((initialData.posts || []) as unknown as WPPost[]),
 };
 
 export function getLocalSnapshot(): CacheSnapshot {
@@ -25,9 +33,12 @@ export function getLocalSnapshot(): CacheSnapshot {
 }
 
 export function updateLocalSnapshot(updated: Partial<CacheSnapshot>) {
+  const mergedPosts = updated.posts ? sortPostsByDateDesc(updated.posts) : currentCache.posts;
   currentCache = {
     ...currentCache,
     ...updated,
+    posts: mergedPosts,
+    totalPosts: updated.totalPosts ?? mergedPosts.length,
     syncedAt: new Date().toISOString(),
   };
 }

@@ -1,7 +1,15 @@
 import he from "he";
 import sanitizeHtml from "sanitize-html";
 
-export const WORDPRESS_URL = (process.env.WORDPRESS_URL || "https://orhunpolicycenter.com/uy").replace(/\/$/, "");
+function getWordpressUrl(): string {
+  let url = (process.env.WORDPRESS_URL || "https://orhunpolicycenter.com/uy").trim().replace(/\/$/, "");
+  if (url.includes("orhunpolicycenter.com") && !url.endsWith("/uy")) {
+    url = `${url}/uy`;
+  }
+  return url;
+}
+
+export const WORDPRESS_URL = getWordpressUrl();
 export const SOURCE_ORIGIN = new URL(WORDPRESS_URL).origin;
 export const SOURCE_PATH = new URL(WORDPRESS_URL).pathname.replace(/\/$/, "");
 

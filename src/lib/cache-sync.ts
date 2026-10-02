@@ -1,4 +1,4 @@
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { WORDPRESS_URL, localPath, plainText } from "./content";
 import { clearMemoryCache } from "./wordpress";
 import { getLocalSnapshot, updateLocalSnapshot } from "./cache-store";
@@ -53,9 +53,18 @@ export async function fetchLatestWordPressStatus(): Promise<SyncStatus> {
 
 export async function revalidateAllPages() {
   clearMemoryCache();
+  try {
+    revalidateTag("posts", "max");
+    revalidateTag("categories", "max");
+    revalidateTag("pages", "max");
+  } catch {}
+
   revalidatePath("/uy", "layout");
   revalidatePath("/uy");
+  revalidatePath("/ug", "layout");
+  revalidatePath("/ug");
   revalidatePath("/uy/podcasts");
+  revalidatePath("/ug/podcasts");
 
   return {
     ok: true,
@@ -67,6 +76,10 @@ export async function revalidateAllPages() {
 
 export async function revalidateSpecificUrl(inputUrlOrSlug: string) {
   clearMemoryCache();
+  try {
+    revalidateTag("posts", "max");
+  } catch {}
+
   let path = inputUrlOrSlug.trim();
 
   // If full URL was provided
@@ -80,7 +93,9 @@ export async function revalidateSpecificUrl(inputUrlOrSlug: string) {
 
   revalidatePath(path);
   revalidatePath("/uy");
+  revalidatePath("/ug");
   revalidatePath("/uy/podcasts");
+  revalidatePath("/ug/podcasts");
 
   return {
     ok: true,
@@ -93,6 +108,10 @@ export async function revalidateSpecificUrl(inputUrlOrSlug: string) {
 
 export async function autoSyncModifiedPosts() {
   clearMemoryCache();
+  try {
+    revalidateTag("posts", "max");
+  } catch {}
+
   const status = await fetchLatestWordPressStatus();
 
   // Revalidate most recently modified posts for both Uy and Ug
@@ -154,6 +173,9 @@ export async function autoSyncModifiedPosts() {
 
 export async function preWarmSite(limit = 100, baseUrl?: string) {
   clearMemoryCache();
+  try {
+    revalidateTag("posts", "max");
+  } catch {}
 
   // 1. Fetch all posts from WordPress across pages if needed
   let allPosts: any[] = [];

@@ -53,6 +53,7 @@ import {
   getLocalPosts,
   getLocalPodcasts,
   getLocalSnapshot,
+  updateLocalSnapshot,
   safeDecode,
 } from "./cache-store";
 import { toUyghurArabic } from "./i18n";
@@ -65,11 +66,27 @@ export async function getPosts(options: {
   exclude?: number[];
   withContent?: boolean;
 } = {}): Promise<PostList> {
-  const local = getLocalPosts(options);
-  if (local && (local.data.length > 0 || !options.search)) {
-    return local;
+  const isSearch = Boolean(options.search?.trim());
+  const isPage1 = !options.page || options.page === 1;
+
+  // 1. For searches, query fast local multi-script index first
+  if (isSearch) {
+    const local = getLocalPosts(options);
+    if (local && local.data.length > 0) {
+      return local;
+    }
   }
 
+  // 2. For deep pagination without search, serve from local snapshot for instant browsing
+  if (!isPage1 && !isSearch) {
+    const local = getLocalPosts(options);
+    if (local && local.data.length > 0) {
+      return local;
+    }
+  }
+
+  // 3. For page 1 (homepage, category, recent rail) or when local has no items:
+  // Fetch from WordPress API with Next.js ISR tag-based cache (60s TTL)
   const fields = options.withContent
     ? "id,date,modified,slug,link,title,content,excerpt,categories,_links,_embedded"
     : "id,date,modified,slug,link,title,excerpt,categories,_links,_embedded";
@@ -90,24 +107,71 @@ export async function getPosts(options: {
   const key = JSON.stringify(params);
   const cached = postLists.get(key);
   if (cached && cached.expires > Date.now()) return cached.result;
-  const revalidate = options.search ? 120 : 300;
-  const result = request<WPPost[]>("posts", params, revalidate).then(list => ({
-    ...list,
-    data: list.data.map(post => {
-      const ytId = post.content?.rendered ? extractYoutubeId(post.content.rendered) : undefined;
+
+  const revalidate = isSearch ? 120 : 60;
+  const result: Promise<PostList> = request<WPPost[]>("posts", params, revalidate)
+    .then(list => {
+      const mappedData = list.data.map(post => {
+        const ytId = post.content?.rendered ? extractYoutubeId(post.content.rendered) : undefined;
+        return {
+          ...post,
+          previewImage: postImage(post) || (ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : undefined),
+          readMinutes: readingMinutes(post),
+          youtubeId: ytId,
+          content: { rendered: "" },
+        };
+      });
+
+      // Synchronize in-memory snapshot with newly seen posts so that related/search also see them
+      try {
+        const current = getLocalSnapshot();
+        const merged = [...current.posts];
+        let hasNew = false;
+        for (const p of mappedData) {
+          const idx = merged.findIndex(existing => existing.id === p.id);
+          if (idx >= 0) {
+            merged[idx] = { ...merged[idx], ...p };
+          } else {
+            merged.unshift(p);
+            hasNew = true;
+          }
+        }
+        if (hasNew || list.total > current.totalPosts) {
+          updateLocalSnapshot({
+            posts: merged,
+            totalPosts: Math.max(list.total, merged.length),
+            latestModified: mappedData[0]?.modified || current.latestModified,
+          });
+        }
+      } catch {
+        // Non-blocking
+      }
+
       return {
-        ...post,
-        previewImage: postImage(post) || (ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : undefined),
-        readMinutes: readingMinutes(post),
-        youtubeId: ytId,
-        content: { rendered: "" },
+        data: mappedData,
+        total: list.total,
+        totalPages: list.totalPages,
       };
-    }),
-  }));
+    })
+    .catch(error => {
+      // Graceful fallback to local cache if WordPress API fails or times out
+      const local = getLocalPosts(options);
+      if (local && (local.data.length > 0 || !options.search)) {
+        return local;
+      }
+      throw error;
+    });
+
   if (postLists.size >= 100) postLists.delete(postLists.keys().next().value!);
   postLists.set(key, { expires: Date.now() + (revalidate * 1000), result });
-  try { return await result; }
-  catch (error) { if (postLists.get(key)?.result === result) postLists.delete(key); throw error; }
+  try {
+    return await result;
+  } catch (error) {
+    if (postLists.get(key)?.result === result) postLists.delete(key);
+    const fallback = getLocalPosts(options);
+    if (fallback) return fallback;
+    throw error;
+  }
 }
 
 export async function getPostBySlug(slug: string): Promise<WPPost | undefined> {
