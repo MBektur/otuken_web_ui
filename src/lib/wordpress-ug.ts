@@ -76,6 +76,7 @@ export type { WPPost, WPPage, Category } from "./wordpress";
 export { toCachedImageUrl } from "./wordpress";
 
 import { getPodcastPosts, getSmartRelatedPosts } from "./wordpress";
+import { getPodcastPostsAsWP } from "./podcast-store";
 import { localPath as origLocalPath } from "./content";
 
 export function localPath(link: string): string {
@@ -83,6 +84,9 @@ export function localPath(link: string): string {
 }
 
 export async function getPodcastPostsUg() {
+  const curated = getPodcastPostsAsWP("ug");
+  if (curated && curated.length > 0) return curated;
+
   const posts = await getPodcastPosts();
   return posts.map(p => transPost(p, false));
 }

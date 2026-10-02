@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export async function GET() {
-  redirect("/uy/admin/cache");
+  redirect("/uy/admin/settings");
 }

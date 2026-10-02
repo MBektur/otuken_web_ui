@@ -56,6 +56,7 @@ import {
   updateLocalSnapshot,
   safeDecode,
 } from "./cache-store";
+import { getPodcastPostsAsWP } from "./podcast-store";
 import { toUyghurArabic } from "./i18n";
 
 export async function getPosts(options: {
@@ -224,6 +225,9 @@ export async function getPostBySlug(slug: string): Promise<WPPost | undefined> {
 }
 
 export async function getPodcastPosts(): Promise<WPPost[]> {
+  const curated = getPodcastPostsAsWP("uy");
+  if (curated && curated.length > 0) return curated;
+
   const local = getLocalPodcasts();
   if (local && local.length > 0) return local;
 

@@ -208,6 +208,24 @@ export function CacheManager() {
 
   return (
     <div className="cache-admin-container">
+      {/* Top Admin Navigation Tabs */}
+      <nav className="admin-nav-tabs" aria-label="Admin Navigation">
+        <Link
+          href="/ug/admin/settings"
+          className="admin-tab-btn"
+        >
+          <Volume2 size={16} />
+          <span>Podkast we Video Tengshekliri</span>
+        </Link>
+        <Link
+          href="/ug/admin/cache"
+          className="admin-tab-btn active"
+        >
+          <Zap size={16} />
+          <span>Tez Khatire we Masqedemlesh</span>
+        </Link>
+      </nav>
+
       {/* Top Banner */}
       <header className="cache-admin-header">
         <div className="cache-admin-title">

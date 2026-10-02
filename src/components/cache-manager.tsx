@@ -208,6 +208,24 @@ export function CacheManager() {
 
   return (
     <div className="cache-admin-container">
+      {/* Top Admin Navigation Tabs */}
+      <nav className="admin-nav-tabs" aria-label="Admin Navigation">
+        <Link
+          href="/uy/admin/settings"
+          className="admin-tab-btn"
+        >
+          <Volume2 size={16} />
+          <span>پودكاست ۋە سىن تەڭشەكلىرى</span>
+        </Link>
+        <Link
+          href="/uy/admin/cache"
+          className="admin-tab-btn active"
+        >
+          <Zap size={16} />
+          <span>تېز ساقلىغۇچ ۋە ماسقەدەملەش</span>
+        </Link>
+      </nav>
+
       {/* Top Banner */}
       <header className="cache-admin-header">
         <div className="cache-admin-title">

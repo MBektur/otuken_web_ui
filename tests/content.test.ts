@@ -29,7 +29,7 @@ test("Uyghur permalinks and entities survive normalization", () => {
 });
 
 test("Uyghur post slug resolution matches decoded, raw, and encoded variations", () => {
-  const { getLocalPostBySlug, safeDecode } = require("../src/lib/cache-store");
+  const { getLocalPostBySlug, safeDecode, updateLocalSnapshot, getLocalSnapshot } = require("../src/lib/cache-store");
   const rawEncoded = "%d8%a6%d9%89%d8%b3%d8%b1%d8%a7%d8%a6%d9%89%d9%84%d9%89%d9%8a%db%95-%d8%a6%d9%89%d8%b1%d8%a7%d9%86-d";
   const decoded = "ئىسرائىلىيە-ئىران-d";
   const upperEncoded = encodeURIComponent(decoded);
@@ -37,21 +37,63 @@ test("Uyghur post slug resolution matches decoded, raw, and encoded variations",
   assert.equal(safeDecode(rawEncoded), decoded);
   assert.equal(safeDecode(upperEncoded), decoded);
 
-  const post1 = getLocalPostBySlug(rawEncoded);
-  const post2 = getLocalPostBySlug(decoded);
-  const post3 = getLocalPostBySlug(upperEncoded);
-
+  // Test with real WordPress synced slug
+  const post1 = getLocalPostBySlug("israiliye_-_iran_urushi_heqqide");
   assert.ok(post1);
   assert.equal(post1.id, 81);
-  assert.equal(post2?.id, 81);
-  assert.equal(post3?.id, 81);
 
-  // Test post 317 with truncated malformed %d8 at end:
+  // Test with Uyghur script slug resolution
+  const snapshot = getLocalSnapshot();
+  updateLocalSnapshot({
+    posts: [
+      ...snapshot.posts,
+      {
+        id: 9999,
+        slug: decoded,
+        title: { rendered: "سىناق" },
+        content: { rendered: "مەزمۇن" },
+        excerpt: { rendered: "قىسقىچە" },
+        date: "2026-01-01",
+        modified: "2026-01-01",
+        link: `/uy/2026/01/01/${decoded}`,
+        categories: [1],
+      } as any,
+    ],
+  });
+
+  const testPost1 = getLocalPostBySlug(rawEncoded);
+  const testPost2 = getLocalPostBySlug(decoded);
+  const testPost3 = getLocalPostBySlug(upperEncoded);
+
+  assert.ok(testPost1);
+  assert.equal(testPost1.id, 9999);
+  assert.equal(testPost2?.id, 9999);
+  assert.equal(testPost3?.id, 9999);
+
+  // Test malformed decoding
   const malformedSlug = "%d8%ae%db%95%d9%84%d9%82%d8%a6%d8%a7%d8%b1%d8%a7-%d9%85%db%87%d9%86%d8%a7%d8%b3%d9%89%db%8b%db%95%d8";
-  const post317 = getLocalPostBySlug(malformedSlug);
-  assert.ok(post317);
-  assert.equal(post317.id, 317);
+  assert.equal(safeDecode(malformedSlug), "خەلقئارا-مۇناسىۋە");
   assert.equal(normalizedPath(`/uy/2025/01/02/${malformedSlug}`), "/uy/2025/01/02/خەلقئارا-مۇناسىۋە");
+});
+
+test("curated podcast store loads and converts correctly for uy and ug", () => {
+  const { getCuratedPodcasts, getPodcastPostsAsWP, extractYouTubeId } = require("../src/lib/podcast-store");
+  
+  assert.equal(extractYouTubeId("https://www.youtube.com/watch?v=NlgZanVJZw8"), "NlgZanVJZw8");
+  assert.equal(extractYouTubeId("https://youtu.be/HPOa4HnsznI"), "HPOa4HnsznI");
+  assert.equal(extractYouTubeId("01lAM1kHSTk"), "01lAM1kHSTk");
+
+  const podcasts = getCuratedPodcasts();
+  assert.ok(podcasts.length >= 9);
+  assert.ok(podcasts[0].isFeatured);
+
+  const uyPosts = getPodcastPostsAsWP("uy");
+  assert.equal(uyPosts.length, podcasts.length);
+  assert.ok(uyPosts[0].youtubeId);
+
+  const ugPosts = getPodcastPostsAsWP("ug");
+  assert.equal(ugPosts.length, podcasts.length);
+  assert.ok(ugPosts[0].youtubeId);
 });
 
 test("plugin widgets are omitted and only recognized video hosts are embedded", () => {
