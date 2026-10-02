@@ -49,27 +49,27 @@ export function Header({ categories, active }: { categories: Category[]; active?
     </header>
     <div className="navigation-wrap"><div className="site-width navigation-inner">
       <nav aria-label="Баш Тизимлик">
-        <Link href="/ug" className={!active ? "active" : ""}>
+        <Link href="/ug" prefetch={true} className={!active ? "active" : ""}>
           <Home size={15} className="nav-icon" aria-hidden="true" />
           <span>Башбәт</span>
         </Link>
         {analysis && (
-          <Link href={localPath(analysis.link)} className={active === analysis.id ? "active" : ""}>
+          <Link href={localPath(analysis.link)} prefetch={true} className={active === analysis.id ? "active" : ""}>
             <TrendingUp size={15} className="nav-icon" aria-hidden="true" />
             <span>{analysis.name}</span>
           </Link>
         )}
-        <Link href="/ug/podcasts" className={`nav-podcast-item ${active === "podcasts" ? "active" : ""}`}>
+        <Link href="/ug/podcasts" prefetch={true} className={`nav-podcast-item ${active === "podcasts" ? "active" : ""}`}>
           <Headphones size={15} className="nav-icon" aria-hidden="true" />
           <span>Подкастлар</span>
         </Link>
         {otherCats.map(c => (
-          <Link key={c.id} href={localPath(c.link)} className={active === c.id ? "active" : ""}>
+          <Link key={c.id} href={localPath(c.link)} prefetch={true} className={active === c.id ? "active" : ""}>
             {getCategoryNavIcon(c.id, c.slug)}
             <span>{c.name}</span>
           </Link>
         ))}
-        <Link href="/ug#regions">
+        <Link href="/ug#regions" prefetch={true}>
           <Compass size={15} className="nav-icon" aria-hidden="true" />
           <span>Районлар</span>
         </Link>

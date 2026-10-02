@@ -26,17 +26,17 @@ export async function generateStaticParams() {
     const paramsList: { path: string[] }[] = [];
 
     for (const c of categories) {
-      const p = localPath(c.link).replace(/^\/uy\/?/, "").split("/").filter(Boolean);
+      const p = localPath(c.link).replace(/^\/(?:ug|uy)\/?/, "").split("/").filter(Boolean);
       if (p.length) paramsList.push({ path: p });
     }
 
     for (const page of pages) {
-      const p = localPath(page.link).replace(/^\/uy\/?/, "").split("/").filter(Boolean);
+      const p = localPath(page.link).replace(/^\/(?:ug|uy)\/?/, "").split("/").filter(Boolean);
       if (p.length) paramsList.push({ path: p });
     }
 
     for (const post of posts.data) {
-      const p = localPath(post.link).replace(/^\/uy\/?/, "").split("/").filter(Boolean);
+      const p = localPath(post.link).replace(/^\/(?:ug|uy)\/?/, "").split("/").filter(Boolean);
       if (p.length) paramsList.push({ path: p });
     }
 
