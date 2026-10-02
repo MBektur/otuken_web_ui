@@ -83,7 +83,7 @@ export function Header({ categories, active }: { categories: Category[]; active?
 
 export function SearchForm({ compact = false, value }: { compact?: boolean; value?: string }) {
   return <form action="/uy" className={`search-form ${compact ? "compact" : ""}`} role="search">
-    <Search size={17} aria-hidden="true" /><input name="q" defaultValue={value} placeholder="يازما، تېما ياكى رايون ئىزدەڭ..." aria-label="ئىزدەش" maxLength={200} /><button type="submit" aria-label="ئىزدەش"><ArrowUpLeft size={17} /></button>
+    <Search size={17} aria-hidden="true" /><input name="q" key={value || "empty"} defaultValue={value} placeholder="يازما، تېما ياكى رايون ئىزدەڭ..." aria-label="ئىزدەش" maxLength={200} /><button type="submit" aria-label="ئىزدەش"><ArrowUpLeft size={17} /></button>
   </form>;
 }
 

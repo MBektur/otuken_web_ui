@@ -40,9 +40,48 @@ export function getLocalPages(): WPPage[] {
   return currentCache.pages;
 }
 
-import { robustDecode } from "./content";
+import { robustDecode, plainText } from "./content";
+import { getScriptVariants, toUyghurCyrillic, toUyghurLatin } from "./i18n";
 
 export const safeDecode = robustDecode;
+
+interface PostSearchIndex {
+  titleArab: string;
+  excerptArab: string;
+  titleCyr: string;
+  excerptCyr: string;
+  titleLat: string;
+  excerptLat: string;
+}
+
+const postSearchMap = new WeakMap<WPPost, PostSearchIndex>();
+
+function getPostSearchIndex(p: WPPost): PostSearchIndex {
+  let idx = postSearchMap.get(p);
+  if (!idx) {
+    const cleanTitle = p.title?.rendered ? plainText(p.title.rendered).toLowerCase() : "";
+    const cleanExcerpt = p.excerpt?.rendered ? plainText(p.excerpt.rendered).toLowerCase() : "";
+    let titleCyr = "";
+    let excerptCyr = "";
+    let titleLat = "";
+    let excerptLat = "";
+    try { titleCyr = toUyghurCyrillic(cleanTitle).toLowerCase(); } catch {}
+    try { excerptCyr = toUyghurCyrillic(cleanExcerpt).toLowerCase(); } catch {}
+    try { titleLat = toUyghurLatin(cleanTitle).toLowerCase(); } catch {}
+    try { excerptLat = toUyghurLatin(cleanExcerpt).toLowerCase(); } catch {}
+
+    idx = {
+      titleArab: cleanTitle,
+      excerptArab: cleanExcerpt,
+      titleCyr,
+      excerptCyr,
+      titleLat,
+      excerptLat,
+    };
+    postSearchMap.set(p, idx);
+  }
+  return idx;
+}
 
 export function getLocalPostBySlug(slug: string): WPPost | undefined {
   if (!slug) return undefined;
@@ -69,12 +108,47 @@ export function getLocalPosts(options: {
   }
 
   if (options.search) {
-    const q = options.search.toLowerCase().trim();
-    list = list.filter(p => {
-      const title = p.title?.rendered ? p.title.rendered.toLowerCase() : "";
-      const excerpt = p.excerpt?.rendered ? p.excerpt.rendered.toLowerCase() : "";
-      return title.includes(q) || excerpt.includes(q);
-    });
+    const rawSearch = safeDecode(options.search).trim();
+    if (rawSearch) {
+      const tokens = rawSearch.split(/\s+/).filter(Boolean);
+      const tokenVariants = tokens.map(getScriptVariants);
+      const phraseVariants = getScriptVariants(rawSearch);
+
+      list = list.filter(p => {
+        const idx = getPostSearchIndex(p);
+
+        // 1. Check full phrase match across any script
+        for (const pv of phraseVariants) {
+          if (
+            idx.titleArab.includes(pv) ||
+            idx.excerptArab.includes(pv) ||
+            idx.titleCyr.includes(pv) ||
+            idx.excerptCyr.includes(pv) ||
+            idx.titleLat.includes(pv) ||
+            idx.excerptLat.includes(pv)
+          ) {
+            return true;
+          }
+        }
+
+        // 2. Multi-token: check all words match across any script
+        if (tokens.length > 1) {
+          const allTokensMatch = tokenVariants.every(variants => {
+            return variants.some(v =>
+              idx.titleArab.includes(v) ||
+              idx.excerptArab.includes(v) ||
+              idx.titleCyr.includes(v) ||
+              idx.excerptCyr.includes(v) ||
+              idx.titleLat.includes(v) ||
+              idx.excerptLat.includes(v)
+            );
+          });
+          if (allTokensMatch) return true;
+        }
+
+        return false;
+      });
+    }
   }
 
   if (options.exclude?.length) {

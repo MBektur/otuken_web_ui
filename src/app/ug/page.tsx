@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getCategoriesUg, getPostsUg, postCategory, WordPressError, localPath } from "@/lib/wordpress-ug";
-import { plainText } from "@/lib/content";
+import { plainText, robustDecode } from "@/lib/content";
 import { Header, Footer, SearchForm } from "@/components-ug/shell";
 import { Hero, LatestRail, RegionRail, PostCard, SectionTitle, Pagination, PostPhoto } from "@/components-ug/editorial";
 
@@ -10,15 +10,23 @@ export const revalidate = 300;
 type Props = { searchParams: Promise<{ q?: string; page?: string }> };
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const { q, page } = await searchParams;
+  const decoded = q ? robustDecode(q).slice(0, 200).trim() : undefined;
+  const query = decoded !== undefined && decoded !== "" ? decoded : undefined;
   const browsing = q !== undefined || !!page;
-  return { title: q ? `Издәш: ${q.slice(0, 200)}` : "Башбәт", alternates: browsing ? undefined : { canonical: "/ug" }, robots: browsing ? { index: false, follow: true } : undefined };
+  return {
+    title: query ? `Издәш: ${query}` : (page ? "Барлиқ Йазмиلار" : "Башбәт"),
+    alternates: browsing ? undefined : { canonical: "/ug" },
+    robots: browsing ? { index: false, follow: true } : undefined,
+  };
 }
 
 export default async function Home({ searchParams }: Props) {
   const params = await searchParams;
-  const query = params.q?.slice(0, 200);
+  const rawQ = params.q;
+  const decoded = rawQ ? robustDecode(rawQ).slice(0, 200).trim() : undefined;
+  const query = decoded !== undefined && decoded !== "" ? decoded : undefined;
   const page = Math.max(1, Math.min(1000, Number.parseInt(params.page || "1", 10) || 1));
-  const listing = query !== undefined || page > 1;
+  const listing = rawQ !== undefined || page > 1;
   const [categories, result, books] = await Promise.all([
     getCategoriesUg(),
     getPostsUg({ page, perPage: 12, search: query }).catch((error: any) => { if (error instanceof WordPressError && error.status === 400 && page > 1) return { data: [], total: 0, totalPages: 0 }; throw error; }),

@@ -81,7 +81,7 @@ export function Header({ categories, active }: { categories: Category[]; active?
 
 export function SearchForm({ compact = false, value }: { compact?: boolean; value?: string }) {
   return <form action="/ug" className={`search-form ${compact ? "compact" : ""}`} role="search">
-    <Search size={17} aria-hidden="true" /><input name="q" defaultValue={value} placeholder="Йазма, Тема Йаки Район Издәң..." aria-label="Издәш" maxLength={200} /><button type="submit" aria-label="Издәш"><ArrowUpRight size={17} /></button>
+    <Search size={17} aria-hidden="true" /><input name="q" key={value || "empty"} defaultValue={value} placeholder="Йазма, Тема Йаки Район Издәң..." aria-label="Издәш" maxLength={200} /><button type="submit" aria-label="Издәш"><ArrowUpRight size={17} /></button>
   </form>;
 }
 

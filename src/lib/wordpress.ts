@@ -53,7 +53,9 @@ import {
   getLocalPosts,
   getLocalPodcasts,
   getLocalSnapshot,
+  safeDecode,
 } from "./cache-store";
+import { toUyghurArabic } from "./i18n";
 
 export async function getPosts(options: {
   page?: number;
@@ -80,7 +82,10 @@ export async function getPosts(options: {
     order: "desc",
   };
   if (options.category) params.categories = options.category;
-  if (options.search) params.search = options.search;
+  if (options.search) {
+    const rawSearch = safeDecode(options.search).trim();
+    params.search = toUyghurArabic(rawSearch);
+  }
   if (options.exclude?.length) params.exclude = options.exclude.join(",");
   const key = JSON.stringify(params);
   const cached = postLists.get(key);
