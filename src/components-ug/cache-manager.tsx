@@ -51,7 +51,7 @@ export function CacheManager() {
   const [logs, setLogs] = useState<LogEntry[]>([
     {
       id: "init",
-      time: new Date().toLocaleTimeString(),
+      time: "--:--:--",
       text: "Башқуруш Системиси Тәййарланди. Мәхпий Ачқуч Билән Улансиңиз Болиду.",
       type: "info",
     },
@@ -67,8 +67,21 @@ export function CacheManager() {
     setLogs(prev => [entry, ...prev.slice(0, 40)]);
   }
 
+  const [origin, setOrigin] = useState("https://otuken-policy-center.vercel.app");
+
   // Check stored secret on mount
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      setOrigin(window.location.origin);
+      setLogs([
+        {
+          id: "init",
+          time: new Date().toLocaleTimeString(),
+          text: "Башқуруш Системиси Тәййарланди. Мәхпий Ачқуч Билән Улансиңиз Болиду.",
+          type: "info",
+        },
+      ]);
+    }
     const saved = sessionStorage.getItem("otuken_cache_secret");
     if (saved) {
       setSecret(saved);
@@ -184,9 +197,7 @@ export function CacheManager() {
     }
   }
 
-  const webhookUrl = typeof window !== "undefined"
-    ? `${window.location.origin}/api/revalidate?secret=${secret}`
-    : `https://otuken-policy-center.vercel.app/api/revalidate?secret=${secret}`;
+  const webhookUrl = `${origin}/api/revalidate?secret=${secret}`;
 
   function copyWebhook() {
     navigator.clipboard.writeText(webhookUrl);
@@ -408,7 +419,7 @@ export function CacheManager() {
           </p>
 
           <div className="webhook-copy-box">
-            <code dir="ltr">{webhookUrl}</code>
+            <code dir="ltr" suppressHydrationWarning>{webhookUrl}</code>
             <button type="button" onClick={copyWebhook} className="btn-copy">
               {copied ? <Check size={16} /> : <Copy size={16} />}
               {copied ? "Көчүрүлди" : "Көчүрүш"}
