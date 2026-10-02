@@ -11,6 +11,7 @@ import {
   Compass,
   Bookmark,
   Languages,
+  Facebook,
 } from "lucide-react";
 import { Category } from "@/lib/wordpress";
 import { localPath } from "@/lib/content";
@@ -38,7 +39,21 @@ export function Header({ categories, active }: { categories: Category[]; active?
   const otherCats = [22, 14, 21].map(id => categories.find(c => c.id === id)).filter((c): c is Category => !!c);
   return <>
     <div className="utility-bar" dir="rtl"><div className="site-width utility-inner" dir="rtl">
-      <span>تەتقىقات · ئانالىز · يېڭى نەزەر</span>
+      <div className="utility-left">
+        <span>تەتقىقات · ئانالىز · يېڭى نەزەر</span>
+        <span className="utility-divider">|</span>
+        <a
+          href="https://www.facebook.com/profile.php?id=100081744912628"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="topbar-social-link"
+          aria-label="Facebook"
+          title="ئۆتۈكەن سىياسەت تەتقىقات مەركىزى Facebook سەھىپىسى"
+        >
+          <Facebook size={13} aria-hidden="true" />
+          <span>Facebook</span>
+        </a>
+      </div>
       <LanguageSwitcher currentLocale="uy" />
     </div></div>
     <header className="site-width masthead">
@@ -114,6 +129,17 @@ export function Footer() {
           <Link href="/uy/ھەققىمىزدە/">ھەققىمىزدە</Link>
           <Link href="/uy/biz-bilen-alaqilid/">ئالاقىلىشىڭ</Link>
           <Link href="/uy/teklip-pikir/">تەكلىپ-پىكىر</Link>
+          <a
+            href="https://www.facebook.com/profile.php?id=100081744912628"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-social-link"
+            title="Facebook"
+            aria-label="Facebook"
+          >
+            <Facebook size={14} aria-hidden="true" />
+            <span>Facebook</span>
+          </a>
         </nav>
         <small>© {new Date().getFullYear()} ئۆتۈكەن سىياسەت تەتقىقات مەركىزى</small>
       </div>

@@ -11,6 +11,7 @@ import {
   Compass,
   Bookmark,
   Languages,
+  Facebook,
 } from "lucide-react";
 import { Category, localPath } from "@/lib/wordpress-ug";
 import { LanguageSwitcher } from "@/components/language-switcher";
@@ -36,7 +37,21 @@ export function Header({ categories, active }: { categories: Category[]; active?
   const otherCats = [22, 14, 21].map(id => categories.find(c => c.id === id)).filter((c): c is Category => !!c);
   return <>
     <div className="utility-bar" dir="rtl"><div className="site-width utility-inner" dir="rtl">
-      <span>йеңи нәзәр</span>
+      <div className="utility-left">
+        <span>Тәтқиқات · Анализ · Йеңи Нәзәр</span>
+        <span className="utility-divider">|</span>
+        <a
+          href="https://www.facebook.com/profile.php?id=100081744912628"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="topbar-social-link"
+          aria-label="Facebook"
+          title="Facebook"
+        >
+          <Facebook size={13} aria-hidden="true" />
+          <span>Facebook</span>
+        </a>
+      </div>
       <LanguageSwitcher currentLocale="ug" />
     </div></div>
     <header className="site-width masthead">
@@ -110,8 +125,19 @@ export function Footer() {
         <nav aria-label="Асти Тизимлик">
           <Link href="/ug/podcasts">Подкастлар</Link>
           <Link href="/ug/Һәққимиздә/">Һәққимиздә</Link>
-          <Link href="/ug/biz-bilen-alaqilid/">Алақилишиң</Link>
+          <Link href="/ug/biz-bilen-alaqilid/">Аلاقىلىشىڭ</Link>
           <Link href="/ug/teklip-pikir/">Тәклип-Пикир</Link>
+          <a
+            href="https://www.facebook.com/profile.php?id=100081744912628"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-social-link"
+            title="Facebook"
+            aria-label="Facebook"
+          >
+            <Facebook size={14} aria-hidden="true" />
+            <span>Facebook</span>
+          </a>
         </nav>
         <small>© {new Date().getFullYear()} Өтүкән Сийасәт Тәтқиқат Мәркизи</small>
       </div>
