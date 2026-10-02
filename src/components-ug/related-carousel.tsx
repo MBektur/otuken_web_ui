@@ -39,9 +39,12 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
     const firstRect = cards[0].getBoundingClientRect();
     const lastRect = cards[cards.length - 1].getBoundingClientRect();
 
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    const currentScroll = el.scrollLeft;
+
     // In LTR, start is on the left, end is on the right
-    const atStart = firstRect.left >= trackRect.left - 12;
-    const atEnd = lastRect.right <= trackRect.right + 12;
+    const atStart = currentScroll <= 6 || firstRect.left >= trackRect.left - 12;
+    const atEnd = maxScroll <= 0 || currentScroll >= maxScroll - 6 || lastRect.right <= trackRect.right + 12;
 
     setCanPrev(!atStart);
     setCanNext(!atEnd);
@@ -72,8 +75,6 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
     } else if (atEnd) {
       setCurrentPage(pages);
     } else {
-      const maxScroll = el.scrollWidth - el.clientWidth;
-      const currentScroll = el.scrollLeft;
       const progress = maxScroll > 0 ? Math.min(1, Math.max(0, currentScroll / maxScroll)) : 0;
       const pageIndex = 1 + Math.round(progress * (pages - 1));
       setCurrentPage(Math.min(pages, Math.max(1, pageIndex)));

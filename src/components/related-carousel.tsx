@@ -39,9 +39,15 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
     const firstRect = cards[0].getBoundingClientRect();
     const lastRect = cards[cards.length - 1].getBoundingClientRect();
 
-    // In RTL, the start is at the right edge, the end is at the left edge
-    const atStart = firstRect.right >= trackRect.right - 12;
-    const atEnd = lastRect.left >= trackRect.left - 12;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    const currentScroll = Math.abs(el.scrollLeft);
+
+    // In RTL, start is on the right edge, end is on the left edge
+    // At start: Card 0 is aligned with the right edge (firstRect.right <= trackRect.right + 12).
+    // As we scroll towards the end, Card 0 moves to the right (firstRect.right increases).
+    // At end: The last card is aligned with the left edge (lastRect.left >= trackRect.left - 12).
+    const atStart = currentScroll <= 6 || firstRect.right <= trackRect.right + 12;
+    const atEnd = maxScroll <= 0 || currentScroll >= maxScroll - 6 || lastRect.left >= trackRect.left - 12;
 
     setCanPrev(!atStart);
     setCanNext(!atEnd);
@@ -72,8 +78,6 @@ export function RelatedCarousel({ posts }: { posts: WPPost[] }) {
     } else if (atEnd) {
       setCurrentPage(pages);
     } else {
-      const maxScroll = el.scrollWidth - el.clientWidth;
-      const currentScroll = Math.abs(el.scrollLeft);
       const progress = maxScroll > 0 ? Math.min(1, Math.max(0, currentScroll / maxScroll)) : 0;
       const pageIndex = 1 + Math.round(progress * (pages - 1));
       setCurrentPage(Math.min(pages, Math.max(1, pageIndex)));
