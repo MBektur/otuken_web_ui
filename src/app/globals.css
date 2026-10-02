@@ -232,9 +232,10 @@ html[dir="ltr"] .action-card-btn {
     text-align: left;
 }
 
-html[dir="ltr"] .scroll-controls {
-    inset-inline-start: auto;
-    inset-inline-start: 24px;
+html[dir="ltr"] .scroll-controls,
+body.ug-cyrl .scroll-controls {
+    left: auto;
+    right: 24px;
 }
 
 .masthead {
@@ -1837,7 +1838,8 @@ html[dir="ltr"] .scroll-controls {
 .scroll-controls {
     position: fixed;
     bottom: 28px;
-    inset-inline-start: 24px;
+    left: 24px;
+    right: auto;
     z-index: 95;
     display: flex;
     flex-direction: column;
@@ -3253,8 +3255,15 @@ html[dir="ltr"] .scroll-controls {
     }
 
     .scroll-controls {
-        inset-inline-start: 14px;
+        left: 14px;
+        right: auto;
         bottom: 18px;
+    }
+
+    html[dir="ltr"] .scroll-controls,
+    body.ug-cyrl .scroll-controls {
+        left: auto;
+        right: 14px;
     }
 
     .pagination {
