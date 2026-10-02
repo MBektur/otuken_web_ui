@@ -3,10 +3,26 @@ import { Suspense } from "react";
 import { NavigationProgress } from "@/components/navigation-progress";
 import "./globals.css";
 
+import { SITE_URL, DEFAULT_OG_IMAGE } from "@/lib/seo";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
+  metadataBase: new URL(SITE_URL),
   title: { default: "ئۆتۈكەن — سىياسەت تەتقىقات مەركىزى", template: "%s | ئۆتۈكەن" },
   description: "سىياسىي ئانالىز، خەلقئارا مۇناسىۋەتلەر، تەتقىقات ۋە كىتاپ تونۇشتۇرۇش.",
+  openGraph: {
+    siteName: "ئۆتۈكەن سىياسەت تەتقىقات مەركىزى | Ötüken Policy Center",
+    locale: "ug",
+    type: "website",
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "ئۆتۈكەن سىياسەت تەتقىقات مەركىزى" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [DEFAULT_OG_IMAGE],
+  },
+  icons: {
+    icon: "/logo.Header-UY.png",
+    apple: "/logo.Header-UY.png",
+  },
 };
 
 import { headers } from "next/headers";

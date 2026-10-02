@@ -169,9 +169,19 @@ export async function getPages(): Promise<WPPage[]> {
   catch (e) { pagesCache = null; throw e; }
 }
 
+function getWidthTier(w: number): number {
+  if (w <= 160) return 160;
+  if (w <= 320) return 320;
+  if (w <= 480) return 480;
+  if (w <= 640) return 640;
+  if (w <= 840) return 840;
+  if (w <= 1080) return 1080;
+  return 1200;
+}
+
 /**
  * Convert a remote image URL to an edge-cached proxy URL via /api/img.
- * Images are cached with public, max-age=31536000, immutable for 1 year.
+ * Images are resized to width tiers and compressed to WebP.
  */
 export function toCachedImageUrl(url?: string, w: number = 640, q: number = 75): string | undefined {
   if (!url) return undefined;
@@ -194,7 +204,9 @@ export function toCachedImageUrl(url?: string, w: number = 640, q: number = 75):
     url.includes("youtube.com") ||
     url.includes("ytimg.com")
   ) {
-    return `/api/img?url=${encodeURIComponent(url)}`;
+    const tier = getWidthTier(w);
+    const quality = Math.max(50, Math.min(90, q));
+    return `/api/img?url=${encodeURIComponent(url)}&w=${tier}&q=${quality}`;
   }
   return url;
 }

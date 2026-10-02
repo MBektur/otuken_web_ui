@@ -96,5 +96,27 @@ export function SearchForm({ compact = false, value }: { compact?: boolean; valu
 }
 
 export function Footer() {
-  return <footer className="footer"><div className="site-width footer-inner"><Link href="/uy" className="footer-brand">ئۆتۈكەن <span dir="ltr">POLICY CENTER</span></Link><nav aria-label="ئاستى تىزىملىك"><Link href="/uy/podcasts">پودكاستلار</Link><Link href="/uy/ھەققىمىزدە/">ھەققىمىزدە</Link><Link href="/uy/biz-bilen-alaqilid/">ئالاقىلىشىڭ</Link><Link href="/uy/teklip-pikir/">تەكلىپ-پىكىر</Link></nav><small>© {new Date().getFullYear()} ئۆتۈكەن سىياسەت تەتقىقات مەركىزى</small></div></footer>;
+  return (
+    <footer className="footer">
+      <div className="site-width footer-inner">
+        <Link href="/uy" className="footer-brand" aria-label="باشبەت">
+          <img
+            src="/logo.Header-UY.png"
+            alt="ئۆتۈكەن سىياسەت تەتقىقات مەركىزى"
+            className="footer-logo-img"
+            width={730}
+            height={141}
+            loading="lazy"
+          />
+        </Link>
+        <nav aria-label="ئاستى تىزىملىك">
+          <Link href="/uy/podcasts">پودكاستلار</Link>
+          <Link href="/uy/ھەققىمىزدە/">ھەققىمىزدە</Link>
+          <Link href="/uy/biz-bilen-alaqilid/">ئالاقىلىشىڭ</Link>
+          <Link href="/uy/teklip-pikir/">تەكلىپ-پىكىر</Link>
+        </nav>
+        <small>© {new Date().getFullYear()} ئۆتۈكەن سىياسەت تەتقىقات مەركىزى</small>
+      </div>
+    </footer>
+  );
 }

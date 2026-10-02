@@ -7,17 +7,27 @@ import { Hero, LatestRail, RegionRail, PostCard, SectionTitle, Pagination, PostP
 
 export const revalidate = 300;
 
+import { buildSeoMetadata } from "@/lib/seo";
+
 type Props = { searchParams: Promise<{ q?: string; page?: string }> };
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const { q, page } = await searchParams;
   const decoded = q ? robustDecode(q).slice(0, 200).trim() : undefined;
   const query = decoded !== undefined && decoded !== "" ? decoded : undefined;
   const browsing = q !== undefined || !!page;
-  return {
-    title: query ? `Издәш: ${query}` : (page ? "Барлиқ Йазмилар" : "Башбәт"),
-    alternates: browsing ? undefined : { canonical: "/ug" },
-    robots: browsing ? { index: false, follow: true } : undefined,
-  };
+  const title = query ? `Издәш: ${query}` : (page ? "Барлиқ Йазмилар" : "Башбәт — Дунйаға Нәзәр, Кәлгүсигә Тәпәккур");
+  const description = query
+    ? `«${query}» Һәққидики тәтқиқат, мақалә вә сийасий анализлар.`
+    : "Өтүкән Сийасәт Тәтқиқат Мәркизи — Мустәқил көз қараш, дунйаға нәзәр вә кәлгүсигә тәпәккур.";
+
+  return buildSeoMetadata({
+    title,
+    description,
+    path: "/ug",
+    locale: "ug",
+    type: "website",
+    noIndex: browsing,
+  });
 }
 
 export default async function Home({ searchParams }: Props) {

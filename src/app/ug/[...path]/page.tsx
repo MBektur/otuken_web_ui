@@ -95,17 +95,42 @@ const resolve = cache(async (pathKey: string) => {
   if (post) return { kind: "post" as const, categories, post };
 });
 
+import { buildSeoMetadata } from "@/lib/seo";
+
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { path } = await params;
   const data = await resolve(path.join("/"));
   if (!data) return { title: "Бәт Тепилмиди" };
   if (data.kind === "category") {
     const { page } = await searchParams;
-    return { title: data.category.name, alternates: { canonical: localPath(data.category.link) + (page && Number(page) > 1 ? `?page=${Number(page)}` : "") } };
+    const pageSuffix = page && Number(page) > 1 ? ` — ${page}-Бәт` : "";
+    const categoryTitle = `${data.category.name}${pageSuffix}`;
+    const categoryPath = localPath(data.category.link) + (page && Number(page) > 1 ? `?page=${Number(page)}` : "");
+    return buildSeoMetadata({
+      title: categoryTitle,
+      description: `«${data.category.name}» сәһиписидики барлиқ сийасий анализ, мақалә вә тәтқиқат йазмилири.`,
+      path: categoryPath,
+      locale: "ug",
+      type: "website",
+    });
   }
   const item = data.kind === "post" ? data.post : data.page;
   const title = plainText(item.title.rendered);
-  return { title, description: plainText(data.kind === "post" ? data.post.excerpt.rendered : item.content.rendered).slice(0, 170), alternates: { canonical: localPath(item.link) }, openGraph: { title, type: data.kind === "post" ? "article" : "website", images: data.kind === "post" && postImage(data.post) ? [postImage(data.post)!] : undefined } };
+  const description = plainText(data.kind === "post" ? data.post.excerpt.rendered : item.content.rendered).slice(0, 175);
+  const imgUrl = data.kind === "post" ? (postImage(data.post, 1200, 85) || null) : null;
+  const authors = data.kind === "post" && data.post._embedded?.author?.[0]?.name ? [data.post._embedded.author[0].name] : undefined;
+
+  return buildSeoMetadata({
+    title,
+    description,
+    path: localPath(item.link),
+    locale: "ug",
+    image: imgUrl,
+    type: data.kind === "post" ? "article" : "website",
+    publishedTime: data.kind === "post" ? data.post.date : undefined,
+    modifiedTime: data.kind === "post" ? data.post.modified : undefined,
+    authors,
+  });
 }
 
 async function ArticleSidebarStream({

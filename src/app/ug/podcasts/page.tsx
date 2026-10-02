@@ -7,11 +7,15 @@ import { ScrollControls } from "@/components-ug/scroll-controls";
 
 export const revalidate = 300;
 
-export const metadata: Metadata = {
+import { buildSeoMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildSeoMetadata({
   title: "Подкастлар — Син Вә Авазлиқ Анализлар",
   description: "Өтүкән Сийасәт Тәтқиқат Мәркизиниң Син, Подкаст Вә Сөһбәт Программилири.",
-  alternates: { canonical: "/ug/podcasts" },
-};
+  path: "/ug/podcasts",
+  locale: "ug",
+  type: "website",
+});
 
 export default async function PodcastsPage() {
   const [categories, podcasts] = await Promise.all([

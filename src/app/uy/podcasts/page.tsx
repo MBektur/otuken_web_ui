@@ -7,11 +7,15 @@ import { ScrollControls } from "@/components/scroll-controls";
 
 export const revalidate = 300;
 
-export const metadata: Metadata = {
+import { buildSeoMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildSeoMetadata({
   title: "پودكاستلار — سىن ۋە ئاۋازلىق ئانالىزلار",
   description: "ئۆتۈكەن سىياسەت تەتقىقات مەركىزىنىڭ سىن، پودكاست ۋە سۆھبەت پروگراممىلىرى.",
-  alternates: { canonical: "/uy/podcasts" },
-};
+  path: "/uy/podcasts",
+  locale: "uy",
+  type: "website",
+});
 
 export default async function PodcastsPage() {
   const [categories, podcasts] = await Promise.all([

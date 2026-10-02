@@ -94,5 +94,27 @@ export function SearchForm({ compact = false, value }: { compact?: boolean; valu
 }
 
 export function Footer() {
-  return <footer className="footer"><div className="site-width footer-inner"><Link href="/ug" className="footer-brand">Өтүкән <span dir="ltr">POLICY CENTER</span></Link><nav aria-label="Асти Тизимлик"><Link href="/ug/podcasts">Подкастлар</Link><Link href="/ug/Һәққимиздә/">Һәққимиздә</Link><Link href="/ug/biz-bilen-alaqilid/">Алақилишиң</Link><Link href="/ug/teklip-pikir/">Тәклип-Пикир</Link></nav><small>© {new Date().getFullYear()} Өтүкән Сийасәт Тәтқиқат Мәркизи</small></div></footer>;
+  return (
+    <footer className="footer">
+      <div className="site-width footer-inner">
+        <Link href="/ug" className="footer-brand" aria-label="Башбәт">
+          <img
+            src="/logo.Header-UY.png"
+            alt="Өтүкән Сийасәт Тәтқиқат Мәркизи"
+            className="footer-logo-img"
+            width={730}
+            height={141}
+            loading="lazy"
+          />
+        </Link>
+        <nav aria-label="Асти Тизимлик">
+          <Link href="/ug/podcasts">Подкастлар</Link>
+          <Link href="/ug/Һәққимиздә/">Һәққимиздә</Link>
+          <Link href="/ug/biz-bilen-alaqilid/">Алақилишиң</Link>
+          <Link href="/ug/teklip-pikir/">Тәклип-Пикир</Link>
+        </nav>
+        <small>© {new Date().getFullYear()} Өтүкән Сийасәт Тәтқиқат Мәркизи</small>
+      </div>
+    </footer>
+  );
 }

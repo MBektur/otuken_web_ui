@@ -7,17 +7,27 @@ import { Hero, LatestRail, RegionRail, PostCard, SectionTitle, Pagination, PostP
 
 export const revalidate = 300;
 
+import { buildSeoMetadata } from "@/lib/seo";
+
 type Props = { searchParams: Promise<{ q?: string; page?: string }> };
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const { q, page } = await searchParams;
   const decoded = q ? robustDecode(q).slice(0, 200).trim() : undefined;
   const query = decoded !== undefined && decoded !== "" ? decoded : undefined;
   const browsing = q !== undefined || !!page;
-  return {
-    title: query ? `ئىزدەش: ${query}` : (page ? "بارلىق يازمىلار" : "باشبەت"),
-    alternates: browsing ? undefined : { canonical: "/uy" },
-    robots: browsing ? { index: false, follow: true } : undefined,
-  };
+  const title = query ? `ئىزدەش: ${query}` : (page ? "بارلىق يازمىلار" : "باشبەت — دۇنياغا نەزەر، كەلگۈسىگە تەپەككۇر");
+  const description = query
+    ? `«${query}» ھەققىدىكى تەتقىقات، ماقالە ۋە سىياسىي ئانالىزلار.`
+    : "ئۆتۈكەن سىياسەت تەتقىقات مەركىزى — مۇستەقىل كۆز قاراش، دۇنياغا نەزەر ۋە كەلگۈسىگە تەپەككۇر.";
+
+  return buildSeoMetadata({
+    title,
+    description,
+    path: "/uy",
+    locale: "uy",
+    type: "website",
+    noIndex: browsing,
+  });
 }
 
 export default async function Home({ searchParams }: Props) {

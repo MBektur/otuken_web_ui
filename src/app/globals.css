@@ -2606,9 +2606,28 @@ body.ug-cyrl .scroll-controls {
     font-family: var(--heading-font);
     font-weight: 700;
     font-size: 27px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 13px
+    gap: 13px;
+    text-decoration: none
+}
+
+.footer-logo-img {
+    height: 42px;
+    width: auto;
+    max-width: 220px;
+    object-fit: contain;
+    background: #faf7f0;
+    padding: 5px 12px;
+    border-radius: 7px;
+    display: block;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+    transition: transform .2s ease, opacity .2s ease
+}
+
+.footer-brand:hover .footer-logo-img {
+    opacity: .92;
+    transform: translateY(-1px)
 }
 
 .footer-brand span {
@@ -3253,6 +3272,11 @@ body.ug-cyrl .scroll-controls {
 
     .footer-brand {
         font-size: 29px
+    }
+
+    .footer-logo-img {
+        height: 36px;
+        padding: 4px 10px
     }
 
     .footer nav {
