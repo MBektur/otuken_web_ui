@@ -610,7 +610,7 @@ export function PodcastAdmin({ locale = "uy" }: PodcastAdminProps) {
             <div className="form-field-group">
               <label htmlFor="slug-input">
                 <FileText size={14} />
-                <span>{isUg ? "Tordiki Maqale Slug (Ixtiyariy)" : "سائىتتىكى مۇناسىۋەتلىك ماقالە ئۇلانمىسى (slug)"}</span>
+                <span>{isUg ? "Tordiki Maqale Slug (Ixtiyariy)" : "بېكەتتىكى مۇناسىۋەتلىك ماقالە ئۇلانمىسى (slug)"}</span>
               </label>
               <input
                 id="slug-input"
