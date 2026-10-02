@@ -95,20 +95,23 @@ export async function autoSyncModifiedPosts() {
   clearMemoryCache();
   const status = await fetchLatestWordPressStatus();
 
-  // Revalidate top 5 most recently modified posts
+  // Revalidate most recently modified posts for both Uy and Ug
   const revalidatedPaths: string[] = [];
   for (const post of status.recentPosts) {
     if (post.link) {
       revalidatePath(post.link);
       revalidatedPaths.push(post.link);
+      const ugLink = localPath(post.link, "/ug");
+      revalidatePath(ugLink);
+      revalidatedPaths.push(ugLink);
     }
   }
 
-  // Fetch newest posts to update in-memory snapshot
+  // Fetch newest posts (up to 20) to update in-memory snapshot
   try {
-    const freshRes = await fetch(`${WORDPRESS_URL}/wp-json/wp/v2/posts?per_page=10&_embed=1`, {
+    const freshRes = await fetch(`${WORDPRESS_URL}/wp-json/wp/v2/posts?per_page=20&_embed=1`, {
       cache: "no-store",
-      signal: AbortSignal.timeout(10000),
+      signal: AbortSignal.timeout(15000),
     });
     if (freshRes.ok) {
       const freshPosts: any[] = await freshRes.json();
@@ -135,6 +138,8 @@ export async function autoSyncModifiedPosts() {
   // Revalidate home and podcast pages to reflect any new additions or edits
   revalidatePath("/uy");
   revalidatePath("/uy/podcasts");
+  revalidatePath("/ug");
+  revalidatePath("/ug/podcasts");
 
   return {
     ok: true,
@@ -147,45 +152,104 @@ export async function autoSyncModifiedPosts() {
   };
 }
 
-export async function preWarmSite(limit = 50, baseUrl?: string) {
+export async function preWarmSite(limit = 100, baseUrl?: string) {
   clearMemoryCache();
-  const fetchLimit = Math.min(Math.max(limit, 10), 100);
-  const url = `${WORDPRESS_URL}/wp-json/wp/v2/posts?per_page=${fetchLimit}&orderby=modified&order=desc&_fields=id,date,modified,slug,link,title`;
 
-  const res = await fetch(url, {
-    cache: "no-store",
-    signal: AbortSignal.timeout(15000),
-  });
+  // 1. Fetch all posts from WordPress across pages if needed
+  let allPosts: any[] = [];
+  let totalPosts = 0;
 
-  if (!res.ok) {
-    throw new Error(`WordPress API returned status ${res.status}`);
+  try {
+    const firstRes = await fetch(
+      `${WORDPRESS_URL}/wp-json/wp/v2/posts?per_page=100&page=1&orderby=modified&order=desc&_fields=id,date,modified,slug,link,title`,
+      {
+        cache: "no-store",
+        signal: AbortSignal.timeout(20000),
+      }
+    );
+
+    if (!firstRes.ok) {
+      throw new Error(`WordPress API returned status ${firstRes.status}`);
+    }
+
+    allPosts = await firstRes.json();
+    const totalPages = Number(firstRes.headers.get("X-WP-TotalPages") || 1);
+    totalPosts = Number(firstRes.headers.get("X-WP-Total") || allPosts.length);
+
+    if (totalPages > 1) {
+      for (let p = 2; p <= totalPages; p++) {
+        try {
+          const nextRes = await fetch(
+            `${WORDPRESS_URL}/wp-json/wp/v2/posts?per_page=100&page=${p}&orderby=modified&order=desc&_fields=id,date,modified,slug,link,title`,
+            {
+              cache: "no-store",
+              signal: AbortSignal.timeout(15000),
+            }
+          );
+          if (nextRes.ok) {
+            const morePosts = await nextRes.json();
+            allPosts.push(...morePosts);
+          }
+        } catch {
+          // Non-blocking for additional pages
+        }
+      }
+    }
+  } catch (err: any) {
+    throw new Error(`WordPress API returned error: ${err.message}`);
   }
 
-  const posts: any[] = await res.json();
-  const totalPosts = Number(res.headers.get("X-WP-Total") || posts.length);
+  // 2. Synchronize in-memory snapshot with latest slugs, links and titles
+  try {
+    const current = getLocalSnapshot();
+    const mergedPosts = [...current.posts];
+    for (const post of allPosts) {
+      const idx = mergedPosts.findIndex(p => p.id === post.id);
+      if (idx >= 0) {
+        mergedPosts[idx] = {
+          ...mergedPosts[idx],
+          slug: post.slug,
+          link: post.link,
+          title: post.title,
+          modified: post.modified,
+        };
+      } else {
+        mergedPosts.unshift(post);
+      }
+    }
+    updateLocalSnapshot({
+      posts: mergedPosts,
+      latestModified: allPosts[0]?.modified || current.latestModified,
+      totalPosts: mergedPosts.length,
+    });
+  } catch {
+    // Non-blocking
+  }
 
-  // Target paths for pre-caching
-  const paths: string[] = ["/uy", "/uy/podcasts"];
-  for (const p of posts) {
+  // Target paths for pre-caching (both Uy and Ug locales)
+  const paths: string[] = ["/uy", "/uy/podcasts", "/ug", "/ug/podcasts"];
+  for (const p of allPosts) {
     if (p.link) {
-      const lp = localPath(p.link);
-      if (!paths.includes(lp)) paths.push(lp);
+      const lpUy = localPath(p.link, "/uy");
+      if (!paths.includes(lpUy)) paths.push(lpUy);
+      const lpUg = localPath(p.link, "/ug");
+      if (!paths.includes(lpUg)) paths.push(lpUg);
     }
   }
 
-  // 1. Revalidate Next.js cache for all paths
+  // Revalidate Next.js cache for all paths
   for (const p of paths) {
     revalidatePath(p);
   }
 
-  // 2. Determine base origin for warm-up requests
+  // Determine base origin for warm-up requests
   const origin = (baseUrl || process.env.NEXT_PUBLIC_SITE_URL || "https://otuken-policy-center.vercel.app").replace(/\/$/, "");
 
   let warmedCount = 0;
   const warmedPaths: string[] = [];
 
-  // Batch warm-up requests (5 concurrent at a time)
-  const batchSize = 5;
+  // Batch warm-up requests (6 concurrent at a time)
+  const batchSize = 6;
   for (let i = 0; i < paths.length; i += batchSize) {
     const batch = paths.slice(i, i + batchSize);
     await Promise.allSettled(
@@ -213,7 +277,7 @@ export async function preWarmSite(limit = 50, baseUrl?: string) {
     totalPosts,
     warmedCount,
     totalTargeted: paths.length,
-    message: `${warmedCount} بەت مۇۋەپپەقىيەتلىك ئىسسىتىلىپ، تېز خاتىرە ئەسلىمىگە تولۇق ساقلاندى (${warmedCount} sayfa başarıyla ısıtılıp önbelleklendi)`,
+    message: `جەمئىي ${totalPosts} يازما بايقالدى. ${warmedCount} بەت مۇۋەپپەقىيەتلىك ئىسسىتىلىپ، تېز خاتىرە ئەسلىمىگە تولۇق ساقلاندى (${totalPosts} yazıdan ${warmedCount} sayfa önbelleklendi)`,
     samplePaths: warmedPaths.slice(0, 10),
     timestamp: new Date().toISOString(),
   };

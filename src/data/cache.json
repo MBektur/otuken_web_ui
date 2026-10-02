@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-01T17:18:07.604Z",
+  "syncedAt": "2026-10-02T04:05:19.153Z",
   "latestModified": "2026-09-26T09:07:21",
   "totalPosts": 83,
   "categories": [
@@ -7,9 +7,9 @@
       "id": 15,
       "count": 29,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+      "link": "https://orhunpolicycenter.com/uy/category/arxip/",
       "name": "ئارخىپ",
-      "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+      "slug": "arxip",
       "taxonomy": "category",
       "parent": 0,
       "meta": [],
@@ -52,9 +52,9 @@
       "id": 17,
       "count": 0,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d9%84%d8%a7%d9%82%d9%89%d9%84%d9%89%d8%b4%d9%89%da%ad/",
+      "link": "https://orhunpolicycenter.com/uy/category/alaqilishing/",
       "name": "ئالاقىلىشىڭ",
-      "slug": "%d8%a6%d8%a7%d9%84%d8%a7%d9%82%d9%89%d9%84%d9%89%d8%b4%d9%89%da%ad",
+      "slug": "alaqilishing",
       "taxonomy": "category",
       "parent": 0,
       "meta": [],
@@ -97,9 +97,9 @@
       "id": 8,
       "count": 27,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+      "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
       "name": "ئامېرىكا",
-      "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+      "slug": "amerika",
       "taxonomy": "category",
       "parent": 4,
       "meta": [],
@@ -148,9 +148,9 @@
       "id": 10,
       "count": 7,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%a6%d8%a7%d8%b3%d9%89%d9%8a%d8%a7/",
+      "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_asiya/",
       "name": "ئوتتۇرا ئاسىيا",
-      "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%a6%d8%a7%d8%b3%d9%89%d9%8a%d8%a7",
+      "slug": "ottura_asiya",
       "taxonomy": "category",
       "parent": 4,
       "meta": [],
@@ -199,9 +199,9 @@
       "id": 7,
       "count": 29,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+      "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
       "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-      "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+      "slug": "ottura_sherq_we_shimaliy_afriqa",
       "taxonomy": "category",
       "parent": 4,
       "meta": [],
@@ -250,9 +250,9 @@
       "id": 9,
       "count": 9,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7/",
+      "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ukraina/",
       "name": "ئۇكرائىنا",
-      "slug": "%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7",
+      "slug": "ukraina",
       "taxonomy": "category",
       "parent": 4,
       "meta": [],
@@ -301,9 +301,9 @@
       "id": 12,
       "count": 10,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89/",
+      "link": "https://orhunpolicycenter.com/uy/category/rayonlar/uyghur_diasporasi/",
       "name": "ئۇيغۇر دىئاسپوراسى",
-      "slug": "%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89",
+      "slug": "uyghur_diasporasi",
       "taxonomy": "category",
       "parent": 4,
       "meta": [],
@@ -352,9 +352,9 @@
       "id": 21,
       "count": 1,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d9%89%d9%82%d8%aa%d9%89%d8%b3%d8%a7%d8%af-%db%8b%db%95-%d9%be%db%95%d9%86-%d8%aa%db%90%d8%ae%d9%86%d9%89%d9%83%d8%a7/",
+      "link": "https://orhunpolicycenter.com/uy/category/iqtisad_we_pen-texnika/",
       "name": "ئىقتىساد ۋە پەن-تېخنىكا",
-      "slug": "%d8%a6%d9%89%d9%82%d8%aa%d9%89%d8%b3%d8%a7%d8%af-%db%8b%db%95-%d9%be%db%95%d9%86-%d8%aa%db%90%d8%ae%d9%86%d9%89%d9%83%d8%a7",
+      "slug": "iqtisad_we_pen-texnika",
       "taxonomy": "category",
       "parent": 0,
       "meta": [],
@@ -397,9 +397,9 @@
       "id": 5,
       "count": 36,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+      "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
       "name": "خىتاي",
-      "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+      "slug": "xitay",
       "taxonomy": "category",
       "parent": 4,
       "meta": [],
@@ -493,9 +493,9 @@
       "id": 4,
       "count": 0,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/",
+      "link": "https://orhunpolicycenter.com/uy/category/rayonlar/",
       "name": "رايونلار",
-      "slug": "%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1",
+      "slug": "rayonlar",
       "taxonomy": "category",
       "parent": 0,
       "meta": [],
@@ -538,9 +538,9 @@
       "id": 3,
       "count": 29,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+      "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
       "name": "سىياسىي ئانالىز",
-      "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+      "slug": "siyasiy_analiz",
       "taxonomy": "category",
       "parent": 0,
       "meta": [],
@@ -583,9 +583,9 @@
       "id": 1,
       "count": 7,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d8%a7%d8%aa%db%90%da%af%d9%88%d8%b1%d9%89%d9%8a%db%95%d8%b3%d9%89%d8%b2/",
+      "link": "https://orhunpolicycenter.com/uy/category/kategoriyesiz/",
       "name": "كاتېگورىيەسىز",
-      "slug": "%d9%83%d8%a7%d8%aa%db%90%da%af%d9%88%d8%b1%d9%89%d9%8a%db%95%d8%b3%d9%89%d8%b2",
+      "slug": "kategoriyesiz",
       "taxonomy": "category",
       "parent": 0,
       "meta": [],
@@ -628,9 +628,9 @@
       "id": 16,
       "count": 0,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%d9%83%db%87%d8%b1%d8%b3/",
+      "link": "https://orhunpolicycenter.com/uy/category/kurs/",
       "name": "كۇرس",
-      "slug": "%d9%83%db%87%d8%b1%d8%b3",
+      "slug": "kurs",
       "taxonomy": "category",
       "parent": 0,
       "meta": [],
@@ -673,9 +673,9 @@
       "id": 14,
       "count": 9,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4/",
+      "link": "https://orhunpolicycenter.com/uy/category/kitap_tonushturush/",
       "name": "كىتاپ تونۇشتۇرۇش",
-      "slug": "%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4",
+      "slug": "kitap_tonushturush",
       "taxonomy": "category",
       "parent": 0,
       "meta": [],
@@ -718,9 +718,9 @@
       "id": 13,
       "count": 0,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%d9%85%db%95%d8%ae%d8%b3%db%87%d8%b3-%d8%af%d9%88%d9%83%d9%89%d9%84%d8%a7%d8%aa/",
+      "link": "https://orhunpolicycenter.com/uy/category/mexsus_dokilat/",
       "name": "مەخسۇس دوكىلات",
-      "slug": "%d9%85%db%95%d8%ae%d8%b3%db%87%d8%b3-%d8%af%d9%88%d9%83%d9%89%d9%84%d8%a7%d8%aa",
+      "slug": "mexsus_dokilat",
       "taxonomy": "category",
       "parent": 0,
       "meta": [],
@@ -763,9 +763,9 @@
       "id": 18,
       "count": 0,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%da%be%db%95%d9%82%d9%82%d9%89%d9%85%d9%89%d8%b2%d8%af%db%95/",
+      "link": "https://orhunpolicycenter.com/uy/category/heqqimizde/",
       "name": "ھەققىمىزدە",
-      "slug": "%da%be%db%95%d9%82%d9%82%d9%89%d9%85%d9%89%d8%b2%d8%af%db%95",
+      "slug": "heqqimizde",
       "taxonomy": "category",
       "parent": 0,
       "meta": [],
@@ -808,9 +808,9 @@
       "id": 6,
       "count": 1,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%da%be%d9%89%d9%86%d8%af%d9%89-%d8%aa%db%90%d9%86%da%86-%d8%a6%d9%88%d9%83%d9%8a%d8%a7%d9%86/",
+      "link": "https://orhunpolicycenter.com/uy/category/rayonlar/hindi-tench_okyan/",
       "name": "ھىندى-تېنچ ئوكيان",
-      "slug": "%da%be%d9%89%d9%86%d8%af%d9%89-%d8%aa%db%90%d9%86%da%86-%d8%a6%d9%88%d9%83%d9%8a%d8%a7%d9%86",
+      "slug": "hindi-tench_okyan",
       "taxonomy": "category",
       "parent": 4,
       "meta": [],
@@ -859,9 +859,9 @@
       "id": 11,
       "count": 10,
       "description": "",
-      "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7/",
+      "link": "https://orhunpolicycenter.com/uy/category/rayonlar/yawropa/",
       "name": "ياۋروپا",
-      "slug": "%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7",
+      "slug": "yawropa",
       "taxonomy": "category",
       "parent": 4,
       "meta": [],
@@ -1260,8 +1260,8 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-8",
-        "category-5"
+        "category-amerika",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -1370,9 +1370,9 @@
           [
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -1417,9 +1417,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -1516,8 +1516,8 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-5",
-        "category-14"
+        "category-xitay",
+        "category-kitap_tonushturush"
       ],
       "_links": {
         "self": [
@@ -1626,9 +1626,9 @@
           [
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -1673,9 +1673,9 @@
             },
             {
               "id": 14,
-              "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4/",
+              "link": "https://orhunpolicycenter.com/uy/category/kitap_tonushturush/",
               "name": "كىتاپ تونۇشتۇرۇش",
-              "slug": "%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4",
+              "slug": "kitap_tonushturush",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -1766,8 +1766,8 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-8",
-        "category-5"
+        "category-amerika",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -1876,9 +1876,9 @@
           [
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -1923,9 +1923,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -2022,7 +2022,7 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-1"
+        "category-kategoriyesiz"
       ],
       "_links": {
         "self": [
@@ -2301,9 +2301,9 @@
           [
             {
               "id": 1,
-              "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d8%a7%d8%aa%db%90%da%af%d9%88%d8%b1%d9%89%d9%8a%db%95%d8%b3%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/kategoriyesiz/",
               "name": "كاتېگورىيەسىز",
-              "slug": "%d9%83%d8%a7%d8%aa%db%90%da%af%d9%88%d8%b1%d9%89%d9%8a%db%95%d8%b3%d9%89%d8%b2",
+              "slug": "kategoriyesiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -2394,7 +2394,7 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-1"
+        "category-kategoriyesiz"
       ],
       "_links": {
         "self": [
@@ -2658,9 +2658,9 @@
           [
             {
               "id": 1,
-              "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d8%a7%d8%aa%db%90%da%af%d9%88%d8%b1%d9%89%d9%8a%db%95%d8%b3%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/kategoriyesiz/",
               "name": "كاتېگورىيەسىز",
-              "slug": "%d9%83%d8%a7%d8%aa%db%90%da%af%d9%88%d8%b1%d9%89%d9%8a%db%95%d8%b3%d9%89%d8%b2",
+              "slug": "kategoriyesiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -2752,7 +2752,7 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-11"
+        "category-yawropa"
       ],
       "_links": {
         "self": [
@@ -2991,9 +2991,9 @@
           [
             {
               "id": 11,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/yawropa/",
               "name": "ياۋروپا",
-              "slug": "%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7",
+              "slug": "yawropa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -3090,7 +3090,7 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-9"
+        "category-ukraina"
       ],
       "_links": {
         "self": [
@@ -3199,9 +3199,9 @@
           [
             {
               "id": 9,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ukraina/",
               "name": "ئۇكرائىنا",
-              "slug": "%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7",
+              "slug": "ukraina",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -3299,8 +3299,8 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-9",
-        "category-3"
+        "category-ukraina",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -3409,9 +3409,9 @@
           [
             {
               "id": 9,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ukraina/",
               "name": "ئۇكرائىنا",
-              "slug": "%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7",
+              "slug": "ukraina",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -3456,9 +3456,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -3549,7 +3549,7 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-1"
+        "category-kategoriyesiz"
       ],
       "_links": {
         "self": [
@@ -3658,9 +3658,9 @@
           [
             {
               "id": 1,
-              "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d8%a7%d8%aa%db%90%da%af%d9%88%d8%b1%d9%89%d9%8a%db%95%d8%b3%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/kategoriyesiz/",
               "name": "كاتېگورىيەسىز",
-              "slug": "%d9%83%d8%a7%d8%aa%db%90%da%af%d9%88%d8%b1%d9%89%d9%8a%db%95%d8%b3%d9%89%d8%b2",
+              "slug": "kategoriyesiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -3751,7 +3751,7 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-1"
+        "category-kategoriyesiz"
       ],
       "_links": {
         "self": [
@@ -3860,9 +3860,9 @@
           [
             {
               "id": 1,
-              "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d8%a7%d8%aa%db%90%da%af%d9%88%d8%b1%d9%89%d9%8a%db%95%d8%b3%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/kategoriyesiz/",
               "name": "كاتېگورىيەسىز",
-              "slug": "%d9%83%d8%a7%d8%aa%db%90%da%af%d9%88%d8%b1%d9%89%d9%8a%db%95%d8%b3%d9%89%d8%b2",
+              "slug": "kategoriyesiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -3954,9 +3954,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-8",
-        "category-5",
-        "category-3"
+        "category-amerika",
+        "category-xitay",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -4065,9 +4065,9 @@
           [
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -4112,9 +4112,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -4159,9 +4159,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -4253,9 +4253,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-8",
-        "category-3",
-        "category-11"
+        "category-amerika",
+        "category-siyasiy_analiz",
+        "category-yawropa"
       ],
       "_links": {
         "self": [
@@ -4364,9 +4364,9 @@
           [
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -4411,9 +4411,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -4452,9 +4452,9 @@
             },
             {
               "id": 11,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/yawropa/",
               "name": "ياۋروپا",
-              "slug": "%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7",
+              "slug": "yawropa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -4914,7 +4914,7 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-5"
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -5023,9 +5023,9 @@
           [
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -5123,9 +5123,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-10",
-        "category-12",
-        "category-3"
+        "category-ottura_asiya",
+        "category-uyghur_diasporasi",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -5234,9 +5234,9 @@
           [
             {
               "id": 10,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%a6%d8%a7%d8%b3%d9%89%d9%8a%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_asiya/",
               "name": "ئوتتۇرا ئاسىيا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%a6%d8%a7%d8%b3%d9%89%d9%8a%d8%a7",
+              "slug": "ottura_asiya",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -5281,9 +5281,9 @@
             },
             {
               "id": 12,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/uyghur_diasporasi/",
               "name": "ئۇيغۇر دىئاسپوراسى",
-              "slug": "%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89",
+              "slug": "uyghur_diasporasi",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -5328,9 +5328,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -5824,9 +5824,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-5",
-        "category-3",
-        "category-6"
+        "category-xitay",
+        "category-siyasiy_analiz",
+        "category-hindi-tench_okyan"
       ],
       "_links": {
         "self": [
@@ -5935,9 +5935,9 @@
           [
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -5982,9 +5982,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -6023,9 +6023,9 @@
             },
             {
               "id": 6,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%da%be%d9%89%d9%86%d8%af%d9%89-%d8%aa%db%90%d9%86%da%86-%d8%a6%d9%88%d9%83%d9%8a%d8%a7%d9%86/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/hindi-tench_okyan/",
               "name": "ھىندى-تېنچ ئوكيان",
-              "slug": "%da%be%d9%89%d9%86%d8%af%d9%89-%d8%aa%db%90%d9%86%da%86-%d8%a6%d9%88%d9%83%d9%8a%d8%a7%d9%86",
+              "slug": "hindi-tench_okyan",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -6122,8 +6122,8 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-3",
-        "category-11"
+        "category-siyasiy_analiz",
+        "category-yawropa"
       ],
       "_links": {
         "self": [
@@ -6232,9 +6232,9 @@
           [
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -6273,9 +6273,9 @@
             },
             {
               "id": 11,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/yawropa/",
               "name": "ياۋروپا",
-              "slug": "%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7",
+              "slug": "yawropa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -6372,8 +6372,8 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-12",
-        "category-5"
+        "category-uyghur_diasporasi",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -6482,9 +6482,9 @@
           [
             {
               "id": 12,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/uyghur_diasporasi/",
               "name": "ئۇيغۇر دىئاسپوراسى",
-              "slug": "%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89",
+              "slug": "uyghur_diasporasi",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -6529,9 +6529,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -6628,8 +6628,8 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-8",
-        "category-5"
+        "category-amerika",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -6738,9 +6738,9 @@
           [
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -6785,9 +6785,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -6885,9 +6885,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-7",
-        "category-12",
-        "category-5"
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-uyghur_diasporasi",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -6996,9 +6996,9 @@
           [
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -7043,9 +7043,9 @@
             },
             {
               "id": 12,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/uyghur_diasporasi/",
               "name": "ئۇيغۇر دىئاسپوراسى",
-              "slug": "%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89",
+              "slug": "uyghur_diasporasi",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -7090,9 +7090,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -7188,7 +7188,7 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-5"
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -7297,9 +7297,9 @@
           [
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -7397,9 +7397,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-8",
-        "category-7",
-        "category-5"
+        "category-amerika",
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -7508,9 +7508,9 @@
           [
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -7555,9 +7555,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -7602,9 +7602,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -7661,12 +7661,12 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=1175"
       },
-      "modified": "2026-04-30T18:39:23",
-      "modified_gmt": "2026-04-30T18:39:23",
-      "slug": "sunzining_herbiy_ishlar_desturi_qumandanlar_yiraq_turushi_kerek_bolghan_besh_xeter_%e4%ba%94%e5%8db",
+      "modified": "2026-10-02T03:36:06",
+      "modified_gmt": "2026-10-02T03:36:06",
+      "slug": "sunzining_herbiy_ishlar_desturi_qumandanlar_yiraq_turushi_kerek_bolghan_besh_xeter",
       "status": "publish",
       "type": "post",
-      "link": "https://orhunpolicycenter.com/uy/2026/04/28/sunzining_herbiy_ishlar_desturi_qumandanlar_yiraq_turushi_kerek_bolghan_besh_xeter_%e4%ba%94%e5%8db/",
+      "link": "https://orhunpolicycenter.com/uy/2026/04/28/sunzining_herbiy_ishlar_desturi_qumandanlar_yiraq_turushi_kerek_bolghan_besh_xeter/",
       "title": {
         "rendered": "سۈنزىنىڭ ھەربىي ئىشلار دەستۇرى: قۇماندانلار يىراق تۇرۇشى كېرەك بولغان «بەش خەتەر» (五危)"
       },
@@ -7700,7 +7700,7 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-5"
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -7737,14 +7737,14 @@
         ],
         "version-history": [
           {
-            "count": 50,
+            "count": 49,
             "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/posts/1175/revisions"
           }
         ],
         "predecessor-version": [
           {
-            "id": 1248,
-            "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/posts/1175/revisions/1248"
+            "id": 1247,
+            "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/posts/1175/revisions/1247"
           }
         ],
         "wp:attachment": [
@@ -7809,9 +7809,9 @@
           [
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -7909,9 +7909,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-8",
-        "category-5",
-        "category-11"
+        "category-amerika",
+        "category-xitay",
+        "category-yawropa"
       ],
       "_links": {
         "self": [
@@ -8020,9 +8020,9 @@
           [
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -8067,9 +8067,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -8114,9 +8114,9 @@
             },
             {
               "id": 11,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/yawropa/",
               "name": "ياۋروپا",
-              "slug": "%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7",
+              "slug": "yawropa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -8214,9 +8214,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-8",
-        "category-7",
-        "category-5"
+        "category-amerika",
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -8485,9 +8485,9 @@
           [
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -8532,9 +8532,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -8579,9 +8579,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -8678,8 +8678,8 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-8",
-        "category-7"
+        "category-amerika",
+        "category-ottura_sherq_we_shimaliy_afriqa"
       ],
       "_links": {
         "self": [
@@ -8788,9 +8788,9 @@
           [
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -8835,9 +8835,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -8934,8 +8934,8 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-8",
-        "category-7"
+        "category-amerika",
+        "category-ottura_sherq_we_shimaliy_afriqa"
       ],
       "_links": {
         "self": [
@@ -9090,9 +9090,9 @@
           [
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -9137,9 +9137,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -9238,9 +9238,9 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-8",
-        "category-7",
-        "category-5"
+        "category-amerika",
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -9600,9 +9600,9 @@
           [
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -9647,9 +9647,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -9694,9 +9694,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -9794,8 +9794,8 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-7",
-        "category-5"
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -10241,9 +10241,9 @@
           [
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -10288,9 +10288,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -10386,7 +10386,7 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-7"
+        "category-ottura_sherq_we_shimaliy_afriqa"
       ],
       "_links": {
         "self": [
@@ -10495,9 +10495,9 @@
           [
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -10594,7 +10594,7 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-7"
+        "category-ottura_sherq_we_shimaliy_afriqa"
       ],
       "_links": {
         "self": [
@@ -10840,9 +10840,9 @@
           [
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -10941,9 +10941,9 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-15",
-        "category-7",
-        "category-3"
+        "category-arxip",
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -11229,9 +11229,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -11270,9 +11270,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -11317,9 +11317,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -11410,7 +11410,7 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-5"
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -11648,9 +11648,9 @@
           [
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -11747,7 +11747,7 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-7"
+        "category-ottura_sherq_we_shimaliy_afriqa"
       ],
       "_links": {
         "self": [
@@ -12001,9 +12001,9 @@
           [
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -12060,8 +12060,8 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=929"
       },
-      "modified": "2026-02-08T11:56:47",
-      "modified_gmt": "2026-02-08T11:56:47",
+      "modified": "2026-10-02T03:56:39",
+      "modified_gmt": "2026-10-02T03:56:39",
       "slug": "iranning_siyasiy_tarixi_iii",
       "status": "publish",
       "type": "post",
@@ -12091,7 +12091,9 @@
       "categories": [
         7
       ],
-      "tags": [],
+      "tags": [
+        24
+      ],
       "class_list": [
         "post-929",
         "post",
@@ -12100,7 +12102,8 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-7"
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "tag-iran"
       ],
       "_links": {
         "self": [
@@ -12387,9 +12390,9 @@
           [
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -12433,7 +12436,49 @@
               }
             }
           ],
-          []
+          [
+            {
+              "id": 24,
+              "link": "https://orhunpolicycenter.com/uy/tag/iran/",
+              "name": "ئىران",
+              "slug": "iran",
+              "taxonomy": "post_tag",
+              "_links": {
+                "self": [
+                  {
+                    "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/tags/24",
+                    "targetHints": {
+                      "allow": [
+                        "GET"
+                      ]
+                    }
+                  }
+                ],
+                "collection": [
+                  {
+                    "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/tags"
+                  }
+                ],
+                "about": [
+                  {
+                    "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/taxonomies/post_tag"
+                  }
+                ],
+                "wp:post_type": [
+                  {
+                    "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/posts?tags=24"
+                  }
+                ],
+                "curies": [
+                  {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                  }
+                ]
+              }
+            }
+          ]
         ]
       },
       "previewImage": "https://orhunpolicycenter.com/uy/wp-content/uploads/2026/02/Screenshot-2026-02-07-at-11.33.39-1024x581.png",
@@ -12486,7 +12531,7 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-7"
+        "category-ottura_sherq_we_shimaliy_afriqa"
       ],
       "_links": {
         "self": [
@@ -12740,9 +12785,9 @@
           [
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -12840,8 +12885,8 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-8",
-        "category-7"
+        "category-amerika",
+        "category-ottura_sherq_we_shimaliy_afriqa"
       ],
       "_links": {
         "self": [
@@ -13087,9 +13132,9 @@
           [
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -13134,9 +13179,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -13193,8 +13238,8 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=874"
       },
-      "modified": "2026-01-21T20:16:13",
-      "modified_gmt": "2026-01-21T20:16:13",
+      "modified": "2026-10-02T03:56:44",
+      "modified_gmt": "2026-10-02T03:56:44",
       "slug": "iranning_siyasiy_tarixi_ii",
       "status": "publish",
       "type": "post",
@@ -13224,7 +13269,9 @@
       "categories": [
         7
       ],
-      "tags": [],
+      "tags": [
+        24
+      ],
       "class_list": [
         "post-874",
         "post",
@@ -13233,7 +13280,8 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-7"
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "tag-iran"
       ],
       "_links": {
         "self": [
@@ -13495,9 +13543,9 @@
           [
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -13541,7 +13589,49 @@
               }
             }
           ],
-          []
+          [
+            {
+              "id": 24,
+              "link": "https://orhunpolicycenter.com/uy/tag/iran/",
+              "name": "ئىران",
+              "slug": "iran",
+              "taxonomy": "post_tag",
+              "_links": {
+                "self": [
+                  {
+                    "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/tags/24",
+                    "targetHints": {
+                      "allow": [
+                        "GET"
+                      ]
+                    }
+                  }
+                ],
+                "collection": [
+                  {
+                    "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/tags"
+                  }
+                ],
+                "about": [
+                  {
+                    "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/taxonomies/post_tag"
+                  }
+                ],
+                "wp:post_type": [
+                  {
+                    "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/posts?tags=24"
+                  }
+                ],
+                "curies": [
+                  {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                  }
+                ]
+              }
+            }
+          ]
         ]
       },
       "previewImage": "https://orhunpolicycenter.com/uy/wp-content/uploads/2026/01/image-4-810x1024.png",
@@ -13554,8 +13644,8 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=856"
       },
-      "modified": "2026-01-19T13:17:51",
-      "modified_gmt": "2026-01-19T13:17:51",
+      "modified": "2026-10-02T03:56:52",
+      "modified_gmt": "2026-10-02T03:56:52",
       "slug": "iranning_siyasiy_tarixi_i",
       "status": "publish",
       "type": "post",
@@ -13585,7 +13675,9 @@
       "categories": [
         1
       ],
-      "tags": [],
+      "tags": [
+        24
+      ],
       "class_list": [
         "post-856",
         "post",
@@ -13593,7 +13685,8 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-1"
+        "category-kategoriyesiz",
+        "tag-iran"
       ],
       "_links": {
         "self": [
@@ -13702,9 +13795,9 @@
           [
             {
               "id": 1,
-              "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d8%a7%d8%aa%db%90%da%af%d9%88%d8%b1%d9%89%d9%8a%db%95%d8%b3%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/kategoriyesiz/",
               "name": "كاتېگورىيەسىز",
-              "slug": "%d9%83%d8%a7%d8%aa%db%90%da%af%d9%88%d8%b1%d9%89%d9%8a%db%95%d8%b3%d9%89%d8%b2",
+              "slug": "kategoriyesiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -13742,7 +13835,49 @@
               }
             }
           ],
-          []
+          [
+            {
+              "id": 24,
+              "link": "https://orhunpolicycenter.com/uy/tag/iran/",
+              "name": "ئىران",
+              "slug": "iran",
+              "taxonomy": "post_tag",
+              "_links": {
+                "self": [
+                  {
+                    "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/tags/24",
+                    "targetHints": {
+                      "allow": [
+                        "GET"
+                      ]
+                    }
+                  }
+                ],
+                "collection": [
+                  {
+                    "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/tags"
+                  }
+                ],
+                "about": [
+                  {
+                    "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/taxonomies/post_tag"
+                  }
+                ],
+                "wp:post_type": [
+                  {
+                    "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/posts?tags=24"
+                  }
+                ],
+                "curies": [
+                  {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                  }
+                ]
+              }
+            }
+          ]
         ]
       },
       "previewImage": "https://orhunpolicycenter.com/uy/wp-content/uploads/2026/01/image-1-1024x980.png",
@@ -13794,7 +13929,7 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-1"
+        "category-kategoriyesiz"
       ],
       "_links": {
         "self": [
@@ -13903,9 +14038,9 @@
           [
             {
               "id": 1,
-              "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d8%a7%d8%aa%db%90%da%af%d9%88%d8%b1%d9%89%d9%8a%db%95%d8%b3%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/kategoriyesiz/",
               "name": "كاتېگورىيەسىز",
-              "slug": "%d9%83%d8%a7%d8%aa%db%90%da%af%d9%88%d8%b1%d9%89%d9%8a%db%95%d8%b3%d9%89%d8%b2",
+              "slug": "kategoriyesiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -13999,10 +14134,10 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-15",
-        "category-8",
-        "category-5",
-        "category-3"
+        "category-arxip",
+        "category-amerika",
+        "category-xitay",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -14240,9 +14375,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -14281,9 +14416,9 @@
             },
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -14328,9 +14463,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -14375,9 +14510,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -14470,9 +14605,9 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-7",
-        "category-12",
-        "category-5"
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-uyghur_diasporasi",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -14742,9 +14877,9 @@
           [
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -14789,9 +14924,9 @@
             },
             {
               "id": 12,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/uyghur_diasporasi/",
               "name": "ئۇيغۇر دىئاسپوراسى",
-              "slug": "%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89",
+              "slug": "uyghur_diasporasi",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -14836,9 +14971,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -14936,8 +15071,8 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-5",
-        "category-3"
+        "category-xitay",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -15183,9 +15318,9 @@
           [
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -15230,9 +15365,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -15324,8 +15459,8 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-8",
-        "category-5"
+        "category-amerika",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -15563,9 +15698,9 @@
           [
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -15610,9 +15745,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -15710,9 +15845,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-15",
-        "category-5",
-        "category-14"
+        "category-arxip",
+        "category-xitay",
+        "category-kitap_tonushturush"
       ],
       "_links": {
         "self": [
@@ -15821,9 +15956,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -15862,9 +15997,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -15909,9 +16044,9 @@
             },
             {
               "id": 14,
-              "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4/",
+              "link": "https://orhunpolicycenter.com/uy/category/kitap_tonushturush/",
               "name": "كىتاپ تونۇشتۇرۇش",
-              "slug": "%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4",
+              "slug": "kitap_tonushturush",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -16003,9 +16138,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-8",
-        "category-7",
-        "category-5"
+        "category-amerika",
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -16114,9 +16249,9 @@
           [
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -16161,9 +16296,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -16208,9 +16343,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -16308,8 +16443,8 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-8",
-        "category-5"
+        "category-amerika",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -16587,9 +16722,9 @@
           [
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -16634,9 +16769,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -16733,7 +16868,7 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-1"
+        "category-kategoriyesiz"
       ],
       "_links": {
         "self": [
@@ -17011,9 +17146,9 @@
           [
             {
               "id": 1,
-              "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d8%a7%d8%aa%db%90%da%af%d9%88%d8%b1%d9%89%d9%8a%db%95%d8%b3%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/kategoriyesiz/",
               "name": "كاتېگورىيەسىز",
-              "slug": "%d9%83%d8%a7%d8%aa%db%90%da%af%d9%88%d8%b1%d9%89%d9%8a%db%95%d8%b3%d9%89%d8%b2",
+              "slug": "kategoriyesiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -17105,8 +17240,8 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-15",
-        "category-5"
+        "category-arxip",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -17376,9 +17511,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -17417,9 +17552,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -17518,9 +17653,9 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-15",
-        "category-8",
-        "category-7"
+        "category-arxip",
+        "category-amerika",
+        "category-ottura_sherq_we_shimaliy_afriqa"
       ],
       "_links": {
         "self": [
@@ -17790,9 +17925,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -17831,9 +17966,9 @@
             },
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -17878,9 +18013,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -17980,10 +18115,10 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-15",
-        "category-8",
-        "category-5",
-        "category-3"
+        "category-arxip",
+        "category-amerika",
+        "category-xitay",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -18261,9 +18396,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -18302,9 +18437,9 @@
             },
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -18349,9 +18484,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -18396,9 +18531,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -18491,9 +18626,9 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-15",
-        "category-3",
-        "category-14"
+        "category-arxip",
+        "category-siyasiy_analiz",
+        "category-kitap_tonushturush"
       ],
       "_links": {
         "self": [
@@ -18731,9 +18866,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -18772,9 +18907,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -18813,9 +18948,9 @@
             },
             {
               "id": 14,
-              "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4/",
+              "link": "https://orhunpolicycenter.com/uy/category/kitap_tonushturush/",
               "name": "كىتاپ تونۇشتۇرۇش",
-              "slug": "%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4",
+              "slug": "kitap_tonushturush",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -18908,9 +19043,9 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-15",
-        "category-7",
-        "category-3"
+        "category-arxip",
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -19180,9 +19315,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -19221,9 +19356,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -19268,9 +19403,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -19364,10 +19499,10 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-15",
-        "category-7",
-        "category-12",
-        "category-5"
+        "category-arxip",
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-uyghur_diasporasi",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -19637,9 +19772,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -19678,9 +19813,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -19725,9 +19860,9 @@
             },
             {
               "id": 12,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/uyghur_diasporasi/",
               "name": "ئۇيغۇر دىئاسپوراسى",
-              "slug": "%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89",
+              "slug": "uyghur_diasporasi",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -19772,9 +19907,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -19872,9 +20007,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-15",
-        "category-10",
-        "category-5"
+        "category-arxip",
+        "category-ottura_asiya",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -19983,9 +20118,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -20024,9 +20159,9 @@
             },
             {
               "id": 10,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%a6%d8%a7%d8%b3%d9%89%d9%8a%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_asiya/",
               "name": "ئوتتۇرا ئاسىيا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%a6%d8%a7%d8%b3%d9%89%d9%8a%d8%a7",
+              "slug": "ottura_asiya",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -20071,9 +20206,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -20169,7 +20304,7 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-12"
+        "category-uyghur_diasporasi"
       ],
       "_links": {
         "self": [
@@ -20278,9 +20413,9 @@
           [
             {
               "id": 12,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/uyghur_diasporasi/",
               "name": "ئۇيغۇر دىئاسپوراسى",
-              "slug": "%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89",
+              "slug": "uyghur_diasporasi",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -20381,11 +20516,11 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-15",
-        "category-8",
-        "category-7",
-        "category-12",
-        "category-5"
+        "category-arxip",
+        "category-amerika",
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-uyghur_diasporasi",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -20655,9 +20790,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -20696,9 +20831,9 @@
             },
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -20743,9 +20878,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -20790,9 +20925,9 @@
             },
             {
               "id": 12,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/uyghur_diasporasi/",
               "name": "ئۇيغۇر دىئاسپوراسى",
-              "slug": "%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89",
+              "slug": "uyghur_diasporasi",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -20837,9 +20972,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -20939,10 +21074,10 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-15",
-        "category-10",
-        "category-5",
-        "category-14"
+        "category-arxip",
+        "category-ottura_asiya",
+        "category-xitay",
+        "category-kitap_tonushturush"
       ],
       "_links": {
         "self": [
@@ -21204,9 +21339,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -21245,9 +21380,9 @@
             },
             {
               "id": 10,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%a6%d8%a7%d8%b3%d9%89%d9%8a%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_asiya/",
               "name": "ئوتتۇرا ئاسىيا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%a6%d8%a7%d8%b3%d9%89%d9%8a%d8%a7",
+              "slug": "ottura_asiya",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -21292,9 +21427,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -21339,9 +21474,9 @@
             },
             {
               "id": 14,
-              "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4/",
+              "link": "https://orhunpolicycenter.com/uy/category/kitap_tonushturush/",
               "name": "كىتاپ تونۇشتۇرۇش",
-              "slug": "%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4",
+              "slug": "kitap_tonushturush",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -21392,12 +21527,12 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=531"
       },
-      "modified": "2025-09-21T11:02:44",
-      "modified_gmt": "2025-09-21T11:02:44",
-      "slug": "xtaystan",
+      "modified": "2026-10-01T22:54:27",
+      "modified_gmt": "2026-10-01T22:54:27",
+      "slug": "xitaystan_xitayning_pilanlimighan_imperiyisi1",
       "status": "publish",
       "type": "post",
-      "link": "https://orhunpolicycenter.com/uy/2025/09/09/xtaystan/",
+      "link": "https://orhunpolicycenter.com/uy/2025/09/09/xitaystan_xitayning_pilanlimighan_imperiyisi1/",
       "title": {
         "rendered": "خىتايستان: خىتاينىڭ پىلانلىمىغان ئىمپېرىيىسى(1)"
       },
@@ -21433,8 +21568,8 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-15",
-        "category-14"
+        "category-arxip",
+        "category-kitap_tonushturush"
       ],
       "_links": {
         "self": [
@@ -21551,7 +21686,7 @@
             "date": "2025-09-09T10:56:23",
             "slug": "screenshot_2025-09-09_at_11-54-52",
             "type": "attachment",
-            "link": "https://orhunpolicycenter.com/uy/2025/09/09/xtaystan/screenshot_2025-09-09_at_11-54-52/",
+            "link": "https://orhunpolicycenter.com/uy/2025/09/09/xitaystan_xitayning_pilanlimighan_imperiyisi1/screenshot_2025-09-09_at_11-54-52/",
             "title": {
               "rendered": "Screenshot 2025-09-09 at 11.54.52"
             },
@@ -21696,9 +21831,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -21737,9 +21872,9 @@
             },
             {
               "id": 14,
-              "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4/",
+              "link": "https://orhunpolicycenter.com/uy/category/kitap_tonushturush/",
               "name": "كىتاپ تونۇشتۇرۇش",
-              "slug": "%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4",
+              "slug": "kitap_tonushturush",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -21833,10 +21968,10 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-15",
-        "category-10",
-        "category-5",
-        "category-3"
+        "category-arxip",
+        "category-ottura_asiya",
+        "category-xitay",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -22114,9 +22249,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -22155,9 +22290,9 @@
             },
             {
               "id": 10,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%a6%d8%a7%d8%b3%d9%89%d9%8a%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_asiya/",
               "name": "ئوتتۇرا ئاسىيا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%a6%d8%a7%d8%b3%d9%89%d9%8a%d8%a7",
+              "slug": "ottura_asiya",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -22202,9 +22337,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -22249,9 +22384,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -22346,11 +22481,11 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-15",
-        "category-8",
-        "category-9",
-        "category-3",
-        "category-11"
+        "category-arxip",
+        "category-amerika",
+        "category-ukraina",
+        "category-siyasiy_analiz",
+        "category-yawropa"
       ],
       "_links": {
         "self": [
@@ -22620,9 +22755,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -22661,9 +22796,9 @@
             },
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -22708,9 +22843,9 @@
             },
             {
               "id": 9,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ukraina/",
               "name": "ئۇكرائىنا",
-              "slug": "%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7",
+              "slug": "ukraina",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -22755,9 +22890,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -22796,9 +22931,9 @@
             },
             {
               "id": 11,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/yawropa/",
               "name": "ياۋروپا",
-              "slug": "%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7",
+              "slug": "yawropa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -22897,10 +23032,10 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-15",
-        "category-8",
-        "category-9",
-        "category-11"
+        "category-arxip",
+        "category-amerika",
+        "category-ukraina",
+        "category-yawropa"
       ],
       "_links": {
         "self": [
@@ -23009,9 +23144,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -23050,9 +23185,9 @@
             },
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -23097,9 +23232,9 @@
             },
             {
               "id": 9,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ukraina/",
               "name": "ئۇكرائىنا",
-              "slug": "%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7",
+              "slug": "ukraina",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -23144,9 +23279,9 @@
             },
             {
               "id": 11,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/yawropa/",
               "name": "ياۋروپا",
-              "slug": "%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7",
+              "slug": "yawropa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -23245,10 +23380,10 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-15",
-        "category-8",
-        "category-9",
-        "category-3"
+        "category-arxip",
+        "category-amerika",
+        "category-ukraina",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -23357,9 +23492,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -23398,9 +23533,9 @@
             },
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -23445,9 +23580,9 @@
             },
             {
               "id": 9,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ukraina/",
               "name": "ئۇكرائىنا",
-              "slug": "%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7",
+              "slug": "ukraina",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -23492,9 +23627,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -23587,10 +23722,10 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-15",
-        "category-8",
-        "category-10",
-        "category-3"
+        "category-arxip",
+        "category-amerika",
+        "category-ottura_asiya",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -23699,9 +23834,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -23740,9 +23875,9 @@
             },
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -23787,9 +23922,9 @@
             },
             {
               "id": 10,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%a6%d8%a7%d8%b3%d9%89%d9%8a%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_asiya/",
               "name": "ئوتتۇرا ئاسىيا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%a6%d8%a7%d8%b3%d9%89%d9%8a%d8%a7",
+              "slug": "ottura_asiya",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -23834,9 +23969,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -23929,10 +24064,10 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-15",
-        "category-10",
-        "category-7",
-        "category-3"
+        "category-arxip",
+        "category-ottura_asiya",
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -24041,9 +24176,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -24082,9 +24217,9 @@
             },
             {
               "id": 10,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%a6%d8%a7%d8%b3%d9%89%d9%8a%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_asiya/",
               "name": "ئوتتۇرا ئاسىيا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%a6%d8%a7%d8%b3%d9%89%d9%8a%d8%a7",
+              "slug": "ottura_asiya",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -24129,9 +24264,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -24176,9 +24311,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -24229,12 +24364,12 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=359"
       },
-      "modified": "2025-09-02T21:00:27",
-      "modified_gmt": "2025-09-02T21:00:27",
-      "slug": "%d9%8a%db%90%da%ad%d9%89-%d8%b3%db%88%d8%b1%d9%89%d9%8a%db%95-%da%be%db%86%d9%83%db%88%d9%85%d9%89d",
+      "modified": "2026-10-01T22:52:06",
+      "modified_gmt": "2026-10-01T22:52:06",
+      "slug": "yengi_suriye_hokumiti_kop_terep_menpeetining_ortaq_nuqtisini_tepish_yolidiki_muweppeqiyet_krizis",
       "status": "publish",
       "type": "post",
-      "link": "https://orhunpolicycenter.com/uy/2025/08/05/%d9%8a%db%90%da%ad%d9%89-%d8%b3%db%88%d8%b1%d9%89%d9%8a%db%95-%da%be%db%86%d9%83%db%88%d9%85%d9%89d/",
+      "link": "https://orhunpolicycenter.com/uy/2025/08/05/yengi_suriye_hokumiti_kop_terep_menpeetining_ortaq_nuqtisini_tepish_yolidiki_muweppeqiyet_krizis/",
       "title": {
         "rendered": "يېڭى سۈرىيە ھۆكۈمىتى: كۆپ تەرەپ مەنپەئەتىنىڭ ئ‍ورتاق نۇقتىسىنى تېپىش يولىدىكى مۇۋەپپەقىيەت، كرىزىس ۋە چارىلەر"
       },
@@ -24270,9 +24405,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-15",
-        "category-7",
-        "category-3"
+        "category-arxip",
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -24381,9 +24516,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -24422,9 +24557,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -24469,9 +24604,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -24522,12 +24657,12 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=69"
       },
-      "modified": "2025-08-07T21:07:15",
-      "modified_gmt": "2025-08-07T21:07:15",
-      "slug": "%d8%a6%db%88%d9%85%d9%89%d8%af-%db%8b%db%95-%d8%b1%d9%89%d8%a6%d8%a7%d9%84%d9%84%d9%89%d9%82-%d8%ae",
+      "modified": "2026-10-01T22:54:36",
+      "modified_gmt": "2026-10-01T22:54:36",
+      "slug": "umid_we_rialliq_xitay_nime_uchun_irangha_yardem_qilmaydu",
       "status": "publish",
       "type": "post",
-      "link": "https://orhunpolicycenter.com/uy/2025/06/22/%d8%a6%db%88%d9%85%d9%89%d8%af-%db%8b%db%95-%d8%b1%d9%89%d8%a6%d8%a7%d9%84%d9%84%d9%89%d9%82-%d8%ae/",
+      "link": "https://orhunpolicycenter.com/uy/2025/06/22/umid_we_rialliq_xitay_nime_uchun_irangha_yardem_qilmaydu/",
       "title": {
         "rendered": "ئۈمىد ۋە رىئاللىق: خىتاي نىمە ئۈچۈن ئىرانغا ياردەم قىلمايدۇ؟"
       },
@@ -24565,10 +24700,10 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-15",
-        "category-8",
-        "category-5",
-        "category-3"
+        "category-arxip",
+        "category-amerika",
+        "category-xitay",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -24691,7 +24826,7 @@
               "content": {
                 "rendered": "<p>ياخشى مۇلاھىزە بولۇپتۇ، ئىملا خاتالىقلىرىڭىزنىڭ ھەل بولۇپ كېتىشىنى ئۈمىد قىلىمەن.</p>\n"
               },
-              "link": "https://orhunpolicycenter.com/uy/2025/06/22/%d8%a6%db%88%d9%85%d9%89%d8%af-%db%8b%db%95-%d8%b1%d9%89%d8%a6%d8%a7%d9%84%d9%84%d9%89%d9%82-%d8%ae/#comment-4",
+              "link": "https://orhunpolicycenter.com/uy/2025/06/22/umid_we_rialliq_xitay_nime_uchun_irangha_yardem_qilmaydu/#comment-4",
               "type": "comment",
               "author_avatar_urls": {
                 "24": "https://secure.gravatar.com/avatar/b2eda55803688ed00db5b9ab6292a5fc3bae1fb746c5fa919292fb734b434f79?s=24&d=mm&r=g",
@@ -24731,7 +24866,7 @@
             "date": "2025-07-31T14:06:38",
             "slug": "499557730_712214664846691_966513725435976356_n",
             "type": "attachment",
-            "link": "https://orhunpolicycenter.com/uy/2025/06/22/%d8%a6%db%88%d9%85%d9%89%d8%af-%db%8b%db%95-%d8%b1%d9%89%d8%a6%d8%a7%d9%84%d9%84%d9%89%d9%82-%d8%ae/499557730_712214664846691_966513725435976356_n/",
+            "link": "https://orhunpolicycenter.com/uy/2025/06/22/umid_we_rialliq_xitay_nime_uchun_irangha_yardem_qilmaydu/499557730_712214664846691_966513725435976356_n/",
             "title": {
               "rendered": "499557730_712214664846691_966513725435976356_n"
             },
@@ -24892,9 +25027,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -24933,9 +25068,9 @@
             },
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -24980,9 +25115,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -25027,9 +25162,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -25080,12 +25215,12 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=81"
       },
-      "modified": "2025-08-07T21:07:58",
-      "modified_gmt": "2025-08-07T21:07:58",
-      "slug": "%d8%a6%d9%89%d8%b3%d8%b1%d8%a7%d8%a6%d9%89%d9%84%d9%89%d9%8a%db%95-%d8%a6%d9%89%d8%b1%d8%a7%d9%86-d",
+      "modified": "2026-10-01T22:52:50",
+      "modified_gmt": "2026-10-01T22:52:50",
+      "slug": "israiliye_-_iran_urushi_heqqide",
       "status": "publish",
       "type": "post",
-      "link": "https://orhunpolicycenter.com/uy/2025/06/18/%d8%a6%d9%89%d8%b3%d8%b1%d8%a7%d8%a6%d9%89%d9%84%d9%89%d9%8a%db%95-%d8%a6%d9%89%d8%b1%d8%a7%d9%86-d/",
+      "link": "https://orhunpolicycenter.com/uy/2025/06/18/israiliye_-_iran_urushi_heqqide/",
       "title": {
         "rendered": "ئىسرائىلىيە – ئىران ئۇرۇشى ھەققىدە"
       },
@@ -25122,9 +25257,9 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-15",
-        "category-7",
-        "category-3"
+        "category-arxip",
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -25241,7 +25376,7 @@
             "date": "2025-07-31T18:55:27",
             "slug": "509007499_709329388468552_5043636055443400548_n",
             "type": "attachment",
-            "link": "https://orhunpolicycenter.com/uy/2025/06/18/%d8%a6%d9%89%d8%b3%d8%b1%d8%a7%d8%a6%d9%89%d9%84%d9%89%d9%8a%db%95-%d8%a6%d9%89%d8%b1%d8%a7%d9%86-d/509007499_709329388468552_5043636055443400548_n/",
+            "link": "https://orhunpolicycenter.com/uy/2025/06/18/israiliye_-_iran_urushi_heqqide/509007499_709329388468552_5043636055443400548_n/",
             "title": {
               "rendered": "509007499_709329388468552_5043636055443400548_n"
             },
@@ -25394,9 +25529,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -25435,9 +25570,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -25482,9 +25617,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -25535,12 +25670,12 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=84"
       },
-      "modified": "2025-08-07T21:08:40",
-      "modified_gmt": "2025-08-07T21:08:40",
-      "slug": "%da%af%d9%89%d8%a6%d9%88-%d9%be%d9%88%d9%84%d9%89%d8%aa%d9%89%d9%83%d8%a7%d9%86%d9%89%da%ad-%d8%a6d",
+      "modified": "2026-10-01T22:54:44",
+      "modified_gmt": "2026-10-01T22:54:44",
+      "slug": "gio-politikaning_asasliri",
       "status": "publish",
       "type": "post",
-      "link": "https://orhunpolicycenter.com/uy/2025/05/12/%da%af%d9%89%d8%a6%d9%88-%d9%be%d9%88%d9%84%d9%89%d8%aa%d9%89%d9%83%d8%a7%d9%86%d9%89%da%ad-%d8%a6d/",
+      "link": "https://orhunpolicycenter.com/uy/2025/05/12/gio-politikaning_asasliri/",
       "title": {
         "rendered": "گىئو-پولىتىكانىڭ ئاساسلىرى"
       },
@@ -25578,10 +25713,10 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-9",
-        "category-3",
-        "category-14",
-        "category-11"
+        "category-ukraina",
+        "category-siyasiy_analiz",
+        "category-kitap_tonushturush",
+        "category-yawropa"
       ],
       "_links": {
         "self": [
@@ -25698,7 +25833,7 @@
             "date": "2025-07-31T18:57:22",
             "slug": "496192440_682283474506477_2171931551435446293_n",
             "type": "attachment",
-            "link": "https://orhunpolicycenter.com/uy/2025/05/12/%da%af%d9%89%d8%a6%d9%88-%d9%be%d9%88%d9%84%d9%89%d8%aa%d9%89%d9%83%d8%a7%d9%86%d9%89%da%ad-%d8%a6d/496192440_682283474506477_2171931551435446293_n/",
+            "link": "https://orhunpolicycenter.com/uy/2025/05/12/gio-politikaning_asasliri/496192440_682283474506477_2171931551435446293_n/",
             "title": {
               "rendered": "496192440_682283474506477_2171931551435446293_n"
             },
@@ -25859,9 +25994,9 @@
           [
             {
               "id": 9,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ukraina/",
               "name": "ئۇكرائىنا",
-              "slug": "%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7",
+              "slug": "ukraina",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -25906,9 +26041,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -25947,9 +26082,9 @@
             },
             {
               "id": 14,
-              "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4/",
+              "link": "https://orhunpolicycenter.com/uy/category/kitap_tonushturush/",
               "name": "كىتاپ تونۇشتۇرۇش",
-              "slug": "%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4",
+              "slug": "kitap_tonushturush",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -25988,9 +26123,9 @@
             },
             {
               "id": 11,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/yawropa/",
               "name": "ياۋروپا",
-              "slug": "%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7",
+              "slug": "yawropa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -26047,12 +26182,12 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=87"
       },
-      "modified": "2025-08-07T21:09:56",
-      "modified_gmt": "2025-08-07T21:09:56",
-      "slug": "%d8%b1%db%87%d8%b3%d9%89%d9%8a%db%95%d9%86%d9%89%da%ad-%da%be%d9%86%d8%af%d9%89%d8%b3%d8%aa%d8%a7%d9",
+      "modified": "2026-10-01T22:54:54",
+      "modified_gmt": "2026-10-01T22:54:54",
+      "slug": "rusiyening_hndistan-_pakistan_urushidiki_pozitsiyesi_we_alksandir_duginning_buyuk_rusiye_istratigyis",
       "status": "publish",
       "type": "post",
-      "link": "https://orhunpolicycenter.com/uy/2025/05/09/%d8%b1%db%87%d8%b3%d9%89%d9%8a%db%95%d9%86%d9%89%da%ad-%da%be%d9%86%d8%af%d9%89%d8%b3%d8%aa%d8%a7%d9/",
+      "link": "https://orhunpolicycenter.com/uy/2025/05/09/rusiyening_hndistan-_pakistan_urushidiki_pozitsiyesi_we_alksandir_duginning_buyuk_rusiye_istratigyis/",
       "title": {
         "rendered": "رۇسىيەنىڭ ھندىستان- پاكىستان ئۇرۇشىدىكى پوزىتسىيەسى ۋە ئالكساندىر دۇگىننىڭ بۈيۈك رۇسىيە ئىستراتىگيىسى"
       },
@@ -26090,10 +26225,10 @@
         "format-standard",
         "has-post-thumbnail",
         "hentry",
-        "category-9",
-        "category-3",
-        "category-14",
-        "category-11"
+        "category-ukraina",
+        "category-siyasiy_analiz",
+        "category-kitap_tonushturush",
+        "category-yawropa"
       ],
       "_links": {
         "self": [
@@ -26216,7 +26351,7 @@
               "content": {
                 "rendered": "<p>دۇگىن شۇنچە سىرلىق شەخسمۇ؟</p>\n"
               },
-              "link": "https://orhunpolicycenter.com/uy/2025/05/09/%d8%b1%db%87%d8%b3%d9%89%d9%8a%db%95%d9%86%d9%89%da%ad-%da%be%d9%86%d8%af%d9%89%d8%b3%d8%aa%d8%a7%d9/#comment-3",
+              "link": "https://orhunpolicycenter.com/uy/2025/05/09/rusiyening_hndistan-_pakistan_urushidiki_pozitsiyesi_we_alksandir_duginning_buyuk_rusiye_istratigyis/#comment-3",
               "type": "comment",
               "author_avatar_urls": {
                 "24": "https://secure.gravatar.com/avatar/e22e006a0cc9101e17ef8e5222d73b3c786b445abe045ff7eed723f2279f8f06?s=24&d=mm&r=g",
@@ -26256,7 +26391,7 @@
             "date": "2025-07-31T18:59:41",
             "slug": "496208437_680427664692058_1562860607770659991_n",
             "type": "attachment",
-            "link": "https://orhunpolicycenter.com/uy/2025/05/09/%d8%b1%db%87%d8%b3%d9%89%d9%8a%db%95%d9%86%d9%89%da%ad-%da%be%d9%86%d8%af%d9%89%d8%b3%d8%aa%d8%a7%d9/496208437_680427664692058_1562860607770659991_n/",
+            "link": "https://orhunpolicycenter.com/uy/2025/05/09/rusiyening_hndistan-_pakistan_urushidiki_pozitsiyesi_we_alksandir_duginning_buyuk_rusiye_istratigyis/496208437_680427664692058_1562860607770659991_n/",
             "title": {
               "rendered": "496208437_680427664692058_1562860607770659991_n"
             },
@@ -26417,9 +26552,9 @@
           [
             {
               "id": 9,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ukraina/",
               "name": "ئۇكرائىنا",
-              "slug": "%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7",
+              "slug": "ukraina",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -26464,9 +26599,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -26505,9 +26640,9 @@
             },
             {
               "id": 14,
-              "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4/",
+              "link": "https://orhunpolicycenter.com/uy/category/kitap_tonushturush/",
               "name": "كىتاپ تونۇشتۇرۇش",
-              "slug": "%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4",
+              "slug": "kitap_tonushturush",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -26546,9 +26681,9 @@
             },
             {
               "id": 11,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/yawropa/",
               "name": "ياۋروپا",
-              "slug": "%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7",
+              "slug": "yawropa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -26605,12 +26740,12 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=314"
       },
-      "modified": "2025-08-05T16:49:56",
-      "modified_gmt": "2025-08-05T16:49:56",
-      "slug": "%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1%d9%84%d8%a7%d8%b1-%d9%86%db%90%d9%85%db%95-%d8%a6%db%88%da%86d",
+      "modified": "2026-10-01T22:53:11",
+      "modified_gmt": "2026-10-01T22:53:11",
+      "slug": "uyghurlar_neme_uchun_amerikaning_tashqi_siyasitige_kongul_bolishi_kerek_we_qaysi_noqtidin_kozitishi_",
       "status": "publish",
       "type": "post",
-      "link": "https://orhunpolicycenter.com/uy/2025/05/02/%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1%d9%84%d8%a7%d8%b1-%d9%86%db%90%d9%85%db%95-%d8%a6%db%88%da%86d/",
+      "link": "https://orhunpolicycenter.com/uy/2025/05/02/uyghurlar_neme_uchun_amerikaning_tashqi_siyasitige_kongul_bolishi_kerek_we_qaysi_noqtidin_kozitishi_/",
       "title": {
         "rendered": "ئۇيغۇرلار نېمە ئۈچۈن ئامېرىكانىڭ تاشقى سىياسىتىگە كۆڭۈل بۆلىشى كېرەك ۋە قايسى نوقتىدىن كۆزىتىشى كېرەك؟"
       },
@@ -26649,12 +26784,12 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-15",
-        "category-8",
-        "category-9",
-        "category-12",
-        "category-5",
-        "category-3"
+        "category-arxip",
+        "category-amerika",
+        "category-ukraina",
+        "category-uyghur_diasporasi",
+        "category-xitay",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -26763,9 +26898,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -26804,9 +26939,9 @@
             },
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -26851,9 +26986,9 @@
             },
             {
               "id": 9,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ukraina/",
               "name": "ئۇكرائىنا",
-              "slug": "%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7",
+              "slug": "ukraina",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -26898,9 +27033,9 @@
             },
             {
               "id": 12,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/uyghur_diasporasi/",
               "name": "ئۇيغۇر دىئاسپوراسى",
-              "slug": "%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89",
+              "slug": "uyghur_diasporasi",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -26945,9 +27080,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -26992,9 +27127,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -27087,9 +27222,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-15",
-        "category-7",
-        "category-3"
+        "category-arxip",
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -27198,9 +27333,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -27239,9 +27374,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -27286,9 +27421,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -27340,12 +27475,12 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=294"
       },
-      "modified": "2025-08-05T16:50:06",
-      "modified_gmt": "2025-08-05T16:50:06",
-      "slug": "%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1%d9%84%d8%a7%d8%b1-%d8%b3%db%88%d8%b1%d9%89%d9%8a%db%95%d8%af%db",
+      "modified": "2026-10-01T22:56:14",
+      "modified_gmt": "2026-10-01T22:56:14",
+      "slug": "uyghurlar_suriyede_neme_qiliwatidu",
       "status": "publish",
       "type": "post",
-      "link": "https://orhunpolicycenter.com/uy/2025/04/04/%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1%d9%84%d8%a7%d8%b1-%d8%b3%db%88%d8%b1%d9%89%d9%8a%db%95%d8%af%db/",
+      "link": "https://orhunpolicycenter.com/uy/2025/04/04/uyghurlar_suriyede_neme_qiliwatidu/",
       "title": {
         "rendered": "ئ‍ۇيغۇرلار سۈرىيەدە نېمە قىلىۋاتىدۇ؟"
       },
@@ -27381,9 +27516,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-7",
-        "category-12",
-        "category-3"
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-uyghur_diasporasi",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -27492,9 +27627,9 @@
           [
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -27539,9 +27674,9 @@
             },
             {
               "id": 12,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/uyghur_diasporasi/",
               "name": "ئۇيغۇر دىئاسپوراسى",
-              "slug": "%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89",
+              "slug": "uyghur_diasporasi",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -27586,9 +27721,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -27639,12 +27774,12 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=297"
       },
-      "modified": "2025-08-05T16:50:05",
-      "modified_gmt": "2025-08-05T16:50:05",
-      "slug": "%d8%af%db%86%d9%84%db%95%d8%aa%d9%84%db%95%d8%b1-%d9%86%db%90%d9%85%db%95-%d8%a6%db%88%da%86%db%88d",
+      "modified": "2026-10-01T22:56:00",
+      "modified_gmt": "2026-10-01T22:56:00",
+      "slug": "doletler_neme_uchun_meghlup_bolidu_kuch_bayashatliq_we_yuqsulluqning_yiltizi",
       "status": "publish",
       "type": "post",
-      "link": "https://orhunpolicycenter.com/uy/2025/04/02/%d8%af%db%86%d9%84%db%95%d8%aa%d9%84%db%95%d8%b1-%d9%86%db%90%d9%85%db%95-%d8%a6%db%88%da%86%db%88d/",
+      "link": "https://orhunpolicycenter.com/uy/2025/04/02/doletler_neme_uchun_meghlup_bolidu_kuch_bayashatliq_we_yuqsulluqning_yiltizi/",
       "title": {
         "rendered": "دۆلەتلەر نېمە ئۈچۈن مەغلۇپ بولىدۇ: كۈچ، باياشاتلىق ۋە يۇقسۇللۇقنىڭ يىلتىزى"
       },
@@ -27679,8 +27814,8 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-21",
-        "category-14"
+        "category-iqtisad_we_pen-texnika",
+        "category-kitap_tonushturush"
       ],
       "_links": {
         "self": [
@@ -27789,9 +27924,9 @@
           [
             {
               "id": 21,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d9%89%d9%82%d8%aa%d9%89%d8%b3%d8%a7%d8%af-%db%8b%db%95-%d9%be%db%95%d9%86-%d8%aa%db%90%d8%ae%d9%86%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/iqtisad_we_pen-texnika/",
               "name": "ئىقتىساد ۋە پەن-تېخنىكا",
-              "slug": "%d8%a6%d9%89%d9%82%d8%aa%d9%89%d8%b3%d8%a7%d8%af-%db%8b%db%95-%d9%be%db%95%d9%86-%d8%aa%db%90%d8%ae%d9%86%d9%89%d9%83%d8%a7",
+              "slug": "iqtisad_we_pen-texnika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -27830,9 +27965,9 @@
             },
             {
               "id": 14,
-              "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4/",
+              "link": "https://orhunpolicycenter.com/uy/category/kitap_tonushturush/",
               "name": "كىتاپ تونۇشتۇرۇش",
-              "slug": "%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4",
+              "slug": "kitap_tonushturush",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -27884,14 +28019,14 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=310"
       },
-      "modified": "2025-08-05T16:50:05",
-      "modified_gmt": "2025-08-05T16:50:05",
-      "slug": "%d8%aa%d8%b1%d8%a7%d9%85%d9%be-%d8%b1%db%87%d8%b3%d9%89%d9%8a%db%95-%d8%a6%d9%89%d8%b3%d8%aa%d9%89d",
+      "modified": "2026-10-01T22:55:32",
+      "modified_gmt": "2026-10-01T22:55:32",
+      "slug": "tramp_rusiye_istixbarati_k_g_b_kgb_ge_ishligenmu",
       "status": "publish",
       "type": "post",
-      "link": "https://orhunpolicycenter.com/uy/2025/03/03/%d8%aa%d8%b1%d8%a7%d9%85%d9%be-%d8%b1%db%87%d8%b3%d9%89%d9%8a%db%95-%d8%a6%d9%89%d8%b3%d8%aa%d9%89d/",
+      "link": "https://orhunpolicycenter.com/uy/2025/03/03/tramp_rusiye_istixbarati_k_g_b_kgb_ge_ishligenmu/",
       "title": {
-        "rendered": "ترامپ رۇسىيە ئىستىخباراتى ك گ ب (KGB) گە ئىشلىگەنمۇ ؟"
+        "rendered": "ترامپ رۇسىيە ئىستىخباراتى ك گ ب (KGB) گە ئىشلىگەنمۇ؟"
       },
       "content": {
         "rendered": "\n<figure class=\"wp-block-image size-full\"><img loading=\"lazy\" decoding=\"async\" width=\"2560\" height=\"1230\" src=\"https://orhunpolicycenter.com/uy/wp-content/uploads/2025/08/Screenshot-2025-08-02-at-23.10.39-scaled.png\" alt=\"\" class=\"wp-image-311\" style=\"aspect-ratio:4/3;object-fit:cover\" srcset=\"https://orhunpolicycenter.com/uy/wp-content/uploads/2025/08/Screenshot-2025-08-02-at-23.10.39-scaled.png 2560w, https://orhunpolicycenter.com/uy/wp-content/uploads/2025/08/Screenshot-2025-08-02-at-23.10.39-300x144.png 300w, https://orhunpolicycenter.com/uy/wp-content/uploads/2025/08/Screenshot-2025-08-02-at-23.10.39-1024x492.png 1024w, https://orhunpolicycenter.com/uy/wp-content/uploads/2025/08/Screenshot-2025-08-02-at-23.10.39-768x369.png 768w, https://orhunpolicycenter.com/uy/wp-content/uploads/2025/08/Screenshot-2025-08-02-at-23.10.39-1536x738.png 1536w, https://orhunpolicycenter.com/uy/wp-content/uploads/2025/08/Screenshot-2025-08-02-at-23.10.39-2048x984.png 2048w\" sizes=\"auto, (max-width: 2560px) 100vw, 2560px\" /></figure>\n\n\n\n<p class=\"wp-block-paragraph\">(بۇنىڭغا ئىشىنىڭ ياكى ئىشەنمەڭ دېمەيمەن. لېكىن ئوقۇپ قويۇڭ.)</p>\n\n\n\n<p class=\"wp-block-paragraph\">—-بۇ The Hill دېگەن تور بەتتە رۇتگېرس ئۇنىۋېرسىتېتى سىياسەت پەنلەر پروفېسسورى ئالېكساندىر ج. موتىل (Alexander J. Motyl) تەرىپىدىن 2025-يىلى 26-فىۋرال يېزىلغان يازما.</p>\n\n\n\n<p class=\"wp-block-paragraph\"></p>\n\n\n\n<p class=\"wp-block-paragraph\">قازاقىستان ئىستخبارات ئورگىنىنىڭ سابىق باشلىقى ئالنۇر مۇسايېف (Alnur Mussayev) يېقىندا فېيسبۇك سەھىپىسىدە ئەينى ۋاقىتتا، يەنى 1987-يىلى 40 ياشلىق ئۆي-مۈلۈك ماگناتى دونالد ترامپنىڭ نىڭ موسكۋاغا زىيارەتكە كەلگەندە KGB تەرىپىدىن ئىشقا ئېلىنغانلىقىنى ئوتتۇرىغا قويغان.</p>\n\n\n\n<p class=\"wp-block-paragraph\">مۇسايىف دېگەن گەپ ئەسلى مۇنداق</p>\n\n\n\n<p class=\"wp-block-paragraph\">—- « 1987-يىلى مەن موسكۋادىكى سوۋېت ئىتتىپاقى KGB نىڭ 6-بۆلۈمىدە ئىشلەيتىم. 6-بۆلۈمنىڭ ئاساسلىق خىزمىتى كاپىتالىستىك دۆلەت سودىگەرلىرىدىن جاسۇس ۋە ئۇچۇر مەنبەسىگە ئېرىشىش. شۇ يىلى بىزنىڭ بۆلۈمىمىز ئامېرىكىدىن 40 ياشلىق سودىگەر دونالد ترامپنى قوبۇل قىلدى ۋە «كراسنوۋ» دېگەن يالغان ئىسىم بىلەن ئاتىدى.»—-</p>\n\n\n\n<p class=\"wp-block-paragraph\">(ئەسكەرتىش: مۇسايېۋنىڭ بۇ گىپى يازمىدا يوق، لېكىن ئاستىدىكى رەسمىدىكى سۆزى موشۇنداق. شۇڭا بۇ يەرگە قوشۇپ قويۇلدى)</p>\n\n\n\n<p class=\"wp-block-paragraph\">ئەگەر بۇ گەپ راست بولسا ، پارتلاش خاراكترىلىك تەسىر پەيدا قىلىدۇ. مۇسايېف دېگەن گىپى ھەققىدە ھېچقانداق ھۆججەتلىك ئىسپات بىلەن تەمىنلىمىگەن &#8211; ئەمما قانداقمۇ تەمىنلىيەلىسۇن؟ ئۇ تىرامپقا مۇناسىۋەتلىك ھۆججەتلەرنىڭ ۋىلادىمىر پۇتىننىڭ قولىدا ئىكەنلىكىنى ئوتتۇرىغا قويدى.</p>\n\n\n\n<p class=\"wp-block-paragraph\">مۇسايېف ترامپ ھەققىدە بۇنداق دېگەن بىردىبىر ئىستىخبارات خادىمى ئەمەس. بىر قانچە يىل ئىلگىرى ھازىر ئامېرىكىنىڭ ۋاشىنگىتوندا ياشاۋاتقان KGB سابىق مايورى يۇرى شۋېتس (Yuri Shvets) مۇ ئوخشاش گەپ قىلغان. يۇرى شۋېتس كرەيگ ئۇنگېرنىڭ (Craig Unger) ئەڭ بازارلىق كىتابى «ئامېرىكا جاسۇسلۇق ماتېرىياللىرى: KGB دونالد ترامپنى قانداق تەربىيلىدى ۋە مۇناسىۋەتلىك جىنسىي شەھۋەت ، ئاچكۆزلۈك ، ھوقۇق ۋە خىيانەتچىلىك ھېكايىلىرى» نىڭ ئاساسلىق ئۇچۇر مەنبەسىلىرىنىڭ بىرى بولغان (يەنى بۇ كىتاب جاسوس يۇرى شۋېتسنىڭ ئۇچۇر بىلەن تەمىنلىشى بىلەن يېزىلغان )</p>\n\n\n\n<p class=\"wp-block-paragraph\">مۇسايېف بۇ گەپنى چىقارغاندىن كېيىنلا ، ھازىر فرانسىيەدە تۇرۇشلۇق يەنە بىر سابىق KGB خادىمى سېرگېي جىرنوۋ ئۇكرائىنالىق ژۇرنالىستنىڭ زىيارىتىنى قوبۇل قىلغاندا بۇ گەپنى (ئىددئانى) تولۇق قوللايدىغانلىقىنى بىلدۈرگەن. جىرنوۋنىڭ سۆزىگە قارىغاندا ، ترامپ شوپۇرىدىن تارتىپ ئۇنىڭ مېھمانخاندىكى ياتاق ئۆيىدە مۇلازىمەت قىلىدىغان مۇلازىمەتچىگىچە 24/7 (پۈتۈن كۈن) KGB جاسۇسلىرى تەرىپىدىن كونترول قىلىنغان بولۇشى كېرەك (جىرنوۋ موشۇنداق بولۇشى كېرەكلىكىنى بىر جاسۇس بولۇش سۈپىتى بىلەن پەزەر قىلىۋاتىدۇ) . جىرنوف تىرامپنىڭ ھەر بىر ھەرىكىتىنىڭ خاتىرىلىندىغانلىقى ۋە ئارخىپلاشتۇرۇلۇپ مېڭىلىدىغانلىقىنى ، ھەمدە ئۇنىڭ «ساھبجامال ھىيلىسىگە») چۈشۈپ قالغان بولۇشىنىڭ مۇمكىنلىكىنى («جىرنوف پۈتۈن دوللار پاھىشەلىرنىڭ ھەممىسىنىڭ 100% KGB – لىق ئىكەنلىكىنى تەكىتلىگەن») ، ياكى ترامپنىڭ سوۋېت پايتەختىدە مېھمانخانا قۇرۇش پىلانى ئۈچۈن موسكۋا شەھەر ئەمەلدارلىرىغا پارا بەرگەنلىكىنىڭ خاتىرىلنىپ قالغانلىقىنى ئىلگىرى سۈرگەن.</p>\n\n\n\n<p class=\"wp-block-paragraph\">بۇ سابىق KGB جاسۇسلىرىنىڭ ھېچقايسىسى دېگەن گەپلىرىگە ئائىت دەلىل-ئىسپات بىلەن تەمىنلىمگەن ، ئەمما ئوخشىمىغان جايلارغا جايلاشقان ۋە ئوخشىمىغان ۋاقىتتا سۆزلىگەن بۇ ئۈچ جاسۇسنىڭ بۇ ھەقتە ئوخشاش پىكىرگە ئىگە بولۇشى بۇ ئېھتىماللىقنىڭ (ترامپنىڭ ك گ ب خادىمى بولغانلىقى ئىھتىماللىقىنىڭ) تامامەن نەزەردىن ساقىت قىلنماسلىقى كېرەكلىكىنى كۆرسىتىپ بېرىدۇ. ئەگەر بىز بىرىنچى ترامپ ھۆكۈمىتىدىن ۋە ئىككىنچى قېتملىقىنىڭ دەسلەپكى مەزگىللىرىدىن ئۆگەنگەن بىر نەرسە بار بولسا ، ئۇ مۇمكىن بولمايدىغاندەك كۆرۈنگەن ئىشلارنىمۇ ئۆز ئىچىگە ئالغان ھالدا ھەممە نەرسىنىڭ مۇمكىن ئىكەنلىگىدۇر.</p>\n\n\n\n<p class=\"wp-block-paragraph\">بۇ گەپلەرنىڭ ئىشەنچىلىك دەرىجىسىنى يۇقىرى كۆتۈرىدىغان يەنە بىر نەرسە بولسا ، ئەگەر ك گ ب نىڭ قولىدا ترامپقا مۇناسىۋەتلىك ھۆججەتلەر بولسا بۇ ترامپنىڭ شىمالىي ئاتلانتىك ئەھدى تەشكىلاتى ، ياۋروپا ۋە ئۇكرائىناغا بولغان ئۆچمەنلىكىنى ، ۋىلادىمىر پۇتىنغا بولغان قايىللىقىنى ۋە مۇستەبىت ھاكىمىيەتنى قوللايدىغانلىقىنى ئاسان ، ئاددىي ۋە قايىل قىلارلىق چۈشەندۈرۈپ بېرىدۇ. بۇ ھەتتا مۇرەككەپ بولغانلاردىن بەكرەك ئاددى بولغان چۈشەندۈرۈشلەرنىڭ بەكرەك توغرا ئىكەنلىكىنى تەشەببۇس قىلىدىغان «ئوككامنىڭ ساقال ئالغۇچى» پەلسەپەسى ئىسمىزگە سالىدۇ.</p>\n\n\n\n<p class=\"wp-block-paragraph\">يەنە كېلىپ ترامپنىڭ ئۆزگىرىپ تۇردىغان ۋە نارسىست (ئۆز مەپتۇنلۇق) خاراكترىنى ،شۇنداقلا ئامېرىكانىڭ سىياسىي مەيدانىنىڭ ئۆزگىرىشى قاتارلىق مۇرەككەپ ۋە قالايمىقان چۈشەندۈرۈشلەردىن بەكرەك KGB نىڭ قولىدا ترامقا ئائىت مەخپى ھۆججەتلەرنىڭ بار ئىكەنلىكى قارىشى ئاددى ئەمما قايىل قىلارلىق بىر چۈشەندۈرۈش بولالايدۇ. ناۋادا باشقا چۈشەندۈرۈشلەر توغرا بولغان تەقدىردىمۇ ، بۇ چۈشەندۈرۈشلەر پەقەت ئۈچ KGB خادىمىنىڭ ئوتتۇرىغا قويغان بايانلىرىنى كۈچلەندۈردىغان قوشۇمچە ھالقا ۋە ئۇچۇرلاردۇر.</p>\n\n\n\n<p class=\"wp-block-paragraph\">تەبىئىيكى ، ترامپ ۋە ئۇنىڭ قوللىغۇچىلىرى بۇنى ئاڭلاپ غەزەپلىنىپ چىچاڭشىپ كىتىدۇ. ئەلۋەتتە ،بۇ ئۈچ KGB خادىمى باشقىلارغا ئىشلەيدۇ. ئامېرىكا پرېزىدېنتىنى ئىتىبارسىزلاشتۇرشنى خالىمايدىغان كىم بار دەيسىز ؟ بۇلار مەركىزىي ئاخبارات ئىدارىسى (CIA) ياكى FBI بولۇشى مۇمكىن. لېكىن بۇ ئورگانلار ھازىر تىرامپنىڭ ساداقەتمەنلىرىنىڭ قولىدا. بۇنىڭدىن باشقا ، ئۇلارنىڭ قازاقىستان ۋە فرانسىيە پۇخرالىرىنى سېتىۋېلىش ياكى مەجبۇرلاش ئىقتىدارى بارمۇ؟ باشقا غەرب ئىستىخبارات تەشكىلاتلىرى ئۈچۈنمۇ ئوخشاش سۇئالنى قويۇشقا بولىدۇ.</p>\n\n\n\n<p class=\"wp-block-paragraph\">بەلكىم پۇتىن بولۇشى مۇمكىنمۇ؟ ئەمما ئۇ ئۆزىنىڭ ئۇكرائىنا ، شىمالىي ئاتلانتىك ئەھدى تەشكىلاتى ۋە ياۋروپاغا قاراتقان سىياسىتىنى قوللايدىغان پرېزىدېنتنى رەززىل قىلشىقا قىزىقمايدۇ.</p>\n\n\n\n<p class=\"wp-block-paragraph\">پۇتىن ۋە ترامپنىڭ پىلانلىرىغا قارشى تۇرىدىغان روسىيە ئاخبارات ئىدارىسى ئىچىدىكى بىر ياكى بىر قانچە ئەمەلدارلارنىڭ بولۇشى بەكرەك ئىھتىماللىققا يېقىن. باشتا بۇنداق بولۇشى تازا ئەقلىگە مۇۋاپىق ئەمەستەك تەسىر بېرىدۇ . چۈنكى بىز پۇتىننىڭ قارىماققا كىشىنىڭ ئىشەنگۈسى كەلمەيدىغان تەڭداشسىز ھاكىمىيتنىڭ ئەمەلىيەتتە چاك- چېكىدىن يېرىلىپ كەتكەنلىكىنى بىلىمىز.</p>\n\n\n\n<p class=\"wp-block-paragraph\">ئەمما نېمە ئۈچۈن مەخپىي ئۆكتىچىلەر مۇنداق بىر ھېكايە توقۇپ ، KGB نىڭ سابىق مايورى يۇرى شۋېتسنى بىر نەچچە يىل ئىلگىرى ترامپ ھەققىدىكى بۇ ئۇچۇرلارنى تۆكۈشكە قايىل قىلسۇن؟ ئۆكتىچىلەر بۇ ئۇچۇرلارنىڭ ساختىلىقىنى بىلسە ئۇلارنىڭ بۇنداق قىلىشتىكى مەقسىدى نېمە ؟</p>\n\n\n\n<p class=\"wp-block-paragraph\">بەلكىم بۇ ئۈچ سابىق KGB خادىملىرىنىڭ ھەممىسى يالغان سۆزلەۋاتقان بولۇشى مۇمكىن ، ئۇلار كىشىلەرنىڭ دىققىتىنى تارتىش ۋە شۆھرىتىنى ئاشۇرۇشنى مەخسەد قىلغاندۇ ؟؟ ۋاشىنگىتوندا تۇرۇشلۇق جاسۇس ئەنە شۇنداق ئويلىدى، دەيلى ، ئەمما قازاقىستان ۋە فرانسىيەدىكى ئىككىسىچۇ؟</p>\n\n\n\n<p class=\"wp-block-paragraph\">مېنى بۇ ئۈچ جاسۇسنىڭ دېگەنلىرىنىڭ ئاساسى بولۇشى مۇمكىن دەپ ئويلىشىمغا سەۋەب بولغان نەرسە ، بىر تونۇشۇمنىڭ ئوخشاش ۋاقىتتا ئوخشاش ئىشنى باشتىن كەچۈرگەنلىكىدۇر. سولچى ۋە قىز-ئاياللارغا ئامراق بۇ ئادەم (ئاپتۇرنىڭ تونۇشى) ، 1980-يىللارنىڭ ئاخىرىدا موسكۋادا بىر نەچچە يىل ياشىدى. ئۇ يەردە ئۇنىڭغا ئېىسىل تاماق ۋە شاراپلار سۇنۇلدى ، خانىم-قىزلار ئۇنىڭ بىلەن كېچە-كۈندۈز ئارلىشىپ يۈرەتتى، ئۇنىڭ تەرجىمانى ئايال ئىدى ۋە ئەتراپىدىلا يۈرەتتى، ھەتتا ئۇ بىر دۇكاندا كۆرگەن ئايالمۇ ئۇنى ئۆيىگە تەكلىپ قىلغان ئىدى.</p>\n\n\n\n<p class=\"wp-block-paragraph\">بىز بەلكىم ھەقىقەتنى مەڭگۈ بىلمەسلىكىمىز مۇمكىن. ئەمما ئېنىق بىر پاكىت بولمىسىمۇ ،مۇنداق گەپ سۆزلەرنىڭ چىقىشى ئەڭ ئاز دېگەندە كىشىنى ئەندىشىگە سالىدۇ ، بولۇپمۇ MAGA ئامېرىكانى قايتىدىن كۈچلۈك قىلىشنى (Make America Great Again) قوللىغان ۋەتەنپەرۋەرلەرنى .</p>\n\n\n\n<p class=\"wp-block-paragraph\">بۇ يازمىنى يازغان ئالېكساندىر ج. موتىل رۇتگېرس ئۇنىۋېرسىتىتى (نيۇيورك ) نىڭ سىياسەت پەنلەر پروفېسسورى. ئۇكرائىنا ، روسىيە ۋە سوۋېت ئىتتىپاقى شۇنداقلا مىللەتچىلىك ، ئىنقىلاب ، ئىمپېرىيە ۋە نەزەرىيەشۇناسلىق مۇتەخەسسىسى ، ئۇ 10 كىتابنىڭ ئاپتورى ، شۇنداقلا Imperial Ends: The Decay, Collapse, and Revival of Empires ناملىق كىتابنىڭ ئاپتۇرى.</p>\n\n\n\n<p class=\"wp-block-paragraph\"></p>\n\n\n\n<p class=\"wp-block-paragraph\"></p>\n\r\n\t\t\t<div id=\"daexthefu-container\"\r\n\t\t\t\tclass=\"daexthefu-container daexthefu-layout-side-by-side daexthefu-alignment-center\"\r\n\t\t\t\tdata-post-id=\"310\">\r\n\r\n\t\t\t\t<div class=\"daexthefu-feedback\">\r\n\t\t\t\t\t<div class=\"daexthefu-text\">\r\n\t\t\t\t\t\t<h3 class=\"daexthefu-title\">ياقتۇردىڭىزمۇ؟</h3>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"daexthefu-buttons-container\">\r\n\t\t\t\t\t\t<div class=\"daexthefu-buttons\">\r\n\t\t\t\t\t\t\t\r\n\t\t\t<div class=\"daexthefu-yes daexthefu-button daexthefu-button-type-icon\" data-value=\"1\">\r\n\t\t\t\t\r\n                <svg>\r\n                    <defs>\r\n                        <style>.happy-face-cls-1{fill:#c9c9c9;}.happy-face-cls-2{fill:#e1e1e1;}.happy-face-cls-3{fill:#676767;}</style>\r\n                    </defs>\r\n                    <g id=\"happy_face\">\r\n                        <circle class=\"happy-face-cls-1 daexthefu-icon-primary-color\" cx=\"24\" cy=\"24\" r=\"17\" />\r\n                        <path class=\"happy-face-cls-2 daexthefu-icon-circle\" d=\"m24,3c11.58,0,21,9.42,21,21s-9.42,21-21,21S3,35.58,3,24,12.42,3,24,3m0-1C11.85,2,2,11.85,2,24s9.85,22,22,22,22-9.85,22-22S36.15,2,24,2h0Z\" />\r\n                        <circle class=\"happy-face-cls-3 daexthefu-icon-secondary-color\" cx=\"18\" cy=\"22\" r=\"2\" />\r\n                        <circle class=\"happy-face-cls-3 daexthefu-icon-secondary-color\" cx=\"30\" cy=\"22\" r=\"2\" />\r\n                        <path class=\"happy-face-cls-3 daexthefu-icon-secondary-color\" d=\"m16.79,29c-1.19,0-1.89,1.31-1.25,2.32,1.77,2.81,4.9,4.68,8.47,4.68s6.7-1.87,8.47-4.68c.63-1.01-.06-2.32-1.25-2.32-3.67,0-10.76,0-14.43,0Z\" />\r\n                    </g>\r\n                </svg>\t\t\t</div>\r\n\r\n\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t<div class=\"daexthefu-no daexthefu-button daexthefu-button-type-icon\" data-value=\"0\">\r\n\t\t\t\t\r\n                <svg>\r\n                    <defs>\r\n                        <style>\r\n                            .sad-face-cls-1{fill:#c9c9c9;}.sad-face-cls-2{fill:#676767;}.sad-face-cls-3{fill:#e1e1e1;}.sad-face-cls-4{fill:#676767;}\r\n                        </style>\r\n                    </defs>\r\n                    <g id=\"sad_face\">\r\n                        <circle class=\"sad-face-cls-1 daexthefu-icon-primary-color\" cx=\"24\" cy=\"24\" r=\"17\" />\r\n                        <path class=\"sad-face-cls-3 daexthefu-icon-circle\" d=\"m24,3c11.58,0,21,9.42,21,21s-9.42,21-21,21S3,35.58,3,24,12.42,3,24,3m0-1C11.85,2,2,11.85,2,24s9.85,22,22,22,22-9.85,22-22S36.15,2,24,2h0Z\" />\r\n                        <circle class=\"sad-face-cls-4 daexthefu-icon-secondary-color\" cx=\"18\" cy=\"22\" r=\"2\" />\r\n                        <circle class=\"sad-face-cls-4 daexthefu-icon-secondary-color\" cx=\"30\" cy=\"22\" r=\"2\" />\r\n                        <path class=\"sad-face-cls-2 daexthefu-icon-secondary-color\" d=\"M16.9,34.5c-0.4,0-0.8-0.1-1.1-0.4c-0.6-0.6-0.6-1.5,0-2.1c2.2-2.2,5.1-3.4,8.1-3.4c3.1,0,6,1.2,8.1,3.4\n                        c0.6,0.6,0.6,1.5,0,2.1s-1.5,0.6-2.1,0c-1.6-1.6-3.7-2.5-6-2.5s-4.4,0.9-6,2.5C17.7,34.4,17.3,34.5,16.9,34.5z\" />\r\n                    </g>\r\n                </svg>\t\t\t</div>\r\n\r\n\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"daexthefu-comment\">\r\n\t\t\t\t\t<div class=\"daexthefu-comment-top-container\">\r\n\t\t\t\t\t\t<label id=\"daexthefu-comment-label\" class=\"daexthefu-comment-label\"></label>\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"daexthefu-comment-character-counter-container\">\r\n\t\t\t\t\t\t\t\t<div id=\"daexthefu-comment-character-counter-number\"\r\n\t\t\t\t\t\t\t\t\tclass=\"daexthefu-comment-character-counter-number\"></div>\r\n\t\t\t\t\t\t\t\t<div class=\"daexthefu-comment-character-counter-text\"></div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t<textarea id=\"daexthefu-comment-textarea\" class=\"daexthefu-comment-textarea\"\r\n\t\t\t\t\t\t\t\tplaceholder=\"پىكىرىڭىزنى يېزىڭ\"\r\n\t\t\t\t\t\t\t\tmaxlength=\"\r\n\t\t\t\t\t\t\t\t400\t\t\t\t\t\t\t\t\t\"></textarea>\r\n\t\t\t\t\t<div class=\"daexthefu-comment-buttons-container\">\r\n\t\t\t\t\t\t<button class=\"daexthefu-comment-submit daexthefu-button\">يوللاش</button>\r\n\t\t\t\t\t\t<button class=\"daexthefu-comment-cancel daexthefu-button\">ئەمەلدىن قالدۇرۇش</button>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"daexthefu-successful-submission-text\">تەكلىپىڭىزگە كۆپ رەھمەت.</div>\r\n\r\n\t\t\t</div>\r\n\r\n\t\t\t",
@@ -27926,10 +28061,10 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-8",
-        "category-9",
-        "category-3",
-        "category-11"
+        "category-amerika",
+        "category-ukraina",
+        "category-siyasiy_analiz",
+        "category-yawropa"
       ],
       "_links": {
         "self": [
@@ -27966,14 +28101,14 @@
         ],
         "version-history": [
           {
-            "count": 3,
+            "count": 4,
             "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/posts/310/revisions"
           }
         ],
         "predecessor-version": [
           {
-            "id": 354,
-            "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/posts/310/revisions/354"
+            "id": 1504,
+            "href": "https://orhunpolicycenter.com/uy/wp-json/wp/v2/posts/310/revisions/1504"
           }
         ],
         "wp:attachment": [
@@ -28038,9 +28173,9 @@
           [
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -28085,9 +28220,9 @@
             },
             {
               "id": 9,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ukraina/",
               "name": "ئۇكرائىنا",
-              "slug": "%d8%a6%db%87%d9%83%d8%b1%d8%a7%d8%a6%d9%89%d9%86%d8%a7",
+              "slug": "ukraina",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -28132,9 +28267,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -28173,9 +28308,9 @@
             },
             {
               "id": 11,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/yawropa/",
               "name": "ياۋروپا",
-              "slug": "%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7",
+              "slug": "yawropa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -28232,12 +28367,12 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=355"
       },
-      "modified": "2025-08-05T16:50:05",
-      "modified_gmt": "2025-08-05T16:50:05",
-      "slug": "%d8%aa%d8%b1%d8%a7%d9%85%d9%be-%d9%84%d9%89%d8%af%d9%89%d8%b1%d9%84%d9%89%d9%82%d9%89%d8%af%d9%89%d9",
+      "modified": "2026-10-01T22:53:59",
+      "modified_gmt": "2026-10-01T22:53:59",
+      "slug": "tramp_lidirliqidiki_amerika_dunyagha_we_uyghur_dawasigha_qandaq_tesir_korsitidu",
       "status": "publish",
       "type": "post",
-      "link": "https://orhunpolicycenter.com/uy/2025/02/11/%d8%aa%d8%b1%d8%a7%d9%85%d9%be-%d9%84%d9%89%d8%af%d9%89%d8%b1%d9%84%d9%89%d9%82%d9%89%d8%af%d9%89%d9/",
+      "link": "https://orhunpolicycenter.com/uy/2025/02/11/tramp_lidirliqidiki_amerika_dunyagha_we_uyghur_dawasigha_qandaq_tesir_korsitidu/",
       "title": {
         "rendered": "ترامپ لىدىرلىقىدىكى ئامېرىكا دۇنياغا ۋە ئۇيغۇر داۋاسىغا قانداق تەسىر كۆرسىتىدۇ؟"
       },
@@ -28275,11 +28410,11 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-15",
-        "category-8",
-        "category-5",
-        "category-3",
-        "category-11"
+        "category-arxip",
+        "category-amerika",
+        "category-xitay",
+        "category-siyasiy_analiz",
+        "category-yawropa"
       ],
       "_links": {
         "self": [
@@ -28388,9 +28523,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -28429,9 +28564,9 @@
             },
             {
               "id": 8,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/amerika/",
               "name": "ئامېرىكا",
-              "slug": "%d8%a6%d8%a7%d9%85%db%90%d8%b1%d9%89%d9%83%d8%a7",
+              "slug": "amerika",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -28476,9 +28611,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -28523,9 +28658,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -28564,9 +28699,9 @@
             },
             {
               "id": 11,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/yawropa/",
               "name": "ياۋروپا",
-              "slug": "%d9%8a%d8%a7%db%8b%d8%b1%d9%88%d9%be%d8%a7",
+              "slug": "yawropa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -28623,12 +28758,12 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=317"
       },
-      "modified": "2025-08-05T16:50:08",
-      "modified_gmt": "2025-08-05T16:50:08",
-      "slug": "%d8%ae%db%95%d9%84%d9%82%d8%a6%d8%a7%d8%b1%d8%a7-%d9%85%db%87%d9%86%d8%a7%d8%b3%d9%89%db%8b%db%95%d8",
+      "modified": "2026-10-01T22:55:12",
+      "modified_gmt": "2026-10-01T22:55:12",
+      "slug": "xelqara_munasiwetler_nezeriyesi",
       "status": "publish",
       "type": "post",
-      "link": "https://orhunpolicycenter.com/uy/2025/01/02/%d8%ae%db%95%d9%84%d9%82%d8%a6%d8%a7%d8%b1%d8%a7-%d9%85%db%87%d9%86%d8%a7%d8%b3%d9%89%db%8b%db%95%d8/",
+      "link": "https://orhunpolicycenter.com/uy/2025/01/02/xelqara_munasiwetler_nezeriyesi/",
       "title": {
         "rendered": "خەلقئارا مۇناسىۋەتلەر نەزەرىيەسى"
       },
@@ -28663,8 +28798,8 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-15",
-        "category-14"
+        "category-arxip",
+        "category-kitap_tonushturush"
       ],
       "_links": {
         "self": [
@@ -28773,9 +28908,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -28814,9 +28949,9 @@
             },
             {
               "id": 14,
-              "link": "https://orhunpolicycenter.com/uy/category/%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4/",
+              "link": "https://orhunpolicycenter.com/uy/category/kitap_tonushturush/",
               "name": "كىتاپ تونۇشتۇرۇش",
-              "slug": "%d9%83%d9%89%d8%aa%d8%a7%d9%be-%d8%aa%d9%88%d9%86%db%87%d8%b4%d8%aa%db%87%d8%b1%db%87%d8%b4",
+              "slug": "kitap_tonushturush",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -28867,12 +29002,12 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=348"
       },
-      "modified": "2025-08-05T16:50:10",
-      "modified_gmt": "2025-08-05T16:50:10",
-      "slug": "%d8%b3%db%88%d8%b1%d9%89%d9%8a%db%95%d8%af%d9%89%d9%83%d9%89-%d8%a6%db%86%d8%b2%da%af%d9%89%d8%b1%d9",
+      "modified": "2026-10-01T22:53:40",
+      "modified_gmt": "2026-10-01T22:53:40",
+      "slug": "suriyediki_ozgirishlerning_sewebi_hazirqi_haliti_we_kelgusi_heqqide_tehilil",
       "status": "publish",
       "type": "post",
-      "link": "https://orhunpolicycenter.com/uy/2024/12/11/%d8%b3%db%88%d8%b1%d9%89%d9%8a%db%95%d8%af%d9%89%d9%83%d9%89-%d8%a6%db%86%d8%b2%da%af%d9%89%d8%b1%d9/",
+      "link": "https://orhunpolicycenter.com/uy/2024/12/11/suriyediki_ozgirishlerning_sewebi_hazirqi_haliti_we_kelgusi_heqqide_tehilil/",
       "title": {
         "rendered": "سۈرىيەدىكى ئۆزگىرىشلەرنىڭ سەۋەبى، ھازىرقى ھالىتى ۋە كەلگۈسى ھەققىدە تەھىلىل"
       },
@@ -28908,9 +29043,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-15",
-        "category-7",
-        "category-3"
+        "category-arxip",
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -29019,9 +29154,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -29060,9 +29195,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -29107,9 +29242,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -29202,9 +29337,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-15",
-        "category-7",
-        "category-5"
+        "category-arxip",
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-xitay"
       ],
       "_links": {
         "self": [
@@ -29313,9 +29448,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -29354,9 +29489,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -29401,9 +29536,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -29501,9 +29636,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-15",
-        "category-7",
-        "category-12"
+        "category-arxip",
+        "category-ottura_sherq_we_shimaliy_afriqa",
+        "category-uyghur_diasporasi"
       ],
       "_links": {
         "self": [
@@ -29612,9 +29747,9 @@
           [
             {
               "id": 15,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be/",
+              "link": "https://orhunpolicycenter.com/uy/category/arxip/",
               "name": "ئارخىپ",
-              "slug": "%d8%a6%d8%a7%d8%b1%d8%ae%d9%89%d9%be",
+              "slug": "arxip",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -29653,9 +29788,9 @@
             },
             {
               "id": 7,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_sherq_we_shimaliy_afriqa/",
               "name": "ئوتتۇرا شەرق ۋە شىمالىي ئافرىقا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%b4%db%95%d8%b1%d9%82-%db%8b%db%95-%d8%b4%d9%89%d9%85%d8%a7%d9%84%d9%89%d9%8a-%d8%a6%d8%a7%d9%81%d8%b1%d9%89%d9%82%d8%a7",
+              "slug": "ottura_sherq_we_shimaliy_afriqa",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -29700,9 +29835,9 @@
             },
             {
               "id": 12,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/uyghur_diasporasi/",
               "name": "ئۇيغۇر دىئاسپوراسى",
-              "slug": "%d8%a6%db%87%d9%8a%d8%ba%db%87%d8%b1-%d8%af%d9%89%d8%a6%d8%a7%d8%b3%d9%be%d9%88%d8%b1%d8%a7%d8%b3%d9%89",
+              "slug": "uyghur_diasporasi",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -29759,12 +29894,12 @@
       "guid": {
         "rendered": "https://orhunpolicycenter.com/uy/?p=343"
       },
-      "modified": "2025-08-05T16:50:15",
-      "modified_gmt": "2025-08-05T16:50:15",
-      "slug": "%da%af%d9%89%d8%a6%d9%88-%d9%be%d9%88%d9%84%d9%89%d8%aa%d9%89%d9%83%d8%a7-%db%8b%db%95-%d8%af%db%87",
+      "modified": "2026-10-01T22:53:26",
+      "modified_gmt": "2026-10-01T22:53:26",
+      "slug": "gio-politika_we_dunyawi_hokumranliq-_ottura_asiya",
       "status": "publish",
       "type": "post",
-      "link": "https://orhunpolicycenter.com/uy/2023/06/04/%da%af%d9%89%d8%a6%d9%88-%d9%be%d9%88%d9%84%d9%89%d8%aa%d9%89%d9%83%d8%a7-%db%8b%db%95-%d8%af%db%87/",
+      "link": "https://orhunpolicycenter.com/uy/2023/06/04/gio-politika_we_dunyawi_hokumranliq-_ottura_asiya/",
       "title": {
         "rendered": "گىئو-پولىتىكا ۋە دۇنياۋى ھۆكۈمرانلىق- ئوتتۇرا ئاسىيا"
       },
@@ -29800,9 +29935,9 @@
         "status-publish",
         "format-standard",
         "hentry",
-        "category-10",
-        "category-5",
-        "category-3"
+        "category-ottura_asiya",
+        "category-xitay",
+        "category-siyasiy_analiz"
       ],
       "_links": {
         "self": [
@@ -29911,9 +30046,9 @@
           [
             {
               "id": 10,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%a6%d8%a7%d8%b3%d9%89%d9%8a%d8%a7/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/ottura_asiya/",
               "name": "ئوتتۇرا ئاسىيا",
-              "slug": "%d8%a6%d9%88%d8%aa%d8%aa%db%87%d8%b1%d8%a7-%d8%a6%d8%a7%d8%b3%d9%89%d9%8a%d8%a7",
+              "slug": "ottura_asiya",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -29958,9 +30093,9 @@
             },
             {
               "id": 5,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b1%d8%a7%d9%8a%d9%88%d9%86%d9%84%d8%a7%d8%b1/%d8%ae%d9%89%d8%aa%d8%a7%d9%8a/",
+              "link": "https://orhunpolicycenter.com/uy/category/rayonlar/xitay/",
               "name": "خىتاي",
-              "slug": "%d8%ae%d9%89%d8%aa%d8%a7%d9%8a",
+              "slug": "xitay",
               "taxonomy": "category",
               "_links": {
                 "self": [
@@ -30005,9 +30140,9 @@
             },
             {
               "id": 3,
-              "link": "https://orhunpolicycenter.com/uy/category/%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2/",
+              "link": "https://orhunpolicycenter.com/uy/category/siyasiy_analiz/",
               "name": "سىياسىي ئانالىز",
-              "slug": "%d8%b3%d9%89%d9%8a%d8%a7%d8%b3%d9%89%d9%8a-%d8%a6%d8%a7%d9%86%d8%a7%d9%84%d9%89%d8%b2",
+              "slug": "siyasiy_analiz",
               "taxonomy": "category",
               "_links": {
                 "self": [

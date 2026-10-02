@@ -111,7 +111,7 @@ export function CacheManager() {
       let endpoint = `/api/revalidate?secret=${encodeURIComponent(secret)}`;
       if (action === "all") endpoint += "&action=all";
       else if (action === "sync") endpoint += "&action=sync";
-      else if (action === "warmup") endpoint += "&action=warmup&limit=60";
+      else if (action === "warmup") endpoint += "&action=warmup&limit=100";
       else if (action === "home") endpoint += "&action=single&path=/uy";
       else if (action === "podcasts") endpoint += "&action=single&path=/uy/podcasts";
 

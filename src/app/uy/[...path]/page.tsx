@@ -76,6 +76,16 @@ const resolve = cache(async (pathKey: string) => {
     });
   }
 
+  // Fallback: Partial match for renamed or encoded slugs
+  if (!post) {
+    const allPosts = getLocalSnapshot().posts;
+    const targetDecoded = safeDecode(lastSegment).toLowerCase();
+    post = allPosts.find(p => {
+      const s = safeDecode(p.slug).toLowerCase();
+      return (s.length > 8 && targetDecoded.includes(s)) || (targetDecoded.length > 8 && s.includes(targetDecoded));
+    });
+  }
+
   if (post) return { kind: "post" as const, categories, post };
 });
 
@@ -142,14 +152,7 @@ export default async function ContentPage({ params, searchParams }: Props) {
   const targetPath = normalizedPath(localPath(item.link));
 
   if (currentPath !== targetPath) {
-    const isSamePost = data.kind === "post" && (
-      currentPath.includes(robustDecode(data.post.slug).toLowerCase()) ||
-      targetPath.includes(robustDecode(path[path.length - 1]).toLowerCase()) ||
-      (data.post.date && currentPath.includes(data.post.date.slice(0, 10).replace(/-/g, "/")))
-    );
-    if (!isSamePost) {
-      redirect(localPath(item.link));
-    }
+    redirect(localPath(item.link));
   }
 
   const isPost = data.kind === "post";

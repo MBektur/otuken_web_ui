@@ -58,7 +58,7 @@ async function handleRequest(req: NextRequest) {
 
     if (action === "warmup" || action === "prewarm") {
       const origin = req.nextUrl.origin;
-      const limit = Number(searchParams.get("limit") || 50);
+      const limit = Number(searchParams.get("limit") || 100);
       const result = await preWarmSite(limit, origin);
       return NextResponse.json(result);
     }
