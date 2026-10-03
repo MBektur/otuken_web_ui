@@ -20,6 +20,48 @@ function isAuthorized(secret?: string | null): boolean {
   return validSecrets.includes(secret.trim());
 }
 
+async function syncToGitHub(newPodcasts: CuratedPodcast[]): Promise<boolean> {
+  const token = process.env.GITHUB_TOKEN;
+  if (!token) return false;
+
+  try {
+    const owner = process.env.GITHUB_REPO_OWNER || "MBektur";
+    const repo = process.env.GITHUB_REPO_NAME || "otuken_web_ui";
+    const path = "src/data/podcasts.json";
+
+    const getRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github.v3+json",
+      },
+      cache: "no-store",
+    });
+
+    if (!getRes.ok) return false;
+    const getData = await getRes.json();
+    const sha = getData.sha;
+
+    const content = Buffer.from(JSON.stringify(newPodcasts, null, 2), "utf-8").toString("base64");
+    const putRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github.v3+json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: "chore(admin): sync curated podcasts list",
+        content,
+        sha,
+      }),
+    });
+
+    return putRes.ok;
+  } catch {
+    return false;
+  }
+}
+
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const secret = searchParams.get("secret");
@@ -93,6 +135,7 @@ export async function POST(req: NextRequest) {
       }
 
       const saved = addOrUpdateCuratedPodcast(podcast);
+      await syncToGitHub(getCuratedPodcasts());
       revalidatePath("/uy/podcasts");
       revalidatePath("/ug/podcasts");
 
@@ -111,6 +154,7 @@ export async function POST(req: NextRequest) {
       }
 
       const success = setFeaturedPodcast(id);
+      await syncToGitHub(getCuratedPodcasts());
       revalidatePath("/uy/podcasts");
       revalidatePath("/ug/podcasts");
 
@@ -128,6 +172,7 @@ export async function POST(req: NextRequest) {
       }
 
       const reordered = reorderCuratedPodcasts(ids);
+      await syncToGitHub(getCuratedPodcasts());
       revalidatePath("/uy/podcasts");
       revalidatePath("/ug/podcasts");
 
@@ -145,6 +190,7 @@ export async function POST(req: NextRequest) {
       }
 
       const deleted = deleteCuratedPodcast(id);
+      await syncToGitHub(getCuratedPodcasts());
       try {
         revalidatePath("/uy/podcasts");
         revalidatePath("/ug/podcasts");

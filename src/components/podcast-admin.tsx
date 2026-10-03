@@ -60,6 +60,29 @@ export function PodcastAdmin({ locale = "uy" }: PodcastAdminProps) {
   const [showJsonExport, setShowJsonExport] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  const LOCAL_DELETED_KEY = "otuken_deleted_podcast_ids";
+
+  function getLocalDeletedIds(): string[] {
+    if (typeof window === "undefined") return [];
+    try {
+      const raw = localStorage.getItem(LOCAL_DELETED_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function addLocalDeletedId(id: string) {
+    if (typeof window === "undefined") return;
+    try {
+      const current = getLocalDeletedIds();
+      if (!current.includes(id)) {
+        current.push(id);
+        localStorage.setItem(LOCAL_DELETED_KEY, JSON.stringify(current));
+      }
+    } catch {}
+  }
+
   // Load saved secret & initial list
   useEffect(() => {
     const saved = typeof window !== "undefined" ? sessionStorage.getItem("otuken_cache_secret") : null;
@@ -81,7 +104,10 @@ export function PodcastAdmin({ locale = "uy" }: PodcastAdminProps) {
       const data = await res.json();
       if (res.ok && data.ok) {
         setIsAuthenticated(true);
-        setPodcasts(data.podcasts || []);
+        const deletedIds = getLocalDeletedIds();
+        const serverList: CuratedPodcast[] = data.podcasts || [];
+        const activeList = serverList.filter(p => !deletedIds.includes(p.id) && !deletedIds.includes(p.youtubeId));
+        setPodcasts(activeList);
         sessionStorage.setItem("otuken_cache_secret", key);
       } else {
         setIsAuthenticated(false);
@@ -305,10 +331,10 @@ export function PodcastAdmin({ locale = "uy" }: PodcastAdminProps) {
       });
       const data = await res.json();
       if (res.ok && data.ok) {
-        // Optimistically filter or take server list
-        const updatedList = (data.podcasts && data.podcasts.length >= 0)
-          ? data.podcasts
-          : podcasts.filter(p => p.id !== id);
+        addLocalDeletedId(id);
+        const deletedIds = getLocalDeletedIds();
+        const serverList: CuratedPodcast[] = data.podcasts && data.podcasts.length >= 0 ? data.podcasts : podcasts;
+        const updatedList = serverList.filter((p: CuratedPodcast) => !deletedIds.includes(p.id) && !deletedIds.includes(p.youtubeId));
         setPodcasts(updatedList);
         showMessage(isUg ? "Podkast ochuruldi" : "پودكاست ئۆچۈرۈلدى", "success");
         setConfirmDeleteId(null);
