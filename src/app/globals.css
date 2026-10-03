@@ -1415,7 +1415,7 @@ body.ug-cyrl .hero-slide-overlay {
     gap: 20px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scroll-padding-inline: 4px;
+    scroll-padding-inline: 0;
     overscroll-behavior-x: contain;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -1453,6 +1453,7 @@ body.ug-cyrl .hero-slide-overlay {
     flex: 0 0 calc((100% - 40px) / 3);
     min-width: 210px;
     scroll-snap-align: start;
+    scroll-snap-stop: always;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -1566,7 +1567,7 @@ body.ug-cyrl .hero-slide-overlay {
 
     .recent-carousel-track {
         gap: 14px;
-        scroll-padding-inline: 12px;
+        scroll-padding-inline: 0;
     }
 }
 

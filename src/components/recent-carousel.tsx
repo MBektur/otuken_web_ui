@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useCardCarousel } from "@/components/use-card-carousel";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { WPPost, postCategory, postImage, displayDate } from "@/lib/wordpress";
@@ -16,322 +16,9 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
     return tB - tA;
   });
 
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [canPrev, setCanPrev] = useState(false);
-  const [canNext, setCanNext] = useState(true);
-  const autoplayDirectionRef = useRef<"next" | "prev">("next");
-
-  // Drag tracking refs (both Mouse & Touch)
-  const isInteractingRef = useRef(false);
-  const startXRef = useRef(0);
-  const startYRef = useRef(0);
-  const lastXRef = useRef(0);
-  const lastTimeRef = useRef(0);
-  const velocityRef = useRef(0);
-  const hasMovedRef = useRef(false);
-  const justDraggedRef = useRef(false);
-  const touchScrollLockedRef = useRef(false);
-
-  // Update dynamic pagination (e.g. 2/3) based on visible cards and scroll progress
-  const updatePagination = useCallback(() => {
-    const el = trackRef.current;
-    if (!el || !el.firstElementChild) return;
-    const cards = Array.from(el.children) as HTMLElement[];
-    if (cards.length === 0) return;
-
-    const firstCard = cards[0];
-    const gap = 20;
-    const cardStride = firstCard.offsetWidth + gap;
-    const visibleCount = Math.max(1, Math.round((el.clientWidth + gap) / cardStride));
-    const pages = Math.max(1, Math.ceil(cards.length / visibleCount));
-    setTotalPages(pages);
-
-    const maxScroll = el.scrollWidth - el.clientWidth;
-    const current = Math.abs(el.scrollLeft);
-
-    const atStart = current <= 10;
-    const atEnd = current >= maxScroll - 10;
-
-    setCanPrev(!atStart);
-    setCanNext(!atEnd);
-
-    if (pages <= 1 || atStart) {
-      setCurrentPage(1);
-    } else if (atEnd) {
-      setCurrentPage(pages);
-    } else {
-      const progress = maxScroll > 0 ? Math.min(1, Math.max(0, current / maxScroll)) : 0;
-      const pageIndex = 1 + Math.round(progress * (pages - 1));
-      setCurrentPage(Math.min(pages, Math.max(1, pageIndex)));
-    }
-  }, []);
-
-  useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    updatePagination();
-    el.addEventListener("scroll", updatePagination, { passive: true });
-    window.addEventListener("resize", updatePagination);
-    return () => {
-      el.removeEventListener("scroll", updatePagination);
-      window.removeEventListener("resize", updatePagination);
-    };
-  }, [updatePagination, sortedPosts.length]);
-
-  // Calculate stride of 1 card
-  function getSingleCardStride(): number {
-    const el = trackRef.current;
-    if (!el || !el.firstElementChild) return 260;
-    const firstCard = el.firstElementChild as HTMLElement;
-    const gap = 20;
-    return firstCard.offsetWidth + gap;
-  }
-
-  // Scroll by 1 card with smooth easing
-  // In RTL: next is negative left, prev is positive left
-  const scrollOneCard = useCallback((direction: "next" | "prev") => {
-    const el = trackRef.current;
-    if (!el) return;
-    const stride = getSingleCardStride();
-    const maxScroll = el.scrollWidth - el.clientWidth;
-    const current = Math.abs(el.scrollLeft);
-
-    if (direction === "next") {
-      if (current >= maxScroll - 10) {
-        // En sonuna gelindiğinde döngü yönünü tersine çevir
-        autoplayDirectionRef.current = "prev";
-        return;
-      }
-      el.scrollBy({ left: -stride, behavior: "smooth" });
-    } else {
-      if (current <= 10) {
-        // En başına gelindiğinde döngü yönünü ileriye çevir
-        autoplayDirectionRef.current = "next";
-        return;
-      }
-      el.scrollBy({ left: stride, behavior: "smooth" });
-    }
-  }, []);
-
-  // Autoplay: 4 saniyede bir 1 card ilerlet, sınıra ulaşıldığında yön tersine döner (ping-pong loop)
-  useEffect(() => {
-    if (isPaused || isDragging || sortedPosts.length <= 1) return;
-    const timer = setInterval(() => {
-      const el = trackRef.current;
-      if (!el) return;
-      const maxScroll = el.scrollWidth - el.clientWidth;
-      const current = Math.abs(el.scrollLeft);
-
-      let dir = autoplayDirectionRef.current;
-      if (dir === "next" && current >= maxScroll - 15) {
-        dir = "prev";
-        autoplayDirectionRef.current = "prev";
-      } else if (dir === "prev" && current <= 15) {
-        dir = "next";
-        autoplayDirectionRef.current = "next";
-      }
-
-      scrollOneCard(dir);
-    }, AUTOPLAY_INTERVAL);
-    return () => clearInterval(timer);
-  }, [isPaused, isDragging, scrollOneCard, sortedPosts.length]);
-
-  // Pause autoplay when window/tab is hidden
-  useEffect(() => {
-    function onVisibilityChange() {
-      setIsPaused(document.hidden);
-    }
-    document.addEventListener("visibilitychange", onVisibilityChange);
-    window.addEventListener("focus", onVisibilityChange);
-    window.addEventListener("blur", () => setIsPaused(true));
-    return () => {
-      document.removeEventListener("visibilitychange", onVisibilityChange);
-      window.removeEventListener("focus", onVisibilityChange);
-      window.removeEventListener("blur", () => setIsPaused(true));
-    };
-  }, []);
-
-  // ── MOUSE DRAG HANDLERS ───────────────────────────────────────
-  function handleMouseDown(e: React.MouseEvent) {
-    if (e.button !== 0 || !trackRef.current) return;
-    isInteractingRef.current = true;
-    hasMovedRef.current = false;
-    startXRef.current = e.clientX;
-    startYRef.current = e.clientY;
-    lastXRef.current = e.clientX;
-    lastTimeRef.current = performance.now();
-    velocityRef.current = 0;
-    setIsPaused(true);
-  }
-
-  useEffect(() => {
-    function handleWindowMouseMove(e: MouseEvent) {
-      if (!isInteractingRef.current || !trackRef.current) return;
-      const dx = e.clientX - startXRef.current;
-
-      if (!hasMovedRef.current && Math.abs(dx) > 4) {
-        hasMovedRef.current = true;
-        setIsDragging(true);
-      }
-
-      if (hasMovedRef.current) {
-        const now = performance.now();
-        const dt = now - lastTimeRef.current;
-        const stepDelta = e.clientX - lastXRef.current;
-
-        if (dt > 8) {
-          velocityRef.current = stepDelta / dt;
-          lastXRef.current = e.clientX;
-          lastTimeRef.current = now;
-        }
-
-        // In RTL: moving left (stepDelta < 0) scrolls towards Next (negative delta)
-        trackRef.current.scrollBy({ left: stepDelta });
-      }
-    }
-
-    function handleWindowMouseUp(e: MouseEvent) {
-      if (!isInteractingRef.current) return;
-      isInteractingRef.current = false;
-
-      if (hasMovedRef.current && trackRef.current) {
-        justDraggedRef.current = true;
-
-        // Block accidental clicks on links after dragging
-        const captureClick = (evt: MouseEvent) => {
-          evt.preventDefault();
-          evt.stopPropagation();
-          window.removeEventListener("click", captureClick, true);
-        };
-        window.addEventListener("click", captureClick, true);
-        setTimeout(() => {
-          window.removeEventListener("click", captureClick, true);
-          justDraggedRef.current = false;
-          hasMovedRef.current = false;
-          setIsDragging(false);
-        }, 250);
-
-        const totalDx = e.clientX - startXRef.current;
-        const v = velocityRef.current;
-        const isFlick = Math.abs(v) > 0.28;
-
-        if (Math.abs(totalDx) > 45 || isFlick) {
-          // RTL: dragged left (totalDx < 0) = next card, dragged right = prev card
-          if (totalDx < 0) {
-            scrollOneCard("next");
-          } else {
-            scrollOneCard("prev");
-          }
-        }
-      } else {
-        setIsDragging(false);
-        hasMovedRef.current = false;
-      }
-      setIsPaused(false);
-    }
-
-    window.addEventListener("mousemove", handleWindowMouseMove, { passive: false });
-    window.addEventListener("mouseup", handleWindowMouseUp);
-    return () => {
-      window.removeEventListener("mousemove", handleWindowMouseMove);
-      window.removeEventListener("mouseup", handleWindowMouseUp);
-    };
-  }, [scrollOneCard]);
-
-  // ── TOUCH GESTURE HANDLERS (FINGER / MOBILE) ───────────────────
-  function handleTouchStart(e: React.TouchEvent) {
-    if (!trackRef.current || e.touches.length > 1) return;
-    const touch = e.touches[0];
-    isInteractingRef.current = true;
-    hasMovedRef.current = false;
-    touchScrollLockedRef.current = false;
-    startXRef.current = touch.clientX;
-    startYRef.current = touch.clientY;
-    lastXRef.current = touch.clientX;
-    lastTimeRef.current = performance.now();
-    velocityRef.current = 0;
-    setIsPaused(true);
-  }
-
-  function handleTouchMove(e: React.TouchEvent) {
-    if (!isInteractingRef.current || !trackRef.current || e.touches.length > 1) return;
-    const touch = e.touches[0];
-    const dx = touch.clientX - startXRef.current;
-    const dy = touch.clientY - startYRef.current;
-
-    // Check gesture direction if not locked yet
-    if (!touchScrollLockedRef.current) {
-      if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 7) {
-        // Vertical page scroll: let browser handle native scroll
-        isInteractingRef.current = false;
-        setIsDragging(false);
-        return;
-      }
-      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 5) {
-        // Confirmed horizontal swipe: lock to carousel
-        touchScrollLockedRef.current = true;
-        hasMovedRef.current = true;
-        setIsDragging(true);
-      }
-    }
-
-    if (touchScrollLockedRef.current) {
-      const now = performance.now();
-      const dt = now - lastTimeRef.current;
-      const stepDelta = touch.clientX - lastXRef.current;
-
-      if (dt > 8) {
-        velocityRef.current = stepDelta / dt;
-        lastXRef.current = touch.clientX;
-        lastTimeRef.current = now;
-      }
-
-      // In RTL: moving left (stepDelta < 0) scrolls towards Next
-      trackRef.current.scrollBy({ left: stepDelta });
-    }
-  }
-
-  function handleTouchEnd(e: React.TouchEvent) {
-    if (!isInteractingRef.current) return;
-    isInteractingRef.current = false;
-    setIsPaused(false);
-
-    if (hasMovedRef.current && trackRef.current) {
-      justDraggedRef.current = true;
-      setTimeout(() => {
-        justDraggedRef.current = false;
-        hasMovedRef.current = false;
-        setIsDragging(false);
-      }, 250);
-
-      const touch = e.changedTouches[0];
-      const totalDx = touch.clientX - startXRef.current;
-      const v = velocityRef.current;
-      const isFlick = Math.abs(v) > 0.28 || Math.abs(totalDx) > 35;
-
-      if (isFlick) {
-        // RTL: swipe left = next, swipe right = prev
-        if (totalDx < 0) {
-          scrollOneCard("next");
-        } else {
-          scrollOneCard("prev");
-        }
-      }
-    } else {
-      setIsDragging(false);
-    }
-  }
-
-  function handleClickCapture(e: React.MouseEvent) {
-    if (justDraggedRef.current || isDragging || hasMovedRef.current) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  }
+  const { trackRef, isRtl, isDragging, currentPage, totalPages, canPrev, canNext,
+    autoplayDirectionRef, scrollOneCard, handleClickCapture, pauseHandlers, dragHandlers,
+  } = useCardCarousel(sortedPosts.length, AUTOPLAY_INTERVAL);
 
   if (!sortedPosts || sortedPosts.length === 0) return null;
 
@@ -339,12 +26,7 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
     <section
       className="recent-carousel-section"
       aria-label="يېقىنقى يازمىلار كۆرگەزمىسى"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => {
-        if (!isInteractingRef.current) setIsPaused(false);
-      }}
-      onFocusCapture={() => setIsPaused(true)}
-      onBlurCapture={() => setIsPaused(false)}
+      {...pauseHandlers}
     >
       {/* Header with Title on one side, Link + Page indicator + Arrows on the other */}
       <div className="recent-carousel-header">
@@ -366,7 +48,7 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
             {currentPage}/{totalPages}
           </span>
 
-          {/* RTL: Right button = Prev, Left button = Next */}
+          {/* Navigation follows the actual text direction. */}
           <button
             type="button"
             className="recent-carousel-arrow"
@@ -379,7 +61,7 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
             aria-label="ئالدىنقى يازما"
             title={canPrev ? "ئالدىنقى" : "ئالدىنقى يازما يوق"}
           >
-            <ChevronRight size={15} strokeWidth={2.2} />
+            {isRtl ? <ChevronRight size={15} strokeWidth={2.2} /> : <ChevronLeft size={15} strokeWidth={2.2} />}
           </button>
           <button
             type="button"
@@ -393,7 +75,7 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
             aria-label="كېيىنكى يازما"
             title={canNext ? "كېيىنكى" : "كېيىنكى يازما يوق"}
           >
-            <ChevronLeft size={15} strokeWidth={2.2} />
+            {isRtl ? <ChevronLeft size={15} strokeWidth={2.2} /> : <ChevronRight size={15} strokeWidth={2.2} />}
           </button>
         </div>
       </div>
@@ -403,11 +85,8 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
         <div
           ref={trackRef}
           className={`recent-carousel-track ${isDragging ? "is-dragging" : ""}`}
-          onMouseDown={handleMouseDown}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-          onTouchCancel={handleTouchEnd}
+          {...dragHandlers}
+          tabIndex={0}
           onClickCapture={handleClickCapture}
           onDragStart={(e) => e.preventDefault()}
         >
