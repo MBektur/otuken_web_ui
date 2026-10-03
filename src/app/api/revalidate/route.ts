@@ -6,6 +6,7 @@ import {
   revalidateSpecificUrl,
   autoSyncModifiedPosts,
   preWarmSite,
+  preWarmImages,
 } from "@/lib/cache-sync";
 
 export const dynamic = "force-dynamic";
@@ -60,6 +61,13 @@ async function handleRequest(req: NextRequest) {
       const origin = req.nextUrl.origin;
       const limit = Number(searchParams.get("limit") || 100);
       const result = await preWarmSite(limit, origin);
+      return NextResponse.json(result);
+    }
+
+    if (action === "warm-images" || action === "warmimages" || action === "images") {
+      const origin = req.nextUrl.origin;
+      const limit = Number(searchParams.get("limit") || 50);
+      const result = await preWarmImages(limit, origin);
       return NextResponse.json(result);
     }
 

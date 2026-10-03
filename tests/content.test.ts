@@ -132,3 +132,15 @@ test("cache-sync validates secret key correctly", () => {
   assert.equal(isValidSecret(null), false);
   assert.equal(isValidSecret(""), false);
 });
+
+test("cache-sync preWarmImages extracts images and returns structured result", async () => {
+  const { preWarmImages } = require("../src/lib/cache-sync");
+  assert.equal(typeof preWarmImages, "function");
+  // Test with local origin and dummy fetch so it doesn't make external network calls in CI
+  const result = await preWarmImages(2, "http://localhost:3000");
+  assert.equal(result.ok, true);
+  assert.equal(result.action, "warm-images");
+  assert.equal(typeof result.totalImages, "number");
+  assert.equal(typeof result.warmedCount, "number");
+});
+

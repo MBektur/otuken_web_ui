@@ -18,6 +18,7 @@ import {
   Volume2,
   Terminal,
   Flame,
+  Image as ImageIcon,
 } from "lucide-react";
 
 interface SyncStatus {
@@ -115,7 +116,7 @@ export function CacheManager() {
     }
   }
 
-  async function handleAction(action: "all" | "sync" | "home" | "podcasts" | "warmup") {
+  async function handleAction(action: "all" | "sync" | "home" | "podcasts" | "warmup" | "warm-images") {
     setLoadingAction(action);
     const start = performance.now();
     addLog(`⏳ ${action.toUpperCase()} يېڭىلاش / قىزىتىش مەشغۇلاتى يوللاندى...`, "info");
@@ -125,6 +126,7 @@ export function CacheManager() {
       if (action === "all") endpoint += "&action=all";
       else if (action === "sync") endpoint += "&action=sync";
       else if (action === "warmup") endpoint += "&action=warmup&limit=100";
+      else if (action === "warm-images") endpoint += "&action=warm-images&limit=50";
       else if (action === "home") endpoint += "&action=single&path=/uy";
       else if (action === "podcasts") endpoint += "&action=single&path=/uy/podcasts";
 
@@ -133,11 +135,13 @@ export function CacheManager() {
       const elapsed = Math.round(performance.now() - start);
 
       if (res.ok && data.ok) {
-        addLog(`✅ مۇۋەپپەقىيەتلىك تامام block (${elapsed}ms): ${data.message || "تېز خاتىرە يېڭىلاندى"}`, "success");
-        if (data.samplePaths?.length) {
+        addLog(`✅ مۇۋەپپەقىيەتلىك تامام (${elapsed}ms): ${data.message || "تېز خاتىرە يېڭىلاندى"}`, "success");
+        if (data.sampleUrls?.length) {
+          addLog(`⚡ قىزىتىلغان تاللانما رەسىملەر: ${data.sampleUrls.slice(0, 3).join(", ")}...`, "info");
+        } else if (data.samplePaths?.length) {
           addLog(`⚡ قىزىتىلغان تاللانما بەتلەر: ${data.samplePaths.slice(0, 5).join(", ")}...`, "info");
         }
-        if (action === "sync" || action === "all" || action === "warmup") {
+        if (action === "sync" || action === "all" || action === "warmup" || action === "warm-images") {
           refreshStatus();
         }
       } else {
@@ -335,8 +339,23 @@ export function CacheManager() {
               <Flame size={22} className={loadingAction === "warmup" ? "spin" : ""} />
             </div>
             <div className="btn-text">
-              <strong>🔥 پۈتۈن تور بەتنى قىزىتىش ۋە تولۇق تېز خاتىرە يېڭىلاش (Global Pre-Warm)</strong>
-              <span>بارلىق يازمىلارنى ئارقا پىلاندا يۈكلەپ، كېيىنكى زىيارەتچىلەرگە 0ms لىق تېزلىك بىلەن چىقىرىپ بېرىدۇ</span>
+              <strong>🔥 پۈتۈن تور بەت ۋە رەسىملەرنى تولۇق قىزىتىش (Global Pre-Warm)</strong>
+              <span>بارلىق بەتلەر ۋە رەسىملەرنى ئارقا پىلاندا يۈكلەپ، كېيىنكى زىيارەتچىلەرگە 0ms تېزلىكتە تەييارلايدۇ</span>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            className="action-card-btn highlight"
+            onClick={() => handleAction("warm-images")}
+            disabled={!isAuthenticated || !!loadingAction}
+          >
+            <div className="btn-icon warmup">
+              <ImageIcon size={22} className={loadingAction === "warm-images" ? "spin" : ""} />
+            </div>
+            <div className="btn-text">
+              <strong>🖼️ رەسىملەرنى Vercel CDN گە تولۇق قىزىتىش (Pre-Warm Images)</strong>
+              <span>ئەڭ يېڭى 50 يازما رەسىملىرىنى كىچىك ھەجىمدە (WebP KB) Vercel Edge غا يۈكلەپ ئىسسىتىدۇ</span>
             </div>
           </button>
 

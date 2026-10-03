@@ -62,13 +62,24 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    // Resize and convert to modern high-efficiency WebP
+    // Resize and convert to modern high-efficiency WebP with maximum KB size savings
     try {
-      let pipeline = sharp(rawBuffer);
+      let pipeline = sharp(rawBuffer).rotate();
       if (width) {
-        pipeline = pipeline.resize({ width, withoutEnlargement: true });
+        pipeline = pipeline.resize({
+          width,
+          withoutEnlargement: true,
+          fastShrinkOnLoad: true,
+        });
       }
-      const optimizedBuffer = await pipeline.webp({ quality, effort: 4 }).toBuffer();
+      const targetQuality = Math.min(quality, 75);
+      const optimizedBuffer = await pipeline
+        .webp({
+          quality: targetQuality,
+          effort: 5,
+          smartSubsample: true,
+        })
+        .toBuffer();
 
       return new NextResponse(optimizedBuffer, {
         status: 200,

@@ -1,7 +1,8 @@
 import { revalidatePath, revalidateTag } from "next/cache";
 import { WORDPRESS_URL, localPath, plainText } from "./content";
-import { clearMemoryCache } from "./wordpress";
+import { clearMemoryCache, postImage, toCachedImageUrl } from "./wordpress";
 import { getLocalSnapshot, updateLocalSnapshot } from "./cache-store";
+import { getCuratedPodcasts } from "./podcast-store";
 
 export const DEFAULT_SECRET = process.env.REVALIDATE_SECRET || "otuken2026";
 
@@ -293,14 +294,118 @@ export async function preWarmSite(limit = 100, baseUrl?: string) {
     );
   }
 
+  // Also pre-warm the top 25 images into Vercel Edge CDN
+  let warmedImagesCount = 0;
+  try {
+    const imgWarmResult = await preWarmImages(25, origin);
+    warmedImagesCount = imgWarmResult.warmedCount;
+  } catch {
+    // Non-blocking
+  }
+
   return {
     ok: true,
     action: "warmup",
     totalPosts,
     warmedCount,
+    warmedImagesCount,
     totalTargeted: paths.length,
-    message: `جەمئىي ${totalPosts} يازما بايقالدى. ${warmedCount} بەت مۇۋەپپەقىيەتلىك ئىسسىتىلىپ، تېز خاتىرە ئەسلىمىگە تولۇق ساقلاندى (${totalPosts} yazıdan ${warmedCount} sayfa önbelleklendi)`,
+    message: `جەمئىي ${totalPosts} يازما بايقالدى. ${warmedCount} بەت ۋە ${warmedImagesCount} رەسىم Vercel CDN دا كىچىك ھەجىمدە (KB) تولۇق ئىسسىتىلدى`,
     samplePaths: warmedPaths.slice(0, 10),
+    timestamp: new Date().toISOString(),
+  };
+}
+
+export interface WarmImagesResult {
+  ok: boolean;
+  action: "warm-images";
+  totalImages: number;
+  warmedCount: number;
+  durationMs: number;
+  message: string;
+  sampleUrls: string[];
+  timestamp: string;
+}
+
+export async function preWarmImages(limit = 40, baseUrl?: string): Promise<WarmImagesResult> {
+  const start = performance.now();
+  const origin = (baseUrl || process.env.NEXT_PUBLIC_SITE_URL || "https://otuken-policy-center.vercel.app").replace(/\/$/, "");
+  const snapshot = getLocalSnapshot();
+  const targetPosts = snapshot.posts.slice(0, Math.min(limit, snapshot.posts.length));
+
+  // Collect all unique /api/img URLs needed for hero, card, and thumb
+  const imageUrls = new Set<string>();
+
+  for (let i = 0; i < targetPosts.length; i++) {
+    const post = targetPosts[i];
+    // Hero image (first 4 posts)
+    if (i < 4) {
+      const heroUrl = postImage(post, 1080, 75);
+      if (heroUrl && heroUrl.startsWith("/api/img")) imageUrls.add(heroUrl);
+    }
+    // Card image (all posts in limit)
+    const cardUrl = postImage(post, 640, 75);
+    if (cardUrl && cardUrl.startsWith("/api/img")) imageUrls.add(cardUrl);
+
+    // Thumb image (first 12 posts for rails & briefings)
+    if (i < 12) {
+      const thumbUrl = postImage(post, 384, 75);
+      if (thumbUrl && thumbUrl.startsWith("/api/img")) imageUrls.add(thumbUrl);
+    }
+  }
+
+  // Also include podcasts cover images
+  try {
+    const podcasts = getCuratedPodcasts();
+    for (const pod of podcasts.slice(0, 8)) {
+      if (pod.youtubeId) {
+        const ytThumb = `https://img.youtube.com/vi/${pod.youtubeId}/hqdefault.jpg`;
+        const cachedYt = toCachedImageUrl(ytThumb, 640, 75);
+        if (cachedYt && cachedYt.startsWith("/api/img")) imageUrls.add(cachedYt);
+      }
+    }
+  } catch {}
+
+  const urlList = Array.from(imageUrls);
+  let warmedCount = 0;
+  const sampleUrls: string[] = [];
+
+  // Batch warm-up requests (5 concurrent at a time)
+  const batchSize = 5;
+  for (let i = 0; i < urlList.length; i += batchSize) {
+    const batch = urlList.slice(i, i + batchSize);
+    await Promise.allSettled(
+      batch.map(async relUrl => {
+        try {
+          const fullUrl = relUrl.startsWith("http") ? relUrl : `${origin}${relUrl}`;
+          const res = await fetch(fullUrl, {
+            headers: {
+              "User-Agent": "OtukenImageWarmer/1.0",
+              "Accept": "image/webp,image/avif,image/*,*/*;q=0.8",
+            },
+            signal: AbortSignal.timeout(15000),
+          });
+          if (res.ok) {
+            warmedCount++;
+            if (sampleUrls.length < 5) sampleUrls.push(relUrl);
+          }
+        } catch {
+          // Ignore individual timeouts
+        }
+      })
+    );
+  }
+
+  const durationMs = Math.round(performance.now() - start);
+
+  return {
+    ok: true,
+    action: "warm-images",
+    totalImages: urlList.length,
+    warmedCount,
+    durationMs,
+    message: `${urlList.length} رەسىمدىن ${warmedCount} رەسىم Vercel Edge CDN غا كىرگۈزۈلۈپ، كىچىك ھەجىمدە (KB) پۈتۈنلەي ئىسسىتىلدى (${durationMs}ms)`,
+    sampleUrls,
     timestamp: new Date().toISOString(),
   };
 }
