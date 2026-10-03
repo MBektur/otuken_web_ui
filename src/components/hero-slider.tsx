@@ -7,41 +7,102 @@ import { WPPost, displayDate, postCategory, postImage, readingMinutes } from "@/
 import { localPath, plainText } from "@/lib/content";
 
 const AUTOPLAY_INTERVAL = 6000;
+const TRANSITION_DURATION = 450; // ms
 
 export function HeroSlider({ posts }: { posts: WPPost[] }) {
-  const [active, setActive] = useState(0);
+  const total = posts.length;
+
+  // Extended slides with clones for infinite loop:
+  // [Clone of Last, ...posts, Clone of First]
+  const slides = total > 1 ? [posts[total - 1], ...posts, posts[0]] : posts;
+
+  // currentIndex: 1 corresponds to posts[0]
+  const [currentIndex, setCurrentIndex] = useState(total > 1 ? 1 : 0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [paused, setPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState(0);
 
+  const containerRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const dragStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
   const justDraggedRef = useRef(false);
-  const total = posts.length;
+  const isTransitioningRef = useRef(false);
 
-  const goTo = useCallback((idx: number) => {
-    setActive(((idx % total) + total) % total);
+  // Sync ref with state
+  isTransitioningRef.current = isTransitioning;
+
+  // Active dot indicator (0 to total - 1)
+  const activeDotIndex = total > 1
+    ? (currentIndex - 1 + total) % total
+    : 0;
+
+  // Navigate to target index with animation
+  const goToIndex = useCallback((targetIndex: number) => {
+    if (total <= 1 || isTransitioningRef.current) return;
+    setIsTransitioning(true);
+    setCurrentIndex(targetIndex);
   }, [total]);
 
-  const next = useCallback(() => goTo(active + 1), [active, goTo]);
-  const prev = useCallback(() => goTo(active - 1), [active, goTo]);
+  // In RTL:
+  // Next in sequence = currentIndex + 1
+  // Prev in sequence = currentIndex - 1
+  const goNext = useCallback(() => {
+    goToIndex(currentIndex + 1);
+  }, [currentIndex, goToIndex]);
+
+  const goPrev = useCallback(() => {
+    goToIndex(currentIndex - 1);
+  }, [currentIndex, goToIndex]);
+
+  // Jump to specific slide from dot indicators
+  const goToSlide = useCallback((postIdx: number) => {
+    goToIndex(postIdx + 1);
+  }, [goToIndex]);
 
   // Autoplay
   useEffect(() => {
     if (paused || isDragging || total <= 1) return;
-    timerRef.current = setInterval(next, AUTOPLAY_INTERVAL);
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [paused, isDragging, next, total]);
+    timerRef.current = setInterval(goNext, AUTOPLAY_INTERVAL);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [paused, isDragging, goNext, total]);
 
-  // Keyboard navigation for RTL: Left arrow = Next (advance), Right arrow = Prev (go back)
+  // Handle clone boundary reset on transition end
+  const handleTransitionEnd = useCallback(() => {
+    setIsTransitioning(false);
+
+    if (total > 1) {
+      if (currentIndex === 0) {
+        // Reached clone of last slide -> jump to real last slide
+        setCurrentIndex(total);
+      } else if (currentIndex === total + 1) {
+        // Reached clone of first slide -> jump to real first slide
+        setCurrentIndex(1);
+      }
+    }
+  }, [currentIndex, total]);
+
+  // Keyboard navigation for RTL:
+  // Left arrow = Next (advance forward in reading order)
+  // Right arrow = Prev (go backward in reading order)
   function onKeyDown(e: React.KeyboardEvent) {
-    if (e.key === "ArrowLeft") { next(); e.preventDefault(); }
-    if (e.key === "ArrowRight") { prev(); e.preventDefault(); }
+    if (e.key === "ArrowLeft") {
+      goNext();
+      e.preventDefault();
+    } else if (e.key === "ArrowRight") {
+      goPrev();
+      e.preventDefault();
+    }
   }
 
-  // Pointer drag & drop (mouse + finger)
+  // Pointer drag & drop (mouse + touch)
   function onPointerDown(e: React.PointerEvent) {
+    if (total <= 1) return;
     if (e.button !== 0 && e.pointerType === "mouse") return;
+    if (isTransitioningRef.current) return;
+
     dragStartRef.current = { x: e.clientX, y: e.clientY, time: Date.now() };
     setIsDragging(true);
     setDragOffset(0);
@@ -49,39 +110,46 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
   }
 
   function onPointerMove(e: React.PointerEvent) {
-    if (!dragStartRef.current) return;
+    if (!dragStartRef.current || !isDragging) return;
     const dx = e.clientX - dragStartRef.current.x;
     const dy = e.clientY - dragStartRef.current.y;
 
-    // If initial gesture is vertical scroll, release drag
-    if (Math.abs(dy) > Math.abs(dx) && Math.abs(dragOffset) === 0 && Math.abs(dy) > 8) {
+    // Release drag if mostly vertical scroll on mobile
+    if (Math.abs(dy) > Math.abs(dx) && Math.abs(dragOffset) === 0 && Math.abs(dy) > 10) {
       dragStartRef.current = null;
-      setIsDragging(false);
-      return;
-    }
-
-    // Dampen drag resistance
-    const damped = Math.sign(dx) * Math.min(Math.abs(dx), 240);
-    setDragOffset(damped);
-  }
-
-  const finishDrag = useCallback(() => {
-    if (!dragStartRef.current) {
       setIsDragging(false);
       setDragOffset(0);
       return;
     }
+
+    setDragOffset(dx);
+  }
+
+  const finishDrag = useCallback(() => {
+    if (!dragStartRef.current || !isDragging) {
+      setIsDragging(false);
+      setDragOffset(0);
+      return;
+    }
+
     const offset = dragOffset;
     const elapsed = Date.now() - dragStartRef.current.time;
-    const isFlick = elapsed < 320 && Math.abs(offset) > 25;
-    const isMoved = Math.abs(offset) > 55;
+    const containerWidth = containerRef.current?.offsetWidth || 600;
+    const threshold = Math.min(containerWidth * 0.16, 70);
+    const isFlick = elapsed < 300 && Math.abs(offset) > 25;
+    const isMoved = Math.abs(offset) > threshold;
 
     if (isFlick || isMoved) {
       justDraggedRef.current = true;
       setTimeout(() => { justDraggedRef.current = false; }, 250);
-      // RTL: dragging left (offset < 0) advances to next, dragging right (offset > 0) goes to prev
-      if (offset < 0) next(); else prev();
-    } else if (Math.abs(offset) > 6) {
+      // Dragging left (negative offset) pulls next slide into view
+      // Dragging right (positive offset) pulls prev slide into view
+      if (offset < 0) {
+        goToIndex(currentIndex + 1);
+      } else {
+        goToIndex(currentIndex - 1);
+      }
+    } else if (Math.abs(offset) > 5) {
       justDraggedRef.current = true;
       setTimeout(() => { justDraggedRef.current = false; }, 250);
     }
@@ -90,7 +158,7 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
     setIsDragging(false);
     setDragOffset(0);
     setPaused(false);
-  }, [dragOffset, next, prev]);
+  }, [currentIndex, dragOffset, goToIndex, isDragging]);
 
   function handleLinkClick(e: React.MouseEvent) {
     if (justDraggedRef.current) {
@@ -99,8 +167,20 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
     }
   }
 
+  // Calculate track transform
+  // When dragging: no transition, directly follow dragOffset
+  // When transitioning: smooth cubic bezier
+  // When teleporting clones: transition is disabled
+  const trackStyle = {
+    transform: `translate3d(calc(-${currentIndex * 100}% + ${dragOffset}px), 0, 0)`,
+    transition: isDragging || !isTransitioning
+      ? "none"
+      : `transform ${TRANSITION_DURATION}ms cubic-bezier(0.25, 1, 0.5, 1)`,
+  };
+
   return (
     <div
+      ref={containerRef}
       className={`hero-slider ${isDragging ? "is-dragging" : ""}`}
       role="region"
       aria-roledescription="carousel"
@@ -116,25 +196,24 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
       onPointerCancel={finishDrag}
       tabIndex={0}
     >
-      {/* Slides */}
+      {/* Slides Track */}
       <div
         className="hero-slider-track"
-        style={{
-          transform: dragOffset !== 0 ? `translateX(${dragOffset}px)` : undefined,
-          transition: isDragging ? "none" : "transform 0.3s cubic-bezier(0.2, 0.8, 0.4, 1)",
-        }}
+        style={trackStyle}
+        onTransitionEnd={handleTransitionEnd}
       >
-        {posts.map((post, idx) => {
+        {slides.map((post, idx) => {
           const src = postImage(post, 1080, 80);
-          const isActive = idx === active;
+          const isCurrent = idx === currentIndex;
           return (
             <article
-              key={post.id}
-              className={`hero-slide ${isActive ? "is-active" : ""}`}
+              key={`${post.id}-${idx}`}
+              className={`hero-slide ${isCurrent ? "is-active" : ""}`}
+              dir="rtl"
               role="group"
               aria-roledescription="slide"
-              aria-label={`${idx + 1} / ${total}`}
-              aria-hidden={!isActive}
+              aria-label={`${activeDotIndex + 1} / ${total}`}
+              aria-hidden={!isCurrent}
             >
               {/* Background image */}
               <div className="hero-slide-bg">
@@ -142,8 +221,8 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
                   <img
                     src={src}
                     alt=""
-                    loading={idx === 0 ? "eager" : "lazy"}
-                    fetchPriority={idx === 0 ? "high" : "auto"}
+                    loading={idx <= 2 ? "eager" : "lazy"}
+                    fetchPriority={idx === 1 ? "high" : "auto"}
                     decoding="async"
                     draggable={false}
                   />
@@ -155,7 +234,11 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
               <div className="hero-slide-content">
                 <div className="hero-slide-meta">
                   <span>{postCategory(post)}</span>
-                  {post.youtubeId && <span className="podcast-pill"><Play size={10} fill="currentColor" /> سىن</span>}
+                  {post.youtubeId && (
+                    <span className="podcast-pill">
+                      <Play size={10} fill="currentColor" /> سىن
+                    </span>
+                  )}
                   <i />
                   <time dateTime={post.date} dir="ltr">{displayDate(post.date)}</time>
                 </div>
@@ -163,7 +246,7 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
                   <Link
                     href={localPath(post.link)}
                     prefetch={true}
-                    tabIndex={isActive ? 0 : -1}
+                    tabIndex={isCurrent ? 0 : -1}
                     onClick={handleLinkClick}
                   >
                     {plainText(post.title.rendered)}
@@ -180,7 +263,7 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
                     href={localPath(post.link)}
                     className="hero-slide-cta"
                     prefetch={true}
-                    tabIndex={isActive ? 0 : -1}
+                    tabIndex={isCurrent ? 0 : -1}
                     onClick={handleLinkClick}
                   >
                     داۋامىنى ئوقۇڭ
@@ -192,13 +275,13 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
         })}
       </div>
 
-      {/* Navigation arrows (RTL: Left arrow = Next, Right arrow = Prev) */}
+      {/* Navigation arrows (RTL: Left button = Next, Right button = Prev) */}
       {total > 1 && (
         <>
           <button
             type="button"
             className="hero-slider-arrow hero-slider-arrow-left"
-            onClick={next}
+            onClick={goNext}
             aria-label="كېيىنكى"
           >
             <ChevronLeft size={22} />
@@ -206,7 +289,7 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
           <button
             type="button"
             className="hero-slider-arrow hero-slider-arrow-right"
-            onClick={prev}
+            onClick={goPrev}
             aria-label="ئالدىنقى"
           >
             <ChevronRight size={22} />
@@ -222,10 +305,10 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
               key={idx}
               type="button"
               role="tab"
-              className={`hero-slider-dot ${idx === active ? "is-active" : ""}`}
-              aria-selected={idx === active}
+              className={`hero-slider-dot ${idx === activeDotIndex ? "is-active" : ""}`}
+              aria-selected={idx === activeDotIndex}
               aria-label={`${idx + 1}-يازما`}
-              onClick={() => goTo(idx)}
+              onClick={() => goToSlide(idx)}
             />
           ))}
         </div>
@@ -237,7 +320,7 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
           <div
             className={`hero-slider-progress-bar ${!paused && !isDragging ? "is-running" : ""}`}
             style={{ animationDuration: `${AUTOPLAY_INTERVAL}ms` }}
-            key={active}
+            key={activeDotIndex}
           />
         </div>
       )}
