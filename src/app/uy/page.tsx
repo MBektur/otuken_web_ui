@@ -4,6 +4,7 @@ import { getCategories, getPosts, postCategory, WordPressError } from "@/lib/wor
 import { localPath, plainText, robustDecode } from "@/lib/content";
 import { Header, Footer, SearchForm } from "@/components/shell";
 import { Hero, LatestRail, RegionRail, PostCard, SectionTitle, Pagination, PostPhoto } from "@/components/editorial";
+import { RecentCarousel } from "@/components/recent-carousel";
 
 export const revalidate = 300;
 
@@ -48,7 +49,7 @@ export default async function Home({ searchParams }: Props) {
     <div className="main-column">
       {listing ? <><div className="listing-header"><span className="eyebrow">ئۆتۈكەن ئارخىپى</span><h1>{query ? `«${query}» نىڭ ئىزدەش نەتىجىسى` : "بارلىق يازمىلار"}</h1><p><b dir="ltr">{result.total}</b> يازما</p><SearchForm value={query} /></div><div className="posts-grid">{posts.map(post => <PostCard key={post.id} post={post} />)}</div>{!posts.length && <div className="empty-state"><h2>يازما تېپىلمىدى</h2><p>باشقا ئاچقۇچلۇق سۆز بىلەن ئىزدەپ بېقىڭ.</p><Link href="/uy">باشبەتكە قايتىش ←</Link></div>}</> : <>
         {posts[0] && <Hero post={posts[0]} secondary={posts[1]} posts={posts.slice(0, 5)} />}
-        <section className="readings-section"><SectionTitle href="/uy?q=">يېقىنقى يازمىلار</SectionTitle><div className="posts-grid">{posts.slice(5, 8).map(post => <PostCard key={post.id} post={post} />)}</div></section>
+        <RecentCarousel posts={posts} />
         <section className="briefings-section"><SectionTitle href="/uy?q=">داۋاملىق ئوقۇڭ</SectionTitle><div className="briefings-grid">{posts.slice(8, 11).map(post => <article className="briefing" key={post.id}><PostPhoto post={post} /><div className="briefing-content"><span className="eyebrow">{postCategory(post)}</span><h3><Link href={localPath(post.link)}>{plainText(post.title.rendered)}</Link></h3><Link href={localPath(post.link)} className="briefing-link">ئوقۇڭ ←</Link></div></article>)}</div></section>
       </>}
       <Pagination page={page} totalPages={result.totalPages} base="/uy" query={query} />

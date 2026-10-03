@@ -4,6 +4,7 @@ import { getCategoriesUg, getPostsUg, postCategory, WordPressError, localPath } 
 import { plainText, robustDecode } from "@/lib/content";
 import { Header, Footer, SearchForm } from "@/components-ug/shell";
 import { Hero, LatestRail, RegionRail, PostCard, SectionTitle, Pagination, PostPhoto } from "@/components-ug/editorial";
+import { RecentCarousel } from "@/components-ug/recent-carousel";
 
 export const revalidate = 300;
 
@@ -48,7 +49,7 @@ export default async function Home({ searchParams }: Props) {
     <div className="main-column">
       {listing ? <><div className="listing-header"><span className="eyebrow">Өтүкән Архипи</span><h1>{query ? `«${query}» Ниң Издәш Нәтиҗиси` : "Барлиқ Йазмилар"}</h1><p><b dir="ltr">{result.total}</b> Йазма</p><SearchForm value={query} /></div><div className="posts-grid">{posts.map((post: any) => <PostCard key={post.id} post={post} />)}</div>{!posts.length && <div className="empty-state"><h2>Йазма Тепилмиди</h2><p>Башқа Ачқучлуқ Сөз Билән Издәп Беқиң.</p><Link href="/ug">Башбәткә Қайтиш →</Link></div>}</> : <>
         {posts[0] && <Hero post={posts[0]} secondary={posts[1]} posts={posts.slice(0, 5)} />}
-        <section className="readings-section"><SectionTitle href="/ug?q=">Йеқинқи Йазмилар</SectionTitle><div className="posts-grid">{posts.slice(5, 8).map((post: any) => <PostCard key={post.id} post={post} />)}</div></section>
+        <RecentCarousel posts={posts} />
         <section className="briefings-section"><SectionTitle href="/ug?q=">Давамлиқ Оқуң</SectionTitle><div className="briefings-grid">{posts.slice(8, 11).map((post: any) => <article className="briefing" key={post.id}><PostPhoto post={post} /><div className="briefing-content"><span className="eyebrow">{postCategory(post)}</span><h3><Link href={localPath(post.link)}>{plainText(post.title.rendered)}</Link></h3><Link href={localPath(post.link)} className="briefing-link">Оқуң →</Link></div></article>)}</div></section>
       </>}
       <Pagination page={page} totalPages={result.totalPages} base="/ug" query={query} />
