@@ -789,30 +789,32 @@ body.ug-cyrl .scroll-controls {
     transform: scale(1.05);
 }
 
-/* Dark gradient overlay */
+/* Dark gradient overlay — balanced across left and right sides */
 .hero-slide-overlay {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     background:
-        linear-gradient(0deg, rgba(12, 10, 7, 0.95) 0%, rgba(12, 10, 7, 0.72) 42%, rgba(12, 10, 7, 0.2) 75%, transparent 100%),
-        linear-gradient(270deg, rgba(12, 10, 7, 0.55) 0%, rgba(12, 10, 7, 0.15) 50%, transparent 100%);
+        linear-gradient(0deg, rgba(12, 10, 7, 0.95) 0%, rgba(12, 10, 7, 0.7) 45%, rgba(12, 10, 7, 0.2) 75%, transparent 100%),
+        linear-gradient(90deg, rgba(12, 10, 7, 0.35) 0%, transparent 25%, transparent 75%, rgba(12, 10, 7, 0.35) 100%);
     z-index: 1;
 }
 
 body.ug-cyrl .hero-slide-overlay {
     background:
-        linear-gradient(0deg, rgba(12, 10, 7, 0.95) 0%, rgba(12, 10, 7, 0.72) 42%, rgba(12, 10, 7, 0.2) 75%, transparent 100%),
-        linear-gradient(90deg, rgba(12, 10, 7, 0.55) 0%, rgba(12, 10, 7, 0.15) 50%, transparent 100%);
+        linear-gradient(0deg, rgba(12, 10, 7, 0.95) 0%, rgba(12, 10, 7, 0.7) 45%, rgba(12, 10, 7, 0.2) 75%, transparent 100%),
+        linear-gradient(90deg, rgba(12, 10, 7, 0.35) 0%, transparent 25%, transparent 75%, rgba(12, 10, 7, 0.35) 100%);
 }
 
 /* Content overlay */
 .hero-slide-content {
     position: relative;
     z-index: 2;
-    padding: 40px 36px;
-    max-width: 620px;
+    padding: 36px 56px 44px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -872,6 +874,7 @@ body.ug-cyrl .hero-slide-overlay {
     margin: 0;
     color: #fff;
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    max-width: 780px;
 }
 
 .hero-slide-content h2 a {
@@ -894,6 +897,7 @@ body.ug-cyrl .hero-slide-overlay {
     -webkit-box-orient: vertical;
     overflow: hidden;
     margin: 0;
+    max-width: 740px;
 }
 
 /* Footer row */
