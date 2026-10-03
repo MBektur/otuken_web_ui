@@ -12,6 +12,7 @@ import {
   Bookmark,
   Languages,
   Facebook,
+  Youtube,
 } from "lucide-react";
 import { Category } from "@/lib/wordpress";
 import { localPath } from "@/lib/content";
@@ -42,17 +43,28 @@ export function Header({ categories, active }: { categories: Category[]; active?
       <div className="utility-left">
         <span>تەتقىقات · ئانالىز · يېڭى نەزەر</span>
         <span className="utility-divider">|</span>
-        <a
-          href="https://www.facebook.com/profile.php?id=100081744912628"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="topbar-social-link"
-          aria-label="Facebook"
-          title="ئۆتۈكەن سىياسەت تەتقىقات مەركىزى Facebook سەھىپىسى"
-        >
-          <Facebook size={13} aria-hidden="true" />
-          <span>Facebook</span>
-        </a>
+        <div className="utility-socials">
+          <a
+            href="https://www.facebook.com/profile.php?id=100081744912628"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-round-btn facebook"
+            aria-label="Facebook"
+            title="ئۆتۈكەن سىياسەت تەتقىقات مەركىزى Facebook سەھىپىسى"
+          >
+            <span className="social-f" aria-hidden="true">f</span>
+          </a>
+          <a
+            href="https://www.youtube.com/@%C3%96t%C3%BCkenPolicyCenter"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-round-btn youtube"
+            aria-label="YouTube"
+            title="ئۆتۈكەن سىياسەت تەتقىقات مەركىزى YouTube قانىلى"
+          >
+            <Youtube size={13} aria-hidden="true" />
+          </a>
+        </div>
       </div>
       <LanguageSwitcher currentLocale="uy" />
     </div></div>
@@ -129,17 +141,28 @@ export function Footer() {
           <Link href="/uy/ھەققىمىزدە/">ھەققىمىزدە</Link>
           <Link href="/uy/biz-bilen-alaqilid/">ئالاقىلىشىڭ</Link>
           <Link href="/uy/teklip-pikir/">تەكلىپ-پىكىر</Link>
-          <a
-            href="https://www.facebook.com/profile.php?id=100081744912628"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="footer-social-link"
-            title="Facebook"
-            aria-label="Facebook"
-          >
-            <Facebook size={14} aria-hidden="true" />
-            <span>Facebook</span>
-          </a>
+          <div className="footer-socials">
+            <a
+              href="https://www.facebook.com/profile.php?id=100081744912628"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-round-btn footer-btn facebook"
+              title="Facebook"
+              aria-label="Facebook"
+            >
+              <span className="social-f" aria-hidden="true">f</span>
+            </a>
+            <a
+              href="https://www.youtube.com/@%C3%96t%C3%BCkenPolicyCenter"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-round-btn footer-btn youtube"
+              title="YouTube"
+              aria-label="YouTube"
+            >
+              <Youtube size={15} aria-hidden="true" />
+            </a>
+          </div>
         </nav>
         <small>© {new Date().getFullYear()} ئۆتۈكەن سىياسەت تەتقىقات مەركىزى</small>
       </div>

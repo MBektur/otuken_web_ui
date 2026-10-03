@@ -157,7 +157,7 @@ svg {
 .utility-left {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 .utility-divider {
@@ -165,22 +165,58 @@ svg {
     opacity: 0.8;
 }
 
-.topbar-social-link {
+.utility-socials {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    color: var(--muted);
-    font-size: 11.5px;
-    font-weight: 600;
-    text-decoration: none;
-    padding: 2px 8px;
-    border-radius: 4px;
-    transition: all 0.2s ease;
+    gap: 6px;
 }
 
-.topbar-social-link:hover {
+.social-round-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: #fff;
+    border: 1px solid var(--rule);
+    color: var(--muted);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.social-round-btn .social-f {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 1;
+    margin-top: -1px;
+    color: inherit;
+}
+
+.social-round-btn.facebook {
     color: #1877f2;
-    background: rgba(24, 119, 242, 0.08);
+}
+
+.social-round-btn.facebook:hover {
+    background: #1877f2;
+    border-color: #1877f2;
+    color: #fff !important;
+    transform: translateY(-1px) scale(1.08);
+    box-shadow: 0 3px 8px rgba(24, 119, 242, 0.35);
+}
+
+.social-round-btn.youtube {
+    color: #e53935;
+}
+
+.social-round-btn.youtube:hover {
+    background: #e53935;
+    border-color: #e53935;
+    color: #fff !important;
+    transform: translateY(-1px) scale(1.08);
+    box-shadow: 0 3px 8px rgba(229, 57, 53, 0.35);
 }
 
 .language-links {
@@ -1880,7 +1916,7 @@ body.ug-cyrl .scroll-controls {
 /* Scroll Controls */
 .scroll-controls {
     position: fixed;
-    bottom: 28px;
+    bottom: 70px;
     left: 24px;
     right: auto;
     z-index: 95;
@@ -2678,27 +2714,40 @@ body.ug-cyrl .scroll-controls {
     color: white
 }
 
-.footer-social-link {
+.footer-socials {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    color: #f5eadc;
-    text-decoration: none;
-    padding: 4px 11px;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    font-size: 12px;
-    font-weight: 600;
-    transition: all 0.2s ease;
+    gap: 8px;
+    margin-inline-start: 6px;
 }
 
-.footer-social-link:hover {
+.social-round-btn.footer-btn {
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #f5eadc;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.social-round-btn.footer-btn .social-f {
+    font-size: 16px;
+}
+
+.social-round-btn.footer-btn.facebook:hover {
     background: #1877f2;
     border-color: #1877f2;
-    color: #ffffff !important;
-    transform: translateY(-1px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+    color: #fff !important;
+    transform: translateY(-2px) scale(1.08);
+    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.4);
+}
+
+.social-round-btn.footer-btn.youtube:hover {
+    background: #ff0000;
+    border-color: #ff0000;
+    color: #fff !important;
+    transform: translateY(-2px) scale(1.08);
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
 }
 
 .footer small {
@@ -3354,7 +3403,7 @@ body.ug-cyrl .scroll-controls {
     .scroll-controls {
         left: 14px;
         right: auto;
-        bottom: 18px;
+        bottom: 70px;
     }
 
     html[dir="ltr"] .scroll-controls,
