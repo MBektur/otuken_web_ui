@@ -34,6 +34,7 @@ function getCategoryNavIcon(categoryId: number, slug: string) {
 }
 
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { StickyNav } from "@/components/sticky-nav";
 
 export function Header({ categories, active }: { categories: Category[]; active?: number | string }) {
   const analysis = categories.find(c => c.id === 3);
@@ -84,7 +85,11 @@ export function Header({ categories, active }: { categories: Category[]; active?
       <div className="masthead-motto"><span>دۇنياغا نەزەر،</span><span>كەلگۈسىگە تەپەككۇر.</span><small dir="ltr">INDEPENDENT THOUGHT. GLOBAL PERSPECTIVE.</small></div>
       <div className="masthead-edition" dir="ltr"><span>THE ORHUN REVIEW</span><span className="edition-line" /><span>ANALYSIS & INSIGHT</span></div>
     </header>
-    <div className="navigation-wrap"><div className="site-width navigation-inner">
+    <StickyNav
+      homeHref="/uy"
+      logoSrc="/logo.Header-UY.png"
+      altText="ئۆتۈكەن سىياسەت تەتقىقات مەركىزى"
+    >
       <nav aria-label="باش تىزىملىك">
         <Link href="/uy" prefetch={true} className={!active ? "active" : ""}>
           <Home size={15} className="nav-icon" aria-hidden="true" />
@@ -112,7 +117,7 @@ export function Header({ categories, active }: { categories: Category[]; active?
         </Link>
       </nav>
       <SearchForm compact />
-    </div></div>
+    </StickyNav>
   </>;
 }
 

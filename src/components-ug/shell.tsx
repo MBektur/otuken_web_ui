@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { Category, localPath } from "@/lib/wordpress-ug";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { StickyNav } from "@/components/sticky-nav";
 
 function getCategoryNavIcon(categoryId: number, slug: string) {
   if (categoryId === 3 || slug.includes("analiz")) {
@@ -82,7 +83,11 @@ export function Header({ categories, active }: { categories: Category[]; active?
       <div className="masthead-motto"><span>Дунйаға Нәзәр,</span><span>Кәлгүсигә Тәпәккур.</span><small dir="ltr">INDEPENDENT THOUGHT. GLOBAL PERSPECTIVE.</small></div>
       <div className="masthead-edition" dir="ltr"><span>THE ORHUN REVIEW</span><span className="edition-line" /><span>ANALYSIS & INSIGHT</span></div>
     </header>
-    <div className="navigation-wrap"><div className="site-width navigation-inner">
+    <StickyNav
+      homeHref="/ug"
+      logoSrc="/logo.Header-UY.png"
+      altText="Өтүкән Сийاسәт Тәтқиқат Мәркизи"
+    >
       <nav aria-label="Баш Тизимлик">
         <Link href="/ug" prefetch={true} className={!active ? "active" : ""}>
           <Home size={15} className="nav-icon" aria-hidden="true" />
@@ -110,7 +115,7 @@ export function Header({ categories, active }: { categories: Category[]; active?
         </Link>
       </nav>
       <SearchForm compact />
-    </div></div>
+    </StickyNav>
   </>;
 }
 

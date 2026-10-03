@@ -15,7 +15,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   const decoded = q ? robustDecode(q).slice(0, 200).trim() : undefined;
   const query = decoded !== undefined && decoded !== "" ? decoded : undefined;
   const browsing = q !== undefined || !!page;
-  const title = query ? `Издәш: ${query}` : (page ? "Барлиқ Йазмилар" : "Башбәт — Дунйаға Нәзәр, Кәлгүсигә Тәпәккур");
+  const title = query ? `Издәш: ${query}` : (page ? "Барлиқ Йазмилар" : "Башбәт — Өтүкән Сийасәт Тәтқиқат Мәркизи");
   const description = query
     ? `«${query}» Һәққидики тәтқиқат, мақалә вә сийасий анализлар.`
     : "Өтүкән Сийасәт Тәтқиқат Мәркизи — Мустәқил көз қараш, дунйаға нәзәр вә кәлгүсигә тәпәккур.";

@@ -394,7 +394,62 @@ body.ug-cyrl .scroll-controls {
 }
 
 .navigation-wrap {
-    border-block: 1px solid var(--rule)
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--paper);
+    border-block: 1px solid var(--rule);
+    transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.navigation-wrap.is-scrolled {
+    background: rgba(250, 247, 242, 0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid var(--rule);
+}
+
+.sticky-brand-logo {
+    display: inline-flex;
+    align-items: center;
+    overflow: hidden;
+    max-width: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.94);
+    margin-inline-end: 0;
+    pointer-events: none;
+    transition: max-width 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.24s ease,
+                transform 0.24s ease,
+                margin-inline-end 0.24s ease,
+                visibility 0.24s ease;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.navigation-wrap.is-scrolled .sticky-brand-logo {
+    max-width: 175px;
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    margin-inline-end: 20px;
+    pointer-events: auto;
+}
+
+.sticky-logo-img {
+    height: 32px;
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    display: block;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.sticky-brand-logo:hover .sticky-logo-img {
+    opacity: 0.85;
+    transform: translateY(-1px);
 }
 
 .navigation-inner {
@@ -409,7 +464,8 @@ body.ug-cyrl .scroll-controls {
     display: flex;
     align-items: center;
     gap: 27px;
-    white-space: nowrap
+    white-space: nowrap;
+    margin-inline-end: auto;
 }
 
 .navigation-inner nav a {
@@ -3031,6 +3087,43 @@ body.ug-cyrl .scroll-controls {
         width: 100%
     }
 
+    .navigation-wrap.is-scrolled {
+        padding-block: 0;
+    }
+
+    .navigation-wrap.is-scrolled .navigation-inner {
+        flex-wrap: nowrap;
+        padding-bottom: 0;
+        min-height: 48px;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .navigation-wrap.is-scrolled .search-form.compact {
+        display: none;
+    }
+
+    .navigation-wrap.is-scrolled nav {
+        width: auto;
+        flex: 1;
+        min-width: 0;
+        margin-inline-end: 0;
+    }
+
+    .navigation-wrap.is-scrolled nav a {
+        line-height: 48px;
+        font-size: 14px;
+    }
+
+    .navigation-wrap.is-scrolled .sticky-brand-logo {
+        max-width: 120px;
+        margin-inline-end: 12px;
+    }
+
+    .navigation-wrap.is-scrolled .sticky-logo-img {
+        height: 24px;
+    }
+
     .hero-story h1 {
         font-size: 32px
     }
@@ -3088,6 +3181,15 @@ body.ug-cyrl .scroll-controls {
     .brand-logo-img {
         height: 46px;
         max-width: 250px
+    }
+
+    .navigation-wrap.is-scrolled .sticky-brand-logo {
+        max-width: 105px;
+        margin-inline-end: 8px;
+    }
+
+    .navigation-wrap.is-scrolled .sticky-logo-img {
+        height: 22px;
     }
 
     .brand-mark {
