@@ -721,6 +721,19 @@ body.ug-cyrl .scroll-controls {
     height: 100%;
     min-height: 460px;
     background: #151310;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y pinch-zoom;
+}
+
+.hero-slider.is-dragging {
+    cursor: grabbing;
+}
+
+.hero-slider.is-dragging * {
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .hero-slider-track {
@@ -930,25 +943,26 @@ body.ug-cyrl .hero-slide-overlay {
     transform: translateY(-1px);
 }
 
-/* Navigation arrows */
+/* Navigation arrows - Left & Right */
 .hero-slider-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 5;
-    width: 38px;
-    height: 38px;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(0, 0, 0, 0.35);
-    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(15, 12, 8, 0.55);
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    backdrop-filter: blur(6px);
-    transition: background .2s, border-color .2s, opacity .2s;
-    opacity: 0;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: background .2s, border-color .2s, transform .2s, opacity .2s, color .2s;
+    opacity: 0.85;
 }
 
 .hero-slider:hover .hero-slider-arrow {
@@ -956,17 +970,24 @@ body.ug-cyrl .hero-slide-overlay {
 }
 
 .hero-slider-arrow:hover {
-    background: rgba(0, 0, 0, 0.6);
-    border-color: rgba(255, 255, 255, 0.4);
-    color: #fff;
+    background: rgba(15, 12, 8, 0.9);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: var(--gold, #d4a853);
+    transform: translateY(-50%) scale(1.08);
 }
 
-.hero-slider-prev {
-    inset-inline-end: 14px;
+.hero-slider-arrow:active {
+    transform: translateY(-50%) scale(0.95);
 }
 
-.hero-slider-next {
-    inset-inline-start: 14px;
+.hero-slider-arrow-left {
+    left: 14px;
+    right: auto;
+}
+
+.hero-slider-arrow-right {
+    right: 14px;
+    left: auto;
 }
 
 /* Dot indicators */
@@ -3660,17 +3681,19 @@ body.ug-cyrl .hero-slide-overlay {
     }
 
     .hero-slider-arrow {
-        width: 32px;
-        height: 32px;
+        width: 34px;
+        height: 34px;
         opacity: 0.95;
     }
 
-    .hero-slider-prev {
-        inset-inline-end: 8px;
+    .hero-slider-arrow-left {
+        left: 8px;
+        right: auto;
     }
 
-    .hero-slider-next {
-        inset-inline-start: 8px;
+    .hero-slider-arrow-right {
+        right: 8px;
+        left: auto;
     }
 
     .hero-slider-dots {

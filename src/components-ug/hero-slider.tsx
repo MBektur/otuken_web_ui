@@ -11,7 +11,12 @@ const AUTOPLAY_INTERVAL = 6000;
 export function HeroSlider({ posts }: { posts: WPPost[] }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
+
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const dragStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
+  const justDraggedRef = useRef(false);
   const total = posts.length;
 
   const goTo = useCallback((idx: number) => {
@@ -23,55 +28,102 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
 
   // Autoplay
   useEffect(() => {
-    if (paused || total <= 1) return;
+    if (paused || isDragging || total <= 1) return;
     timerRef.current = setInterval(next, AUTOPLAY_INTERVAL);
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [paused, next, total]);
+  }, [paused, isDragging, next, total]);
 
-  // Pause on hover / focus
-  const handlers = {
-    onMouseEnter: () => setPaused(true),
-    onMouseLeave: () => setPaused(false),
-    onFocusCapture: () => setPaused(true),
-    onBlurCapture: () => setPaused(false),
-  };
-
-  // Keyboard navigation
+  // Keyboard navigation for LTR: Right arrow = Next, Left arrow = Prev
   function onKeyDown(e: React.KeyboardEvent) {
     if (e.key === "ArrowRight") { next(); e.preventDefault(); }
     if (e.key === "ArrowLeft") { prev(); e.preventDefault(); }
   }
 
-  // Touch swipe
-  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
-  function onTouchStart(e: React.TouchEvent) {
-    touchStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  // Pointer drag & drop (mouse + finger)
+  function onPointerDown(e: React.PointerEvent) {
+    if (e.button !== 0 && e.pointerType === "mouse") return;
+    dragStartRef.current = { x: e.clientX, y: e.clientY, time: Date.now() };
+    setIsDragging(true);
+    setDragOffset(0);
+    setPaused(true);
   }
-  function onTouchEnd(e: React.TouchEvent) {
-    if (!touchStartRef.current) return;
-    const dx = e.changedTouches[0].clientX - touchStartRef.current.x;
-    const dy = Math.abs(e.changedTouches[0].clientY - touchStartRef.current.y);
-    if (Math.abs(dx) > 50 && Math.abs(dx) > dy) {
-      // LTR: swipe left = next, swipe right = prev
-      if (dx < 0) next(); else prev();
+
+  function onPointerMove(e: React.PointerEvent) {
+    if (!dragStartRef.current) return;
+    const dx = e.clientX - dragStartRef.current.x;
+    const dy = e.clientY - dragStartRef.current.y;
+
+    // If initial gesture is vertical scroll, release drag
+    if (Math.abs(dy) > Math.abs(dx) && Math.abs(dragOffset) === 0 && Math.abs(dy) > 8) {
+      dragStartRef.current = null;
+      setIsDragging(false);
+      return;
     }
-    touchStartRef.current = null;
+
+    // Dampen drag resistance
+    const damped = Math.sign(dx) * Math.min(Math.abs(dx), 240);
+    setDragOffset(damped);
+  }
+
+  const finishDrag = useCallback(() => {
+    if (!dragStartRef.current) {
+      setIsDragging(false);
+      setDragOffset(0);
+      return;
+    }
+    const offset = dragOffset;
+    const elapsed = Date.now() - dragStartRef.current.time;
+    const isFlick = elapsed < 320 && Math.abs(offset) > 25;
+    const isMoved = Math.abs(offset) > 55;
+
+    if (isFlick || isMoved) {
+      justDraggedRef.current = true;
+      setTimeout(() => { justDraggedRef.current = false; }, 250);
+      // LTR: dragging left (offset < 0) advances to next, dragging right (offset > 0) goes to prev
+      if (offset < 0) next(); else prev();
+    } else if (Math.abs(offset) > 6) {
+      justDraggedRef.current = true;
+      setTimeout(() => { justDraggedRef.current = false; }, 250);
+    }
+
+    dragStartRef.current = null;
+    setIsDragging(false);
+    setDragOffset(0);
+    setPaused(false);
+  }, [dragOffset, next, prev]);
+
+  function handleLinkClick(e: React.MouseEvent) {
+    if (justDraggedRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
   }
 
   return (
     <div
-      className="hero-slider"
+      className={`hero-slider ${isDragging ? "is-dragging" : ""}`}
       role="region"
       aria-roledescription="carousel"
-      aria-label="Алаһидә Йазмилар"
-      {...handlers}
+      aria-label="Өтүкән Нәзири"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => { if (!isDragging) setPaused(false); }}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={() => setPaused(false)}
       onKeyDown={onKeyDown}
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={finishDrag}
+      onPointerCancel={finishDrag}
       tabIndex={0}
     >
       {/* Slides */}
-      <div className="hero-slider-track">
+      <div
+        className="hero-slider-track"
+        style={{
+          transform: dragOffset !== 0 ? `translateX(${dragOffset}px)` : undefined,
+          transition: isDragging ? "none" : "transform 0.3s cubic-bezier(0.2, 0.8, 0.4, 1)",
+        }}
+      >
         {posts.map((post, idx) => {
           const src = postImage(post, 1080, 80);
           const isActive = idx === active;
@@ -108,7 +160,12 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
                   <time dateTime={post.date} dir="ltr">{displayDate(post.date)}</time>
                 </div>
                 <h2>
-                  <Link href={localPath(post.link)} prefetch={true} tabIndex={isActive ? 0 : -1}>
+                  <Link
+                    href={localPath(post.link)}
+                    prefetch={true}
+                    tabIndex={isActive ? 0 : -1}
+                    onClick={handleLinkClick}
+                  >
                     {plainText(post.title.rendered)}
                   </Link>
                 </h2>
@@ -119,7 +176,13 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
                     <i />
                     {readingMinutes(post)} Минут Оқуш
                   </span>
-                  <Link href={localPath(post.link)} className="hero-slide-cta" prefetch={true} tabIndex={isActive ? 0 : -1}>
+                  <Link
+                    href={localPath(post.link)}
+                    className="hero-slide-cta"
+                    prefetch={true}
+                    tabIndex={isActive ? 0 : -1}
+                    onClick={handleLinkClick}
+                  >
                     Давамини Оқуң
                   </Link>
                 </div>
@@ -129,12 +192,12 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
         })}
       </div>
 
-      {/* Navigation arrows */}
+      {/* Navigation arrows (LTR: Left arrow = Prev, Right arrow = Next) */}
       {total > 1 && (
         <>
           <button
             type="button"
-            className="hero-slider-arrow hero-slider-prev"
+            className="hero-slider-arrow hero-slider-arrow-left"
             onClick={prev}
             aria-label="Алдинқи"
           >
@@ -142,7 +205,7 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
           </button>
           <button
             type="button"
-            className="hero-slider-arrow hero-slider-next"
+            className="hero-slider-arrow hero-slider-arrow-right"
             onClick={next}
             aria-label="Кейинки"
           >
@@ -172,7 +235,7 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
       {total > 1 && (
         <div className="hero-slider-progress">
           <div
-            className={`hero-slider-progress-bar ${!paused ? "is-running" : ""}`}
+            className={`hero-slider-progress-bar ${!paused && !isDragging ? "is-running" : ""}`}
             style={{ animationDuration: `${AUTOPLAY_INTERVAL}ms` }}
             key={active}
           />
