@@ -3155,32 +3155,73 @@ body.ug-cyrl .scroll-controls {
     }
 }
 
+@media(max-width:768px) {
+    .utility-tagline,
+    .utility-divider,
+    .utility-left > span:first-child {
+        display: none !important;
+    }
+
+    .utility-inner {
+        min-height: 38px;
+    }
+
+    .utility-left {
+        gap: 6px;
+    }
+
+    .masthead {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding-block: 18px 14px;
+        gap: 8px;
+    }
+
+    .brand {
+        justify-content: center;
+        width: 100%;
+        text-align: center;
+    }
+
+    .brand-logo-img {
+        height: 48px;
+        max-width: 280px;
+        margin-inline: auto;
+    }
+
+    .masthead-motto {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        font-size: 13.5px;
+        line-height: 1.5;
+        padding: 0;
+        color: var(--muted);
+        text-align: center;
+        width: 100%;
+    }
+
+    .masthead-motto span {
+        white-space: nowrap;
+    }
+
+    .masthead-motto small {
+        display: none !important;
+    }
+}
+
 @media(max-width:720px) {
     .site-width {
         width: calc(100% - 36px)
     }
 
-    .utility-inner>span {
-        font-size: 10px
-    }
-
     .language-links {
         gap: 12px;
         font-size: 10px
-    }
-
-    .masthead {
-        padding-block: 23px 19px;
-        gap: 10px
-    }
-
-    .brand {
-        gap: 12px
-    }
-
-    .brand-logo-img {
-        height: 46px;
-        max-width: 250px
     }
 
     .navigation-wrap.is-scrolled .sticky-brand-logo {
@@ -3208,11 +3249,6 @@ body.ug-cyrl .scroll-controls {
     .brand-english {
         font-size: 8px;
         letter-spacing: 1.2px
-    }
-
-    .masthead-motto {
-        font-size: 15px;
-        padding-right: 0
     }
 
     .navigation-inner nav {

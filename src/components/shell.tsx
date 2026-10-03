@@ -42,7 +42,7 @@ export function Header({ categories, active }: { categories: Category[]; active?
   return <>
     <div className="utility-bar" dir="rtl"><div className="site-width utility-inner" dir="rtl">
       <div className="utility-left">
-        <span>تەتقىقات · ئانالىز · يېڭى نەزەر</span>
+        <span className="utility-tagline">تەتقىقات · ئانالىز · يېڭى نەزەر</span>
         <span className="utility-divider">|</span>
         <div className="utility-socials">
           <a

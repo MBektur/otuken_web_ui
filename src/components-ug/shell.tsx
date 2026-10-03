@@ -40,7 +40,7 @@ export function Header({ categories, active }: { categories: Category[]; active?
   return <>
     <div className="utility-bar" dir="rtl"><div className="site-width utility-inner" dir="rtl">
       <div className="utility-left">
-        <span>Тәтқиقат · Анализ · Йеңи Нәзәр</span>
+        <span className="utility-tagline">Тәтқиқат · Анализ · Йеңи Нәзәр</span>
         <span className="utility-divider">|</span>
         <div className="utility-socials">
           <a
@@ -86,7 +86,7 @@ export function Header({ categories, active }: { categories: Category[]; active?
     <StickyNav
       homeHref="/ug"
       logoSrc="/logo.Header-UY.png"
-      altText="Өтүкән Сийاسәт Тәтқиқат Мәркизи"
+      altText="Өтүкән Сийасәт Тәтқиқат Мәркизи"
     >
       <nav aria-label="Баш Тизимлик">
         <Link href="/ug" prefetch={true} className={!active ? "active" : ""}>
