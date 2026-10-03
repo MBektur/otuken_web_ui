@@ -117,6 +117,21 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
     return () => clearInterval(timer);
   }, [isPaused, isDragging, scrollOneCard, sortedPosts.length]);
 
+  // Pause autoplay when window/tab is hidden
+  useEffect(() => {
+    function onVisibilityChange() {
+      setIsPaused(document.hidden);
+    }
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    window.addEventListener("focus", onVisibilityChange);
+    window.addEventListener("blur", () => setIsPaused(true));
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      window.removeEventListener("focus", onVisibilityChange);
+      window.removeEventListener("blur", () => setIsPaused(true));
+    };
+  }, []);
+
   // ── MOUSE DRAG HANDLERS ───────────────────────────────────────
   function handleMouseDown(e: React.MouseEvent) {
     if (e.button !== 0 || !trackRef.current) return;

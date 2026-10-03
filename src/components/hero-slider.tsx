@@ -25,6 +25,7 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const transitionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Mouse & Touch drag tracking refs
   const isDraggingRef = useRef(false);
@@ -43,7 +44,8 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
   currentIndexRef.current = currentIndex;
 
   // Active dot indicator (0 to total - 1)
-  const activeDotIndex = total > 1 ? (currentIndex - 1 + total) % total : 0;
+  const activeDotIndex =
+    total > 1 ? (Math.max(1, Math.min(total, currentIndex)) - 1 + total) % total : 0;
 
   // Apply track transform with or without CSS transition
   const setTrackTransform = useCallback((percent: number, offsetPx = 0, animate = true) => {
@@ -57,15 +59,73 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
     trackRef.current.style.transform = `translate3d(calc(-${percent}%${offsetStr}), 0, 0)`;
   }, []);
 
-  // Navigate to target slide index
+  // Teleport clones back to real slide (seamless loop)
+  const finalizeTransition = useCallback(
+    (targetIdx: number) => {
+      if (transitionTimerRef.current) {
+        clearTimeout(transitionTimerRef.current);
+        transitionTimerRef.current = null;
+      }
+      setIsTransitioning(false);
+      isTransitioningRef.current = false;
+
+      if (total > 1) {
+        if (targetIdx <= 0) {
+          // Reached clone of last slide -> jump to real last slide
+          setCurrentIndex(total);
+          currentIndexRef.current = total;
+          setTrackTransform(total * 100, 0, false);
+        } else if (targetIdx >= total + 1) {
+          // Reached clone of first slide -> jump to real first slide
+          setCurrentIndex(1);
+          currentIndexRef.current = 1;
+          setTrackTransform(100, 0, false);
+        }
+      }
+    },
+    [total, setTrackTransform]
+  );
+
+  // Navigate to target slide index with bounds checking and timeout fallback
   const goToIndex = useCallback(
     (targetIndex: number) => {
       if (total <= 1) return;
+
+      // Handle edge cases where previous transition did not finalize
+      let safeTarget = targetIndex;
+      const current = currentIndexRef.current;
+      if (current >= total + 1) {
+        setTrackTransform(100, 0, false);
+        currentIndexRef.current = 1;
+        setCurrentIndex(1);
+        safeTarget = 2;
+      } else if (current <= 0) {
+        setTrackTransform(total * 100, 0, false);
+        currentIndexRef.current = total;
+        setCurrentIndex(total);
+        safeTarget = total - 1;
+      }
+
+      // Hard clamp safeTarget between [0, total + 1] so track never drifts into void
+      safeTarget = Math.max(0, Math.min(total + 1, safeTarget));
+
+      if (transitionTimerRef.current) {
+        clearTimeout(transitionTimerRef.current);
+      }
+
       setIsTransitioning(true);
-      setCurrentIndex(targetIndex);
-      setTrackTransform(targetIndex * 100, 0, true);
+      isTransitioningRef.current = true;
+      setCurrentIndex(safeTarget);
+      currentIndexRef.current = safeTarget;
+      setTrackTransform(safeTarget * 100, 0, true);
+
+      // Safety timeout: if browser suppresses transitionend (background tab/throttling),
+      // forcibly finalize transition so state is NEVER left broken or empty!
+      transitionTimerRef.current = setTimeout(() => {
+        finalizeTransition(safeTarget);
+      }, TRANSITION_DURATION + 60);
     },
-    [total, setTrackTransform]
+    [total, setTrackTransform, finalizeTransition]
   );
 
   // In RTL:
@@ -87,7 +147,50 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
     [goToIndex]
   );
 
-  // Autoplay timer
+  // Handle clone boundary reset on transition end
+  const handleTransitionEnd = useCallback(() => {
+    finalizeTransition(currentIndexRef.current);
+  }, [finalizeTransition]);
+
+  // ── VISIBILITY & TAB SWITCHING HANDLER ────────────────────────
+  // When user switches tabs or window minimizes, pause autoplay.
+  // When user returns, restore track position and resume!
+  useEffect(() => {
+    function handleVisibilityChange() {
+      if (document.hidden) {
+        setPaused(true);
+      } else {
+        // Tab restored! Check if index got corrupted while hidden
+        const curr = currentIndexRef.current;
+        if (curr <= 0 || curr >= total + 1) {
+          const safeIdx = curr <= 0 ? total : 1;
+          setCurrentIndex(safeIdx);
+          currentIndexRef.current = safeIdx;
+          setTrackTransform(safeIdx * 100, 0, false);
+        } else {
+          setTrackTransform(curr * 100, 0, false);
+        }
+        setIsTransitioning(false);
+        isTransitioningRef.current = false;
+        setPaused(false);
+      }
+    }
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("focus", handleVisibilityChange);
+    window.addEventListener("blur", () => setPaused(true));
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("focus", handleVisibilityChange);
+      window.removeEventListener("blur", () => setPaused(true));
+      if (transitionTimerRef.current) {
+        clearTimeout(transitionTimerRef.current);
+      }
+    };
+  }, [total, setTrackTransform]);
+
+  // Autoplay timer (only when active, not paused, not hidden)
   useEffect(() => {
     if (paused || isDragging || total <= 1) return;
     timerRef.current = setInterval(goNext, AUTOPLAY_INTERVAL);
@@ -95,23 +198,6 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [paused, isDragging, goNext, total]);
-
-  // Handle clone boundary reset on transition end (seamless infinite loop)
-  const handleTransitionEnd = useCallback(() => {
-    setIsTransitioning(false);
-
-    if (total > 1) {
-      if (currentIndex === 0) {
-        // Reached clone of last slide -> jump to real last slide without animation
-        setCurrentIndex(total);
-        setTrackTransform(total * 100, 0, false);
-      } else if (currentIndex === total + 1) {
-        // Reached clone of first slide -> jump to real first slide without animation
-        setCurrentIndex(1);
-        setTrackTransform(100, 0, false);
-      }
-    }
-  }, [currentIndex, total, setTrackTransform]);
 
   // Keyboard navigation for RTL:
   // Left arrow = Next (advance forward in reading order)
@@ -143,6 +229,10 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
       if (total <= 1 || e.button !== 0) return;
+
+      if (transitionTimerRef.current) {
+        clearTimeout(transitionTimerRef.current);
+      }
 
       isDraggingRef.current = true;
       hasMovedRef.current = false;
@@ -227,6 +317,10 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
   const handleTouchStart = useCallback(
     (e: React.TouchEvent) => {
       if (total <= 1 || e.touches.length > 1) return;
+
+      if (transitionTimerRef.current) {
+        clearTimeout(transitionTimerRef.current);
+      }
 
       const touch = e.touches[0];
       isDraggingRef.current = true;

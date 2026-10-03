@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { WPPost, postCategory, postImage, displayDate } from "@/lib/wordpress";
 import { localPath, plainText } from "@/lib/content";
 
-const AUTOPLAY_INTERVAL = 4000; // 4 saniyede bir
+const AUTOPLAY_INTERVAL = 6000; // 6 saniyede bir
 
 export function RecentCarousel({ posts }: { posts: WPPost[] }) {
   // Sort posts strictly by date descending (zamana gore en son yazılar)
@@ -116,6 +116,21 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
     }, AUTOPLAY_INTERVAL);
     return () => clearInterval(timer);
   }, [isPaused, isDragging, scrollOneCard, sortedPosts.length]);
+
+  // Pause autoplay when window/tab is hidden
+  useEffect(() => {
+    function onVisibilityChange() {
+      setIsPaused(document.hidden);
+    }
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    window.addEventListener("focus", onVisibilityChange);
+    window.addEventListener("blur", () => setIsPaused(true));
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      window.removeEventListener("focus", onVisibilityChange);
+      window.removeEventListener("blur", () => setIsPaused(true));
+    };
+  }, []);
 
   // ── MOUSE DRAG HANDLERS ───────────────────────────────────────
   function handleMouseDown(e: React.MouseEvent) {
