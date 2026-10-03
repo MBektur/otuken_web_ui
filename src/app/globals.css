@@ -1378,19 +1378,30 @@ body.ug-cyrl .hero-slide-overlay {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+    transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s, opacity 0.2s;
     flex-shrink: 0;
 }
 
-.recent-carousel-arrow:hover {
+.recent-carousel-arrow:hover:not(:disabled) {
     background: var(--wine);
     border-color: var(--wine);
     color: #fff;
     transform: scale(1.06);
 }
 
-.recent-carousel-arrow:active {
+.recent-carousel-arrow:active:not(:disabled) {
     transform: scale(0.95);
+}
+
+.recent-carousel-arrow:disabled,
+.recent-carousel-arrow[aria-disabled="true"] {
+    opacity: 0.32;
+    cursor: not-allowed;
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.12);
+    color: var(--muted);
+    transform: none;
+    pointer-events: none;
 }
 
 .recent-carousel-viewport {

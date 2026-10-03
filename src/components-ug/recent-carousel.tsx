@@ -21,6 +21,9 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
   const [isDragging, setIsDragging] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(true);
+  const autoplayDirectionRef = useRef<"next" | "prev">("next");
 
   // Drag tracking refs (both Mouse & Touch)
   const isInteractingRef = useRef(false);
@@ -50,9 +53,15 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
     const maxScroll = el.scrollWidth - el.clientWidth;
     const current = Math.abs(el.scrollLeft);
 
-    if (pages <= 1 || current <= 8) {
+    const atStart = current <= 10;
+    const atEnd = current >= maxScroll - 10;
+
+    setCanPrev(!atStart);
+    setCanNext(!atEnd);
+
+    if (pages <= 1 || atStart) {
       setCurrentPage(1);
-    } else if (current >= maxScroll - 8) {
+    } else if (atEnd) {
       setCurrentPage(pages);
     } else {
       const progress = maxScroll > 0 ? Math.min(1, Math.max(0, current / maxScroll)) : 0;
@@ -92,27 +101,41 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
     const current = Math.abs(el.scrollLeft);
 
     if (direction === "next") {
-      if (current >= maxScroll - 12) {
-        // Loop back to start smoothly
-        el.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        el.scrollBy({ left: stride, behavior: "smooth" });
+      if (current >= maxScroll - 10) {
+        // En sonuna ulaşıldığında loop yönünü tersine çevir
+        autoplayDirectionRef.current = "prev";
+        return;
       }
+      el.scrollBy({ left: stride, behavior: "smooth" });
     } else {
-      if (current <= 12) {
-        // Loop to end smoothly
-        el.scrollTo({ left: maxScroll, behavior: "smooth" });
-      } else {
-        el.scrollBy({ left: -stride, behavior: "smooth" });
+      if (current <= 10) {
+        // En başına ulaşıldığında loop yönünü ileriye çevir
+        autoplayDirectionRef.current = "next";
+        return;
       }
+      el.scrollBy({ left: -stride, behavior: "smooth" });
     }
   }, []);
 
-  // Autoplay: 4 saniyede bir 1 card ilerlet
+  // Autoplay: 4 saniyede bir 1 card ilerlet, sınıra ulaşıldığında yön tersine döner (ping-pong loop)
   useEffect(() => {
     if (isPaused || isDragging || sortedPosts.length <= 1) return;
     const timer = setInterval(() => {
-      scrollOneCard("next");
+      const el = trackRef.current;
+      if (!el) return;
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      const current = Math.abs(el.scrollLeft);
+
+      let dir = autoplayDirectionRef.current;
+      if (dir === "next" && current >= maxScroll - 15) {
+        dir = "prev";
+        autoplayDirectionRef.current = "prev";
+      } else if (dir === "prev" && current <= 15) {
+        dir = "next";
+        autoplayDirectionRef.current = "next";
+      }
+
+      scrollOneCard(dir);
     }, AUTOPLAY_INTERVAL);
     return () => clearInterval(timer);
   }, [isPaused, isDragging, scrollOneCard, sortedPosts.length]);
@@ -347,18 +370,28 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
           <button
             type="button"
             className="recent-carousel-arrow"
-            onClick={() => scrollOneCard("prev")}
+            onClick={() => {
+              autoplayDirectionRef.current = "prev";
+              scrollOneCard("prev");
+            }}
+            disabled={!canPrev}
+            aria-disabled={!canPrev}
             aria-label="Алдинқи"
-            title="Алдинқи"
+            title={canPrev ? "Алдинқи" : "Алдинқи йазма йоқ"}
           >
             <ChevronLeft size={15} strokeWidth={2.2} />
           </button>
           <button
             type="button"
             className="recent-carousel-arrow"
-            onClick={() => scrollOneCard("next")}
+            onClick={() => {
+              autoplayDirectionRef.current = "next";
+              scrollOneCard("next");
+            }}
+            disabled={!canNext}
+            aria-disabled={!canNext}
             aria-label="Кейинки"
-            title="Кейинки"
+            title={canNext ? "Кейинки" : "Кейинки йазма йоқ"}
           >
             <ChevronRight size={15} strokeWidth={2.2} />
           </button>
