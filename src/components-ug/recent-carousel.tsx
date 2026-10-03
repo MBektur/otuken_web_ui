@@ -9,7 +9,7 @@ import { localPath, plainText } from "@/lib/content";
 const AUTOPLAY_INTERVAL = 3000; // 3 saniyede bir
 
 export function RecentCarousel({ posts }: { posts: WPPost[] }) {
-  // Sort posts by date descending (en son yazılar)
+  // Sort posts strictly by date descending (zamana gore en son yazılar)
   const sortedPosts = [...posts].sort((a, b) => {
     const tA = a.date ? new Date(a.date).getTime() : 0;
     const tB = b.date ? new Date(b.date).getTime() : 0;
@@ -19,6 +19,8 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   // Mouse drag references
   const isDownRef = useRef(false);
@@ -33,6 +35,46 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
   // Touch tracking
   const touchStartXRef = useRef(0);
   const touchStartYRef = useRef(0);
+
+  // Update dynamic pagination (e.g. 2/3) based on visible cards and scroll progress in LTR
+  const updatePagination = useCallback(() => {
+    const el = trackRef.current;
+    if (!el || !el.firstElementChild) return;
+    const cards = Array.from(el.children) as HTMLElement[];
+    if (cards.length === 0) return;
+
+    const firstCard = cards[0];
+    const gap = 20;
+    const cardStride = firstCard.offsetWidth + gap;
+    const visibleCount = Math.max(1, Math.round((el.clientWidth + gap) / cardStride));
+    const pages = Math.max(1, Math.ceil(cards.length / visibleCount));
+    setTotalPages(pages);
+
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    const current = el.scrollLeft;
+
+    if (pages <= 1 || current <= 8) {
+      setCurrentPage(1);
+    } else if (current >= maxScroll - 8) {
+      setCurrentPage(pages);
+    } else {
+      const progress = maxScroll > 0 ? Math.min(1, Math.max(0, current / maxScroll)) : 0;
+      const pageIndex = 1 + Math.round(progress * (pages - 1));
+      setCurrentPage(Math.min(pages, Math.max(1, pageIndex)));
+    }
+  }, []);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    updatePagination();
+    el.addEventListener("scroll", updatePagination, { passive: true });
+    window.addEventListener("resize", updatePagination);
+    return () => {
+      el.removeEventListener("scroll", updatePagination);
+      window.removeEventListener("resize", updatePagination);
+    };
+  }, [updatePagination, sortedPosts.length]);
 
   // Calculate stride of 1 card
   function getSingleCardStride(): number {
@@ -187,34 +229,44 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
       onFocusCapture={() => setIsPaused(true)}
       onBlurCapture={() => setIsPaused(false)}
     >
-      {/* Header */}
+      {/* Header with Title on left, Link + Page indicator (2/3) + Arrows on right */}
       <div className="recent-carousel-header">
         <div className="section-title">
           <h2>Йеңи Йазмилар</h2>
-          <Link href="/ug?q=" prefetch={true} className="section-title-link">
-            Барлиқ Йазмилар →
-          </Link>
         </div>
 
-        {/* Carousel controls */}
-        <div className="recent-carousel-controls">
+        {/* Carousel controls with View All link, page count (2/3), and arrows */}
+        <div className="recent-carousel-controls" aria-label="Көргәзмә Контроллири">
+          <Link href="/ug?q=" prefetch={true} className="recent-carousel-all-link">
+            Барлиқ Йазмилар →
+          </Link>
+
+          <span
+            className="recent-carousel-page"
+            dir="ltr"
+            aria-label={`Бәт ${currentPage} / ${totalPages}`}
+          >
+            {currentPage}/{totalPages}
+          </span>
+
+          {/* LTR: Left button = Prev, Right button = Next */}
           <button
             type="button"
             className="recent-carousel-arrow"
             onClick={() => scrollOneCard("prev")}
-            aria-label="Алдинқи йазма"
+            aria-label="Алдинқи"
             title="Алдинқи"
           >
-            <ChevronLeft size={16} strokeWidth={2.2} />
+            <ChevronLeft size={15} strokeWidth={2.2} />
           </button>
           <button
             type="button"
             className="recent-carousel-arrow"
             onClick={() => scrollOneCard("next")}
-            aria-label="Кейинки йазма"
+            aria-label="Кейинки"
             title="Кейинки"
           >
-            <ChevronRight size={16} strokeWidth={2.2} />
+            <ChevronRight size={15} strokeWidth={2.2} />
           </button>
         </div>
       </div>

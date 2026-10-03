@@ -1332,7 +1332,34 @@ body.ug-cyrl .hero-slide-overlay {
 .recent-carousel-controls {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+}
+
+.recent-carousel-all-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--wine);
+    text-decoration: none;
+    transition: color 0.2s, opacity 0.2s;
+    white-space: nowrap;
+    margin-inline-end: 4px;
+}
+
+.recent-carousel-all-link:hover {
+    color: #951d40;
+    text-decoration: underline;
+}
+
+.recent-carousel-page {
+    font: 12px Georgia, serif;
+    font-weight: 600;
+    color: var(--muted);
+    padding: 2px 8px;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+    user-select: none;
+    white-space: nowrap;
 }
 
 .recent-carousel-arrow {

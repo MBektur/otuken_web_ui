@@ -3,13 +3,13 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { WPPost, postCategory, postImage, displayDate, readingMinutes } from "@/lib/wordpress";
+import { WPPost, postCategory, postImage, displayDate } from "@/lib/wordpress";
 import { localPath, plainText } from "@/lib/content";
 
-const AUTOPLAY_INTERVAL = 4000; // 5 saniyede bir
+const AUTOPLAY_INTERVAL = 3000; // 3 saniyede bir
 
 export function RecentCarousel({ posts }: { posts: WPPost[] }) {
-  // Sort posts by date descending (en son yazılar)
+  // Sort posts strictly by date descending (zamana gore en son yazılar)
   const sortedPosts = [...posts].sort((a, b) => {
     const tA = a.date ? new Date(a.date).getTime() : 0;
     const tB = b.date ? new Date(b.date).getTime() : 0;
@@ -19,8 +19,8 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [canPrev, setCanPrev] = useState(false);
-  const [canNext, setCanNext] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   // Mouse drag references
   const isDownRef = useRef(false);
@@ -36,27 +36,45 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
   const touchStartXRef = useRef(0);
   const touchStartYRef = useRef(0);
 
-  // Check scroll boundary
-  const checkScrollState = useCallback(() => {
+  // Update dynamic pagination (e.g. 2/3) based on visible cards and scroll progress
+  const updatePagination = useCallback(() => {
     const el = trackRef.current;
-    if (!el) return;
+    if (!el || !el.firstElementChild) return;
+    const cards = Array.from(el.children) as HTMLElement[];
+    if (cards.length === 0) return;
+
+    const firstCard = cards[0];
+    const gap = 20;
+    const cardStride = firstCard.offsetWidth + gap;
+    const visibleCount = Math.max(1, Math.round((el.clientWidth + gap) / cardStride));
+    const pages = Math.max(1, Math.ceil(cards.length / visibleCount));
+    setTotalPages(pages);
+
     const maxScroll = el.scrollWidth - el.clientWidth;
     const current = Math.abs(el.scrollLeft);
-    setCanPrev(current > 8);
-    setCanNext(current < maxScroll - 8);
+
+    if (pages <= 1 || current <= 8) {
+      setCurrentPage(1);
+    } else if (current >= maxScroll - 8) {
+      setCurrentPage(pages);
+    } else {
+      const progress = maxScroll > 0 ? Math.min(1, Math.max(0, current / maxScroll)) : 0;
+      const pageIndex = 1 + Math.round(progress * (pages - 1));
+      setCurrentPage(Math.min(pages, Math.max(1, pageIndex)));
+    }
   }, []);
 
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
-    checkScrollState();
-    el.addEventListener("scroll", checkScrollState, { passive: true });
-    window.addEventListener("resize", checkScrollState);
+    updatePagination();
+    el.addEventListener("scroll", updatePagination, { passive: true });
+    window.addEventListener("resize", updatePagination);
     return () => {
-      el.removeEventListener("scroll", checkScrollState);
-      window.removeEventListener("resize", checkScrollState);
+      el.removeEventListener("scroll", updatePagination);
+      window.removeEventListener("resize", updatePagination);
     };
-  }, [checkScrollState]);
+  }, [updatePagination, sortedPosts.length]);
 
   // Calculate stride of 1 card
   function getSingleCardStride(): number {
@@ -68,6 +86,7 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
   }
 
   // Scroll by 1 card with smooth easing
+  // In RTL: next is negative left, prev is positive left
   const scrollOneCard = useCallback((direction: "next" | "prev") => {
     const el = trackRef.current;
     if (!el) return;
@@ -75,7 +94,6 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
     const maxScroll = el.scrollWidth - el.clientWidth;
     const current = Math.abs(el.scrollLeft);
 
-    // RTL: next is negative, prev is positive
     if (direction === "next") {
       if (current >= maxScroll - 12) {
         // Loop back to start smoothly
@@ -211,17 +229,27 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
       onFocusCapture={() => setIsPaused(true)}
       onBlurCapture={() => setIsPaused(false)}
     >
-      {/* Header */}
+      {/* Header with Title on one side, Link + Page indicator + Arrows on the other */}
       <div className="recent-carousel-header">
         <div className="section-title">
           <h2>يېقىنقى يازمىلار</h2>
-          <Link href="/uy?q=" prefetch={true} className="section-title-link">
-            ھەممىنى كۆرۈڭ ←
-          </Link>
         </div>
 
-        {/* Carousel controls */}
-        <div className="recent-carousel-controls">
+        {/* Carousel controls with View All link, page count (2/3), and arrows */}
+        <div className="recent-carousel-controls" aria-label="كۆرگەزمە كونتروللىرى">
+          <Link href="/uy?q=" prefetch={true} className="recent-carousel-all-link">
+            ھەممىنى كۆرۈڭ ←
+          </Link>
+
+          <span
+            className="recent-carousel-page"
+            dir="ltr"
+            aria-label={`بەت ${currentPage} / ${totalPages}`}
+          >
+            {currentPage}/{totalPages}
+          </span>
+
+          {/* RTL: Right button = Prev, Left button = Next */}
           <button
             type="button"
             className="recent-carousel-arrow"
@@ -229,7 +257,7 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
             aria-label="ئالدىنقى يازما"
             title="ئالدىنقى"
           >
-            <ChevronRight size={16} strokeWidth={2.2} />
+            <ChevronRight size={15} strokeWidth={2.2} />
           </button>
           <button
             type="button"
@@ -238,7 +266,7 @@ export function RecentCarousel({ posts }: { posts: WPPost[] }) {
             aria-label="كېيىنكى يازما"
             title="كېيىنكى"
           >
-            <ChevronLeft size={16} strokeWidth={2.2} />
+            <ChevronLeft size={15} strokeWidth={2.2} />
           </button>
         </div>
       </div>
