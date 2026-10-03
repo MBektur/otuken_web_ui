@@ -19,12 +19,31 @@ export interface CuratedPodcast {
   durationMinutes?: number;
 }
 
-// In-memory store initialized from the bundled JSON
-let store: CuratedPodcast[] = (initialPodcasts as unknown as CuratedPodcast[]).map((p, idx) => ({
-  ...p,
-  order: typeof p.order === "number" ? p.order : idx + 1,
-  isFeatured: Boolean(p.isFeatured),
-}));
+// In-memory store initialized from /tmp or bundled JSON
+function loadInitialPodcasts(): CuratedPodcast[] {
+  if (typeof window === "undefined") {
+    try {
+      const fs = require("fs");
+      const path = require("path");
+      const tmpPath = path.join("/tmp", "otuken_podcasts.json");
+      if (fs.existsSync(tmpPath)) {
+        const raw = fs.readFileSync(tmpPath, "utf-8");
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length >= 0) {
+          return parsed;
+        }
+      }
+    } catch {}
+  }
+
+  return (initialPodcasts as unknown as CuratedPodcast[]).map((p, idx) => ({
+    ...p,
+    order: typeof p.order === "number" ? p.order : idx + 1,
+    isFeatured: Boolean(p.isFeatured),
+  }));
+}
+
+let store: CuratedPodcast[] = loadInitialPodcasts();
 
 export function extractYouTubeId(urlOrId: string): string {
   if (!urlOrId) return "";
@@ -53,6 +72,22 @@ export function extractYouTubeId(urlOrId: string): string {
 }
 
 export function getCuratedPodcasts(): CuratedPodcast[] {
+  // Sync latest from /tmp if updated in serverless environment
+  if (typeof window === "undefined") {
+    try {
+      const fs = require("fs");
+      const path = require("path");
+      const tmpPath = path.join("/tmp", "otuken_podcasts.json");
+      if (fs.existsSync(tmpPath)) {
+        const raw = fs.readFileSync(tmpPath, "utf-8");
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          store = parsed;
+        }
+      }
+    } catch {}
+  }
+
   // Sort: featured first, then by order asc, then by date desc
   return [...store].sort((a, b) => {
     if (a.isFeatured && !b.isFeatured) return -1;
@@ -153,7 +188,8 @@ export function reorderCuratedPodcasts(idsInOrder: string[]): CuratedPodcast[] {
 
 export function deleteCuratedPodcast(id: string): boolean {
   const initialLength = store.length;
-  store = store.filter(p => p.id !== id);
+  const targetId = String(id).trim();
+  store = store.filter(p => String(p.id).trim() !== targetId && p.youtubeId !== targetId);
   if (store.length !== initialLength) {
     persistStore();
     return true;
@@ -162,20 +198,31 @@ export function deleteCuratedPodcast(id: string): boolean {
 }
 
 /**
- * Persist store to disk if running in a Node environment with write access
+ * Persist store to disk (in local repo or in serverless /tmp)
  */
-async function persistStore(): Promise<boolean> {
+function persistStore(): boolean {
   if (typeof window !== "undefined") return false;
+  let saved = false;
+
+  // 1. Write to local repo src/data/podcasts.json (works in local dev)
   try {
-    const fs = await import("fs");
-    const path = await import("path");
-    const filePath = path.join(process.cwd(), "src/data/podcasts.json");
-    fs.writeFileSync(filePath, JSON.stringify(store, null, 2), "utf-8");
-    return true;
-  } catch (err) {
-    // Expected in read-only / serverless deployment, in-memory store remains active
-    return false;
-  }
+    const fs = require("fs");
+    const path = require("path");
+    const repoPath = path.join(process.cwd(), "src/data/podcasts.json");
+    fs.writeFileSync(repoPath, JSON.stringify(store, null, 2), "utf-8");
+    saved = true;
+  } catch {}
+
+  // 2. Also write to /tmp/otuken_podcasts.json (writable in Vercel serverless functions)
+  try {
+    const fs = require("fs");
+    const path = require("path");
+    const tmpPath = path.join("/tmp", "otuken_podcasts.json");
+    fs.writeFileSync(tmpPath, JSON.stringify(store, null, 2), "utf-8");
+    saved = true;
+  } catch {}
+
+  return saved;
 }
 
 /**

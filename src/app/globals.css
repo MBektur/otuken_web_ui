@@ -4134,33 +4134,54 @@ body.ug-cyrl .scroll-controls {
 }
 
 .admin-notification-toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 99999;
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 12px 18px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    font-size: 13px;
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-size: 14px;
     font-weight: 600;
-    animation: fadeIn 0.3s ease;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+    animation: toastSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    max-width: 90vw;
+}
+
+[dir="rtl"] .admin-notification-toast {
+    right: auto;
+    left: 24px;
+}
+
+@keyframes toastSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .admin-notification-toast.success {
     background: #e8f5e9;
     color: #2e7d32;
-    border: 1px solid #c8e6c9;
+    border: 1px solid #a5d6a7;
 }
 
 .admin-notification-toast.error {
     background: #ffebee;
     color: #c62828;
-    border: 1px solid #ffcdd2;
+    border: 1px solid #ef9a9a;
 }
 
 .admin-notification-toast.info {
     background: #e3f2fd;
     color: #1565c0;
-    border: 1px solid #bbdefb;
+    border: 1px solid #90caf9;
 }
 
 /* Quick Action Link in Metric Card */
@@ -4780,6 +4801,85 @@ body.ug-cyrl .scroll-controls {
     color: #dc2626;
     border-color: #fca5a5;
     background: #fef2f2;
+}
+
+/* Inline Delete Confirmation */
+.podcast-manage-row.is-confirming-delete {
+    border-color: #fca5a5;
+    background: #fffafa;
+}
+
+.podcast-manage-row.is-deleting {
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.pod-inline-confirm-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff1f2;
+    border: 1px solid #fecdd3;
+    padding: 4px 10px;
+    border-radius: 8px;
+    animation: fadeIn 0.2s ease;
+}
+
+.confirm-prompt-text {
+    font-size: 12px;
+    font-weight: 700;
+    color: #e11d48;
+    white-space: nowrap;
+}
+
+.confirm-btn-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-confirm-yes {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #dc2626;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.btn-confirm-yes:hover:not(:disabled) {
+    background: #b91c1c;
+}
+
+.btn-confirm-yes:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+.btn-confirm-no {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #ffffff;
+    color: #4b5563;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.btn-confirm-no:hover:not(:disabled) {
+    background: #f3f4f6;
+    color: #111827;
 }
 
 @media (max-width: 768px) {

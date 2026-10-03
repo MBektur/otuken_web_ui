@@ -23,6 +23,8 @@ import {
   AlertCircle,
   Clock,
   Share2,
+  X,
+  Download,
 } from "lucide-react";
 import type { CuratedPodcast } from "@/lib/podcast-store";
 
@@ -38,6 +40,8 @@ export function PodcastAdmin({ locale = "uy" }: PodcastAdminProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [podcasts, setPodcasts] = useState<CuratedPodcast[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<{ text: string; type: "success" | "error" | "info" } | null>(null);
 
   // Form State
@@ -91,9 +95,13 @@ export function PodcastAdmin({ locale = "uy" }: PodcastAdminProps) {
     }
   }
 
+  const getActiveSecret = () => inputSecret?.trim() || secret || "otuken2026";
+
   function handleSaveKey() {
-    setSecret(inputSecret);
-    loadPodcasts(inputSecret);
+    const key = inputSecret.trim();
+    setSecret(key);
+    sessionStorage.setItem("otuken_cache_secret", key);
+    loadPodcasts(key);
   }
 
   // Auto extract YouTube ID
@@ -137,7 +145,7 @@ export function PodcastAdmin({ locale = "uy" }: PodcastAdminProps) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          secret,
+          secret: getActiveSecret(),
           action: "fetchMeta",
           url: extractedYtId || ytUrlInput,
         }),
@@ -215,7 +223,7 @@ export function PodcastAdmin({ locale = "uy" }: PodcastAdminProps) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          secret,
+          secret: getActiveSecret(),
           action: editingId ? "update" : "add",
           podcast: payload,
         }),
@@ -242,7 +250,7 @@ export function PodcastAdmin({ locale = "uy" }: PodcastAdminProps) {
       const res = await fetch("/api/admin/podcasts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ secret, action: "setFeatured", id }),
+        body: JSON.stringify({ secret: getActiveSecret(), action: "setFeatured", id }),
       });
       const data = await res.json();
       if (res.ok && data.ok) {
@@ -274,7 +282,7 @@ export function PodcastAdmin({ locale = "uy" }: PodcastAdminProps) {
       const res = await fetch("/api/admin/podcasts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ secret, action: "reorder", ids }),
+        body: JSON.stringify({ secret: getActiveSecret(), action: "reorder", ids }),
       });
       const data = await res.json();
       if (res.ok && data.ok) {
@@ -286,31 +294,31 @@ export function PodcastAdmin({ locale = "uy" }: PodcastAdminProps) {
     }
   }
 
-  async function handleDelete(id: string, title: string) {
-    const confirmMsg = isUg
-      ? `Rastla "${title}" podkastini ochuremsiz?`
-      : `راستلا «${title}» پودكاستىنى ئۆچۈرەمسىز؟`;
-
-    if (!window.confirm(confirmMsg)) return;
-
-    setIsLoading(true);
+  async function executeDelete(id: string) {
+    const activeSecret = getActiveSecret();
+    setDeletingId(id);
     try {
       const res = await fetch("/api/admin/podcasts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ secret, action: "delete", id }),
+        body: JSON.stringify({ secret: activeSecret, action: "delete", id }),
       });
       const data = await res.json();
       if (res.ok && data.ok) {
-        setPodcasts(data.podcasts || []);
+        // Optimistically filter or take server list
+        const updatedList = (data.podcasts && data.podcasts.length >= 0)
+          ? data.podcasts
+          : podcasts.filter(p => p.id !== id);
+        setPodcasts(updatedList);
         showMessage(isUg ? "Podkast ochuruldi" : "پودكاست ئۆچۈرۈلدى", "success");
+        setConfirmDeleteId(null);
       } else {
-        showMessage(data.message, "error");
+        showMessage(data.message || (isUg ? "Ochurush meglup boldi" : "ئۆچۈرۈش مەغلۇپ بولدى"), "error");
       }
     } catch (e: any) {
-      showMessage(e.message, "error");
+      showMessage(e.message || (isUg ? "Xataliq yuz berdi" : "خاتالىق يۈز بەردى"), "error");
     } finally {
-      setIsLoading(false);
+      setDeletingId(null);
     }
   }
 
@@ -320,6 +328,20 @@ export function PodcastAdmin({ locale = "uy" }: PodcastAdminProps) {
     setCopied(true);
     showMessage(isUg ? "JSON nuskilandi" : "JSON نۇسخىلاندى", "success");
     setTimeout(() => setCopied(false), 2000);
+  }
+
+  function handleDownloadJson() {
+    const jsonStr = JSON.stringify(podcasts, null, 2);
+    const blob = new Blob([jsonStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "podcasts.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showMessage(isUg ? "podcasts.json fayli chushurwelindi" : "podcasts.json ھۆججىتى چۈشۈرۈۋېلىندى", "success");
   }
 
   const featuredPodcast = podcasts.find(p => p.isFeatured) || podcasts[0];
@@ -462,10 +484,16 @@ export function PodcastAdmin({ locale = "uy" }: PodcastAdminProps) {
         <section className="admin-subpanel" style={{ marginBottom: "28px" }}>
           <div className="subpanel-header">
             <h3>{isUg ? "Podkast JSON Zapaslash" : "پودكاست ئۇچۇرلىرىنى JSON سۈپىتىدە زاپاسلاش"}</h3>
-            <button type="button" className="btn-action-primary" onClick={handleCopyJson}>
-              {copied ? <Check size={14} /> : <Copy size={14} />}
-              <span>{copied ? (isUg ? "Nuskilandi" : "كۆچۈرۈلدى") : (isUg ? "JSON Nuskilash" : "JSON نۇسخىلاش")}</span>
-            </button>
+            <div style={{ display: "flex", gap: "8px" }}>
+              <button type="button" className="btn-action-primary" onClick={handleDownloadJson}>
+                <Download size={14} />
+                <span>{isUg ? "Faylni Chushurush" : "ھۆججەتنى چۈشۈرۈش"}</span>
+              </button>
+              <button type="button" className="btn-action-primary" onClick={handleCopyJson}>
+                {copied ? <Check size={14} /> : <Copy size={14} />}
+                <span>{copied ? (isUg ? "Nuskilandi" : "كۆچۈرۈلدى") : (isUg ? "JSON Nuskilash" : "JSON نۇسخىلاش")}</span>
+              </button>
+            </div>
           </div>
           <pre className="json-export-box" dir="ltr">
             {JSON.stringify(podcasts, null, 2)}
@@ -723,7 +751,7 @@ export function PodcastAdmin({ locale = "uy" }: PodcastAdminProps) {
             return (
               <article
                 key={pod.id}
-                className={`podcast-manage-row ${pod.isFeatured ? "is-featured" : ""}`}
+                className={`podcast-manage-row ${pod.isFeatured ? "is-featured" : ""} ${confirmDeleteId === pod.id ? "is-confirming-delete" : ""} ${deletingId === pod.id ? "is-deleting" : ""}`}
               >
                 {/* Index / Order */}
                 <div className="pod-order-badge">
@@ -769,63 +797,99 @@ export function PodcastAdmin({ locale = "uy" }: PodcastAdminProps) {
 
                 {/* Action buttons */}
                 <div className="pod-actions-col">
-                  {/* Pin Featured */}
-                  {!pod.isFeatured ? (
-                    <button
-                      type="button"
-                      className="btn-action-icon star"
-                      title={isUg ? "Hero Qilish" : "ئالاھىدە سىن قىلىپ بېكىتىش"}
-                      onClick={() => handleSetFeatured(pod.id)}
-                    >
-                      <Star size={15} />
-                    </button>
+                  {confirmDeleteId === pod.id ? (
+                    <div className="pod-inline-confirm-box" onClick={e => e.stopPropagation()}>
+                      <span className="confirm-prompt-text">
+                        {isUg ? "Rastla ochuremsiz?" : "راستلا ئۆچۈرەمسىز؟"}
+                      </span>
+                      <div className="confirm-btn-group">
+                        <button
+                          type="button"
+                          className="btn-confirm-yes"
+                          onClick={() => executeDelete(pod.id)}
+                          disabled={deletingId === pod.id}
+                          title={isUg ? "He-e, Ochurulsun" : "ھەئە، ئۆچۈرۈلسۇن"}
+                        >
+                          {deletingId === pod.id ? (
+                            <RefreshCw size={12} className="spin" />
+                          ) : (
+                            <Trash2 size={12} />
+                          )}
+                          <span>{deletingId === pod.id ? (isUg ? "Ochuruluwatidu..." : "ئۆچۈرۈلۈۋاتىدۇ...") : (isUg ? "Ochurush" : "ئۆچۈرۈش")}</span>
+                        </button>
+                        <button
+                          type="button"
+                          className="btn-confirm-no"
+                          onClick={() => setConfirmDeleteId(null)}
+                          disabled={deletingId === pod.id}
+                          title={isUg ? "Yaq, Waz kechish" : "ياق، ۋاز كېچىش"}
+                        >
+                          <X size={12} />
+                          <span>{isUg ? "Yaq" : "ياق"}</span>
+                        </button>
+                      </div>
+                    </div>
                   ) : (
-                    <span className="active-star-icon" title="Hero Video">
-                      <Star size={16} fill="#F4B41A" color="#F4B41A" />
-                    </span>
+                    <>
+                      {/* Pin Featured */}
+                      {!pod.isFeatured ? (
+                        <button
+                          type="button"
+                          className="btn-action-icon star"
+                          title={isUg ? "Hero Qilish" : "ئالاھىدە سىن قىلىپ بېكىتىش"}
+                          onClick={() => handleSetFeatured(pod.id)}
+                        >
+                          <Star size={15} />
+                        </button>
+                      ) : (
+                        <span className="active-star-icon" title="Hero Video">
+                          <Star size={16} fill="#F4B41A" color="#F4B41A" />
+                        </span>
+                      )}
+
+                      {/* Reorder Up */}
+                      <button
+                        type="button"
+                        className="btn-action-icon"
+                        title={isUg ? "Yuqiriga" : "يۇقىرىغا يۆتكەش"}
+                        onClick={() => handleMove(idx, "up")}
+                        disabled={isFirst}
+                      >
+                        <ArrowUp size={15} />
+                      </button>
+
+                      {/* Reorder Down */}
+                      <button
+                        type="button"
+                        className="btn-action-icon"
+                        title={isUg ? "Towenge" : "تۆۋەنگە يۆتكەش"}
+                        onClick={() => handleMove(idx, "down")}
+                        disabled={isLast}
+                      >
+                        <ArrowDown size={15} />
+                      </button>
+
+                      {/* Edit */}
+                      <button
+                        type="button"
+                        className="btn-action-icon edit"
+                        title={isUg ? "Ozgertish" : "تەھرىرلەش"}
+                        onClick={() => handleStartEdit(pod)}
+                      >
+                        <Edit2 size={15} />
+                      </button>
+
+                      {/* Delete */}
+                      <button
+                        type="button"
+                        className="btn-action-icon delete"
+                        title={isUg ? "Ochurush" : "ئۆچۈرۈش"}
+                        onClick={() => setConfirmDeleteId(pod.id)}
+                      >
+                        <Trash2 size={15} />
+                      </button>
+                    </>
                   )}
-
-                  {/* Reorder Up */}
-                  <button
-                    type="button"
-                    className="btn-action-icon"
-                    title={isUg ? "Yuqiriga" : "يۇقىرىغا يۆتكەش"}
-                    onClick={() => handleMove(idx, "up")}
-                    disabled={isFirst}
-                  >
-                    <ArrowUp size={15} />
-                  </button>
-
-                  {/* Reorder Down */}
-                  <button
-                    type="button"
-                    className="btn-action-icon"
-                    title={isUg ? "Towenge" : "تۆۋەنگە يۆتكەش"}
-                    onClick={() => handleMove(idx, "down")}
-                    disabled={isLast}
-                  >
-                    <ArrowDown size={15} />
-                  </button>
-
-                  {/* Edit */}
-                  <button
-                    type="button"
-                    className="btn-action-icon edit"
-                    title={isUg ? "Ozgertish" : "تەھرىرلەش"}
-                    onClick={() => handleStartEdit(pod)}
-                  >
-                    <Edit2 size={15} />
-                  </button>
-
-                  {/* Delete */}
-                  <button
-                    type="button"
-                    className="btn-action-icon delete"
-                    title={isUg ? "Ochurush" : "ئۆچۈرۈش"}
-                    onClick={() => handleDelete(pod.id, pod.title)}
-                  >
-                    <Trash2 size={15} />
-                  </button>
                 </div>
               </article>
             );

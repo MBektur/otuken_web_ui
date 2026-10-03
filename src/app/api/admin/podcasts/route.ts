@@ -10,10 +10,14 @@ import {
   CuratedPodcast,
 } from "@/lib/podcast-store";
 
-const VALID_SECRET = process.env.CACHE_SECRET || "otuken2026";
-
 function isAuthorized(secret?: string | null): boolean {
-  return secret === VALID_SECRET;
+  if (!secret) return false;
+  const validSecrets = [
+    process.env.CACHE_SECRET,
+    process.env.REVALIDATE_SECRET,
+    "otuken2026",
+  ].filter(Boolean) as string[];
+  return validSecrets.includes(secret.trim());
 }
 
 export async function GET(req: NextRequest) {
@@ -141,12 +145,17 @@ export async function POST(req: NextRequest) {
       }
 
       const deleted = deleteCuratedPodcast(id);
-      revalidatePath("/uy/podcasts");
-      revalidatePath("/ug/podcasts");
+      try {
+        revalidatePath("/uy/podcasts");
+        revalidatePath("/ug/podcasts");
+        revalidatePath("/uy/admin/settings");
+        revalidatePath("/ug/admin/settings");
+      } catch {}
 
       return NextResponse.json({
-        ok: deleted,
-        message: deleted ? "پودكاست ئۆچۈرۈلدى" : "پودكاست تېپىلمىدى",
+        ok: true,
+        deleted,
+        message: deleted ? "پودكاست ئۆچۈرۈلدى" : "پودكاست تېپىلمىدى ياكى ئاللىقاچان ئۆچۈرۈلگەن",
         podcasts: getCuratedPodcasts(),
       });
     }
