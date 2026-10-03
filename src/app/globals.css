@@ -1411,8 +1411,12 @@ body.ug-cyrl .hero-slide-overlay {
     padding-bottom: 8px;
     cursor: grab;
     cursor: -webkit-grab;
-    touch-action: pan-x pan-y;
+    touch-action: pan-y;
     -webkit-overflow-scrolling: touch;
+}
+
+.recent-carousel-track * {
+    -webkit-user-drag: none;
 }
 
 .recent-carousel-track::-webkit-scrollbar {
@@ -1420,21 +1424,18 @@ body.ug-cyrl .hero-slide-overlay {
 }
 
 .recent-carousel-track.is-dragging {
-    cursor: grabbing;
-    cursor: -webkit-grabbing;
-    user-select: none;
-    -webkit-user-select: none;
-    scroll-behavior: auto;
-    scroll-snap-type: none;
+    cursor: grabbing !important;
+    cursor: -webkit-grabbing !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    scroll-behavior: auto !important;
+    scroll-snap-type: none !important;
 }
 
 .recent-carousel-track.is-dragging * {
-    user-select: none;
-    -webkit-user-select: none;
-}
-
-.recent-carousel-track.is-dragging a {
-    pointer-events: none;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    pointer-events: none !important;
 }
 
 .recent-carousel-card {
