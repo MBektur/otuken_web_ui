@@ -165,14 +165,17 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
               onClick={() => goTo(idx)}
             />
           ))}
-          {/* Progress bar for current slide autoplay */}
-          <div className="hero-slider-progress">
-            <div
-              className={`hero-slider-progress-bar ${!paused ? "is-running" : ""}`}
-              style={{ animationDuration: `${AUTOPLAY_INTERVAL}ms` }}
-              key={active}
-            />
-          </div>
+        </div>
+      )}
+
+      {/* Autoplay progress bar */}
+      {total > 1 && (
+        <div className="hero-slider-progress">
+          <div
+            className={`hero-slider-progress-bar ${!paused ? "is-running" : ""}`}
+            style={{ animationDuration: `${AUTOPLAY_INTERVAL}ms` }}
+            key={active}
+          />
         </div>
       )}
     </div>
