@@ -15,7 +15,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   const decoded = q ? robustDecode(q).slice(0, 200).trim() : undefined;
   const query = decoded !== undefined && decoded !== "" ? decoded : undefined;
   const browsing = q !== undefined || !!page;
-  const title = query ? `ئىزدەش: ${query}` : (page ? "بارلىق يازمىلار" : "باشبەت — دۇنياغا نەزەر، كەلگۈسىگە تەپەككۇر");
+  const title = query ? `ئىزدەش: ${query}` : (page ? "بارلىق يازمىلار" : "باشبەت — ئۆتۈكەن سىياسەت تەتقىقات مەركىزى");
   const description = query
     ? `«${query}» ھەققىدىكى تەتقىقات، ماقالە ۋە سىياسىي ئانالىزلار.`
     : "ئۆتۈكەن سىياسەت تەتقىقات مەركىزى — مۇستەقىل كۆز قاراش، دۇنياغا نەزەر ۋە كەلگۈسىگە تەپەككۇر.";
