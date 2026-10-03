@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { WPPost, postCategory, postImage, displayDate } from "@/lib/wordpress";
 import { localPath, plainText } from "@/lib/content";
 
-const AUTOPLAY_INTERVAL = 3000; // 3 saniyede bir
+const AUTOPLAY_INTERVAL = 4000; // 3 saniyede bir
 
 export function RecentCarousel({ posts }: { posts: WPPost[] }) {
   // Sort posts strictly by date descending (zamana gore en son yazılar)

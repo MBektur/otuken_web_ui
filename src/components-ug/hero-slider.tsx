@@ -21,46 +21,73 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [paused, setPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [dragOffset, setDragOffset] = useState(0);
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const dragStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
-  const justDraggedRef = useRef(false);
-  const isTransitioningRef = useRef(false);
 
-  // Sync ref with state
+  // Mouse & Touch drag tracking refs
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const startYRef = useRef(0);
+  const currentDxRef = useRef(0);
+  const startTimeRef = useRef(0);
+  const hasMovedRef = useRef(false);
+  const justDraggedRef = useRef(false);
+  const scrollLockedRef = useRef(false);
+  const isTransitioningRef = useRef(false);
+  const currentIndexRef = useRef(currentIndex);
+
+  // Keep refs in sync
   isTransitioningRef.current = isTransitioning;
+  currentIndexRef.current = currentIndex;
 
   // Active dot indicator (0 to total - 1)
-  const activeDotIndex = total > 1
-    ? (currentIndex - 1 + total) % total
-    : 0;
+  const activeDotIndex = total > 1 ? (currentIndex - 1 + total) % total : 0;
 
-  // Navigate to target index with animation
-  const goToIndex = useCallback((targetIndex: number) => {
-    if (total <= 1 || isTransitioningRef.current) return;
-    setIsTransitioning(true);
-    setCurrentIndex(targetIndex);
-  }, [total]);
+  // Apply track transform with or without CSS transition
+  const setTrackTransform = useCallback((percent: number, offsetPx = 0, animate = true) => {
+    if (!trackRef.current) return;
+    if (animate) {
+      trackRef.current.style.transition = `transform ${TRANSITION_DURATION}ms cubic-bezier(0.25, 1, 0.5, 1)`;
+    } else {
+      trackRef.current.style.transition = "none";
+    }
+    const offsetStr = offsetPx !== 0 ? ` + ${offsetPx}px` : "";
+    trackRef.current.style.transform = `translate3d(calc(-${percent}%${offsetStr}), 0, 0)`;
+  }, []);
+
+  // Navigate to target slide index
+  const goToIndex = useCallback(
+    (targetIndex: number) => {
+      if (total <= 1) return;
+      setIsTransitioning(true);
+      setCurrentIndex(targetIndex);
+      setTrackTransform(targetIndex * 100, 0, true);
+    },
+    [total, setTrackTransform]
+  );
 
   // In LTR:
   // Next in sequence = currentIndex + 1
   // Prev in sequence = currentIndex - 1
   const goNext = useCallback(() => {
-    goToIndex(currentIndex + 1);
-  }, [currentIndex, goToIndex]);
-
-  const goPrev = useCallback(() => {
-    goToIndex(currentIndex - 1);
-  }, [currentIndex, goToIndex]);
-
-  // Jump to specific slide from dot indicators
-  const goToSlide = useCallback((postIdx: number) => {
-    goToIndex(postIdx + 1);
+    goToIndex(currentIndexRef.current + 1);
   }, [goToIndex]);
 
-  // Autoplay
+  const goPrev = useCallback(() => {
+    goToIndex(currentIndexRef.current - 1);
+  }, [goToIndex]);
+
+  // Jump to specific slide from dots
+  const goToSlide = useCallback(
+    (postIdx: number) => {
+      goToIndex(postIdx + 1);
+    },
+    [goToIndex]
+  );
+
+  // Autoplay timer
   useEffect(() => {
     if (paused || isDragging || total <= 1) return;
     timerRef.current = setInterval(goNext, AUTOPLAY_INTERVAL);
@@ -69,20 +96,22 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
     };
   }, [paused, isDragging, goNext, total]);
 
-  // Handle clone boundary reset on transition end
+  // Handle clone boundary reset on transition end (seamless infinite loop)
   const handleTransitionEnd = useCallback(() => {
     setIsTransitioning(false);
 
     if (total > 1) {
       if (currentIndex === 0) {
-        // Reached clone of last slide -> jump to real last slide
+        // Reached clone of last slide -> jump to real last slide without animation
         setCurrentIndex(total);
+        setTrackTransform(total * 100, 0, false);
       } else if (currentIndex === total + 1) {
-        // Reached clone of first slide -> jump to real first slide
+        // Reached clone of first slide -> jump to real first slide without animation
         setCurrentIndex(1);
+        setTrackTransform(100, 0, false);
       }
     }
-  }, [currentIndex, total]);
+  }, [currentIndex, total, setTrackTransform]);
 
   // Keyboard navigation for LTR:
   // Right arrow = Next
@@ -97,83 +126,189 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
     }
   }
 
-  // Pointer drag & drop (mouse + touch)
-  function onPointerDown(e: React.PointerEvent) {
-    if (total <= 1) return;
-    if (e.button !== 0 && e.pointerType === "mouse") return;
-    if (isTransitioningRef.current) return;
-
-    dragStartRef.current = { x: e.clientX, y: e.clientY, time: Date.now() };
-    setIsDragging(true);
-    setDragOffset(0);
-    setPaused(true);
-  }
-
-  function onPointerMove(e: React.PointerEvent) {
-    if (!dragStartRef.current || !isDragging) return;
-    const dx = e.clientX - dragStartRef.current.x;
-    const dy = e.clientY - dragStartRef.current.y;
-
-    // Release drag if mostly vertical scroll on mobile
-    if (Math.abs(dy) > Math.abs(dx) && Math.abs(dragOffset) === 0 && Math.abs(dy) > 10) {
-      dragStartRef.current = null;
-      setIsDragging(false);
-      setDragOffset(0);
-      return;
-    }
-
-    setDragOffset(dx);
-  }
-
-  const finishDrag = useCallback(() => {
-    if (!dragStartRef.current || !isDragging) {
-      setIsDragging(false);
-      setDragOffset(0);
-      return;
-    }
-
-    const offset = dragOffset;
-    const elapsed = Date.now() - dragStartRef.current.time;
-    const containerWidth = containerRef.current?.offsetWidth || 600;
-    const threshold = Math.min(containerWidth * 0.16, 70);
-    const isFlick = elapsed < 300 && Math.abs(offset) > 25;
-    const isMoved = Math.abs(offset) > threshold;
-
-    if (isFlick || isMoved) {
-      justDraggedRef.current = true;
-      setTimeout(() => { justDraggedRef.current = false; }, 250);
-      // Dragging left (negative offset) pulls next slide into view
-      // Dragging right (positive offset) pulls prev slide into view
-      if (offset < 0) {
-        goToIndex(currentIndex + 1);
-      } else {
-        goToIndex(currentIndex - 1);
-      }
-    } else if (Math.abs(offset) > 5) {
-      justDraggedRef.current = true;
-      setTimeout(() => { justDraggedRef.current = false; }, 250);
-    }
-
-    dragStartRef.current = null;
-    setIsDragging(false);
-    setDragOffset(0);
-    setPaused(false);
-  }, [currentIndex, dragOffset, goToIndex, isDragging]);
-
+  // Prevent link click when dragged
   function handleLinkClick(e: React.MouseEvent) {
-    if (justDraggedRef.current) {
+    if (justDraggedRef.current || hasMovedRef.current) {
       e.preventDefault();
       e.stopPropagation();
     }
   }
 
-  // Calculate track transform
-  const trackStyle = {
-    transform: `translate3d(calc(-${currentIndex * 100}% + ${dragOffset}px), 0, 0)`,
-    transition: isDragging || !isTransitioning
-      ? "none"
-      : `transform ${TRANSITION_DURATION}ms cubic-bezier(0.25, 1, 0.5, 1)`,
-  };
+  // Block native dragging of images & links
+  function preventNativeDrag(e: React.DragEvent) {
+    e.preventDefault();
+  }
+
+  // ── MOUSE DRAG HANDLERS ───────────────────────────────────────
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      if (total <= 1 || e.button !== 0) return;
+
+      isDraggingRef.current = true;
+      hasMovedRef.current = false;
+      startXRef.current = e.clientX;
+      startYRef.current = e.clientY;
+      currentDxRef.current = 0;
+      startTimeRef.current = performance.now();
+      setPaused(true);
+
+      // Disable transition while dragging
+      if (trackRef.current) {
+        trackRef.current.style.transition = "none";
+      }
+
+      function onMouseMove(moveEvent: MouseEvent) {
+        if (!isDraggingRef.current) return;
+        const dx = moveEvent.clientX - startXRef.current;
+
+        if (!hasMovedRef.current && Math.abs(dx) > 4) {
+          hasMovedRef.current = true;
+          setIsDragging(true);
+        }
+
+        if (hasMovedRef.current) {
+          moveEvent.preventDefault();
+          currentDxRef.current = dx;
+          setTrackTransform(currentIndexRef.current * 100, dx, false);
+        }
+      }
+
+      function onMouseUp() {
+        window.removeEventListener("mousemove", onMouseMove);
+        window.removeEventListener("mouseup", onMouseUp);
+
+        if (!isDraggingRef.current) return;
+        isDraggingRef.current = false;
+        setIsDragging(false);
+
+        if (hasMovedRef.current) {
+          justDraggedRef.current = true;
+          // Capture and swallow any click events from this drag gesture
+          const captureClick = (evt: MouseEvent) => {
+            evt.preventDefault();
+            evt.stopPropagation();
+            window.removeEventListener("click", captureClick, true);
+          };
+          window.addEventListener("click", captureClick, true);
+          setTimeout(() => {
+            window.removeEventListener("click", captureClick, true);
+            justDraggedRef.current = false;
+            hasMovedRef.current = false;
+          }, 250);
+
+          const dx = currentDxRef.current;
+          const elapsed = performance.now() - startTimeRef.current;
+          const containerWidth = containerRef.current?.offsetWidth || 600;
+          const threshold = Math.min(containerWidth * 0.16, 75);
+          const isFlick = elapsed < 320 && Math.abs(dx) > 25;
+
+          if (Math.abs(dx) > threshold || isFlick) {
+            if (dx < 0) {
+              goNext();
+            } else {
+              goPrev();
+            }
+          } else {
+            // Snap back to current slide
+            setTrackTransform(currentIndexRef.current * 100, 0, true);
+          }
+        }
+
+        setPaused(false);
+      }
+
+      window.addEventListener("mousemove", onMouseMove, { passive: false });
+      window.addEventListener("mouseup", onMouseUp);
+    },
+    [total, goNext, goPrev, setTrackTransform]
+  );
+
+  // ── TOUCH GESTURE HANDLERS (FINGER / MOBILE) ───────────────────
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      if (total <= 1 || e.touches.length > 1) return;
+
+      const touch = e.touches[0];
+      isDraggingRef.current = true;
+      hasMovedRef.current = false;
+      scrollLockedRef.current = false;
+      startXRef.current = touch.clientX;
+      startYRef.current = touch.clientY;
+      currentDxRef.current = 0;
+      startTimeRef.current = performance.now();
+      setPaused(true);
+
+      if (trackRef.current) {
+        trackRef.current.style.transition = "none";
+      }
+    },
+    [total]
+  );
+
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      if (!isDraggingRef.current || e.touches.length > 1) return;
+
+      const touch = e.touches[0];
+      const dx = touch.clientX - startXRef.current;
+      const dy = touch.clientY - startYRef.current;
+
+      // Determine swipe intent
+      if (!scrollLockedRef.current) {
+        if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 7) {
+          // Primarily vertical scroll: abort slider drag to allow natural page scroll
+          isDraggingRef.current = false;
+          setIsDragging(false);
+          setTrackTransform(currentIndexRef.current * 100, 0, true);
+          return;
+        }
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 6) {
+          scrollLockedRef.current = true;
+          hasMovedRef.current = true;
+          setIsDragging(true);
+        }
+      }
+
+      if (scrollLockedRef.current) {
+        currentDxRef.current = dx;
+        setTrackTransform(currentIndexRef.current * 100, dx, false);
+      }
+    },
+    [setTrackTransform]
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    if (!isDraggingRef.current) return;
+    isDraggingRef.current = false;
+    setIsDragging(false);
+
+    if (hasMovedRef.current) {
+      justDraggedRef.current = true;
+      setTimeout(() => {
+        justDraggedRef.current = false;
+        hasMovedRef.current = false;
+      }, 250);
+
+      const dx = currentDxRef.current;
+      const elapsed = performance.now() - startTimeRef.current;
+      const containerWidth = containerRef.current?.offsetWidth || 600;
+      const threshold = Math.min(containerWidth * 0.16, 75);
+      const isFlick = elapsed < 320 && Math.abs(dx) > 25;
+
+      if (Math.abs(dx) > threshold || isFlick) {
+        if (dx < 0) {
+          goNext();
+        } else {
+          goPrev();
+        }
+      } else {
+        // Snap back to current slide
+        setTrackTransform(currentIndexRef.current * 100, 0, true);
+      }
+    }
+
+    setPaused(false);
+  }, [goNext, goPrev, setTrackTransform]);
 
   return (
     <div
@@ -181,22 +316,32 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
       className={`hero-slider ${isDragging ? "is-dragging" : ""}`}
       role="region"
       aria-roledescription="carousel"
-      aria-label="Өтүкәن Нәзири"
+      aria-label="Өтүкән Нәзири"
       onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => { if (!isDragging) setPaused(false); }}
+      onMouseLeave={() => {
+        if (!isDragging) setPaused(false);
+      }}
       onFocusCapture={() => setPaused(true)}
       onBlurCapture={() => setPaused(false)}
       onKeyDown={onKeyDown}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={finishDrag}
-      onPointerCancel={finishDrag}
+      onMouseDown={handleMouseDown}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd}
+      onDragStart={preventNativeDrag}
       tabIndex={0}
     >
       {/* Slides Track */}
       <div
+        ref={trackRef}
         className="hero-slider-track"
-        style={trackStyle}
+        style={{
+          transform: `translate3d(-${currentIndex * 100}%, 0, 0)`,
+          transition: isTransitioning
+            ? `transform ${TRANSITION_DURATION}ms cubic-bezier(0.25, 1, 0.5, 1)`
+            : "none",
+        }}
         onTransitionEnd={handleTransitionEnd}
       >
         {slides.map((post, idx) => {
@@ -237,7 +382,9 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
                     </span>
                   )}
                   <i />
-                  <time dateTime={post.date} dir="ltr">{displayDate(post.date)}</time>
+                  <time dateTime={post.date} dir="ltr">
+                    {displayDate(post.date)}
+                  </time>
                 </div>
                 <h2>
                   <Link
@@ -245,6 +392,7 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
                     prefetch={true}
                     tabIndex={isCurrent ? 0 : -1}
                     onClick={handleLinkClick}
+                    draggable={false}
                   >
                     {plainText(post.title.rendered)}
                   </Link>
@@ -262,6 +410,7 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
                     prefetch={true}
                     tabIndex={isCurrent ? 0 : -1}
                     onClick={handleLinkClick}
+                    draggable={false}
                   >
                     Давамини Оқуң
                   </Link>
@@ -280,6 +429,7 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
             className="hero-slider-arrow hero-slider-arrow-left"
             onClick={goPrev}
             aria-label="Алдинқи"
+            title="Алдинқи"
           >
             <ChevronLeft size={22} />
           </button>
@@ -288,6 +438,7 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
             className="hero-slider-arrow hero-slider-arrow-right"
             onClick={goNext}
             aria-label="Кейинки"
+            title="Кейинки"
           >
             <ChevronRight size={22} />
           </button>
@@ -296,7 +447,7 @@ export function HeroSlider({ posts }: { posts: WPPost[] }) {
 
       {/* Dot indicators */}
       {total > 1 && (
-        <div className="hero-slider-dots" role="tablist" aria-label="Йазмилар Саниғи">
+        <div className="hero-slider-dots" role="tablist" aria-label="Йазмиلار Саниғи">
           {posts.map((_, idx) => (
             <button
               key={idx}
