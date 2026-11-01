@@ -27,15 +27,28 @@ export function ContactForm({ isUg = false }: { isUg?: boolean }) {
 
     setStatus("submitting");
 
-    // Simulate sending / submit to contact handler
     try {
-      await new Promise((resolve) => setTimeout(resolve, 800));
-      setStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setStatus("error");
+        setErrorMessage(
+          data.error ||
+            (isUg ? "Учур әвәтиштә хаталиқ көрۈلدی." : "ئۇچۇر ئەۋەتىشتە خاتالىق كۆرۈلدى.")
+        );
+      }
     } catch {
       setStatus("error");
       setErrorMessage(
-        isUg ? "Учур әвәтиштә хаталиق көрүلди." : "ئۇچۇر ئەۋەتىشتە خاتالىق كۆرۈلدى."
+        isUg ? "Учур әвәтиштә хаталиқ көрۈلدی." : "ئۇچۇر ئەۋەتىشتە خاتالىق كۆرۈلدى."
       );
     }
   };

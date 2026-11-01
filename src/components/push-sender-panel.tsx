@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Send, Bell, Users, CheckCircle2, AlertCircle, RefreshCw, Smartphone } from "lucide-react";
+import Link from "next/link";
+import { Send, Bell, Users, CheckCircle2, AlertCircle, RefreshCw, Smartphone, Volume2, Zap, Inbox } from "lucide-react";
 import type { WPPost } from "@/lib/wordpress";
 import { plainText, localPath } from "@/lib/content";
 
@@ -87,6 +88,26 @@ export function PushSenderPanel({ posts = [] }: { posts?: WPPost[] }) {
 
   return (
     <div className="editorial-page-container" dir="rtl">
+      {/* Top Admin Navigation Tabs */}
+      <nav className="admin-nav-tabs" aria-label="Admin Navigation" style={{ marginBottom: "28px" }}>
+        <Link href="/uy/admin/settings" className="admin-tab-btn">
+          <Volume2 size={16} />
+          <span>پودكاست تەڭشەكلىرى</span>
+        </Link>
+        <Link href="/uy/admin/cache" className="admin-tab-btn">
+          <Zap size={16} />
+          <span>تېز ساقلىغۇچ (Cache)</span>
+        </Link>
+        <Link href="/uy/admin/push" className="admin-tab-btn active">
+          <Bell size={16} />
+          <span>ئۇقتۇرۇش ئەۋەتىش (Push)</span>
+        </Link>
+        <Link href="/uy/admin/messages" className="admin-tab-btn">
+          <Inbox size={16} />
+          <span>كەلگەن ئۇچۇرلار</span>
+        </Link>
+      </nav>
+
       <header className="editorial-header">
         <span className="eyebrow">ئۇچۇر تارقىتىش سۇپىسى</span>
         <h1>ئەپلەرگە يىراقتىن ئۇقتۇرۇش ئەۋەتىش (Web Push)</h1>

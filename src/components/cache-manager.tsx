@@ -20,6 +20,7 @@ import {
   Flame,
   Image as ImageIcon,
   Bell,
+  Inbox,
 } from "lucide-react";
 
 interface SyncStatus {
@@ -235,6 +236,13 @@ export function CacheManager() {
         >
           <Bell size={16} />
           <span>ئۇقتۇرۇش ئەۋەتىش (Web Push)</span>
+        </Link>
+        <Link
+          href="/uy/admin/messages"
+          className="admin-tab-btn"
+        >
+          <Inbox size={16} />
+          <span>كەلگەن ئۇچۇرلار</span>
         </Link>
       </nav>
 
