@@ -153,6 +153,13 @@ async function RelatedCarouselStream({ currentPost }: { currentPost: WPPost }) {
 
 export default async function ContentPage({ params, searchParams }: Props) {
   const { path } = await params;
+  const decodedPath = path.map(safeDecode).join("/").toLowerCase();
+  if (decodedPath.includes("ھەققىمىزدە") || decodedPath.includes("haqqimizda") || decodedPath.includes("about")) {
+    redirect("/uy/about");
+  }
+  if (decodedPath.includes("biz-bilen-alaqilid") || decodedPath.includes("alaqe") || decodedPath.includes("contact")) {
+    redirect("/uy/contact");
+  }
   const data = await resolve(path.join("/"));
   if (!data) notFound();
   if (data.kind === "category") {

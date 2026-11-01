@@ -141,8 +141,9 @@ export function Footer() {
         </Link>
         <nav aria-label="Асти Тизимлик">
           <Link href="/ug/podcasts">Подкастлар</Link>
-          <Link href="/ug/Һәққимиздә/">Һәққимиздә</Link>
-          <Link href="/ug/biz-bilen-alaqilid/">‍Алақилишиң</Link>
+          <Link href="/ug/about">Һәққимиздә</Link>
+          <Link href="/ug/contact">Алақилишиң</Link>
+          <Link href="/ug/install">Әпни қачилаш (PWA)</Link>
           <Link href="/ug/teklip-pikir/">Тәклип-Пикир</Link>
           <div className="footer-socials">
             <a

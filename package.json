@@ -17,7 +17,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sanitize-html": "^2.17.0",
-    "ulc-converter": "^1.1.0"
+    "ulc-converter": "^1.1.0",
+    "web-push": "^3.6.7"
   },
   "devDependencies": {
     "@types/he": "^1.2.3",
@@ -25,6 +26,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/sanitize-html": "^2.16.0",
+    "@types/web-push": "^3.6.4",
     "tsx": "^4.20.0",
     "typescript": "^5.0.0"
   }

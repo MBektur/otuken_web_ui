@@ -19,6 +19,7 @@ import {
   Terminal,
   Flame,
   Image as ImageIcon,
+  Bell,
 } from "lucide-react";
 
 interface SyncStatus {
@@ -227,6 +228,13 @@ export function CacheManager() {
         >
           <Zap size={16} />
           <span>تېز ساقلىغۇچ ۋە ماسقەدەملەش</span>
+        </Link>
+        <Link
+          href="/uy/admin/push"
+          className="admin-tab-btn"
+        >
+          <Bell size={16} />
+          <span>ئۇقتۇرۇش ئەۋەتىش (Web Push)</span>
         </Link>
       </nav>
 

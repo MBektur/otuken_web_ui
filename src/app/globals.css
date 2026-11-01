@@ -5676,3 +5676,439 @@ body.ug-cyrl .hero-slide-overlay {
         transition: none !important
     }
 }
+
+
+/* ==========================================================================
+   Mobile Touch & Zoom Prevention (PWA & iOS Safari)
+   ========================================================================== */
+html, body {
+    touch-action: manipulation;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* iOS Safari auto-zooms if font-size < 16px on focus */
+@media (max-width: 768px) {
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* ==========================================================================
+   PWA Install Toast
+   ========================================================================== */
+.pwa-install-toast {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    max-width: 480px;
+    margin: 0 auto;
+    z-index: 99999;
+    animation: pwa-slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pwa-slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.pwa-toast-inner {
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.pwa-toast-close {
+    position: absolute;
+    top: 10px;
+    inset-inline-end: 10px;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.pwa-toast-close:hover {
+    background: var(--wash);
+    color: var(--ink);
+}
+
+.pwa-toast-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-inline-end: 28px;
+}
+
+.pwa-toast-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
+}
+
+.pwa-toast-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.pwa-toast-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+}
+
+.pwa-toast-badge {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    background: var(--wine);
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+}
+
+.pwa-toast-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 4px 0 0 0;
+    line-height: 1.45;
+}
+
+.pwa-toast-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pwa-toast-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    border: none;
+}
+
+.pwa-toast-btn.primary {
+    background: var(--wine);
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(104, 21, 42, 0.25);
+}
+
+.pwa-toast-btn.primary:hover {
+    background: #501020;
+    transform: translateY(-1px);
+}
+
+.pwa-toast-btn.secondary {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+}
+
+.pwa-toast-btn.secondary:hover {
+    background: var(--wash);
+    color: var(--ink);
+}
+
+/* ==========================================================================
+   Editorial Custom Pages: Install Guide, About, Contact
+   ========================================================================== */
+.editorial-page-container {
+    max-width: 900px;
+    margin: 32px auto 64px auto;
+    padding: 0 20px;
+}
+
+.editorial-header {
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 28px;
+}
+
+.editorial-header .eyebrow {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--wine);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.editorial-header h1 {
+    font-family: var(--heading-font);
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 12px 0;
+    line-height: 1.25;
+}
+
+.editorial-header p {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 680px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.editorial-card {
+    background: #fffdf9;
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+}
+
+.editorial-card h2 {
+    font-family: var(--heading-font);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 16px 0;
+    border-bottom: 1px solid var(--wash);
+    padding-bottom: 10px;
+}
+
+.editorial-card p {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--ink);
+    margin-bottom: 16px;
+}
+
+.editorial-card ul {
+    padding-inline-start: 24px;
+    margin-bottom: 16px;
+}
+
+.editorial-card li {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 8px;
+    color: var(--ink);
+}
+
+/* Device Tabs for Install Guide */
+.device-tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 2px solid var(--wash);
+    margin-bottom: 28px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+}
+
+.device-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    font-size: 15px;
+    font-weight: 700;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.device-tab-btn.active {
+    color: var(--wine);
+    border-bottom-color: var(--wine);
+    background: rgba(104, 21, 42, 0.04);
+    border-radius: 8px 8px 0 0;
+}
+
+.install-step-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.install-step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: var(--paper);
+    border: 1px solid var(--wash);
+    border-radius: 12px;
+    padding: 16px 20px;
+}
+
+.install-step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--wine);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+.install-step-text h3 {
+    margin: 0 0 4px 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.install-step-text p {
+    margin: 0;
+    font-size: 14.5px;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+/* Contact Page Form */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.form-input, .form-textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--rule);
+    background: #ffffff;
+    color: var(--ink);
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus, .form-textarea:focus {
+    border-color: var(--wine);
+    box-shadow: 0 0 0 3px rgba(104, 21, 42, 0.12);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.btn-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--wine);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(104, 21, 42, 0.2);
+    transition: all 0.2s ease;
+}
+
+.btn-submit:hover {
+    background: #501020;
+    transform: translateY(-1px);
+}
+
+.contact-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.contact-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px;
+    background: var(--paper);
+    border-radius: 10px;
+    border: 1px solid var(--wash);
+}
+
+.contact-info-icon {
+    color: var(--wine);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.contact-info-text strong {
+    display: block;
+    font-size: 14.5px;
+    color: var(--ink);
+    margin-bottom: 2px;
+}
+
+.contact-info-text span, .contact-info-text a {
+    font-size: 14px;
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.contact-info-text a:hover {
+    color: var(--wine);
+    text-decoration: underline;
+}

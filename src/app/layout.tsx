@@ -1,14 +1,32 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
 import { NavigationProgress } from "@/components/navigation-progress";
+import { DirectionManager } from "@/components/direction-manager";
+import { PwaProvider } from "@/components/pwa-provider";
+import { PwaInstallToast } from "@/components/pwa-install-toast";
 import "./globals.css";
 
 import { SITE_URL, DEFAULT_OG_IMAGE } from "@/lib/seo";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover",
+  themeColor: "#faf7f0",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: "ئۆتۈكەن — سىياسەت تەتقىقات مەركىزى", template: "%s | ئۆتۈكەن" },
   description: "سىياسىي ئانالىز، خەلقئارا مۇناسىۋەتلەر، تەتقىقات ۋە كىتاپ تونۇشتۇرۇش.",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "ئۆتۈكەن",
+  },
   openGraph: {
     siteName: "ئۆتۈكەن سىياسەت تەتقىقات مەركىزى | Ötüken Policy Center",
     locale: "ug",
@@ -20,46 +38,43 @@ export const metadata: Metadata = {
     images: [DEFAULT_OG_IMAGE],
   },
   icons: {
-    icon: "/logo.Header-UY.png",
-    apple: "/logo.Header-UY.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { url: "/icons/icon-192x192.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
 };
 
-import { headers } from "next/headers";
-import { DirectionManager } from "@/components/direction-manager";
-
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const headerList = await headers();
-  const pathname = headerList.get("x-pathname") || "";
-  const isUg = pathname.startsWith("/ug");
-  const dir = isUg ? "ltr" : "rtl";
-  const lang = isUg ? "ug-Cyrl" : "ug";
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={lang} dir={dir} data-scroll-behavior="smooth">
+    <html lang="ug" dir="rtl" data-scroll-behavior="smooth">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://orhunpolicycenter.com" />
-        <link rel="dns-prefetch" href="https://orhunpolicycenter.com" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="preload" href="/fonts/ukij-tuz.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/lateef-bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Lateef:wght@200;300;400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
       </head>
-      <body className={isUg ? "ug-cyrl" : ""}>
+      <body>
+        <PwaProvider />
         <Suspense fallback={null}>
           <DirectionManager />
         </Suspense>
         <a className="skip-link" href="#main">
-          {isUg ? "Мәзмунға өтүш" : "مەزمۇنغا ئۆتۈش"}
+          مەزمۇنغا ئۆتۈش
         </a>
         <Suspense fallback={null}>
           <NavigationProgress />
         </Suspense>
         {children}
+        <Suspense fallback={null}>
+          <PwaInstallToast />
+        </Suspense>
       </body>
     </html>
   );

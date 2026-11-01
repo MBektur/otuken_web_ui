@@ -1,0 +1,363 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import {
+  Apple,
+  Smartphone,
+  Monitor,
+  Share,
+  PlusSquare,
+  MoreVertical,
+  Download,
+  CheckCircle2,
+  Sparkles,
+  WifiOff,
+  Bell,
+  Zap,
+} from "lucide-react";
+import { PushSubscriber } from "./push-subscriber";
+
+type Platform = "ios" | "android" | "desktop";
+
+export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
+  const [activeTab, setActiveTab] = useState<Platform>("ios");
+  const [canPrompt, setCanPrompt] = useState(false);
+  const [isInstalled, setIsInstalled] = useState(false);
+  const [installSuccess, setInstallSuccess] = useState(false);
+
+  useEffect(() => {
+    // Detect device
+    const ua = navigator.userAgent.toLowerCase();
+    if (/iphone|ipad|ipod/.test(ua)) {
+      setActiveTab("ios");
+    } else if (/android/.test(ua)) {
+      setActiveTab("android");
+    } else {
+      setActiveTab("desktop");
+    }
+
+    if (
+      window.matchMedia("(display-mode: standalone)").matches ||
+      (window.navigator as any).standalone === true
+    ) {
+      setIsInstalled(true);
+    }
+
+    if (window.deferredPwaInstallPrompt) {
+      setCanPrompt(true);
+    }
+
+    const onInstallReady = () => setCanPrompt(true);
+    window.addEventListener("pwa-install-ready", onInstallReady);
+
+    return () => {
+      window.removeEventListener("pwa-install-ready", onInstallReady);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (window.deferredPwaInstallPrompt) {
+      try {
+        await window.deferredPwaInstallPrompt.prompt();
+        const choice = await window.deferredPwaInstallPrompt.userChoice;
+        if (choice.outcome === "accepted") {
+          setInstallSuccess(true);
+        }
+        window.deferredPwaInstallPrompt = null;
+        setCanPrompt(false);
+      } catch (err) {
+        console.warn("Install error:", err);
+      }
+    }
+  };
+
+  return (
+    <div className="editorial-page-container" dir={isUg ? "ltr" : "rtl"}>
+      <header className="editorial-header">
+        <span className="eyebrow">{isUg ? "Қачила Қолланмиси" : "قاچىلاش قوللانمىسى"}</span>
+        <h1>
+          {isUg
+            ? "Өтүкән Тор Әпини (PWA) Тېلېفون ياكى Kompyuterga Қачилаڭ"
+            : "ئۆتۈكەن تور ئەپىنى (PWA) يانفون ياكى كومپيۇتېرىڭىزغا قاچىلاڭ"}
+        </h1>
+        <p>
+          {isUg
+            ? "Өтүкәнни әп сүпитидә қоллиниш арқилиق тез оқуш, торсиз кириш вә йеңи язмилардин дәрһал хәвәрдар болуш имканийитигә егә болуң."
+            : "ئۆتۈكەننى ئەپ سۈپىتىدە قاچىلاپ، يېڭى ئانالىز ۋە تەتقىقاتلاردىن دەرھال خەۋەردار بولۇڭ ھەمدە تېخىمۇ راۋان، تېز ئوقۇش تەجرىبىسىدىن بەھرىمەن بولۇڭ."}
+        </p>
+      </header>
+
+      {/* Feature Highlights */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+          gap: "16px",
+          marginBottom: "32px",
+        }}
+      >
+        <div className="editorial-card" style={{ padding: "20px", margin: 0 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", color: "var(--wine)", marginBottom: "8px" }}>
+            <Zap size={22} />
+            <strong style={{ fontSize: "16px", color: "var(--ink)" }}>{isUg ? "Тез Йүклиниш" : "دەرھال يۈكلىنىش"}</strong>
+          </div>
+          <p style={{ fontSize: "14px", margin: 0, color: "var(--muted)" }}>
+            {isUg
+              ? "Әп кэш технологияси арқилиқ сәһипиләр көз йумғучә ачилиду."
+              : "كەشكە ئالدىن ساقلاش تېخنىكىسى بىلەن بەتلەر كۆز يۇمۇپ ئاچقۇچە ئېچىلىدۇ."}
+          </p>
+        </div>
+
+        <div className="editorial-card" style={{ padding: "20px", margin: 0 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", color: "var(--wine)", marginBottom: "8px" }}>
+            <WifiOff size={22} />
+            <strong style={{ fontSize: "16px", color: "var(--ink)" }}>{isUg ? "Торсиз Көрүш" : "تورسىزمۇ ئوقۇش"}</strong>
+          </div>
+          <p style={{ fontSize: "14px", margin: 0, color: "var(--muted)" }}>
+            {isUg
+              ? "Интернетиңиз үзүлүп қалсиму алдин оқулған язмилар сақлиниду."
+              : "تور بولمىغان ياكى سىگنال ناچار چاغلاردىمۇ ئىلگىرى كۆرۈلگەن يازمىلارنى ئوقۇغىلى بولىدۇ."}
+          </p>
+        </div>
+
+        <div className="editorial-card" style={{ padding: "20px", margin: 0 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", color: "var(--wine)", marginBottom: "8px" }}>
+            <Bell size={22} />
+            <strong style={{ fontSize: "16px", color: "var(--ink)" }}>{isUg ? "Дәрһал Уқтуруш" : "دەرھال ئۇقتۇرۇش"}</strong>
+          </div>
+          <p style={{ fontSize: "14px", margin: 0, color: "var(--muted)" }}>
+            {isUg
+              ? "Йеңи анализ вә китаплар елан қилинғанда биринчи болуп биләйсүз."
+              : "يېڭى ئانالىز ۋە تەتقىقاتلار ئېلان قىلىنغان ھامان تېلېفونىڭىزغا خەۋەر كېلىدۇ."}
+          </p>
+          <PushSubscriber isUg={isUg} />
+        </div>
+      </div>
+
+      {/* Direct Install CTA button if available */}
+      {canPrompt && (
+        <div
+          className="editorial-card"
+          style={{
+            textAlign: "center",
+            background: "linear-gradient(135deg, rgba(104,21,42,0.06), rgba(244,180,26,0.06))",
+            borderColor: "var(--wine)",
+            marginBottom: "32px",
+          }}
+        >
+          <h2 style={{ border: "none", margin: "0 0 10px 0" }}>
+            {isUg ? "Тор Бравзериңиз Қачилашқа Тәййар!" : "تور كۆرگۈچىڭىز قاچىلاشقا تەييار!"}
+          </h2>
+          <p style={{ maxWidth: 540, margin: "0 auto 20px auto" }}>
+            {isUg
+              ? "Төмәндики түгмини бесип Өтүкән әпини дәрһал қачилавалиң."
+              : "تۆۋەندىكى تۈگمىنى بېسىش ئارقىلىق ئۆتۈكەن ئەپىنى بىۋاسىتە قاچىلىۋالالايسىز."}
+          </p>
+          <button
+            type="button"
+            className="btn-submit"
+            onClick={handleInstallClick}
+            style={{ fontSize: "16px", padding: "14px 32px" }}
+          >
+            <Download size={20} />
+            <span>{isUg ? "Һазир Қачилаш" : "ھازىر قاچىلاش"}</span>
+          </button>
+        </div>
+      )}
+
+      {installSuccess && (
+        <div
+          className="editorial-card"
+          style={{
+            background: "#f0fdf4",
+            borderColor: "#86efac",
+            color: "#166534",
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            marginBottom: "28px",
+          }}
+        >
+          <CheckCircle2 size={24} />
+          <strong>
+            {isUg
+              ? "Әп мувәппәқийәтлик қачиланди! Баш экраниңиздин ачалايсиз."
+              : "ئەپ مۇۋەپپەقىيەتلىك قاچىلاندى! باش ئېكرانىڭىزدىن ئاچالايسىز."}
+          </strong>
+        </div>
+      )}
+
+      {/* Device Instructions Section */}
+      <div className="editorial-card">
+        <h2>{isUg ? "Қәдәмму-Қәдәм Қачилаش Қолланмиси" : "قەدەممۇ-قەدەم قاچىلاش تەرتىپى"}</h2>
+
+        {/* Device Switcher Tabs */}
+        <div className="device-tabs">
+          <button
+            type="button"
+            className={`device-tab-btn ${activeTab === "ios" ? "active" : ""}`}
+            onClick={() => setActiveTab("ios")}
+          >
+            <Apple size={17} />
+            <span>iPhone / iPad (iOS)</span>
+          </button>
+          <button
+            type="button"
+            className={`device-tab-btn ${activeTab === "android" ? "active" : ""}`}
+            onClick={() => setActiveTab("android")}
+          >
+            <Smartphone size={17} />
+            <span>Android (Chrome)</span>
+          </button>
+          <button
+            type="button"
+            className={`device-tab-btn ${activeTab === "desktop" ? "active" : ""}`}
+            onClick={() => setActiveTab("desktop")}
+          >
+            <Monitor size={17} />
+            <span>{isUg ? "Kompyuter (Chrome / Edge / Safari)" : "كومپيۇتېر (Chrome / Edge / Safari)"}</span>
+          </button>
+        </div>
+
+        {/* Tab 1: iOS Instructions */}
+        {activeTab === "ios" && (
+          <div className="install-step-list">
+            <div className="install-step-item">
+              <span className="install-step-num">1</span>
+              <div className="install-step-text">
+                <h3>{isUg ? "1. Сафари (Safari) бравзерини ачиң" : "1. سافارى (Safari) تور كۆرگۈچىنى ئېچىڭ"}</h3>
+                <p>
+                  {isUg
+                    ? "iPhone йаки iPad ңызда Өтүкән تور бетини Сафарида ечиң."
+                    : "iPhone ياكى iPad ئۈسكۈنىڭىزدە ئۆتۈكەن تور بېتىنى Safari تور كۆرگۈچى ئارقىلىق ئېچىڭ."}
+                </p>
+              </div>
+            </div>
+
+            <div className="install-step-item">
+              <span className="install-step-num">2</span>
+              <div className="install-step-text">
+                <h3>
+                  {isUg
+                    ? "2. Төмәндики [Һәмбәһирләш] түгүсини бесиң"
+                    : "2. ئاستىدىكى «ھەمبەھىرلەش» سىنبەلگىسىنى بېسىڭ"}
+                </h3>
+                <p>
+                  {isUg
+                    ? "Екранниң төвәндики бөлимидики квадрат үстигә йолланған йа شەкиллик «Һәмбәһирләш (Share)» түгүсини басың."
+                    : "ئېكراننىڭ ئاستىدا تۇرغان، كۋادرات ئۈستىگە يا ئوق چىقىپ تۇرغان «ھەمبەھىرلەش (Share)» سىنبەلگىسىنى بېسىڭ."}
+                </p>
+              </div>
+            </div>
+
+            <div className="install-step-item">
+              <span className="install-step-num">3</span>
+              <div className="install-step-text">
+                <h3>
+                  {isUg
+                    ? "3. «Баш экранға қошуш»ни таллаң"
+                    : "3. «باش ئېكرانغا قوشۇش» تاللانمىسىنى بېسىڭ"}
+                </h3>
+                <p>
+                  {isUg
+                    ? "Чиққан менюдин төвәнгә сүрүп «Баш экранға қошуш (Add to Home Screen)» дегән йәрни бесиң."
+                    : "چىققان تىزىملىكتىن تۆۋەنگە سىيرىپ «باش ئېكرانغا قوشۇش (Add to Home Screen)» تاللانمىسىنى بېسىڭ."}
+                </p>
+              </div>
+            </div>
+
+            <div className="install-step-item">
+              <span className="install-step-num">4</span>
+              <div className="install-step-text">
+                <h3>{isUg ? "4. «Қошуш»ни бесиң" : "4. «قوشۇش»نى بېسىڭ"}</h3>
+                <p>
+                  {isUg
+                    ? "Оң үстидики «Қошуш (Add)» түгүсини бесиң. Өтүкән сөлбәлгиси тېلېфониңизниң баш экраниға қошулиду."
+                    : "ئوڭ ئۈستىدىكى «قوشۇش (Add)» كۇنۇپكىسىنى بېسىڭ. ئۆتۈكەن سىنبەلگىسى باش ئېكرانىڭىزغا ئەپ شەكلىدە قوشۇلىدۇ."}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Tab 2: Android Instructions */}
+        {activeTab === "android" && (
+          <div className="install-step-list">
+            <div className="install-step-item">
+              <span className="install-step-num">1</span>
+              <div className="install-step-text">
+                <h3>{isUg ? "1. Chrome йаки бравзерни ачиң" : "1. Chrome ياكى سىستېما كۆرگۈچىنى ئېچىڭ"}</h3>
+                <p>
+                  {isUg
+                    ? "Android تېلېфониңизда Google Chrome йаки Samsung Internet арқилиқ тор бетимизгә кириң."
+                    : "Android تېلېفونىڭىزدا Google Chrome ياكى Samsung Internet كۆرگۈچى ئارقىلىق كىرىڭ."}
+                </p>
+              </div>
+            </div>
+
+            <div className="install-step-item">
+              <span className="install-step-num">2</span>
+              <div className="install-step-text">
+                <h3>
+                  {isUg
+                    ? "2. Менюни (үч чекит) йаки төвәндики уқтурушни бесиң"
+                    : "2. ئۈستىدىكى ئۈچ چېكىت تىزىملىكىنى ياكى ئاستىدىكى ئۇقتۇرۇشنى بېسىڭ"}
+                </h3>
+                <p>
+                  {isUg
+                    ? "Бравзерниң оң үстидики үч чекитни бесиң йаки екранниң төвәндики «Қачилаш» түгүсини таллаң."
+                    : "كۆرگۈچنىڭ ئوڭ ئۈستىدىكى ئۈچ چېكىت تىزىملىكىنى بېسىڭ ياكى ئېكران ئاستىدا كۆرۈنگەن «ئەپنى قاچىلاش» كۇنۇپكىسىنى تاللاڭ."}
+                </p>
+              </div>
+            </div>
+
+            <div className="install-step-item">
+              <span className="install-step-num">3</span>
+              <div className="install-step-text">
+                <h3>
+                  {isUg
+                    ? "3. «Әпни қачилаش»ни таллаң"
+                    : "3. «ئەپنى قاچىلاش» ياكى «باش ئېكرانغا قوشۇش»نى بېسىڭ"}
+                </h3>
+                <p>
+                  {isUg
+                    ? "«Әпни қачилаش (Install App)» дегән түгмини бесип тәстиқлаң."
+                    : "«ئەپنى قاچىلاش (Install App)» تۈگمىسىنى بېسىپ مۇئەييەنلەشتۈرۈڭ. ئەپ سېكۇنت ئىچىدە يانفونىڭىزغا قاچىلىنىدۇ."}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Tab 3: Desktop Instructions */}
+        {activeTab === "desktop" && (
+          <div className="install-step-list">
+            <div className="install-step-item">
+              <span className="install-step-num">1</span>
+              <div className="install-step-text">
+                <h3>{isUg ? "1. Адрес тизимидики қачилаش сөлбәлгисини бесиң" : "1. ئادرېس بالدىقىدىكى قاچىلاش سىنبەلگىسىنى بېسىڭ"}</h3>
+                <p>
+                  {isUg
+                    ? "Google Chrome йаки Microsoft Edge бравзерида сайтни ачқиниңизда, адрес қатириниң оң тәрәпидә «Қачилаش (Install)» сөлбәлгиси чиқиду."
+                    : "Google Chrome، Edge ياكى Safari كۆرگۈچلىرىدە ئادرېس بالدىقىنىڭ ئەڭ ئوڭ تەرىپىدە كۆرۈنىدىغان قاچىلاش (Install) سىنبەلگىسىنى چېكىڭ."}
+                </p>
+              </div>
+            </div>
+
+            <div className="install-step-item">
+              <span className="install-step-num">2</span>
+              <div className="install-step-text">
+                <h3>{isUg ? "2. «Қачилаش»ни таллаң" : "2. «قاچىلاش»نى بېسىڭ"}</h3>
+                <p>
+                  {isUg
+                    ? "«Өтүкән әпини қачиласунму?» дегән соалға «Қачилаш (Install)»ни бесиң."
+                    : "«قاچىلاش» كۇنۇپكىسىنى بېسىپ جەزملەشتۈرۈڭ. ئەپ ئايرىم دېرىزىدە ئېچىلىدۇ ۋە كومپيۇتېرىڭىزنىڭ ئاساسىي تىزىملىكىگە قوشۇلىدۇ."}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

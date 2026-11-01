@@ -3,6 +3,7 @@ import { WORDPRESS_URL, localPath, plainText } from "./content";
 import { clearMemoryCache, postImage, toCachedImageUrl } from "./wordpress";
 import { getLocalSnapshot, updateLocalSnapshot } from "./cache-store";
 import { getCuratedPodcasts } from "./podcast-store";
+import { broadcastNotification } from "./push-store";
 
 export const DEFAULT_SECRET = process.env.REVALIDATE_SECRET || "otuken2026";
 
@@ -137,12 +138,14 @@ export async function autoSyncModifiedPosts() {
       const freshPosts: any[] = await freshRes.json();
       const current = getLocalSnapshot();
       const mergedPosts = [...current.posts];
+      const newlyDiscovered: any[] = [];
       for (const fp of freshPosts) {
         const idx = mergedPosts.findIndex(p => p.id === fp.id);
         if (idx >= 0) {
           mergedPosts[idx] = { ...mergedPosts[idx], ...fp };
         } else {
           mergedPosts.unshift(fp);
+          newlyDiscovered.push(fp);
         }
       }
       updateLocalSnapshot({
@@ -150,6 +153,18 @@ export async function autoSyncModifiedPosts() {
         latestModified: status.latestModified,
         totalPosts: mergedPosts.length,
       });
+
+      // Automatically broadcast push notification to all subscribers when new articles are published
+      if (newlyDiscovered.length > 0) {
+        const newest = newlyDiscovered[0];
+        const title = plainText(newest.title?.rendered || "يېڭى ماقالە ئېلان قىلىندى");
+        const body = plainText(newest.excerpt?.rendered || newest.content?.rendered || "").slice(0, 120);
+        broadcastNotification({
+          title,
+          body: body || "ئۆتۈكەن سىياسەت تەتقىقات مەركىزىدە يېڭى تەتقىقات يازمىسى ئېلان قىلىندى.",
+          url: localPath(newest.link || "/uy"),
+        }).catch((err) => console.warn("Auto push dispatch error:", err));
+      }
     }
   } catch {
     // Non-blocking fallback

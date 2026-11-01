@@ -23,7 +23,7 @@ async function request<T>(resource: string, params: Record<string, string | numb
   for (const [key, value] of Object.entries(params)) url.searchParams.set(key, String(value));
   const response = await fetch(url, {
     next: { revalidate: revalidateSeconds, tags: [resource] },
-    signal: AbortSignal.timeout(15000),
+    signal: AbortSignal.timeout(4000),
   });
   if (!response.ok) throw new WordPressError(response.status);
   return {
@@ -68,26 +68,14 @@ export async function getPosts(options: {
   withContent?: boolean;
 } = {}): Promise<PostList> {
   const isSearch = Boolean(options.search?.trim());
-  const isPage1 = !options.page || options.page === 1;
 
-  // 1. For searches, query fast local multi-script index first
-  if (isSearch) {
-    const local = getLocalPosts(options);
-    if (local && local.data.length > 0) {
-      return local;
-    }
+  // 1. Instant local cache lookup - eliminates initial page load wait completely
+  const local = getLocalPosts(options);
+  if (local && local.data.length > 0) {
+    return local;
   }
 
-  // 2. For deep pagination without search, serve from local snapshot for instant browsing
-  if (!isPage1 && !isSearch) {
-    const local = getLocalPosts(options);
-    if (local && local.data.length > 0) {
-      return local;
-    }
-  }
-
-  // 3. For page 1 (homepage, category, recent rail) or when local has no items:
-  // Fetch from WordPress API with Next.js ISR tag-based cache (60s TTL)
+  // 2. Fallback to WordPress API when local has no items for this query
   const fields = "id,date,modified,slug,link,title,content,excerpt,categories,_links,_embedded";
   const params: Record<string, string | number> = {
     _embed: "author,wp:term,wp:featuredmedia",
