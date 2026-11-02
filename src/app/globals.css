@@ -3440,6 +3440,14 @@ body.ug-cyrl .hero-slide-overlay {
     box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
 }
 
+.social-round-btn.footer-btn.whatsapp:hover {
+    background: #25d366;
+    border-color: #25d366;
+    color: #fff !important;
+    transform: translateY(-2px) scale(1.08);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+}
+
 .footer small {
     font-size: 11px;
     color: #d6babe

@@ -46,7 +46,7 @@ export default async function TeklipPikirPage() {
                   <div className="contact-info-item">
                     <MessageSquare className="contact-info-icon" size={20} />
                     <div className="contact-info-text">
-                      <strong>ماقالە يوللاش (تەھرىرات)</strong>
+                      <strong>ماقالە يوللاش (ئۆتۈكەن سىياسەت تەتقىقات مەركىزى تەھرىراتى)</strong>
                       <a href="mailto:otuken2025@gmail.com" dir="ltr">otuken2025@gmail.com</a>
                     </div>
                   </div>
@@ -66,7 +66,7 @@ export default async function TeklipPikirPage() {
                   ماقالە تەكلىپى بېرىش تەرتىپى
                 </h3>
                 <p style={{ fontSize: "14px", color: "var(--muted)", margin: 0, lineHeight: 1.6 }}>
-                  ئەگەر تەتقىقات ماقالىڭىزنى «ئۆتۈكەن سىياسەت مەركىزى» تور بېكىتىدە ئېلان قىلىشنى ئويلىسىڭىز، ماقالە تېمىسى، قىسقىچە مەزمۇنى ۋە ئاپتور تونۇشتۇرۇشىنى ئې-خەت ئارقىلىق يوللاپ بېرىڭ.
+                  ئەگەر تەتقىقات ماقالىڭىزنى «ئۆتۈكەن سىياسەت تەتقىقات مەركىزى» تور بېكىتىدە ئېلان قىلىشنى ئويلىسىڭىز، ماقالە تېمىسى، قىسقىچە مەزمۇنى ۋە ئاپتور تونۇشتۇرۇشىنى ئې-خەت ئارقىلىق يوللاپ بېرىڭ.
                 </p>
               </div>
 

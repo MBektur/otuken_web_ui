@@ -456,7 +456,7 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
                   <h3>
                     {isUg
                       ? "5. Әпни ечип уқтурушқа (Notification) йол қойуң"
-                      : "5. ئەپنى ئېچىپ ئۇقتۇرۇشقا (Notification) يول قويۇڭ"}
+                      : "5. ئەپنى ئېچىپ ئۇقتۇرۇشقا (Notification) رۇخسەت قىلىڭ"}
                   </h3>
                   <p>
                     {isUg
@@ -570,7 +570,7 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
                   <h3>
                     {isUg
                       ? "4. Уқтурушқа (Notification) йол қойуң"
-                      : "4. ئۇقتۇرۇشقا (Notification) يول قويۇڭ"}
+                      : "4. ئۇقتۇرۇشقا (Notification) رۇخسەت قىلىڭ"}
                   </h3>
                   <p>
                     {isUg
@@ -662,7 +662,7 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
                   <h3>
                     {isUg
                       ? "3. Уқтурушларға (Notification) йол қойуң"
-                      : "3. ئۇقتۇرۇشلارغا (Notification) يول قويۇڭ"}
+                      : "3. ئۇقتۇرۇشلارغا (Notification) رۇخسەت قىلىڭ"}
                   </h3>
                   <p>
                     {isUg
