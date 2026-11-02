@@ -220,6 +220,18 @@ svg {
     box-shadow: 0 3px 8px rgba(229, 57, 53, 0.35);
 }
 
+.social-round-btn.whatsapp {
+    color: #25d366;
+}
+
+.social-round-btn.whatsapp:hover {
+    background: #25d366;
+    border-color: #25d366;
+    color: #fff !important;
+    transform: translateY(-1px) scale(1.08);
+    box-shadow: 0 3px 8px rgba(37, 211, 102, 0.35);
+}
+
 .language-links {
     direction: rtl !important;
     display: flex;

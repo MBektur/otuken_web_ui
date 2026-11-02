@@ -696,7 +696,7 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
             {/* Mobile hint badge */}
             <div className="pwa-lightbox-zoom-hint">
               <ZoomIn size={12} />
-              <span>{isUg ? "Чоңайтиш: Икки бармақ بىلән кеңейтиң" : "يېقىنلاشتۇرۇپ كۆرۈش: ئىككى بارماق بىلەن يېقىنلاشتۇرۇپ كۆرلەيسىز"}</span>
+              <span>{isUg ? "Чоңайтиш: Икки бармақ بىلән кеңейтиң" : "يېقىنلاشتۇرۇپ كۆرۈش: ئىككى بارماق بىلەن يېقىنلاشتۇرۇپ كۆرەلەيسىز"}</span>
             </div>
           </div>
         </div>
