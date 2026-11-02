@@ -27,8 +27,34 @@ const SUBS_FILE = path.join(DATA_DIR, "push-subscriptions.json");
 // In-memory cache of subscriptions
 let memorySubs: PushSubscriptionItem[] | null = null;
 
+function getKvCredentials() {
+  const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+  return url && token ? { url, token } : null;
+}
+
 async function loadSubscriptions(): Promise<PushSubscriptionItem[]> {
   if (memorySubs !== null) return memorySubs;
+
+  // 1. Try Cloud KV / Upstash Redis if configured on Vercel
+  const kv = getKvCredentials();
+  if (kv) {
+    try {
+      const res = await fetch(`${kv.url}/get/otuken_push_subs`, {
+        headers: { Authorization: `Bearer ${kv.token}` },
+        cache: "no-store",
+      });
+      const data = await res.json();
+      if (data && data.result) {
+        memorySubs = typeof data.result === "string" ? JSON.parse(data.result) : data.result;
+        return memorySubs || [];
+      }
+    } catch (err) {
+      console.warn("KV load error, falling back to local file:", err);
+    }
+  }
+
+  // 2. Fallback to local JSON file (Localhost development)
   try {
     const raw = await fs.readFile(SUBS_FILE, "utf8");
     memorySubs = JSON.parse(raw);
@@ -41,11 +67,31 @@ async function loadSubscriptions(): Promise<PushSubscriptionItem[]> {
 
 async function persistSubscriptions(subs: PushSubscriptionItem[]): Promise<void> {
   memorySubs = subs;
+
+  // 1. Save to Cloud KV / Upstash Redis if on Vercel
+  const kv = getKvCredentials();
+  if (kv) {
+    try {
+      await fetch(`${kv.url}/set/otuken_push_subs`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${kv.token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(subs),
+      });
+      return;
+    } catch (err) {
+      console.error("KV persist error:", err);
+    }
+  }
+
+  // 2. Fallback to local JSON file
   try {
     await fs.mkdir(DATA_DIR, { recursive: true });
     await fs.writeFile(SUBS_FILE, JSON.stringify(subs, null, 2), "utf8");
   } catch (err) {
-    console.error("Failed to persist push subscriptions:", err);
+    console.error("Failed to persist push subscriptions to disk:", err);
   }
 }
 

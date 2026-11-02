@@ -18,8 +18,34 @@ const MESSAGES_FILE = path.join(DATA_DIR, "contact-messages.json");
 
 let memoryMessages: ContactMessage[] | null = null;
 
+function getKvCredentials() {
+  const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+  return url && token ? { url, token } : null;
+}
+
 async function loadMessages(): Promise<ContactMessage[]> {
   if (memoryMessages !== null) return memoryMessages;
+
+  // 1. Try Cloud KV / Upstash Redis if configured on Vercel
+  const kv = getKvCredentials();
+  if (kv) {
+    try {
+      const res = await fetch(`${kv.url}/get/otuken_contact_messages`, {
+        headers: { Authorization: `Bearer ${kv.token}` },
+        cache: "no-store",
+      });
+      const data = await res.json();
+      if (data && data.result) {
+        memoryMessages = typeof data.result === "string" ? JSON.parse(data.result) : data.result;
+        return memoryMessages || [];
+      }
+    } catch (err) {
+      console.warn("KV load messages error, falling back to local file:", err);
+    }
+  }
+
+  // 2. Fallback to local file
   try {
     const raw = await fs.readFile(MESSAGES_FILE, "utf8");
     memoryMessages = JSON.parse(raw);
@@ -32,6 +58,26 @@ async function loadMessages(): Promise<ContactMessage[]> {
 
 async function persistMessages(messages: ContactMessage[]): Promise<void> {
   memoryMessages = messages;
+
+  // 1. Save to Cloud KV / Upstash Redis if on Vercel
+  const kv = getKvCredentials();
+  if (kv) {
+    try {
+      await fetch(`${kv.url}/set/otuken_contact_messages`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${kv.token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(messages),
+      });
+      return;
+    } catch (err) {
+      console.error("KV persist messages error:", err);
+    }
+  }
+
+  // 2. Fallback to local file
   try {
     await fs.mkdir(DATA_DIR, { recursive: true });
     await fs.writeFile(MESSAGES_FILE, JSON.stringify(messages, null, 2), "utf8");
