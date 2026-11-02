@@ -336,6 +336,32 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
       <div className="editorial-card">
         <h2>{isUg ? "Қәдәмму-Қәдәм Қачилаش Қолланмиси" : "قەدەممۇ-قەدەم قاچىلاش تەرتىپى"}</h2>
 
+        {/* Crucial Notification Permission Callout */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            gap: "14px",
+            background: "rgba(244, 180, 26, 0.12)",
+            border: "1px solid rgba(244, 180, 26, 0.4)",
+            borderRadius: "14px",
+            padding: "16px 20px",
+            marginBottom: "20px",
+          }}
+        >
+          <Bell size={24} style={{ color: "var(--wine)", flexShrink: 0, marginTop: "2px" }} />
+          <div>
+            <strong style={{ fontSize: "16px", color: "var(--wine)", display: "block", marginBottom: "4px" }}>
+              {isUg ? "Муһим: Уқтурушларға (Notification) Йол Қойушни Унутмаң!" : "مۇھىم: ئۇقتۇرۇشلارغا (Notification) يول قويۇشنى ئۇنتۇماڭ!"}
+            </strong>
+            <p style={{ margin: 0, fontSize: "14px", color: "var(--ink)", lineHeight: 1.6 }}>
+              {isUg
+                ? "Өтүкән әпини қачилап болғандин кейин, әпни ачип чиққан «Уқтурушқа йол қойуш (Allow Notifications)» түгмисини бесиң. Айфон (iOS) системисида уқтуруш қобул қилиш үчүн әпни сөзсиз баш экрандин бир қетим ечиш керәк."
+                : "ئۆتۈكەن ئەپىنى قاچىلاپ بولغاندىن كېيىن، ئەپنى ئېچىپ كۆرۈنگەن «ئۇقتۇرۇشقا يول قويۇش (Allow Notifications)» كۇنۇپكىسىنى بېسىڭ. ئالاھىدە ئەسكەرتىش: iPhone (iOS) ئۈسكۈنىلىرىدە يېڭى ماقالىلەر ئۇقتۇرۇشىنى تاپشۇرۇۋېلىش ئۈچۈن، ئەپنى چوقۇم باش ئېكراندىن بىر قېتىم ئېچىپ تەستىقلاش تەلەپ قىلىنىدۇ."}
+            </p>
+          </div>
+        </div>
+
         {/* Device Switcher Tabs */}
         <div className="device-tabs">
           <button
@@ -420,6 +446,22 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
                     {isUg
                       ? "Оң үстидики «Қошуش (Add)» түгүсини бесиң. Өтүкән сөлбәلгиси тېلېфониңيزниң баш экраниға қошулиду."
                       : "ئوڭ ئۈستىدىكى «قوشۇش (Add)» كۇنۇپكىسىنى بېسىڭ. ئۆتۈكەن سىنبەلگىسى باش ئېكرانىڭىزغا ئەپ شەكلىدە قوشۇلىدۇ."}
+                  </p>
+                </div>
+              </div>
+
+              <div className="install-step-item">
+                <span className="install-step-num">5</span>
+                <div className="install-step-text">
+                  <h3>
+                    {isUg
+                      ? "5. Әпни ечип уқтурушқа (Notification) йол қойуң"
+                      : "5. ئەپنى ئېچىپ ئۇقتۇرۇشقا (Notification) يول قويۇڭ"}
+                  </h3>
+                  <p>
+                    {isUg
+                      ? "Баш экранға қошулған Өтүкән сөлбәلгисини бесип әпни ачиң. Чиққан соалда «Йол қойуш (Allow)»ни таллаң, шундақ қилғанда йеңи язма вә китаплардин дәрһал хәвәрдар болисиз."
+                      : "باش ئېكرانغا قوشۇلغان ئۆتۈكەن سىنبەلگىسىنى بېسىپ ئەپنى ئېچىڭ. كۆرۈنگەن ئۇقتۇرۇش بېرىش تەلىپىدە «يول قويۇش (Allow)»نى بېسىڭ؛ شۇنداق قىلغاندىلا يېڭى ئانالىز ۋە تەتقىقاتلاردىن دەرھال خەۋەردار بولالايسىز."}
                   </p>
                 </div>
               </div>
@@ -521,6 +563,22 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
                   </p>
                 </div>
               </div>
+
+              <div className="install-step-item">
+                <span className="install-step-num">4</span>
+                <div className="install-step-text">
+                  <h3>
+                    {isUg
+                      ? "4. Уқтурушқа (Notification) йол қойуң"
+                      : "4. ئۇقتۇرۇشقا (Notification) يول قويۇڭ"}
+                  </h3>
+                  <p>
+                    {isUg
+                      ? "Әп ачилғанда чиққан уқтуруш соалида «Йол қойуш (Allow)»ни бесиң. Йеңи анализлар елан қилинғанда тېلېфониңизға дәрһал хәвәр келиду."
+                      : "ئەپ قاچىلانغاندىن كېيىن ياكى تور بېتىدە چىققان تەكلىپتە «يول قويۇش (Allow)»نى بېسىڭ. يېڭى ئانالىز ۋە مۇھىم تەتقىقاتلار ئېلان قىلىنغان ھامان تېلېفونىڭىزغا دەرھال ئۇقتۇرۇش كېلىدۇ."}
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Visual Guide Card: 100% width, natural ratio, modalbox on click */}
@@ -594,6 +652,22 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
                     {isUg
                       ? "«Өтүкән әпини қачиласунму?» дегән соалға «Қачилаш (Install)»ни бесиң."
                       : "«قاچىلاش» كۇنۇپكىسىنى بېسىپ جەزملەشتۈرۈڭ. ئەپ ئايرىم دېرىزىدە ئېچىلىدۇ ۋە كومپيۇتېرىڭىزنىڭ ئاساسىي تىزىملىكىگە قوشۇلىدۇ."}
+                  </p>
+                </div>
+              </div>
+
+              <div className="install-step-item">
+                <span className="install-step-num">3</span>
+                <div className="install-step-text">
+                  <h3>
+                    {isUg
+                      ? "3. Уқтурушларға (Notification) йол қойуң"
+                      : "3. ئۇقتۇرۇشلارغا (Notification) يول قويۇڭ"}
+                  </h3>
+                  <p>
+                    {isUg
+                      ? "Бравзердин уқтуруш бериш соали чиққанда «Йол қойуш (Allow)»ни таллаң. Шундақ қилғанда комpyутериңиздин йеңи язмилардин биринчи болуп хәвәрдар болисиз."
+                      : "تور كۆرگۈچ ياكى كومپيۇتېرىڭىزدا ئۇقتۇرۇش بېرىش تەلىپى كۆرۈنگەندە «يول قويۇش (Allow)»نى بېسىڭ. يېڭى مەزمۇنلار چىققاندا كومپيۇتېرىڭىزغا دەرھال ئەسكەرتىش كېلىدۇ."}
                   </p>
                 </div>
               </div>
