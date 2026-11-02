@@ -112,7 +112,8 @@ h6 {
 
 img {
     display: block;
-    max-width: 100%
+    max-width: 100%;
+    height: auto;
 }
 
 svg {
@@ -6014,121 +6015,161 @@ html, body {
 }
 
 /* ==========================================================================
-   PWA Installation Guide: Balanced 2-Column Split & Visual Showcase
+   PWA Installation Guide: Full-Width Step Grid & True-Ratio Visual Showcase
    ========================================================================== */
-.install-guide-split {
+.install-step-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
-    align-items: start;
-    margin-top: 10px;
+    gap: 16px;
+    margin-bottom: 24px;
 }
 
-@media (max-width: 860px) {
-    .install-guide-split {
+.install-step-grid.cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.install-step-grid.cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.install-step-grid.cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 900px) {
+    .install-step-grid.cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .install-step-grid.cols-4,
+    .install-step-grid.cols-3,
+    .install-step-grid.cols-2 {
         grid-template-columns: 1fr;
-        gap: 24px;
     }
 }
 
-.install-guide-steps-col {
+.install-step-card {
     display: flex;
     flex-direction: column;
-}
-
-.install-guide-visual-col {
-    position: sticky;
-    top: 90px;
-    display: flex;
-    flex-direction: column;
-}
-
-@media (max-width: 860px) {
-    .install-guide-visual-col {
-        position: static;
-    }
-}
-
-/* Polished Visual Showcase Card */
-.pwa-example-card {
-    background: #ffffff;
+    gap: 8px;
+    background: var(--paper);
     border: 1px solid var(--wash);
-    border-radius: 16px;
+    border-radius: 14px;
     padding: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.pwa-example-header {
+.install-step-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+}
+
+.install-step-card-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 10px;
 }
 
-.pwa-example-title {
+.install-step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--wine);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 13.5px;
+    flex-shrink: 0;
+}
+
+.install-step-card-header h3 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.35;
+}
+
+.install-step-card p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+/* Full-Width Visual Walkthrough Mockup */
+.pwa-fullwidth-mockup-card {
+    background: #ffffff;
+    border: 1px solid var(--wash);
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.pwa-fullwidth-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.pwa-fullwidth-title {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 13.5px;
+    font-size: 14.5px;
     font-weight: 700;
     color: var(--ink);
-    line-height: 1.4;
 }
 
-.pwa-example-zoom-hint {
+.pwa-fullwidth-zoom-btn {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     color: var(--wine);
     background: rgba(104, 21, 42, 0.06);
-    padding: 5px 10px;
-    border-radius: 8px;
-    border: 1px solid rgba(104, 21, 42, 0.12);
+    padding: 6px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(104, 21, 42, 0.14);
     cursor: pointer;
     transition: all 0.2s ease;
-    white-space: nowrap;
-    text-decoration: none;
 }
 
-.pwa-example-zoom-hint:hover {
+.pwa-fullwidth-zoom-btn:hover {
     background: var(--wine);
     color: #ffffff;
 }
 
-.pwa-example-img-wrapper {
+.pwa-fullwidth-img-box {
     position: relative;
-    border-radius: 12px;
+    width: 100%;
+    border-radius: 14px;
     overflow: hidden;
     border: 1px solid var(--rule);
     background: #faf7f2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px;
-    cursor: pointer;
-    min-height: 200px;
-    max-height: 360px;
+    cursor: zoom-in;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
 }
 
-.pwa-example-img {
-    max-width: 100%;
-    max-height: 330px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
+.pwa-fullwidth-img {
+    width: 100% !important;
+    height: auto !important;
     display: block;
-    margin: 0 auto;
-    border-radius: 6px;
-    transition: transform 0.25s ease;
+    object-fit: contain;
+    transition: transform 0.3s ease;
 }
 
-.pwa-example-img-wrapper:hover .pwa-example-img {
-    transform: scale(1.02);
+.pwa-fullwidth-img-box:hover .pwa-fullwidth-img {
+    transform: scale(1.01);
 }
 
 /* Lightbox Modal */
