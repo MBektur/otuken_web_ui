@@ -280,6 +280,13 @@ export function toCachedImageUrl(url?: string, w: number = 640, q: number = 75):
       // keep url as is
     }
   }
+  // Normalize any uploads URL to orhunpolicycenter.com where WordPress media lives
+  if (url.includes("otukenpolicycenter.com/uy/wp-content/")) {
+    url = url.replace("otukenpolicycenter.com/uy/wp-content/", "orhunpolicycenter.com/uy/wp-content/");
+  } else if (url.includes("otukenpolicycenter.com/wp-content/")) {
+    url = url.replace("otukenpolicycenter.com/wp-content/", "orhunpolicycenter.com/wp-content/");
+  }
+
   if (
     url.includes("orhunpolicycenter.com") ||
     url.includes("otukenpolicycenter.com") ||

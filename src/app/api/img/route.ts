@@ -26,6 +26,10 @@ export async function GET(req: NextRequest) {
     ) {
       return new NextResponse("Host not allowed", { status: 403 });
     }
+    // Media files from WordPress uploads are hosted on orhunpolicycenter.com
+    if (parsed.hostname.endsWith("otukenpolicycenter.com")) {
+      parsed.hostname = "orhunpolicycenter.com";
+    }
     targetUrl = parsed.toString();
     if (targetUrl.startsWith("http://")) {
       targetUrl = targetUrl.replace("http://", "https://");
@@ -49,6 +53,9 @@ export async function GET(req: NextRequest) {
     }
 
     const contentType = upstream.headers.get("content-type") || "image/jpeg";
+    if (contentType.includes("text/html") || (!contentType.startsWith("image/") && !targetUrl.endsWith(".svg") && !targetUrl.endsWith(".png") && !targetUrl.endsWith(".jpg") && !targetUrl.endsWith(".jpeg") && !targetUrl.endsWith(".webp"))) {
+      return new NextResponse("Upstream is not an image", { status: 502 });
+    }
     const rawBuffer = Buffer.from(await upstream.arrayBuffer());
 
     // For SVG vectors, do not rasterize
