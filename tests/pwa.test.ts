@@ -28,6 +28,9 @@ test("PWA icon and favicon files exist in public directory", () => {
   assert.ok(fs.existsSync(path.join(publicDir, "icons/icon-512x512.png")), "icon-512x512 must exist");
   assert.ok(fs.existsSync(path.join(publicDir, "icons/icon-maskable-512x512.png")), "maskable icon must exist");
   assert.ok(fs.existsSync(path.join(publicDir, "sw.js")), "Service worker must exist");
+  assert.ok(fs.existsSync(path.join(publicDir, "images/pwa/how-to-install-a-pwa-on-ios.webp")), "iOS guide image must exist");
+  assert.ok(fs.existsSync(path.join(publicDir, "images/pwa/how-to-install-a-pwa-on-android.webp")), "Android guide image must exist");
+  assert.ok(fs.existsSync(path.join(publicDir, "images/pwa/installing-pwa-on-desktop.webp")), "Desktop guide image must exist");
 });
 
 test("Service worker contains push and notificationclick event listeners", () => {

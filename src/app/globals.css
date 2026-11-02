@@ -6013,6 +6013,69 @@ html, body {
     line-height: 1.5;
 }
 
+/* PWA Visual Guide Examples */
+.pwa-example-card {
+    margin-top: 24px;
+    background: var(--paper);
+    border: 1px solid var(--wash);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+}
+
+.pwa-example-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.pwa-example-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.pwa-example-img-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+    background: #00000004;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+}
+
+.pwa-example-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    transition: transform 0.25s ease;
+}
+
+.pwa-example-zoom-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--wine);
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: rgba(104, 21, 42, 0.06);
+    transition: background 0.2s ease;
+}
+
+.pwa-example-zoom-hint:hover {
+    background: rgba(104, 21, 42, 0.12);
+}
+
 /* Contact Page Form */
 .contact-grid {
     display: grid;

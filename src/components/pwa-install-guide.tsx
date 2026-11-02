@@ -14,6 +14,8 @@ import {
   WifiOff,
   Bell,
   Zap,
+  ExternalLink,
+  Eye,
 } from "lucide-react";
 import { PushSubscriber } from "./push-subscriber";
 
@@ -220,7 +222,7 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
         </div>
 
         {/* Tab 1: iOS Instructions */}
-        {activeTab === "ios" && (
+        {activeTab === "ios" && (<>
           <div className="install-step-list">
             <div className="install-step-item">
               <span className="install-step-num">1</span>
@@ -278,10 +280,43 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
               </div>
             </div>
           </div>
-        )}
+
+            {/* iOS Visual Example */}
+            <div className="pwa-example-card">
+              <div className="pwa-example-header">
+                <div className="pwa-example-title">
+                  <Sparkles size={18} style={{ color: 'var(--gold)' }} />
+                  <span>
+                    {isUg
+                      ? 'Мушу рәсимлик өрнәктин қәдәм баскучларни көрүп үлгә алалайсиз:'
+                      : 'مۇشۇ رەسىملىك ئۆرنەكتىن قەدەم باسقۇچلارنى كۆرۈپ ئۈلگە ئالالايسىز:'}
+                  </span>
+                </div>
+                <a
+                  href="https://progressier.com/assets/img/how-to-install-a-pwa-on-ios.webp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="pwa-example-zoom-hint"
+                >
+                  <ExternalLink size={13} />
+                  <span>{isUg ? 'Чоңайтып көрۈش' : 'چوڭايتىپ كۆرۈش'}</span>
+                </a>
+              </div>
+              <div className="pwa-example-img-wrapper">
+                <img
+                  src="/images/pwa/how-to-install-a-pwa-on-ios.webp"
+                  alt={isUg ? 'iPhone/iPad PWA қачилаش өрники' : 'iPhone/iPad PWA قاچىلاش رەسىملىك ئۆرنىكى'}
+                  className="pwa-example-img"
+                  loading="lazy"
+                  width={2000}
+                  height={948}
+                />
+              </div>
+            </div>
+        </>)}
 
         {/* Tab 2: Android Instructions */}
-        {activeTab === "android" && (
+        {activeTab === "android" && (<>
           <div className="install-step-list">
             <div className="install-step-item">
               <span className="install-step-num">1</span>
@@ -327,10 +362,43 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
               </div>
             </div>
           </div>
-        )}
+
+            {/* Android Visual Example */}
+            <div className="pwa-example-card">
+              <div className="pwa-example-header">
+                <div className="pwa-example-title">
+                  <Sparkles size={18} style={{ color: 'var(--gold)' }} />
+                  <span>
+                    {isUg
+                      ? 'Мушу рәсимлик өрнәктин қәдәм баскучларни көрүп үлгә алалайсиз:'
+                      : 'مۇشۇ رەسىملىك ئۆرنەكتىن قەدەم باسقۇچلارنى كۆرۈپ ئۈلگە ئالالايسىز:'}
+                  </span>
+                </div>
+                <a
+                  href="https://progressier.com/assets/img/how-to-install-a-pwa-on-android.webp?v=3"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="pwa-example-zoom-hint"
+                >
+                  <ExternalLink size={13} />
+                  <span>{isUg ? 'Чоңайтып көрۈش' : 'چوڭايتىپ كۆرۈش'}</span>
+                </a>
+              </div>
+              <div className="pwa-example-img-wrapper">
+                <img
+                  src="/images/pwa/how-to-install-a-pwa-on-android.webp"
+                  alt={isUg ? 'Android PWA қачилаش өрники' : 'Android PWA قاچىلاش رەسىملىك ئۆرنىكى'}
+                  className="pwa-example-img"
+                  loading="lazy"
+                  width={2000}
+                  height={1243}
+                />
+              </div>
+            </div>
+        </>)}
 
         {/* Tab 3: Desktop Instructions */}
-        {activeTab === "desktop" && (
+        {activeTab === "desktop" && (<>
           <div className="install-step-list">
             <div className="install-step-item">
               <span className="install-step-num">1</span>
@@ -356,7 +424,40 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
               </div>
             </div>
           </div>
-        )}
+
+            {/* Desktop Visual Example */}
+            <div className="pwa-example-card">
+              <div className="pwa-example-header">
+                <div className="pwa-example-title">
+                  <Sparkles size={18} style={{ color: 'var(--gold)' }} />
+                  <span>
+                    {isUg
+                      ? 'Мушу рәсимлик өрнәктин қәдәм баскучларни көрүп үлгә алалайсиз:'
+                      : 'مۇشۇ رەسىملىك ئۆرنەكتىن قەدەم باسقۇچلارنى كۆرۈپ ئۈلگە ئالالايسىز:'}
+                  </span>
+                </div>
+                <a
+                  href="https://progressier.com/assets/img/installing-pwa-on-desktop.webp?v=5"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="pwa-example-zoom-hint"
+                >
+                  <ExternalLink size={13} />
+                  <span>{isUg ? 'Чоңайтып көрۈش' : 'چوڭايتىپ كۆرۈش'}</span>
+                </a>
+              </div>
+              <div className="pwa-example-img-wrapper">
+                <img
+                  src="/images/pwa/installing-pwa-on-desktop.webp"
+                  alt={isUg ? 'Kompyuter PWA қачилаش өрники' : 'كومپيۇتېر PWA قاچىلاش رەسىملىك ئۆرنىكى'}
+                  className="pwa-example-img"
+                  loading="lazy"
+                  width={2464}
+                  height={1494}
+                />
+              </div>
+            </div>
+        </>)}
       </div>
     </div>
   );
