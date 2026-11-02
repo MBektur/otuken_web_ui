@@ -32,7 +32,7 @@ export function PwaInstallToast() {
       try {
         localStorage.setItem(PWA_INSTALLED_KEY, "true");
         localStorage.setItem(PWA_LAST_STANDALONE_KEY, String(Date.now()));
-      } catch {}
+      } catch { }
     }
 
     // 2. Detect iOS Safari
@@ -78,7 +78,7 @@ export function PwaInstallToast() {
       // If browser fires beforeinstallprompt, app is NOT currently installed (or was uninstalled)
       try {
         localStorage.removeItem(PWA_INSTALLED_KEY);
-      } catch {}
+      } catch { }
       evaluateState();
       setCanPrompt(true);
     };
@@ -88,7 +88,7 @@ export function PwaInstallToast() {
     const onAppInstalled = () => {
       try {
         localStorage.setItem(PWA_INSTALLED_KEY, "true");
-      } catch {}
+      } catch { }
       setVisible(false);
     };
     window.addEventListener("appinstalled", onAppInstalled);
@@ -124,7 +124,7 @@ export function PwaInstallToast() {
         if (choice.outcome === "accepted") {
           try {
             localStorage.setItem(PWA_INSTALLED_KEY, "true");
-          } catch {}
+          } catch { }
           setVisible(false);
         }
         window.deferredPwaInstallPrompt = null;
@@ -139,7 +139,7 @@ export function PwaInstallToast() {
     setVisible(false);
     try {
       localStorage.setItem(PWA_DISMISSED_KEY, String(Date.now()));
-    } catch {}
+    } catch { }
   };
 
   if (!visible) return null;
@@ -203,8 +203,8 @@ export function PwaInstallToast() {
                     ? "Өтүкән Әпи вә Уқтуруш"
                     : "ئۆتۈكەن ئەپى ۋە ئۇقتۇرۇش"
                   : isUg
-                  ? "Өтүкән Әпини Қачилаң"
-                  : "ئۆتۈكەن ئەپىنى قاچىلاڭ"}
+                    ? "Өтүкән Әпини Қачилаң"
+                    : "ئۆتۈكەن ئەپىنى قاچىلاڭ"}
               </strong>
               <span className="pwa-toast-badge">
                 {isInstalledNoNotification ? (isUg ? "Уқтуруш" : "ئۇقتۇرۇش") : "PWA"}
@@ -214,14 +214,14 @@ export function PwaInstallToast() {
               {isInstalledNoNotification
                 ? isUg
                   ? "Өтүкәن әпини қачилиғансиз, амма уқтуруш қозғитилмиған. Йеңи язмилардин хәвәрдар болуш үчүн баш экрандики әпкә кирип уқтурушни ечиң."
-                  : "ئۆتۈكەن ئەپىنى قاچىلىغانسىز، ئەمما ئۇقتۇرۇش قوزغىتىلمىغان. يېڭى يازمىلاردىن خەۋەردار بولۇش ئۈچۈن باش ئېكراندىكى ئەپكە كىرىپ ئۇقتۇرۇشنى ئېچىڭ."
+                  : "ئۆتۈكەن ئەپىنى قاچىلىدىڭىز، ئەمما ئۇقتۇرۇش قوزغىتىلمىغان. يېڭى يازمىلاردىن خەۋەردار بولۇش ئۈچۈن باش ئېكراندىكى ئەپلەر تىزىملىكىدىن ئەپكە كىرىپ ئۇقتۇرۇشنى ئېچىڭ."
                 : isIOS
-                ? isUg
-                  ? "Сафарида [Һәмбәһирләш] түгүсини бесиپ, «Баш экранға қошуш»ни таллаң."
-                  : "سافارىدا «ھەمبەھىرلەش» سىنبەلگىسىنى بېسىپ، «باش ئېكرانغا قوشۇش»نى تاللاڭ."
-                : isUg
-                ? "Тез йүклиниш, торсиз оқуш вә йеңи язмиلارдин дәрһал хәвәрдар болуш үчүн."
-                : "تېز يۈكلىنىش، تورسىزمۇ ئوقۇش ۋە يېڭى يازمىلاردىن دەرھال خەۋەردار بولۇش ئۈچۈن."}
+                  ? isUg
+                    ? "Сафарида [Һәмбәһирләш] түгүсини бесиپ, «Баш экранға қошуш»ни таллаң."
+                    : "سافارىدا «ھەمبەھىرلەش» سىنبەلگىسىنى بېسىپ، «باش ئېكرانغا قوشۇش»نى تاللاڭ."
+                  : isUg
+                    ? "Тез йүклиниш, торсиз оқуш вә йеңи язмиلارдин дәрһал хәвәрдар болуш үчүн."
+                    : "تېز يۈكلىنىش، تورسىزمۇ ئوقۇش ۋە يېڭى يازمىلاردىن دەرھال خەۋەردار بولۇش ئۈچۈن."}
             </p>
           </div>
         </div>
