@@ -106,6 +106,11 @@ export async function broadcastNotification(payload: {
   let failed = 0;
   const deadEndpoints: string[] = [];
 
+  const pushOptions = {
+    TTL: 60 * 60 * 24, // 24 hours
+    urgency: "high" as const, // High priority to wake sleeping iOS & Android devices immediately
+  };
+
   for (const sub of subs) {
     try {
       await webpush.sendNotification(
@@ -113,7 +118,8 @@ export async function broadcastNotification(payload: {
           endpoint: sub.endpoint,
           keys: sub.keys,
         },
-        notificationPayload
+        notificationPayload,
+        pushOptions
       );
       sent++;
     } catch (error: any) {

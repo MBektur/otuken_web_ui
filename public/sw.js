@@ -128,7 +128,26 @@ self.addEventListener('push', (event) => {
     ],
   };
 
-  event.waitUntil(self.registration.showNotification(title, options));
+  // Broadcast to open client windows (Foreground In-App Notification Banner)
+  const broadcastPromise = self.clients
+    .matchAll({ type: 'window', includeUncontrolled: true })
+    .then((clientList) => {
+      for (const client of clientList) {
+        client.postMessage({
+          type: 'PUSH_NOTIFICATION_RECEIVED',
+          payload: {
+            title,
+            body: options.body,
+            url: options.data.url,
+            icon: options.icon,
+          },
+        });
+      }
+    });
+
+  const showNotificationPromise = self.registration.showNotification(title, options);
+
+  event.waitUntil(Promise.all([broadcastPromise, showNotificationPromise]));
 });
 
 // Push Notification Click Event Listener
