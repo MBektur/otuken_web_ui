@@ -267,3 +267,60 @@ npm run build
 
 *Tüm testler ve üretim derlemesi 0 hata ile başarıyla doğrulanmıştır.*
 
+---
+
+## 9. Vercel Canlı Ortam Kurulumu & Ücretsiz Kalıcı Veritabanı (KV / Upstash)
+
+Canlı ortamda (`https://www.otukenpolicycenter.com`) Vercel sunucusuz (Serverless) mimari ile çalıştığı için, sunucular uyuduğunda aboneliklerin ve iletişim mesajlarının kaybolmaması için kalıcı bir bulut deposu kullanılır.
+
+### Kodun Hibrit (Çift Modlu) Çalışma Mantığı
+`src/lib/push-store.ts` ve `src/lib/contact-store.ts` modülleri akıllı adaptörle donatılmıştır:
+* **Localhost'ta:** Herhangi bir bulut değişkeni yoksa yerel `src/data/*.json` dosyalarına yazar (Geliştirme için zahmetsizdir).
+* **Vercel'de:** `UPSTASH_REDIS_REST_URL` veya `KV_REST_API_URL` tanımlandığı anda, kod otomatik olarak bulut deposuna geçiş yapar. Abone sayısı asla `0`a düşmez ve sunucu 1000 kez yeniden başlasa bile veriler korunur.
+
+### Ücretsiz Veritabanı Kurulumu (2 Alternatif)
+
+#### 1. Yol: Doğrudan Upstash.com'dan Kredi Kartsız Açma (En Kolay & Kesinlikle Ücretsiz)
+1. **[upstash.com](https://upstash.com)** adresine gidin ve GitHub hesabınızla tek tıkla giriş yapın (Kredi kartı gerekmez).
+2. **"Create Database"** butonuna basın:
+   * **Name:** `otuken-db`
+   * **Region:** *eu-central-1 (Frankfurt)*
+   * **Plan:** **Free ($0)**
+3. Oluşturulduktan sonra sayfayı kaydırıp **"REST API"** başlığı altındaki 2 değeri kopyalayın:
+   * `UPSTASH_REDIS_REST_URL`
+   * `UPSTASH_REDIS_REST_TOKEN`
+4. Vercel Dashboard -> **Settings** -> **Environment Variables** bölümüne gidip bu iki değişkeni yapıştırın ve kaydedin.
+
+#### 2. Yol: Vercel Storage Üzerinden Ücretsiz Plan Seçimi
+1. Vercel projenizde üstteki **"Storage"** sekmesine gidin.
+2. **"Create Database"** -> **"Upstash" (Redis)** seçin.
+3. Fiyatlandırma ekranı geldiğinde **"Free" / "Hobby" ($0/mo)** seçeneğini seçin (Vercel'de Upstash günde 10.000 istek ve 256MB'a kadar $0'dır).
+4. Projenize bağlayın (Connect). Vercel değişkenleri otomatik tanımlar.
+
+### Vercel Ortam Değişkenleri Tam Listesi
+
+Vercel -> **Settings** -> **Environment Variables** bölümünde bulunması gereken değişkenler:
+
+| Değişken Adı | Değer / Açıklama |
+| :--- | :--- |
+| `NEXT_PUBLIC_VAPID_PUBLIC_KEY` | `BKtNZBLK3SktKj9OCEzNAyPvuEjKVJlmHYRJVNN3QEynCXYmSFkm7_l4egF6Klo4kVBVyc6f7NgRmcxOxtuXIgE` |
+| `VAPID_PRIVATE_KEY` | `d6Xuelue4PST-l2_CK46UelG3r7bqNiQHx7BLgZBP1U` |
+| `VAPID_SUBJECT` | `mailto:info@orhunpolicycenter.com` |
+| `PUSH_ADMIN_SECRET` | `otuken-push-secret-2026` |
+| `REVALIDATE_SECRET` | `otuken2026` |
+| `NEXT_PUBLIC_SITE_URL` | `https://www.otukenpolicycenter.com` |
+| `WORDPRESS_URL` | `https://orhunpolicycenter.com/uy` |
+| `UPSTASH_REDIS_REST_URL` | Upstash / Vercel KV REST Adresi |
+| `UPSTASH_REDIS_REST_TOKEN` | Upstash / Vercel KV REST Yetki Anahtarı |
+
+---
+
+## 10. Yönetici Paneli Sekme Birliği
+
+Yönetim deneyiminin bütünlüğü için tüm admin sayfalarında 4 temel sekme standartlaştırılmıştır:
+1. **پودكاست ۋە سىن تەڭشەكلىرى:** `/uy/admin/settings`
+2. **تېز ساقلىغۇچ ۋە ماسقەدەملەش:** `/uy/admin/cache`
+3. **ئۇقتۇرۇش ئەۋەتىش (Web Push):** `/uy/admin/push`
+4. **كەلگەن ئۇچۇرلار:** `/uy/admin/messages`
+
+

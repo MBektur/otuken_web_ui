@@ -25,6 +25,8 @@ import {
   Share2,
   X,
   Download,
+  Bell,
+  Inbox,
 } from "lucide-react";
 import type { CuratedPodcast } from "@/lib/podcast-store";
 
@@ -389,6 +391,20 @@ export function PodcastAdmin({ locale = "uy" }: PodcastAdminProps) {
         >
           <Zap size={16} />
           <span>{isUg ? "Tez Khatire we Masqedemlesh" : "تېز ساقلىغۇچ ۋە ماسقەدەملەش"}</span>
+        </Link>
+        <Link
+          href={`/${locale}/admin/push`}
+          className="admin-tab-btn"
+        >
+          <Bell size={16} />
+          <span>{isUg ? "Uqturesh Ewetish (Push)" : "ئۇقتۇرۇش ئەۋەتىش (Web Push)"}</span>
+        </Link>
+        <Link
+          href={`/${locale}/admin/messages`}
+          className="admin-tab-btn"
+        >
+          <Inbox size={16} />
+          <span>{isUg ? "Kelgen Uchurlar" : "كەلگەن ئۇچۇرلار"}</span>
         </Link>
         <Link
           href={`/${locale}/podcasts`}
