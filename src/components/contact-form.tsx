@@ -42,7 +42,7 @@ export function ContactForm({ isUg = false }: { isUg?: boolean }) {
         setStatus("error");
         setErrorMessage(
           data.error ||
-            (isUg ? "Учур әвәтиштә хаталиқ көрۈلدی." : "ئۇچۇر ئەۋەتىشتە خاتالىق كۆرۈلدى.")
+          (isUg ? "Учур әвәтиштә хаталиқ көрۈلدی." : "ئۇچۇر ئەۋەتىشتە خاتالىق كۆرۈلدى.")
         );
       }
     } catch {
@@ -114,7 +114,7 @@ export function ContactForm({ isUg = false }: { isUg?: boolean }) {
 
       <div className="form-group">
         <label htmlFor="email">
-          {isUg ? "Елхәт ئادرېسى *" : "ئېلخەت ئادرېسى *"}
+          {isUg ? "Елхәт ئادرېسى *" : "ئې-خەت ئادرېسى *"}
         </label>
         <input
           id="email"
@@ -169,8 +169,8 @@ export function ContactForm({ isUg = false }: { isUg?: boolean }) {
               ? "Йоллиниватиду..."
               : "يوللىنىۋاتىدۇ..."
             : isUg
-            ? "Йоллаш"
-            : "يوللاش"}
+              ? "Йоллаш"
+              : "يوللاش"}
         </span>
       </button>
     </form>
