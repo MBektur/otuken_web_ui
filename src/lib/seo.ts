@@ -74,7 +74,7 @@ export function buildSeoMetadata({
       languages: {
         "ug": alternateUy,
         "ug-Cyrl": alternateUg,
-        "en": "https://otukenpolicycenter.com/",
+        "en": "https://orhunpolicycenter.com/",
       },
     },
     openGraph: {

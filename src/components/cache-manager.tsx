@@ -70,7 +70,8 @@ export function CacheManager() {
     setLogs(prev => [entry, ...prev.slice(0, 40)]);
   }
 
-  const [origin, setOrigin] = useState("https://otuken-policy-center.vercel.app");
+  // Use null as SSR-safe initial value; set to real origin on client
+  const [origin, setOrigin] = useState<string | null>(null);
 
   // Check stored secret on mount
   useEffect(() => {
@@ -293,7 +294,7 @@ export function CacheManager() {
           <div className="metric-content">
             <span className="metric-label">WordPress ئەھۋالى</span>
             <strong className="metric-value">{status?.ok ? "ئۇلانغان (Online)" : "كۈتۈلمەكتە..."}</strong>
-            <small>otukenpolicycenter.com</small>
+            <small>orhunpolicycenter.com</small>
           </div>
         </div>
 

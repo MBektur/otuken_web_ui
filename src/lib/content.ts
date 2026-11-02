@@ -2,8 +2,8 @@ import he from "he";
 import sanitizeHtml from "sanitize-html";
 
 function getWordpressUrl(): string {
-  let url = (process.env.WORDPRESS_URL || "https://otukenpolicycenter.com/uy").trim().replace(/\/$/, "");
-  if (url.includes("otukenpolicycenter.com") && !url.endsWith("/uy")) {
+  let url = (process.env.WORDPRESS_URL || "https://orhunpolicycenter.com/uy").trim().replace(/\/$/, "");
+  if ((url.includes("orhunpolicycenter.com") || url.includes("otukenpolicycenter.com")) && !url.endsWith("/uy")) {
     url = `${url}/uy`;
   }
   return url;
@@ -21,8 +21,20 @@ export function localPath(link: string, prefix: string = "/uy"): string {
   if (link.startsWith("#")) return link;
   try {
     const url = new URL(he.decode(link), WORDPRESS_URL + "/");
-    if (url.origin === SOURCE_ORIGIN && (url.pathname === SOURCE_PATH || url.pathname.startsWith(SOURCE_PATH + "/"))) {
-      const suffix = url.pathname.slice(SOURCE_PATH.length);
+    const isDomainMatch =
+      url.origin === SOURCE_ORIGIN ||
+      url.hostname.endsWith("orhunpolicycenter.com") ||
+      url.hostname.endsWith("otukenpolicycenter.com");
+
+    if (isDomainMatch && (url.pathname === SOURCE_PATH || url.pathname.startsWith(SOURCE_PATH + "/") || url.pathname.startsWith("/uy"))) {
+      let suffix = "";
+      if (url.pathname.startsWith(SOURCE_PATH)) {
+        suffix = url.pathname.slice(SOURCE_PATH.length);
+      } else if (url.pathname.startsWith("/uy")) {
+        suffix = url.pathname.slice(3);
+      } else {
+        suffix = url.pathname;
+      }
       if (/^\/(?:wp-content|wp-includes|wp-json|wp-admin)(?:\/|$)/.test(suffix) || suffix === "/wp-login.php") return url.href;
       return prefix + suffix + url.search + url.hash;
     }
@@ -104,6 +116,7 @@ export function safeContent(html: string): string {
       img: (_tagName, attrs) => {
         let src = attrs.src || "";
         if (
+          src.includes("orhunpolicycenter.com") ||
           src.includes("otukenpolicycenter.com") ||
           src.includes("youtube.com") ||
           src.includes("ytimg.com")

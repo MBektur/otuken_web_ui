@@ -12,6 +12,10 @@ const config: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "orhunpolicycenter.com",
+      },
+      {
+        protocol: "https",
         hostname: "otukenpolicycenter.com",
       },
       {

@@ -75,7 +75,7 @@ export function LanguageSwitcher({ currentLocale = "uy" }: { currentLocale?: "uy
         </Link>
       </div>
       <a
-        href="https://otukenpolicycenter.com/"
+        href="https://orhunpolicycenter.com/"
         lang="en"
         dir="ltr"
         target="_blank"
