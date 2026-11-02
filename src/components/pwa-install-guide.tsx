@@ -33,10 +33,10 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
   const [lightboxImg, setLightboxImg] = useState<{ src: string; alt: string } | null>(null);
 
   // ── Pinch-to-Zoom refs ──────────────────────────────────────────────────
-  const lightboxImgRef   = useRef<HTMLImageElement>(null);
-  const lightboxWrapRef  = useRef<HTMLDivElement>(null);
-  const lightboxCardRef  = useRef<HTMLDivElement>(null);
-  const lastTapTime      = useRef(0);
+  const lightboxImgRef = useRef<HTMLImageElement>(null);
+  const lightboxWrapRef = useRef<HTMLDivElement>(null);
+  const lightboxCardRef = useRef<HTMLDivElement>(null);
+  const lastTapTime = useRef(0);
   const zoomState = useRef({
     scale: 1, tx: 0, ty: 0,
     lastDist: 0,
@@ -54,7 +54,7 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
     // Show reset button when zoomed
     if (card) {
       if (scale > 1.05) card.classList.add("is-zoomed");
-      else              card.classList.remove("is-zoomed");
+      else card.classList.remove("is-zoomed");
     }
   };
 
@@ -123,7 +123,7 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
       const z = zoomState.current;
       if (e.touches.length === 2) {
         z.isPinching = true;
-        z.isPanning  = false;
+        z.isPanning = false;
         const dx = e.touches[1].clientX - e.touches[0].clientX;
         const dy = e.touches[1].clientY - e.touches[0].clientY;
         z.lastDist = Math.hypot(dx, dy);
@@ -144,10 +144,10 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
         lastTapTime.current = now;
 
         if (z.scale > 1) {
-          z.isPanning  = true;
+          z.isPanning = true;
           z.isPinching = false;
-          z.panStartX  = e.touches[0].clientX - z.tx;
-          z.panStartY  = e.touches[0].clientY - z.ty;
+          z.panStartX = e.touches[0].clientX - z.tx;
+          z.panStartY = e.touches[0].clientY - z.ty;
         }
       }
     };
@@ -156,8 +156,8 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
       const z = zoomState.current;
       if (e.touches.length === 2 && z.isPinching) {
         e.preventDefault(); // stop page scroll during pinch
-        const dx   = e.touches[1].clientX - e.touches[0].clientX;
-        const dy   = e.touches[1].clientY - e.touches[0].clientY;
+        const dx = e.touches[1].clientX - e.touches[0].clientX;
+        const dy = e.touches[1].clientY - e.touches[0].clientY;
         const dist = Math.hypot(dx, dy);
         const delta = dist / (z.lastDist || dist);
         z.scale = Math.min(Math.max(z.scale * delta, 1), 5);
@@ -185,13 +185,13 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
     };
 
     wrap.addEventListener("touchstart", onTouchStart, { passive: true });
-    wrap.addEventListener("touchmove",  onTouchMove,  { passive: false });
-    wrap.addEventListener("touchend",   onTouchEnd,   { passive: true });
+    wrap.addEventListener("touchmove", onTouchMove, { passive: false });
+    wrap.addEventListener("touchend", onTouchEnd, { passive: true });
 
     return () => {
       wrap.removeEventListener("touchstart", onTouchStart);
-      wrap.removeEventListener("touchmove",  onTouchMove);
-      wrap.removeEventListener("touchend",   onTouchEnd);
+      wrap.removeEventListener("touchmove", onTouchMove);
+      wrap.removeEventListener("touchend", onTouchEnd);
     };
   }, [lightboxImg]);
   // ──────────────────────────────────────────────────────────────────────────
@@ -368,62 +368,62 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
         {activeTab === "ios" && (
           <>
             <div className="install-step-list">
-                <div className="install-step-item">
-                  <span className="install-step-num">1</span>
-                  <div className="install-step-text">
-                    <h3>{isUg ? "1. Сафари (Safari) йаки Chrome бравзерини ачиң" : "1. سافارى (Safari) ياكى Chrome تور كۆرگۈچىنى ئېچىڭ"}</h3>
-                    <p>
-                      {isUg
-                        ? "iPhone йаки iPad ңызда Өтүкән تور бетини Сафари йаки Google Chrome (iOS 16.4+) арқилиқ ечиң."
-                        : "iPhone ياكى iPad ئۈسكۈنىڭىزدە ئۆتۈكەن تور بېتىنى Safari ياكى Google Chrome (iOS 16.4+) ئارقىلىق ئېچىڭ."}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="install-step-item">
-                  <span className="install-step-num">2</span>
-                  <div className="install-step-text">
-                    <h3>
-                      {isUg
-                        ? "2. Төмәндики [Һәмбәһирләش] түгүсини бесиң"
-                        : "2. ئاستىدىكى «ھەمبەھىرلەش» سىنبەلگىسىنى بېسىڭ"}
-                    </h3>
-                    <p>
-                      {isUg
-                        ? "Екранниң төвәндики бөлимидики квадрат үстигә йолланған йа شەкиллик «Һәмбәһирләش (Share)» түгүсини басың."
-                        : "ئېكراننىڭ ئاستىدا تۇرغان «ھەمبەھىرلەش (Share)» سىنبەلگىسىنى بېسىڭ (Chrome دا بولسا تىزىملىكتىن Share نى تاللاڭ)."}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="install-step-item">
-                  <span className="install-step-num">3</span>
-                  <div className="install-step-text">
-                    <h3>
-                      {isUg
-                        ? "3. «Баш экранға қошуش»ни таллаң"
-                        : "3. «باش ئېكرانغا قوشۇش» تاللانمىسىنى بېسىڭ"}
-                    </h3>
-                    <p>
-                      {isUg
-                        ? "Чиққан менюдин төвәнгә сүрүп «Баш экранға қошуش (Add to Home Screen)» дегән йәрни бесиң."
-                        : "چىققان تىزىملىكتىن تۆۋەنگە سىيرىپ «باش ئېكرانغا قوشۇش (Add to Home Screen)» تاللانمىسىنى بېسىڭ."}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="install-step-item">
-                  <span className="install-step-num">4</span>
-                  <div className="install-step-text">
-                    <h3>{isUg ? "4. «Қошуش»ни бесиң" : "4. «قوشۇش»نى بېسىڭ"}</h3>
-                    <p>
-                      {isUg
-                        ? "Оң үстидики «Қошуش (Add)» түгүсини бесиң. Өтүкән сөлбәلгиси тېلېфониңيزниң баш экраниға қошулиду."
-                        : "ئوڭ ئۈستىدىكى «قوشۇش (Add)» كۇنۇپكىسىنى بېسىڭ. ئۆتۈكەن سىنبەلگىسى باش ئېكرانىڭىزغا ئەپ شەكلىدە قوشۇلىدۇ."}
-                    </p>
-                  </div>
+              <div className="install-step-item">
+                <span className="install-step-num">1</span>
+                <div className="install-step-text">
+                  <h3>{isUg ? "1. Сафари (Safari) йаки Chrome бравзерини ачиң" : "1. سافارى (Safari) ياكى Chrome تور كۆرگۈچىنى ئېچىڭ"}</h3>
+                  <p>
+                    {isUg
+                      ? "iPhone йаки iPad ңызда Өтүкән تور бетини Сафари йаки Google Chrome (iOS 16.4+) арқилиқ ечиң."
+                      : "iPhone ياكى iPad ئۈسكۈنىڭىزدە ئۆتۈكەن تور بېتىنى Safari ياكى Google Chrome (iOS 16.4+) ئارقىلىق ئېچىڭ."}
+                  </p>
                 </div>
               </div>
+
+              <div className="install-step-item">
+                <span className="install-step-num">2</span>
+                <div className="install-step-text">
+                  <h3>
+                    {isUg
+                      ? "2. Төмәндики [Һәмбәһирләش] түгүсини бесиң"
+                      : "2. ئاستىدىكى «ھەمبەھىرلەش» سىنبەلگىسىنى بېسىڭ"}
+                  </h3>
+                  <p>
+                    {isUg
+                      ? "Екранниң төвәндики бөлимидики квадрат үстигә йолланған йа شەкиллик «Һәмбәһирләش (Share)» түгүсини басың."
+                      : "ئېكراننىڭ ئاستىدا تۇرغان «ھەمبەھىرلەش (Share)» سىنبەلگىسىنى بېسىڭ (Chrome دا بولسا تىزىملىكتىن Share نى تاللاڭ)."}
+                  </p>
+                </div>
+              </div>
+
+              <div className="install-step-item">
+                <span className="install-step-num">3</span>
+                <div className="install-step-text">
+                  <h3>
+                    {isUg
+                      ? "3. «Баш экранға қошуش»ни таллаң"
+                      : "3. «باش ئېكرانغا قوشۇش» تاللانمىسىنى بېسىڭ"}
+                  </h3>
+                  <p>
+                    {isUg
+                      ? "Чиққан менюдин төвәнгә сүрүп «Баш экранға қошуش (Add to Home Screen)» дегән йәрни бесиң."
+                      : "چىققان تىزىملىكتىن تۆۋەنگە سىيرىپ «باش ئېكرانغا قوشۇش (Add to Home Screen)» تاللانمىسىنى بېسىڭ."}
+                  </p>
+                </div>
+              </div>
+
+              <div className="install-step-item">
+                <span className="install-step-num">4</span>
+                <div className="install-step-text">
+                  <h3>{isUg ? "4. «Қошуش»ни бесиң" : "4. «قوشۇش»نى بېسىڭ"}</h3>
+                  <p>
+                    {isUg
+                      ? "Оң үстидики «Қошуش (Add)» түгүсини бесиң. Өтүкән сөлбәلгиси тېلېфониңيزниң баш экраниға қошулиду."
+                      : "ئوڭ ئۈستىدىكى «قوشۇش (Add)» كۇنۇپكىسىنى بېسىڭ. ئۆتۈكەن سىنبەلگىسى باش ئېكرانىڭىزغا ئەپ شەكلىدە قوشۇلىدۇ."}
+                  </p>
+                </div>
+              </div>
+            </div>
 
             {/* Visual Guide Card: 100% width, natural ratio, modalbox on click */}
             <div className="pwa-fullwidth-mockup-card">
@@ -696,7 +696,7 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
             {/* Mobile hint badge */}
             <div className="pwa-lightbox-zoom-hint">
               <ZoomIn size={12} />
-              <span>{isUg ? "Чоңайтиш: Икки бармақ بىلән кеңейтиң" : "كەڭەيتىش: ئىككى بارماق بىلەن كەڭەيتىڭ"}</span>
+              <span>{isUg ? "Чоңайтиш: Икки бармақ بىلән кеңейтиң" : "يېقىنلاشتۇرۇپ كۆرۈش: ئىككى بارماق بىلەن يېقىنلاشتۇرۇپ كۆرلەيسىز"}</span>
             </div>
           </div>
         </div>
