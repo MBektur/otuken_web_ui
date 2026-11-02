@@ -105,27 +105,19 @@ self.addEventListener('push', (event) => {
   }
 
   const title = data.title || 'ئۆتۈكەن — يېڭى ماقالە';
-  const options = {
+  const targetUrl = data.url || '/uy';
+
+  // Base options supported universally across iOS Safari PWA, Android Chrome, and Desktop
+  const baseOptions = {
     body: data.body || 'يېڭى ئانالىز ياكى ماقالە ئېلان قىلىندى.',
     icon: data.icon || '/icons/icon-192x192.png',
     badge: '/icons/icon-192x192.png',
-    dir: data.dir || 'rtl',
-    lang: data.lang || 'ug',
+    tag: data.tag || 'otuken-' + Date.now(),
+    renotify: true,
     data: {
-      url: data.url || '/uy',
+      url: targetUrl,
       dateOfArrival: Date.now(),
     },
-    vibrate: [100, 50, 100],
-    actions: [
-      {
-        action: 'open',
-        title: 'ئوقۇش / Оқуш',
-      },
-      {
-        action: 'close',
-        title: 'تاقاش / Тақаш',
-      },
-    ],
   };
 
   // Broadcast to open client windows (Foreground In-App Notification Banner)
@@ -137,15 +129,29 @@ self.addEventListener('push', (event) => {
           type: 'PUSH_NOTIFICATION_RECEIVED',
           payload: {
             title,
-            body: options.body,
-            url: options.data.url,
-            icon: options.icon,
+            body: baseOptions.body,
+            url: targetUrl,
+            icon: baseOptions.icon,
           },
         });
       }
-    });
+    })
+    .catch(() => {});
 
-  const showNotificationPromise = self.registration.showNotification(title, options);
+  // Resilient showNotification: Attempt rich options first, fallback to minimal clean options for iOS Safari
+  const showNotificationPromise = self.registration
+    .showNotification(title, {
+      ...baseOptions,
+      ...(typeof navigator !== 'undefined' && 'vibrate' in navigator ? { vibrate: [100, 50, 100] } : {}),
+    })
+    .catch((err) => {
+      console.warn('showNotification rich failed, retrying minimal for iOS:', err);
+      return self.registration.showNotification(title, {
+        body: baseOptions.body,
+        icon: baseOptions.icon,
+        data: baseOptions.data,
+      });
+    });
 
   event.waitUntil(Promise.all([broadcastPromise, showNotificationPromise]));
 });
