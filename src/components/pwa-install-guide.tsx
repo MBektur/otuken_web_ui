@@ -225,11 +225,11 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
             <div className="install-step-item">
               <span className="install-step-num">1</span>
               <div className="install-step-text">
-                <h3>{isUg ? "1. Сафари (Safari) бравзерини ачиң" : "1. سافارى (Safari) تور كۆرگۈچىنى ئېچىڭ"}</h3>
+                <h3>{isUg ? "1. Сафари (Safari) йаки Chrome бравзерини ачиң" : "1. سافارى (Safari) ياكى Chrome تور كۆرگۈچىنى ئېچىڭ"}</h3>
                 <p>
                   {isUg
-                    ? "iPhone йаки iPad ңызда Өтүкән تور бетини Сафарида ечиң."
-                    : "iPhone ياكى iPad ئۈسكۈنىڭىزدە ئۆتۈكەن تور بېتىنى Safari تور كۆرگۈچى ئارقىلىق ئېچىڭ."}
+                    ? "iPhone йаки iPad ңызда Өтүкән تور бетини Сафари йаки Google Chrome (iOS 16.4+) арқилиқ ечиң."
+                    : "iPhone ياكى iPad ئۈسكۈنىڭىزدە ئۆتۈكەن تور بېتىنى Safari ياكى Google Chrome (iOS 16.4+) ئارقىلىق ئېچىڭ."}
                 </p>
               </div>
             </div>
@@ -245,7 +245,7 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
                 <p>
                   {isUg
                     ? "Екранниң төвәндики бөлимидики квадрат үстигә йолланған йа شەкиллик «Һәмбәһирләш (Share)» түгүсини басың."
-                    : "ئېكراننىڭ ئاستىدا تۇرغان، كۋادرات ئۈستىگە يا ئوق چىقىپ تۇرغان «ھەمبەھىرلەش (Share)» سىنبەلگىسىنى بېسىڭ."}
+                    : "ئېكراننىڭ ئاستىدا تۇرغان «ھەمبەھىرلەش (Share)» سىنبەلگىسىنى بېسىڭ (Chrome دا بولسا تىزىملىكتىن Share نى تاللاڭ)."}
                 </p>
               </div>
             </div>

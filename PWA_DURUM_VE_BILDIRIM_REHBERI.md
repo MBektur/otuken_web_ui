@@ -115,3 +115,42 @@ npm test
 ✔ determinePwaUserState: handles all 5 lifecycle states and uninstallation recovery
 ℹ tests 19 | pass 19 | fail 0
 ```
+
+---
+
+## 6. iPhone'da Chrome mu Safari mi? (Tarayıcı Uyumluluk Rehberi)
+
+### Sık Sorulan Soru: *"iPhone'da Chrome ile çalışabilir miyiz, yoksa Safari zorunlu mu?"*
+
+### 🟢 Kısa Cevap:
+**Evet, iPhone'da Google Chrome ile de çalışabilirsiniz; Safari zorunlu DEĞİLDİR.**
+Ancak Apple'ın iOS işletim sistemi seviyesindeki güvenlik ve WebKit kurallarını bilmek gerekir:
+
+### 1. iOS'taki Tüm Tarayıcılar Aslında WebKit'tir
+Apple'ın App Store kuralları gereği, iPhone'daki Google Chrome Google'ın Blink motorunu çalıştıramaz; Apple'ın **WebKit (Safari motoru)** altyapısını kullanmak zorundadır. Dolayısıyla Chrome ve Safari aynı çekirdeği paylaşır.
+
+### 2. Chrome ile Ana Ekrana Ekleme (iOS 16.4+)
+* **iOS 16.4 Öncesi:** Apple sadece Safari'ye izin veriyordu.
+* **iOS 16.4 ve Sonrası (Güncel):** Apple, Google Chrome ve Firefox gibi üçüncü taraf tarayıcılara da *"Ana Ekrana Ekle (Add to Home Screen)"* yetkisi verdi.
+* **Chrome Adımları:**
+  1. iPhone'da Chrome açılır.
+  2. Adres çubuğundaki **Paylaş (Share)** simgesine (veya 3 noktaya) basılır.
+  3. Aşağı kaydırıp **«Ana Ekrana Ekle» (Add to Home Screen)** seçilir.
+  4. Simge ana ekrana eklenir.
+
+### 3. Bildirimler (Web Push) Açısından Altın Kural
+* **Tarayıcı Sekmesinde Bildirim:** Apple, pil ve gizlilik politikası sebebiyle iPhone'da ne Safari'nin ne de Chrome'un **açık bir web sekmesi içindeyken** push bildirimi almasına izin vermez.
+* **Ana Ekrana Eklendikten Sonra:** Site ister **Safari'den** ister **Chrome'dan** ana ekrana eklenmiş olsun, kullanıcı ana ekrandaki ikona bastığında iOS onu **bağımsız bir WebClip (PWA)** olarak açar.
+* Bu bağımsız uygulama içinde bildirim izinleri ve Web Push **%100 çalışır**; telefon kilitliyken bile ekran uyanır, bildirim sesi çalar ve kilit ekranına düşer.
+
+### Karşılaştırma Özeti:
+
+| Özellik | iPhone Safari | iPhone Chrome (iOS 16.4+) |
+| :--- | :--- | :--- |
+| **Siteyi Gezme & Okuma** | ✅ Sorunsuz | ✅ Sorunsuz |
+| **Ana Ekrana Ekleme** | ✅ Paylaş ➔ Ana Ekrana Ekle | ✅ Paylaş ➔ Ana Ekrana Ekle |
+| **Tarayıcı Sekmesinde Bildirim Alma** | ❌ Apple izin vermez | ❌ Apple izin vermez |
+| **Ana Ekrandan Açıldığında Bildirim** | ✅ **%100 Çalışır** | ✅ **%100 Çalışır** |
+| **Offline (Çevrimdışı) Önbellek** | ✅ Service Worker tam aktif | ✅ Service Worker tam aktif |
+
+
