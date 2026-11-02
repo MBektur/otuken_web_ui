@@ -377,30 +377,30 @@ export function PodcastAdmin({ locale = "uy" }: PodcastAdminProps) {
   return (
     <div className="cache-admin-container podcast-admin-layout">
       {/* Top Admin Navigation Tabs */}
-      <nav className="admin-nav-tabs" aria-label="Admin Navigation">
+      <nav className="admin-nav-tabs" aria-label="Settings Navigation">
         <Link
-          href={`/${locale}/admin/settings`}
+          href={`/${locale}/settings`}
           className="admin-tab-btn active"
         >
           <Volume2 size={16} />
           <span>{isUg ? "Podkast we Video Tengshekliri" : "پودكاست ۋە سىن تەڭشەكلىرى"}</span>
         </Link>
         <Link
-          href={`/${locale}/admin/cache`}
+          href={`/${locale}/settings/cache`}
           className="admin-tab-btn"
         >
           <Zap size={16} />
           <span>{isUg ? "Tez Khatire we Masqedemlesh" : "تېز ساقلىغۇچ ۋە ماسقەدەملەش"}</span>
         </Link>
         <Link
-          href={`/${locale}/admin/push`}
+          href={`/${locale}/settings/push`}
           className="admin-tab-btn"
         >
           <Bell size={16} />
           <span>{isUg ? "Uqturesh Ewetish (Push)" : "ئۇقتۇرۇش ئەۋەتىش (Web Push)"}</span>
         </Link>
         <Link
-          href={`/${locale}/admin/messages`}
+          href={`/${locale}/settings/messages`}
           className="admin-tab-btn"
         >
           <Inbox size={16} />

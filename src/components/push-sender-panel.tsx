@@ -89,20 +89,20 @@ export function PushSenderPanel({ posts = [] }: { posts?: WPPost[] }) {
   return (
     <div className="editorial-page-container" dir="rtl">
       {/* Top Admin Navigation Tabs */}
-      <nav className="admin-nav-tabs" aria-label="Admin Navigation" style={{ marginBottom: "28px" }}>
-        <Link href="/uy/admin/settings" className="admin-tab-btn">
+      <nav className="admin-nav-tabs" aria-label="Settings Navigation" style={{ marginBottom: "28px" }}>
+        <Link href="/uy/settings" className="admin-tab-btn">
           <Volume2 size={16} />
           <span>پودكاست تەڭشەكلىرى</span>
         </Link>
-        <Link href="/uy/admin/cache" className="admin-tab-btn">
+        <Link href="/uy/settings/cache" className="admin-tab-btn">
           <Zap size={16} />
           <span>تېز ساقلىغۇچ (Cache)</span>
         </Link>
-        <Link href="/uy/admin/push" className="admin-tab-btn active">
+        <Link href="/uy/settings/push" className="admin-tab-btn active">
           <Bell size={16} />
           <span>ئۇقتۇرۇش ئەۋەتىش (Push)</span>
         </Link>
-        <Link href="/uy/admin/messages" className="admin-tab-btn">
+        <Link href="/uy/settings/messages" className="admin-tab-btn">
           <Inbox size={16} />
           <span>كەلگەن ئۇچۇرلار</span>
         </Link>

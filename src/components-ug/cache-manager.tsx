@@ -18,6 +18,8 @@ import {
   Volume2,
   Terminal,
   Flame,
+  Bell,
+  Inbox,
 } from "lucide-react";
 
 interface SyncStatus {
@@ -209,20 +211,34 @@ export function CacheManager() {
   return (
     <div className="cache-admin-container">
       {/* Top Admin Navigation Tabs */}
-      <nav className="admin-nav-tabs" aria-label="Admin Navigation">
+      <nav className="admin-nav-tabs" aria-label="Settings Navigation">
         <Link
-          href="/ug/admin/settings"
+          href="/ug/settings"
           className="admin-tab-btn"
         >
           <Volume2 size={16} />
           <span>Podkast we Video Tengshekliri</span>
         </Link>
         <Link
-          href="/ug/admin/cache"
+          href="/ug/settings/cache"
           className="admin-tab-btn active"
         >
           <Zap size={16} />
           <span>Tez Khatire we Masqedemlesh</span>
+        </Link>
+        <Link
+          href="/ug/settings/push"
+          className="admin-tab-btn"
+        >
+          <Bell size={16} />
+          <span>Uqturesh Ewetish (Push)</span>
+        </Link>
+        <Link
+          href="/ug/settings/messages"
+          className="admin-tab-btn"
+        >
+          <Inbox size={16} />
+          <span>Kelgen Uchurlar</span>
         </Link>
       </nav>
 

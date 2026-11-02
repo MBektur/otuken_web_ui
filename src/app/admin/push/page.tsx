@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 
-export default function AdminPushRedirect() {
-  redirect("/uy/admin/push");
+export default function AdminPushPage() {
+  redirect("/uy/settings/push");
 }
-

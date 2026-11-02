@@ -194,6 +194,8 @@ export async function POST(req: NextRequest) {
       try {
         revalidatePath("/uy/podcasts");
         revalidatePath("/ug/podcasts");
+        revalidatePath("/uy/settings");
+        revalidatePath("/ug/settings");
         revalidatePath("/uy/admin/settings");
         revalidatePath("/ug/admin/settings");
       } catch {}

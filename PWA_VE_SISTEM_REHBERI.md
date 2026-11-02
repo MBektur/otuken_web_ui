@@ -24,7 +24,7 @@ Bu belge, projeye kazandırılan **PWA (Progressive Web App)** altyapısını, *
    - [Mimari ve VAPID Standartları](#mimari-ve-vapid-standartları)
    - [Abonelik Süreci](#abonelik-süreci)
    - [Bildirim Gönderim Yöntemleri](#bildirim-gönderim-yöntemleri)
-   - [Yönetici Bildirim Paneli (`/uy/admin/push`)](#yönetici-bildirim-paneli-uyadminpush)
+   - [Yönetici Bildirim Paneli (`/uy/settings/push`)](#yönetici-bildirim-paneli-uysettingspush)
    - [Yeni Yazıda Otomatik Bildirim Tetikleme](#yeni-yazıda-otomatik-bildirim-tetikleme)
 7. [Yönetici Şifreleri ve Güvenlik](#7-yönetici-şifreleri-ve-güvenlik)
 8. [Test ve Doğrulama](#8-test-ve-doğrulama)
@@ -203,7 +203,8 @@ Yeni bir yazı veya analiz yayınlandığında, siteye abone olan tüm kullanıc
 ### Bildirim Gönderim Yöntemleri
 
 #### Yöntem A: Yönetici Paneli Üzerinden Manuel Gönderim
-* **Panel Adresi:** `http://127.0.0.1:3000/uy/admin/push`
+* **Panel Adresi:** `http://127.0.0.1:3000/uy/settings/push` (veya `https://www.otukenpolicycenter.com/uy/settings/push`)
+  *(Not: Eski `/uy/admin/push` adresi de otomatik olarak buraya yönlendirilir)*
 * **Giriş Şifresi:** `otuken-push-secret-2026` veya `otuken2026`
 * **Adımlar:**
   1. Panel açıldığında kayıtlı aktif abone sayısı gösterilir (Örn: `142 ئۈسكۈنە`).
@@ -241,12 +242,12 @@ curl -X POST http://127.0.0.1:3000/api/push/send \
 
 ## 7. Yönetici Şifreleri ve Güvenlik
 
-| Yönetim Paneli / İşlev | URL | Şifre |
-| :--- | :--- | :--- |
-| **Gelen Mesajlar (Contact Inbox)** | `/uy/admin/messages` | `otuken2026` |
-| **Önbellek & Eşitleme (Cache)** | `/uy/admin/cache` | `otuken2026` |
-| **Web Push Bildirim Paneli** | `/uy/admin/push` | `otuken-push-secret-2026` veya `otuken2026` |
-| **Podcast Ayarları** | `/uy/admin/settings` | `otuken2026` |
+| Yönetim Paneli / İşlev | Güncel URL (`settings`) | Eski URL (`admin` - Yönlendirilir) | Şifre |
+| :--- | :--- | :--- | :--- |
+| **Podcast & Video Ayarları** | `/uy/settings` | `/uy/admin/settings` | `otuken2026` |
+| **Önbellek & Eşitleme (Cache)** | `/uy/settings/cache` | `/uy/admin/cache` | `otuken2026` |
+| **Web Push Bildirim Paneli** | `/uy/settings/push` | `/uy/admin/push` | `otuken-push-secret-2026` veya `otuken2026` |
+| **Gelen Mesajlar (Contact Inbox)** | `/uy/settings/messages` | `/uy/admin/messages` | `otuken2026` |
 
 ---
 
@@ -315,12 +316,12 @@ Vercel -> **Settings** -> **Environment Variables** bölümünde bulunması gere
 
 ---
 
-## 10. Yönetici Paneli Sekme Birliği
+## 10. Yönetim Paneli Sekme Birliği
 
-Yönetim deneyiminin bütünlüğü için tüm admin sayfalarında 4 temel sekme standartlaştırılmıştır:
-1. **پودكاست ۋە سىن تەڭشەكلىرى:** `/uy/admin/settings`
-2. **تېز ساقلىغۇچ ۋە ماسقەدەملەش:** `/uy/admin/cache`
-3. **ئۇقتۇرۇش ئەۋەتىش (Web Push):** `/uy/admin/push`
-4. **كەلگەن ئۇچۇرلار:** `/uy/admin/messages`
+Yönetim deneyiminin bütünlüğü için tüm ayar sayfalarında 4 temel sekme standartlaştırılmıştır:
+1. **پودكاست ۋە سىن تەڭشەكلىرى:** `/uy/settings`
+2. **تېز ساقلىغۇچ ۋە ماسقەدەملەش:** `/uy/settings/cache`
+3. **ئۇقتۇرۇش ئەۋەتىش (Web Push):** `/uy/settings/push`
+4. **كەلگەن ئۇچۇرلار:** `/uy/settings/messages`
 
 

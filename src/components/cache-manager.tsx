@@ -215,30 +215,30 @@ export function CacheManager() {
   return (
     <div className="cache-admin-container">
       {/* Top Admin Navigation Tabs */}
-      <nav className="admin-nav-tabs" aria-label="Admin Navigation">
+      <nav className="admin-nav-tabs" aria-label="Settings Navigation">
         <Link
-          href="/uy/admin/settings"
+          href="/uy/settings"
           className="admin-tab-btn"
         >
           <Volume2 size={16} />
           <span>پودكاست ۋە سىن تەڭشەكلىرى</span>
         </Link>
         <Link
-          href="/uy/admin/cache"
+          href="/uy/settings/cache"
           className="admin-tab-btn active"
         >
           <Zap size={16} />
           <span>تېز ساقلىغۇچ ۋە ماسقەدەملەش</span>
         </Link>
         <Link
-          href="/uy/admin/push"
+          href="/uy/settings/push"
           className="admin-tab-btn"
         >
           <Bell size={16} />
           <span>ئۇقتۇرۇش ئەۋەتىش (Web Push)</span>
         </Link>
         <Link
-          href="/uy/admin/messages"
+          href="/uy/settings/messages"
           className="admin-tab-btn"
         >
           <Inbox size={16} />

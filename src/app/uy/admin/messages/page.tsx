@@ -1,26 +1,5 @@
-import type { Metadata } from "next";
-import { Header, Footer } from "@/components/shell";
-import { getCategories } from "@/lib/wordpress";
-import { AdminMessagesPanel } from "@/components/admin-messages-panel";
+import { redirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "كەلگەن ئۇچۇرلار باشقۇرۇش مەركىزى | ئۆتۈكەن",
-  robots: { index: false, follow: false },
-};
-
-export const dynamic = "force-dynamic";
-
-export default async function AdminMessagesPage() {
-  const categories = await getCategories().catch(() => []);
-
-  return (
-    <>
-      <Header categories={categories} />
-      <main id="main" className="site-width admin-page-layout">
-        <AdminMessagesPanel />
-      </main>
-      <Footer />
-    </>
-  );
+export default function UyAdminMessagesPage() {
+  redirect("/uy/settings/messages");
 }
-
