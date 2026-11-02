@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Bell, X, ArrowLeft, ExternalLink } from "lucide-react";
 import { VAPID_PUBLIC_KEY, urlB64ToUint8Array } from "@/lib/push-config";
+import { PWA_INSTALLED_KEY } from "@/lib/pwa-utils";
 
 declare global {
   interface Window {
@@ -95,6 +96,16 @@ export function PwaProvider() {
       };
 
       navigator.serviceWorker.addEventListener("message", handleMessage);
+
+      // Mark installed if running in standalone mode
+      const isStandalone =
+        window.matchMedia("(display-mode: standalone)").matches ||
+        (window.navigator as any).standalone === true;
+      if (isStandalone) {
+        try {
+          localStorage.setItem(PWA_INSTALLED_KEY, "true");
+        } catch {}
+      }
 
       // Check if notification permission is not decided yet
       if ("Notification" in window && Notification.permission === "default") {

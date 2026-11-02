@@ -4,6 +4,11 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Download, Share, X, Sparkles, Smartphone } from "lucide-react";
+import {
+  shouldShowInstallToast,
+  PWA_INSTALLED_KEY,
+  PWA_DISMISSED_KEY,
+} from "@/lib/pwa-utils";
 
 export function PwaInstallToast() {
   const pathname = usePathname();
@@ -14,28 +19,40 @@ export function PwaInstallToast() {
   const [canPrompt, setCanPrompt] = useState(false);
 
   useEffect(() => {
-    // 1. If already installed in standalone mode, don't show
+    // 1. Detect standalone (homescreen) mode
     const isStandalone =
       window.matchMedia("(display-mode: standalone)").matches ||
       (window.navigator as any).standalone === true;
 
     if (isStandalone) {
-      return;
+      try {
+        localStorage.setItem(PWA_INSTALLED_KEY, "true");
+      } catch {}
     }
 
-    // 2. If user recently dismissed within 7 days, don't show
-    const dismissedAt = localStorage.getItem("otuken_pwa_toast_dismissed");
-    if (dismissedAt) {
-      const diff = Date.now() - Number(dismissedAt);
-      if (diff < 7 * 24 * 60 * 60 * 1000) {
-        return;
-      }
-    }
-
-    // 3. Detect iOS Safari
+    // 2. Detect iOS Safari
     const ua = window.navigator.userAgent.toLowerCase();
     const isAppleDevice = /iphone|ipad|ipod/.test(ua) && !(window as any).MSStream;
     setIsIOS(isAppleDevice);
+
+    // 3. Check installation record, dismissal time, and notification permission
+    const isInstalledRecorded = localStorage.getItem(PWA_INSTALLED_KEY) === "true";
+    const dismissedAtStr = localStorage.getItem(PWA_DISMISSED_KEY);
+    const dismissedAtTimestamp = dismissedAtStr ? Number(dismissedAtStr) : null;
+    const notificationPermission =
+      "Notification" in window ? (Notification.permission as any) : "default";
+
+    const isEligible = shouldShowInstallToast({
+      isStandalone,
+      isInstalledRecorded,
+      notificationPermission,
+      dismissedAtTimestamp,
+      isIOS: isAppleDevice,
+    });
+
+    if (!isEligible) {
+      return;
+    }
 
     if (window.deferredPwaInstallPrompt) {
       setCanPrompt(true);
@@ -46,6 +63,15 @@ export function PwaInstallToast() {
     };
     window.addEventListener("pwa-install-ready", onInstallReady);
 
+    // 4. Android/Chrome appinstalled event listener
+    const onAppInstalled = () => {
+      try {
+        localStorage.setItem(PWA_INSTALLED_KEY, "true");
+      } catch {}
+      setVisible(false);
+    };
+    window.addEventListener("appinstalled", onAppInstalled);
+
     // Show after slight delay for polite user experience
     const timer = setTimeout(() => {
       setVisible(true);
@@ -54,6 +80,7 @@ export function PwaInstallToast() {
     return () => {
       clearTimeout(timer);
       window.removeEventListener("pwa-install-ready", onInstallReady);
+      window.removeEventListener("appinstalled", onAppInstalled);
     };
   }, []);
 
@@ -63,6 +90,9 @@ export function PwaInstallToast() {
         await window.deferredPwaInstallPrompt.prompt();
         const choice = await window.deferredPwaInstallPrompt.userChoice;
         if (choice.outcome === "accepted") {
+          try {
+            localStorage.setItem(PWA_INSTALLED_KEY, "true");
+          } catch {}
           setVisible(false);
         }
         window.deferredPwaInstallPrompt = null;
@@ -76,7 +106,7 @@ export function PwaInstallToast() {
   const handleDismiss = () => {
     setVisible(false);
     try {
-      localStorage.setItem("otuken_pwa_toast_dismissed", String(Date.now()));
+      localStorage.setItem(PWA_DISMISSED_KEY, String(Date.now()));
     } catch {}
   };
 
