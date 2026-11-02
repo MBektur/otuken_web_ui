@@ -1,5 +1,5 @@
 // Service Worker for Ötüken Policy Center PWA
-const CACHE_NAME = 'otuken-pwa-v1';
+const CACHE_NAME = 'otuken-pwa-v2';
 const PRECACHE_ASSETS = [
   '/',
   '/uy',
@@ -39,13 +39,22 @@ self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Ignore non-GET and chrome-extension/api requests
-  if (request.method !== 'GET' || url.origin !== self.location.origin) {
+  // Ignore non-GET, non-origin, and local dev requests to prevent stale HMR bundles
+  if (
+    request.method !== 'GET' ||
+    url.origin !== self.location.origin ||
+    self.location.hostname === 'localhost' ||
+    self.location.hostname === '127.0.0.1'
+  ) {
     return;
   }
 
-  // Bypass API and admin routes
-  if (url.pathname.startsWith('/api/') || url.pathname.includes('/admin/')) {
+  // Bypass API, admin, and settings routes
+  if (
+    url.pathname.startsWith('/api/') ||
+    url.pathname.includes('/admin/') ||
+    url.pathname.includes('/settings/')
+  ) {
     return;
   }
 

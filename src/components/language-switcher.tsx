@@ -81,6 +81,7 @@ export function LanguageSwitcher({ currentLocale = "uy" }: { currentLocale?: "uy
         target="_blank"
         rel="noopener noreferrer"
         className="lang-external-en"
+        suppressHydrationWarning
       >
         English <ArrowUpLeft size={11} />
       </a>
