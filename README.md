@@ -51,6 +51,6 @@ WordPress yönetim paneline ihtiyaç duymadan açık içerikler ve arayüz geli�
 
 - Üretim derlemesi ve TypeScript kontrolü geçti.
 - HTML güvenliği, görsel çıkarımı, Uygurca URL/karakterler, PDF bağlantıları ve gömülü video/eklenti temizliği için 4 test geçti.
-- Tarayıcıda arama (ترامپ: 52 sonuç), ana sayfa, makale ve 404 ekranı doğrulandı.
+- Tarayıcıda arama (ترامپ: 52 sonuç), ana sayfa, makale ve 404 ekranı doğrulandı. 
 - Kategori, sayfa ve ikinci sonuç sayfası gerçek API ile kontrol edildi.
 - Mobil görünümde yatay sayfa taşması yok; navigasyon kendi içinde kaydırılır.
