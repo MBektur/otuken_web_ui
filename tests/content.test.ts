@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { contentImage, localPath, normalizedPath, plainText, safeContent } from "../src/lib/content";
 
 test("WordPress content is sanitized and internal links keep the new frontend", () => {
-  const output = safeContent('<script>alert(1)</script><p onclick="attack()">Hello</p><a href="javascript:attack()">Bad</a><a href="https://orhunpolicycenter.com/uy/2026/09/26/test/">Article</a><img src="https://example.com/a.png" onerror="attack()">');
+  const output = safeContent('<script>alert(1)</script><p onclick="attack()">Hello</p><a href="javascript:attack()">Bad</a><a href="https://otukenpolicycenter.com/uy/2026/09/26/test/">Article</a><img src="https://example.com/a.png" onerror="attack()">');
   assert.ok(!output.includes("script"));
   assert.ok(!output.includes("onclick"));
   assert.ok(!output.includes("onerror"));
@@ -12,7 +12,7 @@ test("WordPress content is sanitized and internal links keep the new frontend", 
 });
 
 test("images are found inside posts when featured_media is missing", () => {
-  assert.equal(contentImage('<figure><img width="596" src="https://orhunpolicycenter.com/uy/wp-content/uploads/photo.png?a=1&amp;b=2"></figure>'), "https://orhunpolicycenter.com/uy/wp-content/uploads/photo.png?a=1&b=2");
+  assert.equal(contentImage('<figure><img width="596" src="https://otukenpolicycenter.com/uy/wp-content/uploads/photo.png?a=1&amp;b=2"></figure>'), "https://otukenpolicycenter.com/uy/wp-content/uploads/photo.png?a=1&b=2");
   assert.equal(contentImage('<img src="javascript:alert(1)">'), undefined);
 });
 
@@ -21,11 +21,11 @@ test("Uyghur permalinks and entities survive normalization", () => {
   assert.equal(normalizedPath("/uy/2025/06/18/%d8%a6%d9%89%d8%b3%d8%b1%d8%a7%d8%a6%d9%89%d9%84%d9%89%d9%8a%db%95-%d8%a6%d9%89%d8%b1%d8%a7%d9%86-d"), "/uy/2025/06/18/ئىسرائىلىيە-ئىران-d");
   assert.equal(normalizedPath("/uy/2025/06/18/ئىسرائىلىيە-ئىران-d/"), "/uy/2025/06/18/ئىسرائىلىيە-ئىران-d");
   assert.equal(plainText("<p>خىتاي &#8211; رۇسىيە</p>"), "خىتاي – رۇسىيە");
-  assert.equal(localPath("https://orhunpolicycenter.com/uy/category/test/"), "/uy/category/test/");
-  assert.equal(localPath("https://orhunpolicycenter.com/ug/"), "https://orhunpolicycenter.com/ug/");
+  assert.equal(localPath("https://otukenpolicycenter.com/uy/category/test/"), "/uy/category/test/");
+  assert.equal(localPath("https://otukenpolicycenter.com/ug/"), "https://otukenpolicycenter.com/ug/");
   assert.equal(localPath("https://example.com/source"), "https://example.com/source");
   assert.equal(localPath("#footnote-1"), "#footnote-1");
-  assert.equal(localPath("https://orhunpolicycenter.com/uy/wp-content/uploads/report.pdf"), "https://orhunpolicycenter.com/uy/wp-content/uploads/report.pdf");
+  assert.equal(localPath("https://otukenpolicycenter.com/uy/wp-content/uploads/report.pdf"), "https://otukenpolicycenter.com/uy/wp-content/uploads/report.pdf");
 });
 
 test("Uyghur post slug resolution matches decoded, raw, and encoded variations", () => {
@@ -78,7 +78,7 @@ test("Uyghur post slug resolution matches decoded, raw, and encoded variations",
 
 test("curated podcast store loads and converts correctly for uy and ug", () => {
   const { getCuratedPodcasts, getPodcastPostsAsWP, extractYouTubeId } = require("../src/lib/podcast-store");
-  
+
   assert.equal(extractYouTubeId("https://www.youtube.com/watch?v=NlgZanVJZw8"), "NlgZanVJZw8");
   assert.equal(extractYouTubeId("https://youtu.be/HPOa4HnsznI"), "HPOa4HnsznI");
   assert.equal(extractYouTubeId("01lAM1kHSTk"), "01lAM1kHSTk");

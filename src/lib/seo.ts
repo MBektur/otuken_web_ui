@@ -5,8 +5,8 @@ export const SITE_URL =
   (process.env.VERCEL_PROJECT_PRODUCTION_URL
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "https://otuken-policy-center.vercel.app");
+      ? `https://${process.env.VERCEL_URL}`
+      : "https://otuken-policy-center.vercel.app");
 
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/logo.Header-UY.png`;
 
@@ -74,7 +74,7 @@ export function buildSeoMetadata({
       languages: {
         "ug": alternateUy,
         "ug-Cyrl": alternateUg,
-        "en": "https://orhunpolicycenter.com/",
+        "en": "https://otukenpolicycenter.com/",
       },
     },
     openGraph: {
@@ -94,10 +94,10 @@ export function buildSeoMetadata({
       ],
       ...(type === "article" && publishedTime
         ? {
-            publishedTime,
-            modifiedTime: modifiedTime || publishedTime,
-            authors: authors || [siteName],
-          }
+          publishedTime,
+          modifiedTime: modifiedTime || publishedTime,
+          authors: authors || [siteName],
+        }
         : {}),
     },
     twitter: {

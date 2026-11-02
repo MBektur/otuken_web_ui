@@ -11,7 +11,7 @@ npm run dev
 
 Yerel adres: http://localhost:3000/uy
 
-`.env.example` yapılandırma örneğidir. Varsayılan WordPress adresi `https://orhunpolicycenter.com/uy`; üretimde `NEXT_PUBLIC_SITE_URL` yayın adresine ayarlanmalıdır.
+`.env.example` yapılandırma örneğidir. Varsayılan WordPress adresi `https://otukenpolicycenter.com/uy`; üretimde `NEXT_PUBLIC_SITE_URL` yayın adresine ayarlanmalıdır.
 
 ## Mevcut işlevler
 
@@ -27,7 +27,7 @@ Yerel adres: http://localhost:3000/uy
 
 ## API incelemesi (1 Ekim 2026)
 
-- `GET https://orhunpolicycenter.com/uy/wp-json/`: WordPress API keşfi.
+- `GET https://otukenpolicycenter.com/uy/wp-json/`: WordPress API keşfi.
 - `GET .../wp/v2/posts?per_page=12&_embed`: yazılar, yazarlar ve kategoriler; toplam 83 yazı.
 - `GET .../wp/v2/categories?per_page=100`: 19 kategori.
 - `GET .../wp/v2/pages?per_page=100`: 3 sayfa.

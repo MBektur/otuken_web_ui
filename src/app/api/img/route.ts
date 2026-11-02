@@ -14,12 +14,12 @@ export async function GET(req: NextRequest) {
   const width = widthParam ? Math.min(1920, Math.max(80, Number.parseInt(widthParam, 10))) : undefined;
   const quality = qualityParam ? Math.min(95, Math.max(50, Number.parseInt(qualityParam, 10))) : 75;
 
-  // Security check: Only allow images from orhunpolicycenter.com or youtube
+  // Security check: Only allow images from otukenpolicycenter.com or youtube
   let targetUrl: string;
   try {
     const parsed = new URL(urlParam);
     if (
-      !parsed.hostname.endsWith("orhunpolicycenter.com") &&
+      !parsed.hostname.endsWith("otukenpolicycenter.com") &&
       !parsed.hostname.endsWith("youtube.com") &&
       !parsed.hostname.endsWith("ytimg.com")
     ) {

@@ -191,7 +191,7 @@ export async function getPostBySlug(slug: string): Promise<WPPost | undefined> {
             merged[idx] = { ...merged[idx], ...post };
             updateLocalSnapshot({ posts: merged });
           }
-        } catch {}
+        } catch { }
         return post;
       }
       return getLocalPostBySlug(slug);
@@ -281,7 +281,7 @@ export function toCachedImageUrl(url?: string, w: number = 640, q: number = 75):
     }
   }
   if (
-    url.includes("orhunpolicycenter.com") ||
+    url.includes("otukenpolicycenter.com") ||
     url.includes("youtube.com") ||
     url.includes("ytimg.com")
   ) {

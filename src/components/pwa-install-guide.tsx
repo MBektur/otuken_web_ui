@@ -16,6 +16,8 @@ import {
   Zap,
   ExternalLink,
   Eye,
+  X,
+  Maximize2,
 } from "lucide-react";
 import { PushSubscriber } from "./push-subscriber";
 
@@ -26,6 +28,7 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
   const [canPrompt, setCanPrompt] = useState(false);
   const [isInstalled, setIsInstalled] = useState(false);
   const [installSuccess, setInstallSuccess] = useState(false);
+  const [lightboxImg, setLightboxImg] = useState<{ src: string; alt: string } | null>(null);
 
   useEffect(() => {
     // Detect device
@@ -52,8 +55,15 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
     const onInstallReady = () => setCanPrompt(true);
     window.addEventListener("pwa-install-ready", onInstallReady);
 
+    // Escape listener for lightbox
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightboxImg(null);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
     return () => {
       window.removeEventListener("pwa-install-ready", onInstallReady);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
@@ -84,18 +94,18 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
         </h1>
         <p>
           {isUg
-            ? "Өтүкәнни әп сүпитидә қоллиниш арқилиق тез оқуш, торсиз кириш вә йеңи язмилардин дәрһал хәвәрдар болуш имканийитигә егә болуң."
+            ? "Өтүкәنني әп сүпитидә қоллиниш арқилиқ тез оқуش، торсиз кириш вә йеңи язмилардин дәрһал хәвәрдар болуش имканийитигә егә болуң."
             : "ئۆتۈكەننى ئەپ سۈپىتىدە قاچىلاپ، يېڭى ئانالىز ۋە تەتقىقاتلاردىن دەرھال خەۋەردار بولۇڭ ھەمدە تېخىمۇ راۋان، تېز ئوقۇش تەجرىبىسىدىن بەھرىمەن بولۇڭ."}
         </p>
       </header>
 
-      {/* Feature Highlights */}
+      {/* Feature Highlights: Symmetrical Equal-Height 3-Card Grid */}
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
           gap: "16px",
-          marginBottom: "32px",
+          marginBottom: "20px",
         }}
       >
         <div className="editorial-card" style={{ padding: "20px", margin: 0 }}>
@@ -103,7 +113,7 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
             <Zap size={22} />
             <strong style={{ fontSize: "16px", color: "var(--ink)" }}>{isUg ? "Тез Йүклиниш" : "دەرھال يۈكلىنىش"}</strong>
           </div>
-          <p style={{ fontSize: "14px", margin: 0, color: "var(--muted)" }}>
+          <p style={{ fontSize: "14px", margin: 0, color: "var(--muted)", lineHeight: 1.6 }}>
             {isUg
               ? "Әп кэш технологияси арқилиқ сәһипиләр көз йумғучә ачилиду."
               : "كەشكە ئالدىن ساقلاش تېخنىكىسى بىلەن بەتلەر كۆز يۇمۇپ ئاچقۇچە ئېچىلىدۇ."}
@@ -113,9 +123,9 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
         <div className="editorial-card" style={{ padding: "20px", margin: 0 }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", color: "var(--wine)", marginBottom: "8px" }}>
             <WifiOff size={22} />
-            <strong style={{ fontSize: "16px", color: "var(--ink)" }}>{isUg ? "Торсиз Көрүш" : "تورسىزمۇ ئوقۇش"}</strong>
+            <strong style={{ fontSize: "16px", color: "var(--ink)" }}>{isUg ? "Торсиз Көрүش" : "تورسىزمۇ ئوقۇش"}</strong>
           </div>
-          <p style={{ fontSize: "14px", margin: 0, color: "var(--muted)" }}>
+          <p style={{ fontSize: "14px", margin: 0, color: "var(--muted)", lineHeight: 1.6 }}>
             {isUg
               ? "Интернетиңиз үзүлүп қалсиму алдин оқулған язмилар сақлиниду."
               : "تور بولمىغان ياكى سىگنال ناچار چاغلاردىمۇ ئىلگىرى كۆرۈلگەن يازمىلارنى ئوقۇغىلى بولىدۇ."}
@@ -125,15 +135,19 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
         <div className="editorial-card" style={{ padding: "20px", margin: 0 }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", color: "var(--wine)", marginBottom: "8px" }}>
             <Bell size={22} />
-            <strong style={{ fontSize: "16px", color: "var(--ink)" }}>{isUg ? "Дәрһал Уқтуруш" : "دەرھال ئۇقتۇرۇش"}</strong>
+            <strong style={{ fontSize: "16px", color: "var(--ink)" }}>{isUg ? "Дәрһал Уқтуруش" : "دەرھال ئۇقتۇرۇش"}</strong>
           </div>
-          <p style={{ fontSize: "14px", margin: 0, color: "var(--muted)" }}>
+          <p style={{ fontSize: "14px", margin: 0, color: "var(--muted)", lineHeight: 1.6 }}>
             {isUg
               ? "Йеңи анализ вә китаплар елан қилинғанда биринчи болуп биләйсүз."
               : "يېڭى ئانالىز ۋە تەتقىقاتلار ئېلان قىلىنغان ھامان تېلېفونىڭىزغا خەۋەر كېلىدۇ."}
           </p>
-          <PushSubscriber isUg={isUg} />
         </div>
+      </div>
+
+      {/* Push Notification Toggle Strip */}
+      <div style={{ marginBottom: "32px" }}>
+        <PushSubscriber isUg={isUg} />
       </div>
 
       {/* Direct Install CTA button if available */}
@@ -221,244 +235,322 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
           </button>
         </div>
 
-        {/* Tab 1: iOS Instructions */}
-        {activeTab === "ios" && (<>
-          <div className="install-step-list">
-            <div className="install-step-item">
-              <span className="install-step-num">1</span>
-              <div className="install-step-text">
-                <h3>{isUg ? "1. Сафари (Safari) йаки Chrome бравзерини ачиң" : "1. سافارى (Safari) ياكى Chrome تور كۆرگۈچىنى ئېچىڭ"}</h3>
-                <p>
-                  {isUg
-                    ? "iPhone йаки iPad ңызда Өтүкән تور бетини Сафари йаки Google Chrome (iOS 16.4+) арқилиқ ечиң."
-                    : "iPhone ياكى iPad ئۈسكۈنىڭىزدە ئۆتۈكەن تور بېتىنى Safari ياكى Google Chrome (iOS 16.4+) ئارقىلىق ئېچىڭ."}
-                </p>
+        {/* Tab 1: iOS Instructions (Balanced 2-Column Split) */}
+        {activeTab === "ios" && (
+          <div className="install-guide-split">
+            {/* Left: Step-by-step guidance */}
+            <div className="install-guide-steps-col">
+              <div className="install-step-list">
+                <div className="install-step-item">
+                  <span className="install-step-num">1</span>
+                  <div className="install-step-text">
+                    <h3>{isUg ? "1. Сафари (Safari) йаки Chrome бравзерини ачиң" : "1. سافارى (Safari) ياكى Chrome تور كۆرگۈچىنى ئېچىڭ"}</h3>
+                    <p>
+                      {isUg
+                        ? "iPhone йаки iPad ңызда Өтүкән تور бетини Сафари йаки Google Chrome (iOS 16.4+) арқилиқ ечиң."
+                        : "iPhone ياكى iPad ئۈسكۈنىڭىزدە ئۆتۈكەن تور بېتىنى Safari ياكى Google Chrome (iOS 16.4+) ئارقىلىق ئېچىڭ."}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="install-step-item">
+                  <span className="install-step-num">2</span>
+                  <div className="install-step-text">
+                    <h3>
+                      {isUg
+                        ? "2. Төмәндики [Һәмбәһирләش] түгүсини бесиң"
+                        : "2. ئاستىدىكى «ھەمبەھىرلەش» سىنبەلگىسىنى بېسىڭ"}
+                    </h3>
+                    <p>
+                      {isUg
+                        ? "Екранниң төвәндики бөлимидики квадрат үстигә йолланған йа شەкиллик «Һәмбәһирләش (Share)» түгүсини басың."
+                        : "ئېكراننىڭ ئاستىدا تۇرغان «ھەمبەھىرلەش (Share)» سىنبەلگىسىنى بېسىڭ (Chrome دا بولسا تىزىملىكتىن Share نى تاللاڭ)."}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="install-step-item">
+                  <span className="install-step-num">3</span>
+                  <div className="install-step-text">
+                    <h3>
+                      {isUg
+                        ? "3. «Баш экранға қошуش»ни таллаң"
+                        : "3. «باش ئېكرانغا قوشۇش» تاللانمىسىنى بېسىڭ"}
+                    </h3>
+                    <p>
+                      {isUg
+                        ? "Чиққан менюдин төвәнгә сүрүп «Баш экранға қошуش (Add to Home Screen)» дегән йәрни бесиң."
+                        : "چىققان تىزىملىكتىن تۆۋەنگە سىيرىپ «باش ئېكرانغا قوشۇش (Add to Home Screen)» تاللانمىسىنى بېسىڭ."}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="install-step-item">
+                  <span className="install-step-num">4</span>
+                  <div className="install-step-text">
+                    <h3>{isUg ? "4. «Қошуش»ни бесиң" : "4. «قوشۇش»نى بېسىڭ"}</h3>
+                    <p>
+                      {isUg
+                        ? "Оң үстидики «Қошуش (Add)» түгүсини бесиң. Өтүкән сөлбәلгиси тېلېфониңيزниң баш экраниға қошулиду."
+                        : "ئوڭ ئۈستىدىكى «قوشۇش (Add)» كۇنۇپكىسىنى بېسىڭ. ئۆتۈكەن سىنبەلگىسى باش ئېكرانىڭىزغا ئەپ شەكلىدە قوشۇلىدۇ."}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="install-step-item">
-              <span className="install-step-num">2</span>
-              <div className="install-step-text">
-                <h3>
-                  {isUg
-                    ? "2. Төмәндики [Һәмбәһирләш] түгүсини бесиң"
-                    : "2. ئاستىدىكى «ھەمبەھىرلەش» سىنبەلگىسىنى بېسىڭ"}
-                </h3>
-                <p>
-                  {isUg
-                    ? "Екранниң төвәндики бөлимидики квадрат үстигә йолланған йа شەкиллик «Һәмбәһирләш (Share)» түгүсини басың."
-                    : "ئېكراننىڭ ئاستىدا تۇرغان «ھەمبەھىرلەش (Share)» سىنبەلگىسىنى بېسىڭ (Chrome دا بولسا تىزىملىكتىن Share نى تاللاڭ)."}
-                </p>
-              </div>
-            </div>
+            {/* Right: Proportionate Visual Preview Mockup Card */}
+            <div className="install-guide-visual-col">
+              <div className="pwa-example-card">
+                <div className="pwa-example-header">
+                  <div className="pwa-example-title">
+                    <Sparkles size={16} style={{ color: "var(--gold)" }} />
+                    <span>{isUg ? "Қәдәмлик Көрсәтмә" : "قەدەم باسقۇچلۇق كۆرسەتمە"}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setLightboxImg({
+                        src: "/images/pwa/how-to-install-a-pwa-on-ios.webp",
+                        alt: isUg ? "iOS PWA Көрсәтмә" : "iOS PWA كۆرسەتمە",
+                      })
+                    }
+                    className="pwa-example-zoom-hint"
+                    title={isUg ? "Чоңайтып көрۈش" : "چوڭايتىپ كۆرۈش"}
+                  >
+                    <Maximize2 size={13} />
+                    <span>{isUg ? "Чоڭайتىپ كۆرۈش" : "چوڭايتىپ كۆرۈش"}</span>
+                  </button>
+                </div>
 
-            <div className="install-step-item">
-              <span className="install-step-num">3</span>
-              <div className="install-step-text">
-                <h3>
-                  {isUg
-                    ? "3. «Баш экранға қошуш»ни таллаң"
-                    : "3. «باش ئېكرانغا قوشۇش» تاللانمىسىنى بېسىڭ"}
-                </h3>
-                <p>
-                  {isUg
-                    ? "Чиққан менюдин төвәнгә сүрүп «Баш экранға қошуш (Add to Home Screen)» дегән йәрни бесиң."
-                    : "چىققان تىزىملىكتىن تۆۋەنگە سىيرىپ «باش ئېكرانغا قوشۇش (Add to Home Screen)» تاللانمىسىنى بېسىڭ."}
-                </p>
-              </div>
-            </div>
-
-            <div className="install-step-item">
-              <span className="install-step-num">4</span>
-              <div className="install-step-text">
-                <h3>{isUg ? "4. «Қошуш»ни бесиң" : "4. «قوشۇش»نى بېسىڭ"}</h3>
-                <p>
-                  {isUg
-                    ? "Оң үстидики «Қошуш (Add)» түгүсини бесиң. Өтүкән сөлбәлгиси тېلېфониңизниң баш экраниға қошулиду."
-                    : "ئوڭ ئۈستىدىكى «قوشۇش (Add)» كۇنۇپكىسىنى بېسىڭ. ئۆتۈكەن سىنبەلگىسى باش ئېكرانىڭىزغا ئەپ شەكلىدە قوشۇلىدۇ."}
-                </p>
+                <div
+                  className="pwa-example-img-wrapper"
+                  onClick={() =>
+                    setLightboxImg({
+                      src: "/images/pwa/how-to-install-a-pwa-on-ios.webp",
+                      alt: isUg ? "iOS PWA Көрсәтмә" : "iOS PWA كۆرسەتمە",
+                    })
+                  }
+                  title={isUg ? "Чоңайтып көрۈش ئۈچۈن بېسىڭ" : "چوڭايتىپ كۆرۈش ئۈچۈن چېكىڭ"}
+                >
+                  <img
+                    src="/images/pwa/how-to-install-a-pwa-on-ios.webp"
+                    alt={isUg ? "iPhone/iPad PWA қачилаش өрники" : "iPhone/iPad PWA قاچىلاش رەسىملىك ئۆرنىكى"}
+                    className="pwa-example-img"
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </div>
           </div>
+        )}
 
-            {/* iOS Visual Example */}
-            <div className="pwa-example-card">
-              <div className="pwa-example-header">
-                <div className="pwa-example-title">
-                  <Sparkles size={18} style={{ color: 'var(--gold)' }} />
-                  <span>
-                    {isUg
-                      ? 'Мушу рәсимлик өрнәктин қәдәм баскучларни көрүп үлгә алалайсиз:'
-                      : 'مۇشۇ رەسىملىك ئۆرنەكتىن قەدەم باسقۇچلارنى كۆرۈپ ئۈلگە ئالالايسىز:'}
-                  </span>
+        {/* Tab 2: Android Instructions (Balanced 2-Column Split) */}
+        {activeTab === "android" && (
+          <div className="install-guide-split">
+            {/* Left: Steps */}
+            <div className="install-guide-steps-col">
+              <div className="install-step-list">
+                <div className="install-step-item">
+                  <span className="install-step-num">1</span>
+                  <div className="install-step-text">
+                    <h3>{isUg ? "1. Chrome йаки бравзерни ачиң" : "1. Chrome ياكى سىستېما كۆرگۈچىنى ئېچىڭ"}</h3>
+                    <p>
+                      {isUg
+                        ? "Android تېلېфоنيڭيزدا Google Chrome йаки Samsung Internet арқилиق тор бетимизгә кириң."
+                        : "Android تېلېفونىڭىزدا Google Chrome ياكى Samsung Internet كۆرگۈچى ئارقىلىق كىرىڭ."}
+                    </p>
+                  </div>
                 </div>
-                <a
-                  href="https://progressier.com/assets/img/how-to-install-a-pwa-on-ios.webp"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="pwa-example-zoom-hint"
+
+                <div className="install-step-item">
+                  <span className="install-step-num">2</span>
+                  <div className="install-step-text">
+                    <h3>
+                      {isUg
+                        ? "2. Менюни (үч чекит) йаки төвәндики уқтурушни бесиң"
+                        : "2. ئۈستىدىكى ئۈچ چېكىت تىزىملىكىنى ياكى ئاستىدىكى ئۇقتۇرۇشنى بېسىڭ"}
+                    </h3>
+                    <p>
+                      {isUg
+                        ? "Бравзерниң оң үстидики үч чекитни бесиң йаки екранниң төвәндики «Қачилаш» түгүсини таллаң."
+                        : "كۆرگۈچنىڭ ئوڭ ئۈستىدىكى ئۈچ چېكىت تىزىملىكىنى بېسىڭ ياكى ئېكران ئاستىدا كۆرۈنگەن «ئەپنى قاچىلاش» كۇنۇپكىسىنى تاللاڭ."}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="install-step-item">
+                  <span className="install-step-num">3</span>
+                  <div className="install-step-text">
+                    <h3>
+                      {isUg
+                        ? "3. «Әпни қачилаش»ни таллаң"
+                        : "3. «ئەپنى قاچىلاش» ياكى «باش ئېكرانغا قوشۇش»نى بېسىڭ"}
+                    </h3>
+                    <p>
+                      {isUg
+                        ? "«Әпни қачилаش (Install App)» дегән түгмини бесип тәстиқлаң."
+                        : "«ئەپنى قاچىلاش (Install App)» تۈگمىسىنى بېسىپ مۇئەييەنلەشتۈرۈڭ. ئەپ سېكۇنت ئىچىدە يانفونىڭىزغا قاچىلىنىدۇ."}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Visual Preview */}
+            <div className="install-guide-visual-col">
+              <div className="pwa-example-card">
+                <div className="pwa-example-header">
+                  <div className="pwa-example-title">
+                    <Sparkles size={16} style={{ color: "var(--gold)" }} />
+                    <span>{isUg ? "Қәдәмлик Көрсәтмә" : "قەدەم باسقۇچلۇق كۆرسەتمە"}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setLightboxImg({
+                        src: "/images/pwa/how-to-install-a-pwa-on-android.webp",
+                        alt: isUg ? "Android PWA Көрсәтмә" : "Android PWA كۆرسەتمە",
+                      })
+                    }
+                    className="pwa-example-zoom-hint"
+                    title={isUg ? "Чоңайтып көрۈش" : "چوڭايتىپ كۆرۈش"}
+                  >
+                    <Maximize2 size={13} />
+                    <span>{isUg ? "Чоңайтып көрۈش" : "چوڭايتىپ كۆرۈش"}</span>
+                  </button>
+                </div>
+
+                <div
+                  className="pwa-example-img-wrapper"
+                  onClick={() =>
+                    setLightboxImg({
+                      src: "/images/pwa/how-to-install-a-pwa-on-android.webp",
+                      alt: isUg ? "Android PWA Көрсәтмә" : "Android PWA كۆرسەتمە",
+                    })
+                  }
+                  title={isUg ? "Чоңايтып көрۈش ئۈچۈن بېسىڭ" : "چوڭايتىپ كۆرۈش ئۈچۈن چېكىڭ"}
                 >
-                  <ExternalLink size={13} />
-                  <span>{isUg ? 'Чоңайтып көрۈش' : 'چوڭايتىپ كۆرۈش'}</span>
-                </a>
-              </div>
-              <div className="pwa-example-img-wrapper">
-                <img
-                  src="/images/pwa/how-to-install-a-pwa-on-ios.webp"
-                  alt={isUg ? 'iPhone/iPad PWA қачилаش өрники' : 'iPhone/iPad PWA قاچىلاش رەسىملىك ئۆرنىكى'}
-                  className="pwa-example-img"
-                  loading="lazy"
-                  width={2000}
-                  height={948}
-                />
-              </div>
-            </div>
-        </>)}
-
-        {/* Tab 2: Android Instructions */}
-        {activeTab === "android" && (<>
-          <div className="install-step-list">
-            <div className="install-step-item">
-              <span className="install-step-num">1</span>
-              <div className="install-step-text">
-                <h3>{isUg ? "1. Chrome йаки бравзерни ачиң" : "1. Chrome ياكى سىستېما كۆرگۈچىنى ئېچىڭ"}</h3>
-                <p>
-                  {isUg
-                    ? "Android تېلېфониңизда Google Chrome йаки Samsung Internet арқилиқ тор бетимизгә кириң."
-                    : "Android تېلېفونىڭىزدا Google Chrome ياكى Samsung Internet كۆرگۈچى ئارقىلىق كىرىڭ."}
-                </p>
-              </div>
-            </div>
-
-            <div className="install-step-item">
-              <span className="install-step-num">2</span>
-              <div className="install-step-text">
-                <h3>
-                  {isUg
-                    ? "2. Менюни (үч чекит) йаки төвәндики уқтурушни бесиң"
-                    : "2. ئۈستىدىكى ئۈچ چېكىت تىزىملىكىنى ياكى ئاستىدىكى ئۇقتۇرۇشنى بېسىڭ"}
-                </h3>
-                <p>
-                  {isUg
-                    ? "Бравзерниң оң үстидики үч чекитни бесиң йаки екранниң төвәндики «Қачилаш» түгүсини таллаң."
-                    : "كۆرگۈچنىڭ ئوڭ ئۈستىدىكى ئۈچ چېكىت تىزىملىكىنى بېسىڭ ياكى ئېكران ئاستىدا كۆرۈنگەن «ئەپنى قاچىلاش» كۇنۇپكىسىنى تاللاڭ."}
-                </p>
-              </div>
-            </div>
-
-            <div className="install-step-item">
-              <span className="install-step-num">3</span>
-              <div className="install-step-text">
-                <h3>
-                  {isUg
-                    ? "3. «Әпни қачилаش»ни таллаң"
-                    : "3. «ئەپنى قاچىلاش» ياكى «باش ئېكرانغا قوشۇش»نى بېسىڭ"}
-                </h3>
-                <p>
-                  {isUg
-                    ? "«Әпни қачилаش (Install App)» дегән түгмини бесип тәстиқлаң."
-                    : "«ئەپنى قاچىلاش (Install App)» تۈگمىسىنى بېسىپ مۇئەييەنلەشتۈرۈڭ. ئەپ سېكۇنت ئىچىدە يانفونىڭىزغا قاچىلىنىدۇ."}
-                </p>
+                  <img
+                    src="/images/pwa/how-to-install-a-pwa-on-android.webp"
+                    alt={isUg ? "Android PWA қачилаش өрники" : "Android PWA قاچىلاش رەسىملىك ئۆرنىكى"}
+                    className="pwa-example-img"
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </div>
           </div>
+        )}
 
-            {/* Android Visual Example */}
-            <div className="pwa-example-card">
-              <div className="pwa-example-header">
-                <div className="pwa-example-title">
-                  <Sparkles size={18} style={{ color: 'var(--gold)' }} />
-                  <span>
-                    {isUg
-                      ? 'Мушу рәсимлик өрнәктин қәдәм баскучларни көрүп үлгә алалайсиз:'
-                      : 'مۇشۇ رەسىملىك ئۆرنەكتىن قەدەم باسقۇچلارنى كۆرۈپ ئۈلگە ئالالايسىز:'}
-                  </span>
+        {/* Tab 3: Desktop Instructions (Balanced 2-Column Split) */}
+        {activeTab === "desktop" && (
+          <div className="install-guide-split">
+            {/* Left: Steps */}
+            <div className="install-guide-steps-col">
+              <div className="install-step-list">
+                <div className="install-step-item">
+                  <span className="install-step-num">1</span>
+                  <div className="install-step-text">
+                    <h3>{isUg ? "1. Адрес тизимидики қачилаش сөлбәلгисини бесиң" : "1. ئادرېس بالدىقىدىكى قاچىلاش سىنبەلگىسىنى بېسىڭ"}</h3>
+                    <p>
+                      {isUg
+                        ? "Google Chrome йаки Microsoft Edge бравзерида сайтни ачқиниңизда, адрес қатириниң оң тәрәпидә «Қачилаش (Install)» сөлбәلгиси чиқиду."
+                        : "Google Chrome، Edge ياكى Safari كۆرگۈچلىرىدە ئادرېس بالدىقىنىڭ ئەڭ ئوڭ تەرىپىدە كۆرۈنىدىغان قاچىلاش (Install) سىنبەلگىسىنى چېكىڭ."}
+                    </p>
+                  </div>
                 </div>
-                <a
-                  href="https://progressier.com/assets/img/how-to-install-a-pwa-on-android.webp?v=3"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="pwa-example-zoom-hint"
+
+                <div className="install-step-item">
+                  <span className="install-step-num">2</span>
+                  <div className="install-step-text">
+                    <h3>{isUg ? "2. «Қачилаش»ни таллаң" : "2. «قاچىلاش»نى بېسىڭ"}</h3>
+                    <p>
+                      {isUg
+                        ? "«Өتүкән әпини қачиласунму?» дегән соалға «Қачилаш (Install)»ни бесиң."
+                        : "«قاچىلاش» كۇنۇپكىسىنى بېسىپ جەزملەشتۈرۈڭ. ئەپ ئايرىم دېرىزىدە ئېچىلىدۇ ۋە كومپيۇتېرىڭىزنىڭ ئاساسىي تىزىملىكىگە قوشۇلىدۇ."}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Visual Preview */}
+            <div className="install-guide-visual-col">
+              <div className="pwa-example-card">
+                <div className="pwa-example-header">
+                  <div className="pwa-example-title">
+                    <Sparkles size={16} style={{ color: "var(--gold)" }} />
+                    <span>{isUg ? "Қәдәмлик Көрсәтмә" : "قەدەم باسقۇچلۇق كۆرسەتمە"}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setLightboxImg({
+                        src: "/images/pwa/installing-pwa-on-desktop.webp",
+                        alt: isUg ? "Desktop PWA Көрсәтмә" : "Desktop PWA كۆرسەتمە",
+                      })
+                    }
+                    className="pwa-example-zoom-hint"
+                    title={isUg ? "Чоңايтып көрۈش" : "چوڭايتىپ كۆرۈش"}
+                  >
+                    <Maximize2 size={13} />
+                    <span>{isUg ? "Чоңايтып көрۈش" : "چوڭايتىپ كۆرۈش"}</span>
+                  </button>
+                </div>
+
+                <div
+                  className="pwa-example-img-wrapper"
+                  onClick={() =>
+                    setLightboxImg({
+                      src: "/images/pwa/installing-pwa-on-desktop.webp",
+                      alt: isUg ? "Desktop PWA Көрсәтмә" : "Desktop PWA كۆرسەتمە",
+                    })
+                  }
+                  title={isUg ? "Чоңايтып көрۈش ئۈچۈن بېسىڭ" : "چوڭايتىپ كۆرۈش ئۈچۈن چېكىڭ"}
                 >
-                  <ExternalLink size={13} />
-                  <span>{isUg ? 'Чоңайтып көрۈش' : 'چوڭايتىپ كۆرۈش'}</span>
-                </a>
-              </div>
-              <div className="pwa-example-img-wrapper">
-                <img
-                  src="/images/pwa/how-to-install-a-pwa-on-android.webp"
-                  alt={isUg ? 'Android PWA қачилаش өрники' : 'Android PWA قاچىلاش رەسىملىك ئۆرنىكى'}
-                  className="pwa-example-img"
-                  loading="lazy"
-                  width={2000}
-                  height={1243}
-                />
-              </div>
-            </div>
-        </>)}
-
-        {/* Tab 3: Desktop Instructions */}
-        {activeTab === "desktop" && (<>
-          <div className="install-step-list">
-            <div className="install-step-item">
-              <span className="install-step-num">1</span>
-              <div className="install-step-text">
-                <h3>{isUg ? "1. Адрес тизимидики қачилаش сөлбәлгисини бесиң" : "1. ئادرېس بالدىقىدىكى قاچىلاش سىنبەلگىسىنى بېسىڭ"}</h3>
-                <p>
-                  {isUg
-                    ? "Google Chrome йаки Microsoft Edge бравзерида сайтни ачқиниңизда, адрес қатириниң оң тәрәпидә «Қачилаش (Install)» сөлбәлгиси чиқиду."
-                    : "Google Chrome، Edge ياكى Safari كۆرگۈچلىرىدە ئادرېس بالدىقىنىڭ ئەڭ ئوڭ تەرىپىدە كۆرۈنىدىغان قاچىلاش (Install) سىنبەلگىسىنى چېكىڭ."}
-                </p>
-              </div>
-            </div>
-
-            <div className="install-step-item">
-              <span className="install-step-num">2</span>
-              <div className="install-step-text">
-                <h3>{isUg ? "2. «Қачилаش»ни таллаң" : "2. «قاچىلاش»نى بېسىڭ"}</h3>
-                <p>
-                  {isUg
-                    ? "«Өтүкән әпини қачиласунму?» дегән соалға «Қачилаш (Install)»ни бесиң."
-                    : "«قاچىلاش» كۇنۇپكىسىنى بېسىپ جەزملەشتۈرۈڭ. ئەپ ئايرىم دېرىزىدە ئېچىلىدۇ ۋە كومپيۇتېرىڭىزنىڭ ئاساسىي تىزىملىكىگە قوشۇلىدۇ."}
-                </p>
+                  <img
+                    src="/images/pwa/installing-pwa-on-desktop.webp"
+                    alt={isUg ? "Kompyuter PWA қачилаش өрники" : "كومپيۇتېر PWA قاچىلاش رەسىملىك ئۆرنىكى"}
+                    className="pwa-example-img"
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </div>
           </div>
-
-            {/* Desktop Visual Example */}
-            <div className="pwa-example-card">
-              <div className="pwa-example-header">
-                <div className="pwa-example-title">
-                  <Sparkles size={18} style={{ color: 'var(--gold)' }} />
-                  <span>
-                    {isUg
-                      ? 'Мушу рәсимлик өрнәктин қәдәм баскучларни көрүп үлгә алалайсиз:'
-                      : 'مۇشۇ رەسىملىك ئۆرنەكتىن قەدەم باسقۇچلارنى كۆرۈپ ئۈلگە ئالالايسىز:'}
-                  </span>
-                </div>
-                <a
-                  href="https://progressier.com/assets/img/installing-pwa-on-desktop.webp?v=5"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="pwa-example-zoom-hint"
-                >
-                  <ExternalLink size={13} />
-                  <span>{isUg ? 'Чоңайтып көрۈش' : 'چوڭايتىپ كۆرۈش'}</span>
-                </a>
-              </div>
-              <div className="pwa-example-img-wrapper">
-                <img
-                  src="/images/pwa/installing-pwa-on-desktop.webp"
-                  alt={isUg ? 'Kompyuter PWA қачилаش өрники' : 'كومپيۇتېر PWA قاچىلاش رەسىملىك ئۆرنىكى'}
-                  className="pwa-example-img"
-                  loading="lazy"
-                  width={2464}
-                  height={1494}
-                />
-              </div>
-            </div>
-        </>)}
+        )}
       </div>
+
+      {/* Interactive Lightbox Modal */}
+      {lightboxImg && (
+        <div
+          className="pwa-lightbox-overlay"
+          onClick={() => setLightboxImg(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className="pwa-lightbox-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="pwa-lightbox-close"
+              onClick={() => setLightboxImg(null)}
+              aria-label={isUg ? "Йепиш" : "تاقاش"}
+              title={isUg ? "Йепиш (Esc)" : "تاقاش (Esc)"}
+            >
+              <X size={20} />
+            </button>
+            <img
+              src={lightboxImg.src}
+              alt={lightboxImg.alt}
+              className="pwa-lightbox-img"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

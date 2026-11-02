@@ -293,7 +293,7 @@ export function CacheManager() {
           <div className="metric-content">
             <span className="metric-label">WordPress ئەھۋالى</span>
             <strong className="metric-value">{status?.ok ? "ئۇلانغان (Online)" : "كۈتۈلمەكتە..."}</strong>
-            <small>orhunpolicycenter.com</small>
+            <small>otukenpolicycenter.com</small>
           </div>
         </div>
 

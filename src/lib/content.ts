@@ -2,8 +2,8 @@ import he from "he";
 import sanitizeHtml from "sanitize-html";
 
 function getWordpressUrl(): string {
-  let url = (process.env.WORDPRESS_URL || "https://orhunpolicycenter.com/uy").trim().replace(/\/$/, "");
-  if (url.includes("orhunpolicycenter.com") && !url.endsWith("/uy")) {
+  let url = (process.env.WORDPRESS_URL || "https://otukenpolicycenter.com/uy").trim().replace(/\/$/, "");
+  if (url.includes("otukenpolicycenter.com") && !url.endsWith("/uy")) {
     url = `${url}/uy`;
   }
   return url;
@@ -104,7 +104,7 @@ export function safeContent(html: string): string {
       img: (_tagName, attrs) => {
         let src = attrs.src || "";
         if (
-          src.includes("orhunpolicycenter.com") ||
+          src.includes("otukenpolicycenter.com") ||
           src.includes("youtube.com") ||
           src.includes("ytimg.com")
         ) {

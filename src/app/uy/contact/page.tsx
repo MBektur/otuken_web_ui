@@ -47,7 +47,7 @@ export default async function ContactPage() {
                     <Mail className="contact-info-icon" size={20} />
                     <div className="contact-info-text">
                       <strong>ئاساسىي ئېلخەت</strong>
-                      <a href="mailto:info@orhunpolicycenter.com" dir="ltr">info@orhunpolicycenter.com</a>
+                      <a href="mailto:otuken2025@gmail.com" dir="ltr">otuken2025@gmail.com</a>
                     </div>
                   </div>
 
@@ -55,7 +55,7 @@ export default async function ContactPage() {
                     <MessageSquare className="contact-info-icon" size={20} />
                     <div className="contact-info-text">
                       <strong>ماقالە يوللاش (تەھرىرات)</strong>
-                      <a href="mailto:editor@orhunpolicycenter.com" dir="ltr">editor@orhunpolicycenter.com</a>
+                      <a href="mailto:otuken2025@gmail.com" dir="ltr">otuken2025@gmail.com</a>
                     </div>
                   </div>
 
@@ -63,7 +63,7 @@ export default async function ContactPage() {
                     <Globe className="contact-info-icon" size={20} />
                     <div className="contact-info-text">
                       <strong>رەسمىي تور بېكەت</strong>
-                      <span dir="ltr">orhunpolicycenter.com</span>
+                      <span dir="ltr">otukenpolicycenter.com</span>
                     </div>
                   </div>
                 </div>

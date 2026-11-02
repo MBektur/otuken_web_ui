@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-const WORDPRESS_URL = "https://orhunpolicycenter.com/uy";
+const WORDPRESS_URL = "https://otukenpolicycenter.com/uy";
 
 function extractYoutubeId(content: string): string | undefined {
   const match = content.match(

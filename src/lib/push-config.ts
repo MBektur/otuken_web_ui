@@ -7,7 +7,7 @@ export const VAPID_PRIVATE_KEY =
   "d6Xuelue4PST-l2_CK46UelG3r7bqNiQHx7BLgZBP1U";
 
 export const VAPID_SUBJECT =
-  process.env.VAPID_SUBJECT || "mailto:info@orhunpolicycenter.com";
+  process.env.VAPID_SUBJECT || "mailto:otuken2025@gmail.com";
 
 export const PUSH_ADMIN_SECRET =
   process.env.PUSH_ADMIN_SECRET || "otuken-push-secret-2026";

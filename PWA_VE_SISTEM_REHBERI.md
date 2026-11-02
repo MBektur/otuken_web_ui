@@ -196,7 +196,7 @@ Yeni bir yazı veya analiz yayınlandığında, siteye abone olan tüm kullanıc
 * **VAPID Anahtarları:**
   * Public Key: `BKtNZBLK3SktKj9OCEzNAyPvuEjKVJlmHYRJVNN3QEynCXYmSFkm7_l4egF6Klo4kVBVyc6f7NgRmcxOxtuXIgE`
   * Private Key: `d6Xuelue4PST-l2_CK46UelG3r7bqNiQHx7BLgZBP1U`
-  * Subject: `mailto:info@orhunpolicycenter.com`
+  * Subject: `mailto:otuken2025@gmail.com`
 * **Kütüphane:** `web-push`
 
 ### Abonelik Süreci
@@ -311,11 +311,11 @@ Vercel -> **Settings** -> **Environment Variables** bölümünde bulunması gere
 | :--- | :--- |
 | `NEXT_PUBLIC_VAPID_PUBLIC_KEY` | `BKtNZBLK3SktKj9OCEzNAyPvuEjKVJlmHYRJVNN3QEynCXYmSFkm7_l4egF6Klo4kVBVyc6f7NgRmcxOxtuXIgE` |
 | `VAPID_PRIVATE_KEY` | `d6Xuelue4PST-l2_CK46UelG3r7bqNiQHx7BLgZBP1U` |
-| `VAPID_SUBJECT` | `mailto:info@orhunpolicycenter.com` |
+| `VAPID_SUBJECT` | `mailto:otuken2025@gmail.com` |
 | `PUSH_ADMIN_SECRET` | `otuken-push-secret-2026` |
 | `REVALIDATE_SECRET` | `otuken2026` |
 | `NEXT_PUBLIC_SITE_URL` | `https://www.otukenpolicycenter.com` |
-| `WORDPRESS_URL` | `https://orhunpolicycenter.com/uy` |
+| `WORDPRESS_URL` | `https://otukenpolicycenter.com/uy` |
 | `UPSTASH_REDIS_REST_URL` | Upstash / Vercel KV REST Adresi |
 | `UPSTASH_REDIS_REST_TOKEN` | Upstash / Vercel KV REST Yetki Anahtarı |
 
