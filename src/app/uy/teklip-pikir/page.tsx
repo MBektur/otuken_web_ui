@@ -54,8 +54,8 @@ export default async function TeklipPikirPage() {
                   <div className="contact-info-item">
                     <Globe className="contact-info-icon" size={20} />
                     <div className="contact-info-text">
-                      <strong>رەسمىي تور بېكەت</strong>
-                      <span dir="ltr">otukenpolicycenter.com</span>
+                      <strong>رەسمىي تور بېكەت ئۇلىنىشىمىز</strong>
+                      <span dir="ltr">www.otukenpolicycenter.com</span>
                     </div>
                   </div>
                 </div>
