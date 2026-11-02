@@ -104,6 +104,7 @@ export function PwaProvider() {
       if (isStandalone) {
         try {
           localStorage.setItem(PWA_INSTALLED_KEY, "true");
+          localStorage.setItem("otuken_pwa_last_standalone", String(Date.now()));
         } catch {}
       }
 

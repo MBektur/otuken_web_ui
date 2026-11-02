@@ -14,6 +14,13 @@ export default function manifest(): MetadataRoute.Manifest {
     dir: "rtl",
     orientation: "portrait",
     categories: ["news", "education", "books", "politics"],
+    prefer_related_applications: false,
+    related_applications: [
+      {
+        platform: "webapp",
+        url: "https://www.otukenpolicycenter.com/manifest.webmanifest",
+      },
+    ],
     icons: [
       {
         src: "/favicon-16x16.png",

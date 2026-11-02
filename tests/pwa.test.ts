@@ -4,7 +4,12 @@ import fs from "node:fs";
 import path from "node:path";
 import manifestConfig from "../src/app/manifest";
 import { addSubscription, getSubscriptionCount, removeSubscription } from "../src/lib/push-store";
-import { shouldShowInstallToast, PWA_SNOOZE_DURATION_MS } from "../src/lib/pwa-utils";
+import {
+  shouldShowInstallToast,
+  determinePwaUserState,
+  PWA_SNOOZE_DURATION_MS,
+  PWA_IOS_EXPIRATION_MS,
+} from "../src/lib/pwa-utils";
 
 test("PWA manifest contains valid metadata and icons", () => {
   const m = manifestConfig();
@@ -132,5 +137,81 @@ test("shouldShowInstallToast: correctly enforces snooze, standalone, and install
     "Dismissed over 24 hours ago should re-prompt installation"
   );
 });
+
+test("determinePwaUserState: handles all 5 lifecycle states and uninstallation recovery", () => {
+  const now = 1762100000000;
+
+  // 1. Not installed
+  assert.equal(
+    determinePwaUserState({
+      isStandalone: false,
+      isInstalledRecorded: false,
+      notificationPermission: "default",
+      currentTime: now,
+    }),
+    "NOT_INSTALLED"
+  );
+
+  // 2. Installed, but inside regular browser and notifications not active yet
+  assert.equal(
+    determinePwaUserState({
+      isStandalone: false,
+      isInstalledRecorded: true,
+      lastStandaloneTimestamp: now - 1000,
+      notificationPermission: "default",
+      currentTime: now,
+    }),
+    "INSTALLED_NO_NOTIFICATIONS_BROWSER"
+  );
+
+  // 3. Inside standalone app, but notifications not active yet
+  assert.equal(
+    determinePwaUserState({
+      isStandalone: true,
+      isInstalledRecorded: true,
+      notificationPermission: "default",
+      currentTime: now,
+    }),
+    "INSTALLED_NO_NOTIFICATIONS_STANDALONE"
+  );
+
+  // 4. Installed and notifications granted
+  assert.equal(
+    determinePwaUserState({
+      isStandalone: true,
+      isInstalledRecorded: true,
+      notificationPermission: "granted",
+      currentTime: now,
+    }),
+    "INSTALLED_AND_SUBSCRIBED"
+  );
+
+  // 5. User dismissed with 'Later' within 24h
+  assert.equal(
+    determinePwaUserState({
+      isStandalone: false,
+      isInstalledRecorded: false,
+      notificationPermission: "default",
+      dismissedAtTimestamp: now - 3600 * 1000,
+      currentTime: now,
+    }),
+    "SNOOZED"
+  );
+
+  // 6. Uninstallation on iOS: was marked installed, but standalone hasn't been launched in > 14 days
+  assert.equal(
+    determinePwaUserState({
+      isStandalone: false,
+      isInstalledRecorded: true,
+      lastStandaloneTimestamp: now - (PWA_IOS_EXPIRATION_MS + 100000),
+      isIOS: true,
+      notificationPermission: "default",
+      currentTime: now,
+    }),
+    "NOT_INSTALLED",
+    "Expired standalone launch indicates app uninstalled on iOS"
+  );
+});
+
 
 
