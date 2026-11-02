@@ -6173,30 +6173,108 @@ html, body {
 }
 
 /* Lightbox Modal */
+/* ── Lightbox Overlay ── */
 .pwa-lightbox-overlay {
     position: fixed;
     inset: 0;
     z-index: 999999;
-    background: rgba(15, 23, 42, 0.88);
-    backdrop-filter: blur(8px);
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 24px;
     animation: pwa-fade-in 0.2s ease-out;
+    /* Prevent browser pull-to-refresh / scroll while open */
+    overscroll-behavior: contain;
 }
 
+/* White card that wraps the image */
 .pwa-lightbox-content {
     position: relative;
+    width: 100%;
     max-width: 1100px;
-    max-height: 90vh;
+    /* No max-height — zoom can push the image beyond the card */
     display: flex;
     flex-direction: column;
     align-items: center;
     background: #ffffff;
     padding: 16px;
     border-radius: 20px;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    /* Critical: clip so zoomed image doesn't bleed over white UI chrome */
+    overflow: hidden;
+}
+
+/* Touch-zoom wrapper — fills the card, clips overflow on mobile */
+.pwa-lightbox-zoom-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Prevent browser native pinch-zoom / scroll interference */
+    touch-action: none;
+    overflow: hidden;
+    /* Give the wrapper a bounded height so portrait images stay visible */
+    max-height: 82vh;
+    border-radius: 10px;
+    cursor: grab;
+    user-select: none;
+}
+
+.pwa-lightbox-zoom-wrapper:active {
+    cursor: grabbing;
+}
+
+/* Zoom hint badge (mobile only) */
+.pwa-lightbox-zoom-hint {
+    display: none;
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    pointer-events: none;
+    white-space: nowrap;
+    gap: 4px;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .pwa-lightbox-zoom-hint {
+        display: flex;
+    }
+    .pwa-lightbox-content {
+        padding: 10px;
+        border-radius: 14px;
+    }
+}
+
+/* Reset zoom button (shown only when zoomed-in via JS class) */
+.pwa-lightbox-reset-btn {
+    display: none;
+    position: absolute;
+    top: -16px;
+    inset-inline-start: -16px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--wine);
+    border: 2px solid #fff;
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.pwa-lightbox-content.is-zoomed .pwa-lightbox-reset-btn {
+    display: flex;
 }
 
 .pwa-lightbox-close {
@@ -6215,6 +6293,7 @@ html, body {
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transition: all 0.2s ease;
+    z-index: 10;
 }
 
 .pwa-lightbox-close:hover {
@@ -6223,13 +6302,19 @@ html, body {
 }
 
 .pwa-lightbox-img {
-    max-width: 100%;
-    max-height: 80vh;
-    width: auto;
+    /* Fill the wrapper width; height scales with aspect ratio */
+    width: 100%;
     height: auto;
     object-fit: contain;
-    border-radius: 12px;
+    border-radius: 10px;
     display: block;
+    /* Transform origin stays center so pinch-zoom feels natural */
+    transform-origin: center center;
+    /* No CSS transition — JS applies transforms directly for 60fps */
+    will-change: transform;
+    pointer-events: none; /* touches go to wrapper, not the img itself */
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 @keyframes pwa-fade-in {

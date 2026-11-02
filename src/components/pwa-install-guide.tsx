@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Apple,
   Smartphone,
@@ -18,6 +18,8 @@ import {
   Eye,
   X,
   Maximize2,
+  ZoomIn,
+  RotateCcw,
 } from "lucide-react";
 import { PushSubscriber } from "./push-subscriber";
 
@@ -30,8 +32,42 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
   const [installSuccess, setInstallSuccess] = useState(false);
   const [lightboxImg, setLightboxImg] = useState<{ src: string; alt: string } | null>(null);
 
+  // ── Pinch-to-Zoom refs ──────────────────────────────────────────────────
+  const lightboxImgRef   = useRef<HTMLImageElement>(null);
+  const lightboxWrapRef  = useRef<HTMLDivElement>(null);
+  const lightboxCardRef  = useRef<HTMLDivElement>(null);
+  const lastTapTime      = useRef(0);
+  const zoomState = useRef({
+    scale: 1, tx: 0, ty: 0,
+    lastDist: 0,
+    isPinching: false,
+    isPanning: false,
+    panStartX: 0, panStartY: 0,
+  });
+
+  const applyZoom = () => {
+    const img = lightboxImgRef.current;
+    const card = lightboxCardRef.current;
+    if (!img) return;
+    const { scale, tx, ty } = zoomState.current;
+    img.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+    // Show reset button when zoomed
+    if (card) {
+      if (scale > 1.05) card.classList.add("is-zoomed");
+      else              card.classList.remove("is-zoomed");
+    }
+  };
+
+  const resetZoom = () => {
+    const z = zoomState.current;
+    z.scale = 1; z.tx = 0; z.ty = 0;
+    z.isPinching = false; z.isPanning = false;
+    if (lightboxImgRef.current) lightboxImgRef.current.style.transform = "";
+    if (lightboxCardRef.current) lightboxCardRef.current.classList.remove("is-zoomed");
+  };
+  // ────────────────────────────────────────────────────────────────────────
+
   useEffect(() => {
-    // Detect device
     const ua = navigator.userAgent.toLowerCase();
     if (/iphone|ipad|ipod/.test(ua)) {
       setActiveTab("ios");
@@ -55,7 +91,6 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
     const onInstallReady = () => setCanPrompt(true);
     window.addEventListener("pwa-install-ready", onInstallReady);
 
-    // Escape listener for lightbox
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setLightboxImg(null);
     };
@@ -67,17 +102,99 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
     };
   }, []);
 
-  // Prevent background scrolling when modalbox is open
+  // Body scroll lock + zoom reset on lightbox open/close
   useEffect(() => {
     if (lightboxImg) {
       document.body.style.overflow = "hidden";
+      // Reset after DOM paints the new image
+      requestAnimationFrame(resetZoom);
     } else {
       document.body.style.overflow = "";
     }
+    return () => { document.body.style.overflow = ""; };
+  }, [lightboxImg]);
+
+  // ── Non-passive touch handlers for pinch-to-zoom ─────────────────────────
+  useEffect(() => {
+    const wrap = lightboxWrapRef.current;
+    if (!wrap || !lightboxImg) return;
+
+    const onTouchStart = (e: TouchEvent) => {
+      const z = zoomState.current;
+      if (e.touches.length === 2) {
+        z.isPinching = true;
+        z.isPanning  = false;
+        const dx = e.touches[1].clientX - e.touches[0].clientX;
+        const dy = e.touches[1].clientY - e.touches[0].clientY;
+        z.lastDist = Math.hypot(dx, dy);
+      } else if (e.touches.length === 1) {
+        // Double-tap detection
+        const now = Date.now();
+        if (now - lastTapTime.current < 280) {
+          // Double tap → toggle 1x / 2.5x
+          if (z.scale > 1.1) {
+            z.scale = 1; z.tx = 0; z.ty = 0;
+          } else {
+            z.scale = 2.5;
+          }
+          applyZoom();
+          lastTapTime.current = 0;
+          return;
+        }
+        lastTapTime.current = now;
+
+        if (z.scale > 1) {
+          z.isPanning  = true;
+          z.isPinching = false;
+          z.panStartX  = e.touches[0].clientX - z.tx;
+          z.panStartY  = e.touches[0].clientY - z.ty;
+        }
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      const z = zoomState.current;
+      if (e.touches.length === 2 && z.isPinching) {
+        e.preventDefault(); // stop page scroll during pinch
+        const dx   = e.touches[1].clientX - e.touches[0].clientX;
+        const dy   = e.touches[1].clientY - e.touches[0].clientY;
+        const dist = Math.hypot(dx, dy);
+        const delta = dist / (z.lastDist || dist);
+        z.scale = Math.min(Math.max(z.scale * delta, 1), 5);
+        z.lastDist = dist;
+        applyZoom();
+      } else if (e.touches.length === 1 && z.isPanning) {
+        e.preventDefault(); // stop page scroll while panning
+        z.tx = e.touches[0].clientX - z.panStartX;
+        z.ty = e.touches[0].clientY - z.panStartY;
+        applyZoom();
+      }
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      const z = zoomState.current;
+      if (e.touches.length < 2) z.isPinching = false;
+      if (e.touches.length === 0) {
+        z.isPanning = false;
+        // Snap back to 1× if nearly reset
+        if (z.scale < 1.08) {
+          z.scale = 1; z.tx = 0; z.ty = 0;
+          applyZoom();
+        }
+      }
+    };
+
+    wrap.addEventListener("touchstart", onTouchStart, { passive: true });
+    wrap.addEventListener("touchmove",  onTouchMove,  { passive: false });
+    wrap.addEventListener("touchend",   onTouchEnd,   { passive: true });
+
     return () => {
-      document.body.style.overflow = "";
+      wrap.removeEventListener("touchstart", onTouchStart);
+      wrap.removeEventListener("touchmove",  onTouchMove);
+      wrap.removeEventListener("touchend",   onTouchEnd);
     };
   }, [lightboxImg]);
+  // ──────────────────────────────────────────────────────────────────────────
 
   const handleInstallClick = async () => {
     if (window.deferredPwaInstallPrompt) {
@@ -531,7 +648,7 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
         )}
       </div>
 
-      {/* Interactive Lightbox Modal */}
+      {/* Interactive Lightbox Modal — Pinch-to-Zoom + Pan + Double-Tap */}
       {lightboxImg && (
         <div
           className="pwa-lightbox-overlay"
@@ -540,9 +657,21 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
           aria-modal="true"
         >
           <div
+            ref={lightboxCardRef}
             className="pwa-lightbox-content"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Reset zoom button — only visible when zoomed (via .is-zoomed CSS class) */}
+            <button
+              type="button"
+              className="pwa-lightbox-reset-btn"
+              onClick={resetZoom}
+              title={isUg ? "Яслига Қайтиш (1×)" : "ئەسلىگە قايتۇرۇش (1×)"}
+            >
+              1×
+            </button>
+
+            {/* Close button */}
             <button
               type="button"
               className="pwa-lightbox-close"
@@ -552,11 +681,23 @@ export function PwaInstallGuide({ isUg = false }: { isUg?: boolean }) {
             >
               <X size={20} />
             </button>
-            <img
-              src={lightboxImg.src}
-              alt={lightboxImg.alt}
-              className="pwa-lightbox-img"
-            />
+
+            {/* Touch-zoom wrapper */}
+            <div ref={lightboxWrapRef} className="pwa-lightbox-zoom-wrapper">
+              <img
+                ref={lightboxImgRef}
+                src={lightboxImg.src}
+                alt={lightboxImg.alt}
+                className="pwa-lightbox-img"
+                draggable={false}
+              />
+            </div>
+
+            {/* Mobile hint badge */}
+            <div className="pwa-lightbox-zoom-hint">
+              <ZoomIn size={12} />
+              <span>{isUg ? "Чоңайтиш: Икки бармақ بىلән кеңейтиң" : "كەڭەيتىش: ئىككى بارماق بىلەن كەڭەيتىڭ"}</span>
+            </div>
           </div>
         </div>
       )}
