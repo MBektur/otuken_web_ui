@@ -77,13 +77,18 @@ Kullanıcıların uygulamayı nasıl kuracağını anlatan rehber sayfaları:
 | **Android (Google Chrome)** | 1. Chrome'da siteyi açın.<br>2. Sağ üstteki üç nokta menüsüne veya ekrandaki **«Yükle»** butonuna basın.<br>3. **«Uygulamayı Yükle» (Install App)** seçeneğini onaylayın. |
 | **Masaüstü (Chrome / Edge / Safari macOS)** | 1. Adres çubuğunun sağ tarafındaki **«Uygulamayı Yükle» (Install)** simgesine tıklayın.<br>2. Çıkan onay kutusunda **«Yükle»** butonuna basın. Uygulama dock/görev çubuğuna eklenir. |
 
-### Akıllı Kurulum Bildirimi (Toast)
-Bileşen: `src/components/pwa-install-toast.tsx`
-* Kullanıcı siteyi tarayıcıda açtığında 2.5 saniye sonra ekranın altından zarif bir şekilde belirir.
-* **Cihaz Algılama:**
-  * iOS Safari ise: Safari'ye özel yönlendirme mesajı gösterir.
-  * Android / Masaüstü ise: Doğrudan `prompt()` tetikleyen **"قاچىلاش (Yükle)"** butonu sunar.
-* **Rahatsız Etmeme Mantığı:** Zaten PWA modunda çalışıyorsa görünmez. Kullanıcı "Kapat / Daha Sonra" butonuna basarsa 7 gün boyunca tekrar gösterilmez (`localStorage`).
+### Akıllı Kurulum ve Bildirim Yaşam Döngüsü (Toast & State Machine)
+Bileşenler: `src/components/pwa-install-toast.tsx` & `src/lib/pwa-utils.ts`
+*(Detaylı durum makinesi diyagramı ve kurallar için ayrıca bakınız: [PWA_DURUM_VE_BILDIRIM_REHBERI.md](PWA_DURUM_VE_BILDIRIM_REHBERI.md))*
+
+* **5 Durumlu Yaşam Döngüsü:**
+  1. **Yüklemediyse (`NOT_INSTALLED`):** «ئۆتۈكەن ئەپىنى قاچىلاڭ» banner'ı çıkar.
+  2. **Yükledi ama Bildirimleri Açmadıysa (`INSTALLED_NO_NOTIFICATIONS_*`):**
+     * Tarayıcıda geziyorsa: *"Ötüken uygulamasını yüklediniz, yeni yazılardan haberdar olmak için uygulamaya girip bildirimleri açın"* uyarısı çıkar.
+     * Uygulama içindeyse: Ekranı kirletmeden sadece 1 tıkla bildirim açma butonu gösterilir.
+  3. **Yükledi ve Bildirime Onay Verdiyse (`INSTALLED_AND_SUBSCRIBED`):** Hiçbir mesaj çıkmaz (tamamen temiz ekran).
+  4. **Kaldırdıysa (Uninstallation):** Android (`beforeinstallprompt` ve `getInstalledRelatedApps`) veya iOS'ta 14 gün açılmadığında silindiği algılanır ve sonraki ziyarette tekrar yükleme teklif edilir.
+  5. **Daha Sonra Dediyse (`SNOOZED`):** 24 saat boyunca sessize alınır, 24 saat sonra açıldığında tekrar teklif edilir.
 
 ---
 
