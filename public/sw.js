@@ -1,6 +1,8 @@
 // Service Worker for Ötüken Policy Center PWA
 const CACHE_NAME = 'otuken-pwa-v3';
-const NAV_TIMEOUT_MS = 1500;
+const NAV_TIMEOUT_MS = 50;
+// Home pages open instantly from cache (stale-while-revalidate); next launch gets the fresh copy
+const INSTANT_PATHS = ['/uy', '/ug'];
 const PRECACHE_ASSETS = [
   '/uy',
   '/ug',
@@ -110,6 +112,10 @@ self.addEventListener('fetch', (event) => {
           } catch {
             return (await cache.match('/uy')) || Response.error();
           }
+        }
+
+        if (INSTANT_PATHS.includes(url.pathname) && !url.searchParams.has('q') && !url.searchParams.has('page')) {
+          return cached;
         }
 
         const timeout = new Promise((resolve) => setTimeout(() => resolve(null), NAV_TIMEOUT_MS));
