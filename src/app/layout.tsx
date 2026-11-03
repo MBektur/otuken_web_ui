@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
 import { NavigationProgress } from "@/components/navigation-progress";
 import { DirectionManager } from "@/components/direction-manager";
+import { BootSplash } from "@/components/boot-splash";
+import { BOOT_SPLASH_CSS } from "@/lib/boot-splash-css";
 import { PwaProvider } from "@/components/pwa-provider";
 import { PwaInstallToast } from "@/components/pwa-install-toast";
 import "./globals.css";
@@ -64,10 +66,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <style dangerouslySetInnerHTML={{ __html: BOOT_SPLASH_CSS }} />
+        <link rel="preload" href="/icons/icon-512x512.png" as="image" type="image/png" />
         <link rel="preload" href="/fonts/ukij-tuz.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/lateef-bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       </head>
       <body>
+        <BootSplash />
         <PwaProvider />
         <Suspense fallback={null}>
           <DirectionManager />
