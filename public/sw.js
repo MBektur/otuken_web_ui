@@ -1,7 +1,7 @@
 // Service Worker for Ötüken Policy Center PWA
-const CACHE_NAME = 'otuken-pwa-v2';
+const CACHE_NAME = 'otuken-pwa-v3';
+const NAV_TIMEOUT_MS = 1500;
 const PRECACHE_ASSETS = [
-  '/',
   '/uy',
   '/ug',
   '/favicon.ico',
@@ -13,6 +13,12 @@ const PRECACHE_ASSETS = [
   '/fonts/lateef-regular.woff2',
   '/logo.Header-UY.png'
 ];
+
+// Query-less cache key for plain pages; search/pagination keep their full URL
+function navCacheKey(url) {
+  if (url.searchParams.has('q') || url.searchParams.has('page')) return url.href;
+  return url.origin + url.pathname;
+}
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
@@ -80,23 +86,41 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Network-first for HTML pages with cache fallback
+  // HTML pages: serve cache immediately if the network is slower than NAV_TIMEOUT_MS,
+  // always refresh the cache in the background (avoids a white screen on PWA launch).
   if (request.mode === 'navigate') {
+    const key = navCacheKey(url);
+    const network = fetch(request).then((response) => {
+      if (response && response.status === 200 && !response.redirected) {
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(key, clone));
+      }
+      return response;
+    });
+    event.waitUntil(network.catch(() => {}));
+
     event.respondWith(
-      fetch(request)
-        .then((response) => {
-          if (response && response.status === 200) {
-            const clone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+      (async () => {
+        const cache = await caches.open(CACHE_NAME);
+        const cached = (await cache.match(key)) || null;
+
+        if (!cached) {
+          try {
+            return await network;
+          } catch {
+            return (await cache.match('/uy')) || Response.error();
           }
-          return response;
-        })
-        .catch(() => {
-          return caches.match(request).then((cached) => {
-            if (cached) return cached;
-            return caches.match('/uy');
-          });
-        })
+        }
+
+        const timeout = new Promise((resolve) => setTimeout(() => resolve(null), NAV_TIMEOUT_MS));
+        try {
+          const fresh = await Promise.race([network, timeout]);
+          if (fresh) return fresh;
+        } catch {
+          // fall through to cached copy
+        }
+        return cached;
+      })()
     );
     return;
   }
