@@ -1,1 +1,1 @@
-export default function Loading() { return <main className="loading-page" id="main" aria-busy="true"><span dir="ltr">ORHUN POLICY CENTER</span><p>يۈكلىنىۋاتىدۇ...</p></main>; }
+export default function Loading() { return <main className="loading-page" id="main" aria-busy="true"><span dir="ltr">Ötüken Policy Center</span><p>يۈكلىنىۋاتىدۇ...</p></main>; }
